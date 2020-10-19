@@ -14,7 +14,7 @@ class services extends Model
      *
      * @var array
      */
-    protected $fillable = [  "image","title","desc"
+    protected $fillable = [  "image","title_en","title_ar","desc_en","desc_ar"
     ];
 
     public function tag()

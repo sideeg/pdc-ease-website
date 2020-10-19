@@ -15,8 +15,12 @@ class CreateSlideBarsTable extends Migration
     {
         Schema::create('slide_bars', function (Blueprint $table) {
             $table->id();
-            $table->string("tilte");
-            $table->text("desc");
+            $table->string("tilte_en")->nullable();
+            $table->string("tilte_ar")->nullable();
+
+            $table->text("desc_en")->nullable();
+            $table->text("desc_ar")->nullable();
+
             $table->string("sourse");
             $table->string("type");
             $table->timestamps();
