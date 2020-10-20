@@ -20,3 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',"App\Http\Controllers\homeController@index")->name('home');
 Route::post("/contact","homeController@message")->name('contact');
 
+Route::get("/blog","App\Http\Controllers\blogController@index")->name('blog');
+Route::get("/article/{id}","blogController@blogById")->name('article');
+
