@@ -9,12 +9,13 @@ class homeController extends Controller
 {
     public function index()
     {
-        $slider = Models\slide_bar::all();
-        $blogs = Models\blogs::with("tag")->all()->take(3)->get();
-        $service = Models\services::all()->get();
+        // $slider = Models\slide_bar::all();
+        $blogs = Models\blogs::with("tag")->take(3)->get();
+        $service = Models\services::all();
+        $clint = Models\clints::all();
 
 
-        dd($blogs);
+        dd($clint);
         return view('pages.home', compact('slider')); //TODO page name
     }
 }
