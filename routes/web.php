@@ -21,5 +21,5 @@ Route::get('/',"App\Http\Controllers\homeController@index")->name('home');
 Route::post("/contact","homeController@message")->name('contact');
 
 Route::get("/blog","App\Http\Controllers\blogController@index")->name('blog');
-Route::get("/article/{id}","blogController@blogById")->name('article');
+Route::get("/article/{id}","App\Http\Controllers\blogController@blogById")->name('article');
 

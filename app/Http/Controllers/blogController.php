@@ -20,4 +20,15 @@ class blogController extends Controller
         return view('pages.blog', compact('blog')); // TODO view name
 
     }
+
+    public function blogById( $id)
+    {
+        // return view('pages.article');
+
+        // dd(json_encode( blog::find($id)));
+       $blog = blogs::find($id);
+
+        dd($blog);
+        return view("pages.article", compact('blog'));
+    }
 }
