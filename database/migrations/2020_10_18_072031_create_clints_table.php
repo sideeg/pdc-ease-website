@@ -15,7 +15,7 @@ class CreateClintsTable extends Migration
     {
         Schema::create('clints', function (Blueprint $table) {
             $table->id();
-            $table->string("logos");
+            $table->string("logo");
             $table->string("name")->nullable();
             $table->timestamps();
         });

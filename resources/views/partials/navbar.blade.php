@@ -4,7 +4,7 @@
         <div class="container">
             <!-- LOGO -->
             <a class="navbar-brand logo" href="\">
-                <img src="images/logo/ease.png" alt="missing_logo" height="60">
+                <img src="{{asset('images/logo/ease.png') }}" alt="missing_logo" height="60">
                 <!-- EaseGroup -->
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
