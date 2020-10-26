@@ -22,11 +22,12 @@ class blogController extends Controller
     {
        
         // dd(json_encode( blog::find($id)));
-       $blog = blogs::find($id);
-       // TODO get realted blogs and service tags
-       $tags = tags::all();
+       $article = blogs::find($id);
 
-        dd($tags);
-        return view("pages.article", compact('blog'));
+       // TODO get realted blogs and service tags
+       $tags = tags::where('id',$article->tag_id)->get();
+       $related_articles = blogs::select('image','title_en')->where('tag_id',$article->tag_id)->take(3)->get();
+        dd($related_articles);
+        return view("pages.article", compact('article'));
     }
 }
