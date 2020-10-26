@@ -40,3 +40,6 @@ Route::get('/service', function () {
 // Route::get("/blog","App\Http\Controllers\blogController@index")->name('blog');
 // Route::get("/article/{id}","blogController@blogById")->name('article');
 
+Route::get("/blog","App\Http\Controllers\blogController@index")->name('blog');
+Route::get("/article/{id}","App\Http\Controllers\blogController@blogById")->name('article');
+
