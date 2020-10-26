@@ -1,0 +1,122 @@
+body {
+	/* direction: rtl; */
+	text-align: right;
+}
+
+nav {
+	direction: rtl;
+}
+
+.row {
+    flex-direction: row-reverse;
+}
+
+.owl-carousel .owl-item .item{
+   /* float: right !important; */
+   flex-direction: row;
+}
+
+
+
+@media (min-width: 768px){
+	.owl-theme .owl-controls{
+		margin-top: 10px;
+		text-align: center;
+		width: 5vw;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		transform: rotate(90deg);	
+	}
+	.owl-theme .owl-controls .owl-pagination {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.owl-wrapper .owl-item .item{
+		display: flex;
+
+		flex-direction: row !important;
+		backface-visibility: hidden; /* for the animation shake at the end */
+
+	}
+	.owl-wrapper .owl-item .item .banner-text{
+		/* text-align: center; */
+		margin: auto;
+		position: relative;
+		/* display: none; */
+		backface-visibility: hidden; /* for the animation shake at the end */
+
+	
+	}
+
+	.owl-wrapper .owl-item .item .banner-text .bg-svg{
+		/* align-self: center; */
+		opacity: 0.3;
+		z-index: -111;
+		position: absolute;
+		top: -100%;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 50vh;
+		background-size: contain;
+		background-position: center center;
+		background-repeat: no-repeat;
+		transform: translateY(50%);
+		
+	}
+	.owl-wrapper .owl-item .item .banner-img{
+		max-width: 50vw !important;
+		max-height: 90vh !important;
+		
+	}
+
+	.owl-wrapper .owl-item .item img{
+		min-width: 50vw !important;
+		min-height: 90vh !important;
+		object-fit: fill;
+
+	}
+
+	.owl-wrapper .owl-item .item video{
+		min-width: 50vw !important;
+		min-height: 90vh !important;
+		object-fit: fill;
+
+	}
+
+
+}
+
+@media (max-width: 768px) and (min-width: 425px){
+	.owl-wrapper .owl-item .item{
+		backface-visibility: hidden; /* for the animation shake at the end */
+	}
+
+	.owl-wrapper .owl-item .item .banner-text{
+		backface-visibility: hidden; /* for the animation shake at the end */
+	}
+
+	.owl-wrapper .owl-item .item .banner-text .bg-svg{
+		/* align-self: center; */
+		opacity: 0.3;
+		z-index: -111;
+		position: absolute;
+		top: -100%;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 50vh;
+		background-size: contain;
+		background-position: center center;
+		background-repeat: no-repeat;
+		transform: translateY(100%);
+		
+	}
+
+}
+
+
