@@ -20,14 +20,14 @@ class blogController extends Controller
 
     public function blogById( $id)
     {
-       
-        // dd(json_encode( blog::find($id)));
-       $article = blogs::find($id);
 
-       // TODO get realted blogs and service tags
-       $tags = tags::where('id',$article->tag_id)->get();
+       $article = blogs::find($id);
+        // var_dump($article);
+       $current_tag = tags::where('id',$article->tag_id)->first();
+        // dd($current_tag->service_id);
+       $related_tags = tags::where('service_id',$current_tag->service_id)->get();
        $related_articles = blogs::select('image','title_en')->where('tag_id',$article->tag_id)->take(3)->get();
-        dd($related_articles);
-        return view("pages.article", compact('article'));
+        // dd($related_tags);
+        return view("pages.article", compact('article','related_tags','related_articles'));
     }
 }
