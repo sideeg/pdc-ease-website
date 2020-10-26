@@ -27,16 +27,18 @@ class blogSeeder extends Seeder
             \File::makeDirectory($path, $mode = 0755, true, true);
         }
          
-        blogs::create([
-            'image' => $faker_en->image($path,400,300, null, false) ,
-        'title_ar' => $faker_ar->name,
-            'title_en' => $faker_en->name,
-            'desc_en' => $faker_ar->realText(),
-            'desc_ar' => $faker_en->realText(),
-            'tag_id' => $faker_en->randomElement($tags),
-            // 'tag_id' => 1,
-
-        ]);
+        for($i = 0; $i < 20; $i++){
+            blogs::create([
+                'image' => $faker_en->image($path,400,300, null, false) ,
+            'title_ar' => $faker_ar->name,
+                'title_en' => $faker_en->name,
+                'desc_en' => $faker_ar->realText(),
+                'desc_ar' => $faker_en->realText(),
+                'tag_id' => $faker_en->randomElement($tags),
+                // 'tag_id' => 1,
+    
+            ]);
+        }
 
         // Create the catory
         //  blogs::factory()->count(50)->create();

@@ -15,8 +15,8 @@ class blogController extends Controller
         // $orders = Order::paginate(10);
         // return view('orders.index', compact('orders'));
         //$blog = json_encode( blog::orderBy('id', 'asc')->select('id','blog_name', 'Brief',"created_at","image")->get());
-       $blog = blogs::paginate(10);
-        dd($blog);
+       $blog = blogs::paginate(5);
+        // dd($blog);
         return view('pages.blog', compact('blog')); // TODO view name
 
     }
@@ -28,7 +28,7 @@ class blogController extends Controller
         // dd(json_encode( blog::find($id)));
        $blog = blogs::find($id);
 
-        dd($blog);
+        // dd($blog);
         return view("pages.article", compact('blog'));
     }
 }

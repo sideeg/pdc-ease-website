@@ -22,9 +22,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/blog', function () {
-    return view('pages.blog');
-});
+// Route::get('/blog', function () {
+//     return view('pages.blog');
+// });
 
 Route::get('/article', function () {
     return view('pages.article');
@@ -34,8 +34,8 @@ Route::get('/service', function () {
     return view('pages.service');
 });
 
-// Route::get('/',"App\Http\Controllers\homeController@index")->name('home');
-// Route::post("/contact","homeController@message")->name('contact');
+Route::get('/',"App\Http\Controllers\homeController@index")->name('home');
+Route::post("/contact","homeController@message")->name('contact');
 
 // Route::get("/blog","App\Http\Controllers\blogController@index")->name('blog');
 // Route::get("/article/{id}","blogController@blogById")->name('article');

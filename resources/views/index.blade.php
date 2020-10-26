@@ -82,6 +82,7 @@ data-aos-delay="100" --}}
 >
     <div class="container">
         <div class="row">
+            @forelse ($service as $item)
             <div class="col-lg-4 col-md-4 col-sm-12 service d-flex justify-content-center align-items-center">
                 <div class="my-2">
                     <div class="service-img text-center" >
@@ -90,14 +91,17 @@ data-aos-delay="100" --}}
                         <i class=" fas fa-adjust display-1"></i>
                     </div>
                     <div class="service-text">
-                        <a href="\service"><h2 class=" text-center">Service Title</h2></a>
-                        <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur laboriosam odio doloremque ab sapiente dicta qui ad dolores numquam fugiat.</p>
+                        <a href="\service"><h2 class=" text-center">{{ $item->title_en}}</h2></a>
+                        <p class="">{{ $item->desc_en}}</p>
                         <div class="d-flex justify-content-center">
                             <a href="javascript:void(0);" class="btn-service">Order Now</a>
                         </div>
                     </div>
                 </div>
             </div>
+            @empty
+                
+            @endforelse
 
             <div class="col-lg-4 col-md-4 col-sm-12 service">
                 <div class="">
@@ -136,6 +140,11 @@ data-aos-anchor-placement="top-bottom"
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="slider autoplay">
+                    @forelse ($clint as $item)
+                        <div><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
+                    @empty
+                        
+                    @endforelse
                     <div><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     <div><img src="images/client/partner-2.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     <div><img src="images/client/partner-3.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
@@ -227,6 +236,7 @@ data-aos-anchor-placement="top-bottom"
         </div>
 
         <div class="row">
+            @forelse ($blogs as $item)
             <div class="col-md-4">
                 <article class="post bg-white mt-30">
                     <div class="post-preview">
@@ -234,15 +244,15 @@ data-aos-anchor-placement="top-bottom"
                     </div>
 
                     <div class="post-header">
-                        <h4 class="post-title"><a href="#"> The business woman hard work</a></h4>
+                        <h4 class="post-title"><a href="#"> {{$item->title_en}}</a></h4>
                         <ul class="post-meta">
-                            <li><i class="mdi mdi-calendar"></i> <small>Fab 01, 2019</small></li>
+                            <li><i class="mdi mdi-calendar"></i> <small>{{\Carbon\Carbon::parse($item->created_at)->format('M  d,yy') }}</small></li>
                             <li><i class="mdi mdi-tag-text-outline"></i>
-                                <a href="#"> <small>Branding</small></a></li>
+                                <a href="#"> <small>{{$item->tag->name_en}}</small></a></li>
                         </ul>
 
                         <div class="post-content">
-                            <p class="two-lines">These cases are perfectly simple and easy to distinguish. In a free hour, when nothing prevents our being able to do what we like best.</p>
+                            <p class="two-lines">{{$item->desc_en }}</p>
                         </div>
 
                         <span class="bar"></span>
@@ -256,11 +266,14 @@ data-aos-anchor-placement="top-bottom"
                                     </li>
                                 </ul>
                             </div> -->
-                            <div class="post-more"><a href="#">Read More</a></div>
+                            <div class="post-more"><a href="{{ route('article', $item->id) }}">Read More</a></div>
                         </div>
                     </div>
                 </article>
             </div>
+            @empty
+                
+            @endforelse
             
             <div class="col-md-4">
                 <article class="post bg-white mt-30">
@@ -337,7 +350,7 @@ data-aos-anchor-placement="top-bottom"
         </div>
 
         <div class="row justify-content-center mt-5">
-            <a href="\blog" class="btn btn-buttons btn-radius btn-visit-blog">Visit Blog</a>
+            <a href="{{ route('blog') }}" class="btn btn-buttons btn-radius btn-visit-blog">Visit Blog</a>
         </div>
     </div>
     
