@@ -17,7 +17,7 @@ class serviceSeeder extends Seeder
     {
         $faker_ar = Factory::create('ar_JO');
         $faker_en = Factory::create('en_JO');
-        $success = curl_exec($ch) && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
+        // $success = curl_exec($ch) && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
 
         
         $path = "public/images";
@@ -31,7 +31,7 @@ class serviceSeeder extends Seeder
             "desc_en" => $faker_en->realText(),
             'desc_ar' => $faker_ar->realText(),
 
-            'image' => $faker_en->image($path,400,300, null, false) ,
+            'image' => $faker_en->imageUrl(400,300, null, false) ,
 
 
             

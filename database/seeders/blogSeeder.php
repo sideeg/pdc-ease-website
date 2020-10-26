@@ -28,7 +28,7 @@ class blogSeeder extends Seeder
         }
          
         blogs::create([
-            'image' => $faker_en->image($path,400,300, null, false) ,
+            'image' => $faker_en->imageUrl(400,300, 'technics', false) ,
         'title_ar' => $faker_ar->name,
             'title_en' => $faker_en->name,
             'desc_en' => $faker_ar->realText(),
