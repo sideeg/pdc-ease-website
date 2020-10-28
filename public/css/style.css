@@ -2063,6 +2063,18 @@ a.faq-black[data-toggle=collapse]{
 }
 
 
+.pagination > li.disabled > a,
+.pagination > li.disabled > a:focus,
+.pagination > li.disabled > a:hover {
+    background-color: #3498db88;
+    border-color: #3498db88;
+    color: #fff;
+    cursor: default;
+    z-index: 3;
+}
+
+/* .pagination > li.disabled >  */
+
 /*==============================
       17.  HISTORY
 ==============================*/

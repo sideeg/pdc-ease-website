@@ -14,9 +14,9 @@
                 <div class="banner-img">
                     <img src="./images/about/about-pic.jpg" class="img-fluid" style="width: 100%;height:90vh;" alt="" srcset="">
                 </div>
-                <div class="banner-text">
-                    <div class="bg-svg" style="background-image: url('images/svg/svg2.svg');"></div>
-                    <div class="banner-content p-4">
+                <div class="banner-text bg-svg">
+                    {{-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> --}}
+                <div class="banner-content p-4">
                         <h2>Move Digatal At Ease</h2>
                         <p  class="mx-3">Lorem ipsum dolor sit, amet consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi itaque neque porro corporis debitis deserunt voluptates excepturi quod eos repellat natus eum, tempore sit! Excepturi rem consequuntur veniam aliquid placeat.</p>
                     </div>
@@ -86,12 +86,12 @@ data-aos-delay="100" --}}
             <div class="col-lg-4 col-md-4 col-sm-12 service d-flex justify-content-center align-items-center">
                 <div class="my-2">
                     <div class="service-img text-center" >
-                        <!-- <img src="./images/about/about-page.jpg" class="img-fluid" alt="sevice img" srcset=""> -->
+                        <img src="{{asset($item->image)}}" class="img-fluid" alt="sevice img" srcset="">
                         <!-- <i class=""></i> -->
-                        <i class=" fas fa-adjust display-1"></i>
+                        {{-- <i class=" fas fa-adjust display-1"></i> --}}
                     </div>
                     <div class="service-text">
-                        <a href="\service"><h2 class=" text-center">{{ $item->title_en}}</h2></a>
+                        <a href="{{ route('service', $item->id)}}"><h2 class=" text-center">{{ $item->title_en}}</h2></a>
                         <p class="">{{ $item->desc_en}}</p>
                         <div class="d-flex justify-content-center">
                             <a href="javascript:void(0);" class="btn-service">Order Now</a>
@@ -131,6 +131,7 @@ data-aos-delay="100" --}}
 <!-- ABOUT US END -->
 
 
+{{-- <a href="#" data-toggle="tooltip" class="text-dark" title="" data-original-title="The last tip!">Last tooltip</a> --}}
 <!-- CLIENTS START -->
 <section class="section bg-dark" id="client"
 data-aos="fade-up"
@@ -141,7 +142,7 @@ data-aos-anchor-placement="top-bottom"
             <div class="col-lg-12">
                 <div class="slider autoplay">
                     @forelse ($clint as $item)
-                        <div><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
+                        <div><a href="#" data-toggle="tooltip" class="text-dark" title="{{$item->name_en}}" data-original-title="hhhhhhhhhh"><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></a></div>
                     @empty
                         
                     @endforelse

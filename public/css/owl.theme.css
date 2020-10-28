@@ -59,6 +59,7 @@
 		/* width: fit-content; */
 		/* display: flex;
 		align-items: center; */
+
 	
 	}
 	.owl-wrapper .owl-item .item .banner-text .banner-content p{
@@ -66,21 +67,26 @@
 
 	}
 
-	.owl-wrapper .owl-item .item .banner-text .bg-svg{
+	.owl-wrapper .owl-item .item .bg-svg{
 		/* align-self: center; */
-		opacity: 0.3;
+		/* opacity: 0.3; */
 		z-index: -111;
-		position: absolute;
-		top: -100%;
+		/* position: absolute;
+		top: 0;
 		right: 0;
 		left: 0;
-		bottom: 0;
-		width: 100%;
-		height: 50vh;
-		background-size: contain;
+		bottom: 0; */
+		/* width: 90vw; */
+		/* height: 100vw; */
+		/* background-size: cover; */
 		background-position: center center;
 		background-repeat: no-repeat;
-		transform: translateY(50%);
+		/* transform: translateY(50%); */
+		background-image: url(../images/svg/banner-bg.svg);
+		background-size: contain;
+		max-width: 50vw !important;
+		max-height: 90vh !important;
+		object-fit: contain;
 		
 	}
 	.owl-wrapper .owl-item .item .banner-img{

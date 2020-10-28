@@ -393,7 +393,7 @@
         {{ $blog->links() }}    
         
         <!-- Pagination-->
-        <div class="row row-paginate mt-4">
+        {{-- <div class="row row-paginate mt-4">
             <div class="col-sm-12">
                 <ul class="pagination justify-content-center">
                     <li class="next"><a href="#"><i class="fas fa-caret-left"></i></a></li>
@@ -404,7 +404,7 @@
                     <li class="prev"><a href="#"><i class="fas fa-caret-right"></i></a></li>
                 </ul>
             </div>
-        </div>
+        </div> --}}
         <!-- Pagination end-->
     </div>
     

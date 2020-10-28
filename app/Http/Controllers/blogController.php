@@ -33,7 +33,7 @@ class blogController extends Controller
         // var_dump($article);
        $current_tag = tags::where('id',$article->tag_id)->first();
         // dd($current_tag->service_id);
-       $related_tags = tags::where('service_id',$current_tag->service_id)->get();
+       $related_tags = tags::where('services_id',$current_tag->service_id)->get();
        $related_articles = blogs::select('image','title_en')->where('tag_id',$article->tag_id)->take(3)->get();
         // dd($related_tags);
         return view("pages.article", compact('article','related_tags','related_articles'));

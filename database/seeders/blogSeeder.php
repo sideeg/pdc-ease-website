@@ -26,11 +26,11 @@ class blogSeeder extends Seeder
         if (!is_dir($path)) {
             \File::makeDirectory($path, $mode = 0755, true, true);
         }
-         
-        for($i = 0; $i < 20; $i++){
+
+        for($i = 0;$i < 20 ; $i++){
             blogs::create([
-                'image' => $faker_en->image($path,400,300, null, false) ,
-            'title_ar' => $faker_ar->name,
+                'image' => $faker_en->imageUrl(400,300, 'technics', false) ,
+                'title_ar' => $faker_ar->name,
                 'title_en' => $faker_en->name,
                 'desc_en' => $faker_ar->realText(),
                 'desc_ar' => $faker_en->realText(),

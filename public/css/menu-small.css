@@ -22,7 +22,7 @@
 
 
 .nav-social li a {
-    color: #fff;
+    color: #000;
 }
 
 .navbar-custom .navbar-nav li a {
@@ -36,13 +36,14 @@
 }
 
 .navbar-custom .navbar-nav li:last-of-type > a {
-    margin-right: 0;
+    /* margin-right: 0; */
 }
 
 .navbar-custom .navbar-nav .nav-link {
     padding-right: 0px;
     padding-left: 0px;
 }
+
 
 .navbar-toggler {
     font-size: 24px;
@@ -155,7 +156,7 @@
         padding: 10px 0px !important;
         /* background-color: #fff !important; */
         box-shadow: 0 10px 33px rgba(0, 0, 0, .1);
-        color: #fff !important;
+        color: #000 !important;
     }
     .navbar-custom::after {
         content: "\A";
@@ -170,7 +171,7 @@
     }
     .navbar-custom .navbar-nav li a {
         transition: all 0.4s;
-        color: #fff !important;
+        color: #000 !important;
         margin: 0px;
     }
     .navbar-custom>.container {
@@ -195,3 +196,11 @@
 
     
 }
+
+
+/* @media (min-width:424px ){
+    .navbar-custom .navbar-nav:last-child {
+        padding: 0.5rem 0;
+    }
+    
+} */

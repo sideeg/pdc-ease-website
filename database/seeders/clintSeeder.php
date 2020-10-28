@@ -22,7 +22,7 @@ class clintSeeder extends Seeder
             \File::makeDirectory($path, $mode = 0755, true, true);
         }
         clints::create([
-            'logos' => $Factory->image($path,400,300, null, false) ,
+            'logo' => $Factory->imageUrl(400,300, 'business', false) ,
             'name' => $Factory->name,
         ]);
     }

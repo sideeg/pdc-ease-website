@@ -37,6 +37,9 @@ Route::get('/service', function () {
 Route::get('/',"App\Http\Controllers\homeController@index")->name('home');
 Route::post("/contact","homeController@message")->name('contact');
 
+Route::get("/service/{id}","App\Http\Controllers\servicesController@serviceById")->name('service');
+
+
 // Route::get("/blog","App\Http\Controllers\blogController@index")->name('blog');
 // Route::get("/article/{id}","blogController@blogById")->name('article');
 

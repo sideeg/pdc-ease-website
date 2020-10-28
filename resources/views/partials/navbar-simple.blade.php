@@ -12,28 +12,10 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <ul class="navbar-nav navbar-center" id="mySidenav">
-                    <li class="nav-item active">
-                        <a href="#home" class="nav-link">@lang('content.home')</a>
-                    </li>
-                    <!-- <li class="nav-item"> 
-                        <a href="#about" class="nav-link">About</a>
-                    </li> -->
-                    <li class="nav-item"> 
-                        <a href="#service" class="nav-link">@lang('content.services')</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a href="#work" class="nav-link">Work</a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a href="#client" class="nav-link">@lang('content.clients')</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#blog" class="nav-link">@lang('content.blog')</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link last-elements">@lang('content.contact')</a>
-                    </li> 
+                    {{-- <li class="nav-item active">
+                        <a href="{{route('home')}}" class="nav-link">@lang('content.home')</a>
+                    </li> --}}
+                     
                 </ul>
                 <ul class="navbar-center my-auto" style="list-style-type: none;" id="">
                     <li class="nav-item">
