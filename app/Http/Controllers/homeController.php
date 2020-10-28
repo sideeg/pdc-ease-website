@@ -66,5 +66,7 @@ class homeController extends Controller
 
         }
 
+        return redirect('/');
+
     }
 }
