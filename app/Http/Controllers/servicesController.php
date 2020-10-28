@@ -66,4 +66,25 @@ class servicesController extends Controller
 
         $order_tag->save();
      }
+
+     /*****************
+      * 
+
+      */
+      public function tagForm( $tag_id)
+      {
+        return view('pages.form', compact('tag_id')); //TODO page name
+      }
+
+      /************************
+       * 
+       * 
+       */
+      public function serviceForm($service_id)
+      {
+        $related_tags = tags::where('service_id',$service_id)->get();
+
+        return view('pages.form', compact('related_tags')); //TODO page name
+
+    }
 }
