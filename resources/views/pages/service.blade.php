@@ -5,7 +5,7 @@
 
 
 <!-- HOME START-->
-<section class="bg-home" style="background-image: url('images/home/bg-home-7.jpg')" id="home">
+<section class="bg-home" style="background-image: url({{asset('images/home/bg-home-7.jpg')}})" id="home">
     <div class="bg-overlay"></div>
     <div class="home-center">
         <div class="home-desc-center">
@@ -14,7 +14,7 @@
                     <div class="col-lg-8">
                         <div class="title-heading text-center text-white">
                             <h1 class="">{{$service->title_en}}</h1>
-                            <p class="mx-auto">{{$service->desc_en}}</p>
+                            {{-- <p class="mx-auto">{{$service->desc_en}}</p> --}}
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <a href="{{route('serviceOrderForm',$service->id )}}" id="submit" name="send" class="btn btn-buttons btn-radius">Customize Your Order</a>
