@@ -21,7 +21,7 @@ class CreateTagsTable extends Migration
             $table->string("desc_en")->nullable();
             $table->string("desc_ar")->nullable();
 
-            $table->string("service_id");
+            $table->string("services_id");
             $table->timestamps();
         });
     }

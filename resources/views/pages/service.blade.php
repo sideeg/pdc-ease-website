@@ -5,7 +5,7 @@
 
 
 <!-- HOME START-->
-<section class="bg-home" style="background-image: url('images/home/bg-home-7.jpg')" id="home">
+<section class="bg-home" style="background-image: url({{asset('images/home/bg-home-7.jpg')}})" id="home">
     <div class="bg-overlay"></div>
     <div class="home-center">
         <div class="home-desc-center">
@@ -13,11 +13,11 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <div class="title-heading text-center text-white">
-                            <h1 class="">Service Title</h1>
-                            <p class="mx-auto">On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire.</p>
+                            <h1 class="">{{$service->title_en}}</h1>
+                            {{-- <p class="mx-auto">{{$service->desc_en}}</p> --}}
                             <div class="row ">
                                 <div class="col-sm-12">
-                                    <input type="submit" id="submit" name="send" class="btn btn-buttons btn-radius" value="Customize Your Order">
+                                    <a href="{{route('serviceOrderForm',$service->id )}}" id="submit" name="send" class="btn btn-buttons btn-radius">Customize Your Order</a>
                                     <div id="simple-msg"></div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
 <!-- HOME END-->
 
 <!-- SERVICE START -->
-<section class="section" style="margin-top: -4rem;" id="service">
+<section class="section" id="service">
     <div class="container"> 
         <!-- <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
@@ -59,15 +59,19 @@
             <div class="col-md-12">
                 <div class="onepage-services mt-4">
                     <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active show" id="planning-tab" data-toggle="tab" href="#planning" role="tab" aria-controls="planning" aria-selected="false">
+                        @forelse ($service->tag as $item)
+                            <li class="nav-item">
+                                <a class="nav-link active show" id="{{ explode(' ',trim($item->name_en))[0] }}-tab" data-toggle="tab" href="#{{ explode(' ',trim($item->name_en))[0] }}" role="tab" aria-controls="{{ explode(' ',trim($item->name_en))[0] }}" aria-selected="false">
 
-                                <!-- <div class="onepage-services-icon">
-                                    <i class="pe-7s-rocket"></i>
-                                </div> -->
-                                <p class="mb-0 text-uppercase mt-3">web</p>
-                            </a>
-                        </li>
+                                    <!-- <div class="onepage-services-icon">
+                                        <i class="pe-7s-rocket"></i>
+                                    </div> -->
+                                    <p class="mb-0 text-uppercase mt-3">{{$item->name_en}}</p>
+                                </a>
+                            </li>
+                        @empty
+                            
+                        @endforelse
                         <li class="nav-item">
                             <a class="nav-link" id="interior-tab" data-toggle="tab" href="#interior" role="tab" aria-controls="interior" aria-selected="true">
                                 <!-- <div class="onepage-services-icon">
@@ -96,7 +100,31 @@
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade bg-dark text-white pb-3 active show" id="planning" role="tabpanel" aria-labelledby="planning-tab">
+                        @forelse ($service->tag as $item)
+                            <div class="tab-pane fade bg-dark text-white pb-3 active show" id="{{ explode(' ',trim($item->name_en))[0] }}" role="tabpanel" aria-labelledby="{{ explode(' ',trim($item->name_en))[0] }}-tab">
+                                <div class="row justify-content-center p-3">
+                                    <div class="col-lg-6">
+                                        <div class="interior-services-info mt-4">
+                                            <h4>{{$item->name_en}}</h4>
+                                            <p class=" mt-4">{{$item->desc_en}}</p>
+                                            {{-- <p class="">Pursues or desires to obtain pain of becaus pain but because occasionally undertakes laborious physical exercise advantage from it?</p> --}}
+                                            <div class="mt-4">
+                                            <a href="{{route('showTagForm', $item->id)}}" class="btn btn-custom">@lang('content.orderNow')</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-lg-6">
+                                        <div class="onepage-services-img mt-4">
+                                            <img src="images/services/img-3.jpg" class="img-fluid" alt="">
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        @empty
+                            
+                        @endforelse
+
+                        {{-- <div class="tab-pane fade bg-dark text-white pb-3 active show" id="planning" role="tabpanel" aria-labelledby="planning-tab">
                             <div class="row justify-content-center p-3">
                                 <div class="col-lg-6">
                                     <div class="interior-services-info mt-4">
@@ -114,7 +142,7 @@
                                     </div>
                                 </div> -->
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="tab-pane fade bg-dark text-white pb-3" id="interior" role="tabpanel" aria-labelledby="interior-tab">
                             <div class="row justify-content-center p-3">

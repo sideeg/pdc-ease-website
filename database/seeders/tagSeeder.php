@@ -29,7 +29,7 @@ class tagSeeder extends Seeder
             'desc_ar' => $faker_en->realText(),
             
 
-            "service_id"=> $faker_en->randomElement($service),
+            "services_id"=> $faker_en->randomElement($service),
         ]);
     }
 }

@@ -11,20 +11,6 @@
         <div class="row">
             <!-- SIDEBAR -->
             <div class="col-lg-4 col-md-4">
-
-                <!-- Categories widget-->
-                <!-- <div class="sidebar p-30">
-                    <div class="widget widget_categories">
-                        <h4 class="text-uppercase text-center">Categories</h4>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><a href="#">Consulting</a> <span class="float-right">(40)</span></li>
-                            <li class="mb-2"><a href="#">Finance</a> <span class="float-right">(08)</span></li>
-                            <li class="mb-2"><a href="#">Marketing</a> <span class="float-right">(11)</span></li>
-                            <li><a href="#">Services</a> <span class="float-right">(21)</span></li>
-                        </ul>
-                    </div>
-                </div> -->
-                <!-- Categories widget-->
                 <div class="post-preview sidebar my-30">
                     <a href="single-post.html"><img src="images/blog/blog-3.jpg" alt="" class="img-fluid mx-auto d-block"></a>
                 </div>
@@ -36,7 +22,12 @@
                         <div class="widget">
                             <h4 class="text-uppercase text-center">Tags</h4>
                             <div class="text-center tagcloud">
-                                <a href="#">Consulting</a>
+                                @forelse ($related_tags as $item)
+                                    <a href="#">{{$item->name_en }}</a>
+                                @empty
+                                    
+                                @endforelse
+                                {{-- <a href="#">Consulting</a>
                                 <a href="#">Finance</a>
                                 <a href="#">Marketing</a>
                                 <a href="#">Services</a>
@@ -46,7 +37,7 @@
                                 <a href="#">Travel</a>
                                 <a href="#">Blog</a>
                                 <a href="#">Video</a>
-                                <a href="#">Audio</a>
+                                <a href="#">Audio</a> --}}
                             </div>
                         </div>
                     </div>
@@ -57,7 +48,16 @@
                         <div class="widget">
                             <h4 class="text-uppercase text-center">Recent Post</h4>
                             <div class="slider single">
-                                <div>
+                                @forelse ($related_articles as $item)
+                                    <div>
+                                        <a href="#"><img src="images/blog/blog-1.jpg" class="mx-auto d-block img-fluid" alt="img-missing"></a>
+                                        <div class="spacer-15"></div>
+                                        <a href="#"><h4 class="pr-2 pl-2">{{$item->title_en}}</h4></a>
+                                    </div>
+                                @empty
+                                    
+                                @endforelse
+                                {{-- <div>
                                     <a href="#"><img src="images/blog/blog-1.jpg" class="mx-auto d-block img-fluid" alt="img-missing"></a>
                                     <div class="spacer-15"></div>
                                     <a href="#"><h4 class="pr-2 pl-2">The business woman hard work</h4></a>
@@ -91,7 +91,7 @@
                                     <a href="#"><img src="images/blog/blog-7.jpg" class="mx-auto d-block img-fluid" alt="img-missing"></a>
                                     <div class="spacer-15"></div>
                                     <a href="#"><h4 class="pr-2 pl-2">Analysis of Last Year Financial Report</h4></a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>                                
@@ -111,16 +111,16 @@
 
                     <div class="post-header">
                         <ul class="post-meta">
-                            <li><i class="mdi mdi-calendar"></i> <small>Fab 01, 2019</small></li>
+                            <li><i class="mdi mdi-calendar"></i> <small>{{\Carbon\Carbon::parse($article->created_at)->format('M  d,yy') }}</small></li>
                             <li><i class="mdi mdi-tag-text-outline"></i>
-                                <a href="#"> <small>Photography</small></a></li>
+                                <a href="#"> <small>{{$article->tag->name_en}}</small></a></li>
                         </ul>
                         
                         <div class="post-content">
-                            <p class="mb-0">The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words. </p>
+                            <p class="mb-0">{{$article->desc_en}}</p>
                         </div>
 
-                        <div class="post-content">
+                        {{-- <div class="post-content">
                             <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I should be incapable of drawing a single stroke at the present moment.</p>
                         </div>
 
@@ -130,7 +130,7 @@
                         
                         <div class="post-content">
                             <p>The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. Lorem Ipsum is composed in a pseudo-Latin language which more or less corresponds contains a series of real Latin words. </p>
-                        </div>
+                        </div> --}}
                     </div>
                 </article>                                              
                 <!-- Post End -->

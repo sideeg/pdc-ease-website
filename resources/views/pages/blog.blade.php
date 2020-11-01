@@ -59,22 +59,23 @@
         </div>
 
         <div class="row">
+            @forelse ($blog as $item)
             <div class="col-md-4">
-                <article class="post bg-dark text-white mt-30">
+                <article class="post bg-white mt-30">
                     <div class="post-preview">
                         <a href="#"><img src="images/blog/blog-1.jpg" alt="" class="img-fluid mx-auto d-block"></a>
                     </div>
 
                     <div class="post-header">
-                        <h4 class="post-title"><a href="#"> The business woman hard work</a></h4>
-                        <ul class="post-meta text-white">
-                            <li><i class="mdi mdi-calendar"></i> <small>Fab 01, 2019</small></li>
+                        <h4 class="post-title"><a href="#"> {{$item->title_en}}</a></h4>
+                        <ul class="post-meta">
+                            <li><i class="mdi mdi-calendar"></i> <small>{{\Carbon\Carbon::parse($item->created_at)->format('M  d,yy') }}</small></li>
                             <li><i class="mdi mdi-tag-text-outline"></i>
-                                <a href="#"> <small>Branding</small></a></li>
+                                <a href="#"> <small>{{$item->tag->name_en}}</small></a></li>
                         </ul>
 
                         <div class="post-content">
-                            <p class="two-lines">These cases are perfectly simple and easy to distinguish. In a free hour, when nothing prevents our being able to do what we like best.</p>
+                            <p class="two-lines">{{$item->desc_en }}</p>
                         </div>
 
                         <span class="bar"></span>
@@ -88,11 +89,14 @@
                                     </li>
                                 </ul>
                             </div> -->
-                            <div class="post-more"><a href="\article">Read More</a></div>
+                            <div class="post-more"><a href="{{ route('article', $item->id) }}">Read More</a></div>
                         </div>
                     </div>
                 </article>
             </div>
+            @empty
+                
+            @endforelse
             
             <div class="col-md-4">
                 <article class="post bg-white mt-30">
@@ -386,9 +390,10 @@
                 </article>
             </div>
         </div>
-
+        {{ $blog->links() }}    
+        
         <!-- Pagination-->
-        <div class="row row-paginate mt-4">
+        {{-- <div class="row row-paginate mt-4">
             <div class="col-sm-12">
                 <ul class="pagination justify-content-center">
                     <li class="next"><a href="#"><i class="fas fa-caret-left"></i></a></li>
@@ -399,7 +404,7 @@
                     <li class="prev"><a href="#"><i class="fas fa-caret-right"></i></a></li>
                 </ul>
             </div>
-        </div>
+        </div> --}}
         <!-- Pagination end-->
     </div>
     

@@ -3,9 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\services;
+use App\Models;
+
+
 
 class servicesController extends Controller
 {
+    //
+
+    public function serviceById($id)
+    {
+        // dd('here');
+        $service = services::find($id)->with("tag")->first();
+        // dd($service);
+        return view('pages.service', compact('service'));
+    }
+
     public function serviceRequest(Request $request)
     {
         $validatedData = $request->validate([
@@ -23,8 +37,8 @@ class servicesController extends Controller
 
         $order->save();
 
-        for ($i =0;i<sizeof($request['tags']);$i++){
-            $order_tag = new orders_tags();
+        for ($i =0;$i<sizeof($request['tags']);$i++){
+            $order_tag = new Models\orders_tags();
 
             $order_tag->order_id = $order->id;
             $order_tag->tag_id = $request['tags'][i];
@@ -59,7 +73,7 @@ class servicesController extends Controller
 
         $order->save();
 
-        $order_tag = new orders_tags();
+        $order_tag = new Models\orders_tags();
 
         $order_tag->order_id = $order->id;
         $order_tag->tag_id = $request['tag_id'];
@@ -80,11 +94,21 @@ class servicesController extends Controller
        *
        *
        */
-      public function serviceForm($service_id)
+      public function showServiceForm($service_id)
       {
-        $related_tags = tags::where('service_id',$service_id)->get();
+        //   dd($service_id);
+        $service_tags = Models\tags::where('services_id',$service_id)->get();
 
-        return view('pages.form', compact('related_tags')); //TODO page name
+        return view('pages.service-order', compact('service_tags')); //TODO page name
+
+    }
+
+    public function showTagForm($tag_id)
+      {
+        //   dd($service_id);
+        // $service_tags = Models\tags::where('services_id',$service_id)->get();
+
+        return view('pages.tag-order', compact('tag_id')); //TODO page name
 
     }
 }
