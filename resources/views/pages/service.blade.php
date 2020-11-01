@@ -17,7 +17,7 @@
                             <p class="mx-auto">{{$service->desc_en}}</p>
                             <div class="row ">
                                 <div class="col-sm-12">
-                                    <input type="submit" id="submit" name="send" class="btn btn-buttons btn-radius" value="Customize Your Order">
+                                    <a href="{{route('serviceOrderForm',$service->id )}}" id="submit" name="send" class="btn btn-buttons btn-radius">Customize Your Order</a>
                                     <div id="simple-msg"></div>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@
 <!-- HOME END-->
 
 <!-- SERVICE START -->
-<section class="section" style="margin-top: -4rem;" id="service">
+<section class="section" id="service">
     <div class="container"> 
         <!-- <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
@@ -109,7 +109,7 @@
                                             <p class=" mt-4">{{$item->desc_en}}</p>
                                             {{-- <p class="">Pursues or desires to obtain pain of becaus pain but because occasionally undertakes laborious physical exercise advantage from it?</p> --}}
                                             <div class="mt-4">
-                                                <a href="#" class="btn btn-custom">Order Now</a>
+                                            <a href="{{route('showTagForm', $item->id)}}" class="btn btn-custom">@lang('content.orderNow')</a>
                                             </div>
                                         </div>
                                     </div>

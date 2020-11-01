@@ -94,11 +94,21 @@ class servicesController extends Controller
        * 
        * 
        */
-      public function serviceForm($service_id)
+      public function showServiceForm($service_id)
       {
-        $related_tags = Models\tags::where('service_id',$service_id)->get();
+        //   dd($service_id);
+        $service_tags = Models\tags::where('services_id',$service_id)->get();
 
-        return view('pages.form', compact('related_tags')); //TODO page name
+        return view('pages.service-order', compact('service_tags')); //TODO page name
+
+    }
+
+    public function showTagForm($tag_id)
+      {
+        //   dd($service_id);
+        // $service_tags = Models\tags::where('services_id',$service_id)->get();
+
+        return view('pages.tag-order', compact('tag_id')); //TODO page name
 
     }
 }

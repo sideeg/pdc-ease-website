@@ -1,10 +1,3 @@
-/* Theme Name: Alita - A Responsive Multipurpose HTML Templates
-   Author: Shreethemes
-   Version: 1.0.0
-   Created: March 2019
-   File Description:Main CSS file of the template
-*/
-
 /**********************************/
 /*            INDEX               */
 /*==================================
@@ -79,6 +72,8 @@ p {
     padding-bottom: 80px;
     position: relative;
 }
+
+
 
 .btn {
     padding: 9px 27px;
@@ -395,10 +390,22 @@ h4 {
     background-size: cover;
     background-position: center center;
     align-self: center;
-    height: 100vh;
+    height: 90vh;
     position: relative;
-    -webkit-clip-path: polygon(0 0, 100% 1%, 100% 100%, 50% 85%, 0 100%);
-    clip-path: polygon(0 0, 100% 1%, 100% 100%, 50% 85%, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 50% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 50% 85%, 0 100%);
+}
+
+@media (max-width: 425px) {
+    .bg-home {
+        background-size: cover;
+        background-position: center center;
+        align-self: center;
+        height: 90vh;
+        position: relative;
+        -webkit-clip-path: none;
+        clip-path: none;
+    }   
 }
 
 .bg-svg {
@@ -413,10 +420,10 @@ h4 {
 }
 
 @media (max-width: 426px) {
-    .bg-svg {
+    /* .bg-svg {
         display: none;
         height: 0;
-    }
+    } */
 }
 
 .bg-fixed {
@@ -975,7 +982,7 @@ h4 {
 
 .call-back-cta .contact-form, .client-counter-border {
     background-color: transparent;
-    border: 8px solid #ffffff;
+    border: 2px solid #ffffff;
 }
 
 .call-back-cta .contact-form h4 {
@@ -1625,7 +1632,7 @@ a.faq-black[data-toggle=collapse]{
 .team-info h3, .member-info h3, .team-list-content h3 {
     font-size: 16px;
 }
-
+/* 
 .social-icon > li a, .social-icon a, .team-icon > li a, .main-icon i {
     background-color: transparent;
     font-size: 15px;
@@ -1638,7 +1645,7 @@ a.faq-black[data-toggle=collapse]{
     text-align: center;
     width: 36px;
     transition: all 0.5s;
-}
+} */
 
 .team-icon > li a {
     color: #ffffff;
@@ -1772,6 +1779,7 @@ a.faq-black[data-toggle=collapse]{
 }
 
 .post-meta > li {
+    margin: 2px 0;
     display: inline-block;
     margin-right: 30px;
 }
@@ -1822,6 +1830,20 @@ a.faq-black[data-toggle=collapse]{
     opacity: 1;
     transition: all 0.4s;
     transform: translateX(20rem);
+
+}
+
+@media (max-width: 768px) {
+    
+    .post-footer .post-more::after {
+        content: '\2192';
+        font-size: 1rem;
+        font-weight: bolder;
+        margin: 5px;
+        opacity: 1;
+        /* transition: all 0.4s; */
+        transform: translateX(20rem);
+    }
 
 }
 
@@ -2562,15 +2584,17 @@ a.faq-black[data-toggle=collapse]{
     background: #212147 !important;
 }
 
-.bg-red {
-    background: #e74c3c;
+.color-dark {
+    color: #212147;
 }
 
-.bg-red {
-    background: #e74c3c;
+.color-blue {
+    color: #33CCCC;
 }
 
-
+.radius {
+    border-radius: 10px;
+}
 
 /*=============ALERT=================*/
 .success-alert {
@@ -3170,21 +3194,22 @@ a.faq-black[data-toggle=collapse]{
      24.  FOOTER
 **********************/
 .footer {
+    padding-top: 3%;
     background-color: #343a40;
 }
 
-.footer hr {
+/* .footer hr {
     margin-bottom: 0px;
     margin-top: 0px;
     border-top: 1px solid #40464c;
-}
-
+} */
+/* 
 .footer-item li, .footer-contact li {
     margin-top: 10px;
 }
 
 .footer-item li a {
-    /* color: #c1c1c1; */
+    color: #c1c1c1;
     color: #77828c;
     transition: all 0.3s ease;
 }
@@ -3222,13 +3247,13 @@ a.faq-black[data-toggle=collapse]{
 
 .text-footer-clr {
     color: #77828c !important;
-}
+} */
 
 .copy-rights {
     font-size: 15px;
     color: #77828c !important;
 }
-
+/* 
 .footer-three {
     padding: 30px 0;
     position: relative;
@@ -3261,6 +3286,28 @@ a.faq-black[data-toggle=collapse]{
     max-width: 600px;
     margin: 0px auto;
     border: none;
+} */
+
+
+
+.footer-menu > .social-icon > .list-inline-item > a > i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background: #f8f9fa;
+    color: #3380CC;
+    border: 1px solid transparent;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.4s;
+}
+
+.footer-menu > .social-icon > .list-inline-item > a > i:hover{
+    background: transparent;
+    color: #3380CC;
+    border: 1px solid #3380CC;
 }
 
 /**BACK TO TOP**/
@@ -3363,8 +3410,8 @@ a.faq-black[data-toggle=collapse]{
 
 @media (min-width: 200px) and (max-width: 768px) {
     .section, .feature-three, .section-two {
-        padding-top: 60px;
-        padding-bottom: 60px;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
 }
 @media (max-width: 768px) {

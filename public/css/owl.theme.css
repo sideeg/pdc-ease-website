@@ -10,9 +10,10 @@
 		text-align: center;
 		width: 5vw;
 		position: absolute;
-		top: 50%;
+		top: 35%;
 		right: 0;
-		transform: rotate(90deg);	
+		transform: translateX(50%);	
+		transform: rotate(90deg);
 	}
 	/* .owl-theme .owl-pagination::before {
 		content: "\A";
@@ -57,13 +58,16 @@
 		margin: auto;
 		position: relative;
 		/* width: fit-content; */
-		/* display: flex;
-		align-items: center; */
+		display: flex;
+		/* align-items: center; */
+		justify-content: center;
+		flex-direction: column;
 
 	
 	}
-	.owl-wrapper .owl-item .item .banner-text .banner-content p{
+	.owl-wrapper .owl-item .item .banner-text .banner-content h2{
 		/* display: inline; */
+		color: #33CCCC;
 
 	}
 
@@ -83,10 +87,10 @@
 		background-repeat: no-repeat;
 		/* transform: translateY(50%); */
 		background-image: url(../images/svg/banner-bg.svg);
-		background-size: contain;
+		background-size: cover;
 		max-width: 50vw !important;
 		max-height: 90vh !important;
-		object-fit: contain;
+		/* object-fit: contain; */
 		
 	}
 	.owl-wrapper .owl-item .item .banner-img{
@@ -98,21 +102,39 @@
 	.owl-wrapper .owl-item .item img{
 		min-width: 50vw !important;
 		min-height: 90vh !important;
-		object-fit: fill;
+		/* object-fit: contain; */
 
 	}
 
 	.owl-wrapper .owl-item .item video{
 		min-width: 50vw !important;
 		min-height: 90vh !important;
-		object-fit: fill;
+		/* object-fit: contain; */
+
+	}
+
+	.owl-wrapper .owl-item .item .one-slide{
+		min-width: 100vw !important;
+		/* max-height: 80vh !important; */
+		object-fit: contain;
 
 	}
 
 
 }
 
+
 @media (max-width: 768px) and (min-width: 425px){
+
+	.owl-wrapper .owl-item .item{
+		display: flex;
+		/* flex-grow: 1; */
+		/* flex-wrap: wrap; */
+
+		/* flex-direction: column; */
+
+	}
+
 	.owl-wrapper .owl-item .item .banner-text .bg-svg{
 		/* align-self: center; */
 		opacity: 0.3;
@@ -133,7 +155,23 @@
 
 }
 
+@media (max-width: 425px){
+	.owl-wrapper .owl-item .item video{
+		/* max-width: 100vw !important; */
+		/* object-fit: contain; */
 
+	}
+
+
+	.owl-wrapper .owl-item .item .one-slide{
+		max-width: 100vw !important;
+		/* max-height: 70vh !important; */
+		object-fit: contain;
+
+	}
+
+
+}
 
 
 

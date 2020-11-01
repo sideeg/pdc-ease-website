@@ -12,11 +12,11 @@
         <div class="owl-carousel text-white" id="owl-demo">
             <div class="item">
                 <div class="banner-img">
-                    <img src="./images/about/about-pic.jpg" class="img-fluid" style="width: 100%;height:90vh;" alt="" srcset="">
+                    <img src="./images/about/about-pic.jpg" class="img-fluid" alt="" srcset="">
                 </div>
                 <div class="banner-text bg-svg">
                     {{-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> --}}
-                <div class="banner-content p-4">
+                    <div class="banner-content p-4">
                         <h2>Move Digatal At Ease</h2>
                         <p  class="mx-3">Lorem ipsum dolor sit, amet consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi itaque neque porro corporis debitis deserunt voluptates excepturi quod eos repellat natus eum, tempore sit! Excepturi rem consequuntur veniam aliquid placeat.</p>
                     </div>
@@ -25,7 +25,7 @@
             </div>
             <div class="item">
                 <div class="banner-img">
-                    <img src="./images/about/about-two-img.jpg" class="img-fluid" style="width: 100%;height:90vh;" alt="" srcset="">
+                    <img src="./images/about/about-two-img.jpg" class="img-fluid" alt="" srcset="">
                 </div>
                 <div class="banner-text p-2">
                     <h2>title</h2>
@@ -34,7 +34,7 @@
             </div>
             <div class="item">
                 <div class="banner-img">
-                    <img src="./images/about/about-img-three.jpg" class="item img-fluid" style="width: 100%;height:90vh;" alt="" srcset="">
+                    <img src="./images/about/about-img-three.jpg" class="item img-fluid" alt="" srcset="">
                 </div>
                 <div class="banner-text p-2">
                     <h2>title</h2>
@@ -42,14 +42,14 @@
                 </div>
             </div>
             <div class="item">
-                <img src="./images/about/about-pic.jpg" class="item img-fluid" style="width: 100%;height:90vh;" alt="" srcset="">
+                <img src="./images/about/about-pic.jpg" class="item img-fluid one-slide" alt="" srcset="">
             </div>
 
             <div class="item">
                 <div class="banner-img">
-                    <video class="item" autoplay loop muted style="width: 50vw;height:90vh;">
+                    <video class="item" autoplay loop muted >
                         <source src="./images/videos/video.mp4"
-                                type="video/mp4" style="width: 100%;height:90vh;">
+                                type="video/mp4">
                     </video>
                 </div>
                 <div class="banner-text p-2">
@@ -59,13 +59,13 @@
             </div>
             
             <div class="item">
-                <video autoplay loop muted style="width: 100vw;height:90vh;">
+                <video class="one-slide" autoplay loop muted>
 
                     <!-- <source src="/media/cc0-videos/flower.webm"
                             type="video/webm"> -->
                 
                     <source src="./images/videos/video.mp4"
-                            type="video/mp4" style="width: 100vw;height:90vh;">
+                            type="video/mp4" >
                 
                 </video>
             </div>
@@ -81,9 +81,19 @@ data-aos-duration="1000"
 data-aos-delay="100" --}}
 >
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-12">
+                <div class="section-title text-center">
+                    <h3 class="sliding-line">Our Service</h3>
+                    <div class="spacer-15"></div>
+                    <!-- <p class="text-muted mb-0">Donec sodales sagittis magna. Excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.</p> -->
+                    <div class="spacer-30"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
             @forelse ($service as $item)
-            <div class="col-lg-4 col-md-4 col-sm-12 service d-flex justify-content-center align-items-center">
+            <div class="col-lg-4 col-md-4 col-sm-12 py-2 service radius d-flex justify-content-center align-items-center">
                 <div class="my-2">
                     <div class="service-img text-center" >
                         <img src="{{asset($item->image)}}" class="img-fluid" alt="sevice img" srcset="">
@@ -91,10 +101,10 @@ data-aos-delay="100" --}}
                         {{-- <i class=" fas fa-adjust display-1"></i> --}}
                     </div>
                     <div class="service-text">
-                        <a href="{{ route('service', $item->id)}}"><h2 class=" text-center">{{ $item->title_en}}</h2></a>
+                        <a href="{{ route('service', $item->id)}}"><h2 class="text-center color-dark">{{ $item->title_en}}</h2></a>
                         <p class="">{{ $item->desc_en}}</p>
                         <div class="d-flex justify-content-center">
-                            <a href="javascript:void(0);" class="btn-service">Order Now</a>
+                            <a href="javascript:void(0);" class="btn-service">@lang('content.orderNow')</a>
                         </div>
                     </div>
                 </div>
@@ -103,7 +113,7 @@ data-aos-delay="100" --}}
                 
             @endforelse
 
-            <div class="col-lg-4 col-md-4 col-sm-12 service">
+            {{-- <div class="col-lg-4 col-md-4 col-sm-12 service">
                 <div class="">
                     <div class="service-img ">
                         <img src="./images/about/about-page.jpg" class="img-fluid" alt="sevice img" srcset="">
@@ -123,7 +133,7 @@ data-aos-delay="100" --}}
                     <a href="service.html"><h2 class=" text-center">Service Title</h2></a>
                     <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur laboriosam odio doloremque ab sapiente dicta qui ad dolores numquam fugiat.</p>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
    
@@ -142,7 +152,7 @@ data-aos-anchor-placement="top-bottom"
             <div class="col-lg-12">
                 <div class="slider autoplay">
                     @forelse ($clint as $item)
-                        <div><a href="#" data-toggle="tooltip" class="text-dark" title="{{$item->name_en}}" data-original-title="hhhhhhhhhh"><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></a></div>
+                        <div><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     @empty
                         
                     @endforelse
@@ -267,7 +277,7 @@ data-aos-anchor-placement="top-bottom"
                                     </li>
                                 </ul>
                             </div> -->
-                            <div class="post-more"><a href="{{ route('article', $item->id) }}">Read More</a></div>
+                            <div class="post-more"><a href="{{ route('article', $item->id) }}">@lang('content.readMore')</a></div>
                         </div>
                     </div>
                 </article>
@@ -276,7 +286,7 @@ data-aos-anchor-placement="top-bottom"
                 
             @endforelse
             
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <article class="post bg-white mt-30">
                     <div class="post-preview">
                         <a href="#"><img src="images/blog/blog-2.jpg" alt="" class="img-fluid mx-auto d-block"></a>
@@ -347,11 +357,11 @@ data-aos-anchor-placement="top-bottom"
                         </div>
                     </div>
                 </article>
-            </div>
+            </div> --}}
         </div>
 
         <div class="row justify-content-center mt-5">
-            <a href="{{ route('blog') }}" class="btn btn-buttons btn-radius btn-visit-blog">Visit Blog</a>
+            <a href="{{ route('blog') }}" class="btn btn-buttons btn-radius btn-visit-blog">@lang('content.visitBlog')</a>
         </div>
     </div>
     
@@ -366,39 +376,53 @@ data-aos-anchor-placement="top-bottom"
         <div class="col-md-6 col-sm-12 px-0 bg-dark">
             <div class="call-back-cta mt-sm-30">
                 <h3 class="text-white mx-4 my-3">Move Digital At Ease</h3>
-                <div class="contact-form p-30 m-4">
+                <div class="p-30 m-4" id="contact-form">
 
-                    <div id="message"></div>
-                    <form method="post" action="" name="contact-form" id="contact-form">
+                    {{-- <div id="message"></div> --}}
+                    <form method="post" action="{{route('serviceRequest')}}" name="contact-form">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="name" id="name" type="text" class="form-control" placeholder="Your name">
+                                    <input name="name" id="name" type="text" class="form-control" placeholder="@lang('content.yourName')">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="email" id="email" type="email" class="form-control" placeholder="Your email">
+                                    <input name="email" id="email" type="email" class="form-control" placeholder="@lang('content.yourEmail')">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="phone" id="phone" class="form-control" placeholder="Your Phone">
+                                    <input name="phone" id="phone" class="form-control" placeholder="@lang('content.yourPhone')">
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <label for="" class=" text-white">Choose Service</label>
-                                    <select class="order-multiple-services form-control" id="id_label_single" name="states[]" multiple="multiple">
-                                        <optgroup label="Web&App">
+                                    <label for="" class=" text-white">@lang('content.chooseService')</label>
+                                    <select class="order-multiple-services form-control" id="id_label_single" name="tags[]" multiple="multiple">
+                                        @forelse ($service as $item)
+                                            <optgroup label="{{$item->title_en}}">
+                                                @forelse ($item->tag as $tag)
+                                                    <option value="{{$tag->id}}">{{$tag->name_en}}</option>
+                                                @empty
+                                                    
+                                                @endforelse
+
+                                            </optgroup>
+                                        @empty
+                                            
+                                        @endforelse
+                                        
+                                        {{-- <optgroup label="Web&App">
                                             <option>Web</option>
                                             <option>App</option>
                                         </optgroup>
                                         <optgroup label="Odoo">
                                             <option>odoo</option>
                                             <option>odoo</option>
-                                        </optgroup>
+                                        </optgroup> --}}
                                       </select>
                                 </div>
                             </div>
@@ -406,7 +430,7 @@ data-aos-anchor-placement="top-bottom"
                         </div>
                         <div class="row">
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <input type="submit" id="submit" name="send" class="btn btn-buttons btn-radius" value="Continue">
+                                <input type="submit" id="submit" name="send" class="btn btn-buttons btn-radius" value="@lang('content.orderNow')">
                                 <div id="simple-msg"></div>
                             </div>
                         </div>
@@ -459,32 +483,33 @@ data-aos-anchor-placement="top-bottom"
             <div class="col-md-6">
                 <div class="custom-form mt-30">
                     <div id="message"></div>
-                    <form method="post" action="" name="contact-form" id="contact-form">
+                    <form method="post" action="{{route('contactForm')}}" name="contact-form">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group app-label">
-                                    <input name="name" id="name" type="text" class="form-control" placeholder="Your name :">
+                                    <input name="name" id="name" type="text" class="form-control" placeholder="@lang('content.yourName') :">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group app-label">
-                                    <input name="email" id="email" type="email" class="form-control" placeholder="Your email :">
+                                    <input name="email" id="email" type="email" class="form-control" placeholder="@lang('content.yourEmail') :">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="subject" id="subject" class="form-control" placeholder="Your subject :">
+                                    <input name="subject" id="subject" class="form-control" placeholder="@lang('content.subject') :">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <textarea name="comments" id="comments" rows="3" class="form-control" placeholder="Enter message :"></textarea>
+                                    <textarea name="message" id="comments" rows="3" class="form-control" placeholder="@lang('content.message') :"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 d-flex justify-content-end">
-                                <input type="submit" id="submit" name="send" class="btn btn-buttons btn-radius" value="Send Message">
+                                <input type="submit" id="submit" name="send" class="btn btn-buttons btn-radius" value="@lang('content.sendMessage')">
                                 <div id="simple-msg"></div>
                             </div>
                         </div>
@@ -498,5 +523,12 @@ data-aos-anchor-placement="top-bottom"
 </section>
 <!-- CONTACT END -->
 
+<!-- SCRIPTS -->
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({
+        });
+    });
+</script>
 
 @endsection

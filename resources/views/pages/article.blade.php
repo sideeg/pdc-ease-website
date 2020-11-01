@@ -57,7 +57,7 @@
                                 @empty
                                     
                                 @endforelse
-                                <div>
+                                {{-- <div>
                                     <a href="#"><img src="images/blog/blog-1.jpg" class="mx-auto d-block img-fluid" alt="img-missing"></a>
                                     <div class="spacer-15"></div>
                                     <a href="#"><h4 class="pr-2 pl-2">The business woman hard work</h4></a>
@@ -91,7 +91,7 @@
                                     <a href="#"><img src="images/blog/blog-7.jpg" class="mx-auto d-block img-fluid" alt="img-missing"></a>
                                     <div class="spacer-15"></div>
                                     <a href="#"><h4 class="pr-2 pl-2">Analysis of Last Year Financial Report</h4></a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>                                

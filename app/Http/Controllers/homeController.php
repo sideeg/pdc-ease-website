@@ -25,7 +25,6 @@ class homeController extends Controller
             'name' => 'required|max:255',
             'message' => 'required',
         ]);
-
         $message = new Models\message();
 
         $message->name = $request->name;
@@ -41,6 +40,8 @@ class homeController extends Controller
 
     public function serviceRequest(Request $request)
     {
+
+        // dd($request);
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'phone' => 'required',
@@ -56,14 +57,23 @@ class homeController extends Controller
 
         $order->save();
 
-        for ($i =0;i<sizeof($request['tags']);$i++){
-            $order_tag = new orders_tags();
-
-            $order_tag->order_id = $order->id;
-            $order_tag->tag_id = $request['tags'][i];
-
-            $order_tag->save();
-
+        if(is_array($request['tags'])){
+            for ($i =0;$i < sizeof($request['tags']);$i++){
+                $order_tag = new Models\orders_tags();
+    
+                $order_tag->order_id = $order->id;
+                $order_tag->tag_id = $request['tags'][$i];
+    
+                $order_tag->save();
+    
+            }
+        }else{
+                $order_tag = new Models\orders_tags();
+    
+                $order_tag->order_id = $order->id;
+                $order_tag->tag_id = $request['tags'];
+    
+                $order_tag->save();
         }
 
         return redirect('/');

@@ -1,7 +1,27 @@
 <!-- FOOTER START -->
-<footer class="footer bg-dark">
+<section class="footer bg-dark">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12 text-center">
+                <div class="footer-menu ab-sm-15">
+                    <ul class="list-unstyled social-icon mb-0">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-apple"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    </ul>
+                    <p class="pt-4 pb-2"> &copy; 2010 - 2020 INISTORY ALL RIGHT RESERVED </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FOOTER END -->
+<!-- FOOTER START -->
+{{-- <footer class="footer bg-dark">
     <div class="section-two">
-        <div class="container">
+        <div class="container"> --}}
             <!--Footer Info -->
             <!-- <div class="row footer-info">
                 <div class="col-lg-3 col-md-12 col-sm-12">
@@ -79,9 +99,9 @@
                 </div>
             </div> -->
             <!-- End Footer Info -->
-        </div>
-    </div>
-    <hr>
+        {{-- </div>
+    </div> --}}
+    {{-- <hr> --}}
 
     <!-- Copyright Bar -->
     <!-- <section class="section-30">
@@ -96,7 +116,7 @@
         </div>
     </section> -->
     <!-- End Copyright Bar -->
-</footer>
+{{-- </footer> --}}
 <!-- FOOTER END -->
 
 <!-- Back to top -->    

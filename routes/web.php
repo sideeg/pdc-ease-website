@@ -34,10 +34,24 @@ Route::get('/service', function () {
     return view('pages.service');
 });
 
+Route::get('/service_order', function () {
+    return view('pages.service-order');
+});
+
+Route::get('/tag_order', function () {
+    return view('pages.tag-order');
+});
+
 Route::get('/',"App\Http\Controllers\homeController@index")->name('home');
-Route::post("/contact","homeController@message")->name('contact');
+Route::post('/contact',"App\Http\Controllers\homeController@contactForm")->name('contactForm');
+Route::post('/service_request',"App\Http\Controllers\homeController@serviceRequest")->name('serviceRequest');
+
+
+// Route::post("/contact","homeController@message")->name('contact');
 
 Route::get("/service/{id}","App\Http\Controllers\servicesController@serviceById")->name('service');
+Route::get("/service_order/{id}","App\Http\Controllers\servicesController@showServiceForm")->name('serviceOrderForm');
+Route::get("/tag_order/{id}","App\Http\Controllers\servicesController@showTagForm")->name('showTagForm');
 
 
 // Route::get("/blog","App\Http\Controllers\blogController@index")->name('blog');

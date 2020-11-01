@@ -1,6 +1,11 @@
 body {
 	/* direction: rtl; */
 	text-align: right;
+	font-family: 'Tajawal', sans-serif;
+}
+
+h1,h2,h3,h4,h5,a{
+	font-family: 'Almarai', sans-serif;
 }
 
 nav {
@@ -158,11 +163,24 @@ textarea {
     transition: all 0.4s;
 }
 
-.post-footer .post-more::before {
-    content: '\2192';
+
+.post-footer .post-more::after {
+    content: '\2190';
     font-size: 1rem;
     font-weight: bolder;
     margin: 5px;
     opacity: 0;
     transition: all 0.4s;
 }
+
+.post-footer .post-more:hover::after {
+    content: '\2190';
+    font-size: 1rem;
+    font-weight: bolder;
+    margin: 5px;
+    opacity: 1;
+    transition: all 0.4s;
+    transform: translateX(20rem);
+
+}
+
