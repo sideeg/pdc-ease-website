@@ -16,7 +16,7 @@ class servicesController extends Controller
         ]);
 
         $order = new Models\orders();
-        
+
         $order->name = $request->name;
         $order->email = $request->email;
         $order->phone = $request->phone;
@@ -38,8 +38,8 @@ class servicesController extends Controller
     }
 
     /***************************
-     * 
-     * 
+     *
+     *
      */
 
      public function tagRequest(Request $request)
@@ -52,7 +52,7 @@ class servicesController extends Controller
         ]);
 
         $order = new Models\orders();
-        
+
         $order->name = $request->name;
         $order->email = $request->email;
         $order->phone = $request->phone;
@@ -68,7 +68,7 @@ class servicesController extends Controller
      }
 
      /*****************
-      * 
+      *
 
       */
       public function tagForm( $tag_id)
@@ -77,8 +77,8 @@ class servicesController extends Controller
       }
 
       /************************
-       * 
-       * 
+       *
+       *
        */
       public function serviceForm($service_id)
       {
