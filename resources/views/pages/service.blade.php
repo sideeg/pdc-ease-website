@@ -5,7 +5,7 @@
 
 
 <!-- HOME START-->
-<section class="bg-home" style="background-image: url({{asset('images/home/bg-home-7.jpg')}})" id="home">
+<section class="bg-home" style="background-image: url({{asset($service->image)}})" id="home">
     <div class="bg-overlay"></div>
     <div class="home-center">
         <div class="home-desc-center">
@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
 
 <!-- SERVICE START -->
 <section class="section" id="service">
-    <div class="container"> 
+    <div class="container">
         <!-- <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
                 <div class="section-title text-center">
@@ -70,7 +70,7 @@
                                 </a>
                             </li>
                         @empty
-                            
+
                         @endforelse
                         <li class="nav-item">
                             <a class="nav-link" id="interior-tab" data-toggle="tab" href="#interior" role="tab" aria-controls="interior" aria-selected="true">
@@ -96,7 +96,7 @@
                                 <p class="mb-0 text-uppercase mt-3">app</p>
                             </a>
                         </li>
-                        
+
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                         @empty
-                            
+
                         @endforelse
 
                         {{-- <div class="tab-pane fade bg-dark text-white pb-3 active show" id="planning" role="tabpanel" aria-labelledby="planning-tab">
@@ -242,7 +242,7 @@
             </div>
             <div class="col-lg-3 col-md-3">
                 <div class="text-center counter-funfact p-4 mt-3 text-white">
-                    <i class="pe-7s-wine counter-icon"></i>                      
+                    <i class="pe-7s-wine counter-icon"></i>
                     <h2 class="counter-value" data-count="532">2</h2>
                     <p class="counter-name mb-0">Tea Cup</p>
                 </div>
