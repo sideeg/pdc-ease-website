@@ -26,7 +26,7 @@ class clintSeeder extends Seeder
             'name' => $Factory->name,
         ]);
         clints::create([
-            'logo' => "images\svg\clints\fss.svg" ,
+            'logo' => "images\svg\clints\fss.SVG" ,
             'name' => $Factory->name,
         ]);
         clints::create([
@@ -34,7 +34,7 @@ class clintSeeder extends Seeder
             'name' => $Factory->name,
         ]);
         clints::create([
-            'logo' => "images\svg\clints\logo_mat.svg" ,
+            'logo' => "images\svg\clints\kumani.svg" ,
             'name' => $Factory->name,
         ]);
         clints::create([
@@ -54,7 +54,7 @@ class clintSeeder extends Seeder
             'name' => $Factory->name,
         ]);
         clints::create([
-            'logo' => "images\svg\clints\TOPAZ.svg" ,
+            'logo' => "images\svg\clints\topaz.svg" ,
             'name' => $Factory->name,
         ]);
     }
