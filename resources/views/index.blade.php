@@ -10,12 +10,30 @@
     </h2> -->
     <!-- <div class="container"> -->
         <div class="owl-carousel text-white bg-dark" id="owl-demo">
-            <div class="item">
+            @forelse ($collection as $item)
+                <div class="item">
+                    <div class="banner-img">
+                        <img src="{{ asset($item->source)}}" class="img-fluid" alt="" srcset="">
+                    </div>
+                    <div class="banner-text bg-svg">
+                        <!-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> -->
+                        <div class="banner-content p-4">
+                            <h2 class="color-blue">{{ $item->title_en}}</h2>
+                            <p  class="mx-3">{{ $item->desc_en}}</p>
+                        </div>
+                    </div>
+
+                </div>
+            @empty
+                
+            @endforelse
+
+            {{-- <div class="item">
                 <div class="banner-img">
                     <img src="./images/client/img-6.jpg" class="img-fluid" alt="" srcset="">
                 </div>
                 <div class="banner-text bg-svg">
-                    {{-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> --}}
+                    <!-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> -->
                     <div class="banner-content p-4">
                         <h2 class="color-blue">Move Digatal At Ease</h2>
                         <p  class="mx-3">Lorem ipsum dolor sit, amet consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi itaque neque porro corporis debitis deserunt voluptates excepturi quod eos repellat natus eum, tempore sit! Excepturi rem consequuntur veniam aliquid placeat.</p>
@@ -68,7 +86,7 @@
                             type="video/mp4" >
 
                 </video>
-            </div>
+            </div> --}}
 
         </div>
     <!-- </div> -->
