@@ -80,12 +80,12 @@ body {
     }
 }
 /* ********* Services Section ********** */
-#service {
+#service-cute {
     margin-top: -4rem;
 }
 
 @media (max-width: 425px) {
-    #service {
+    #service-cute {
         margin-top: 0;
     }
 }

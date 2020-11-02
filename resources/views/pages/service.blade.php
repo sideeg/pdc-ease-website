@@ -21,7 +21,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
 <!-- HOME END-->
 
 <!-- SERVICE START -->
-<section class="section" id="service">
+<section class="section" id="service-cute">
     <div class="container"> 
         
         <div class="row justify-content-center">
@@ -59,7 +59,7 @@
                                 </a>
                             </li>
                         @empty
-                            
+
                         @endforelse
                         {{-- <li class="nav-item">
                             <a class="nav-link" id="interior-tab" data-toggle="tab" href="#interior" role="tab" aria-controls="interior" aria-selected="true">
@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                         @empty
-                            
+
                         @endforelse
 
 
@@ -121,12 +121,6 @@
                                     </div>
                                 </div>
 
-                                <!-- <div class="col-lg-6">
-                                    <div class="onepage-services-img mt-4">
-                                        <img src="images/services/img-4.jpg" class="img-fluid" alt="">
-                                    </div>
-                                </div> -->
-
                             </div>
                         </div>
 
@@ -142,11 +136,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-lg-6">
-                                    <div class="onepage-services-img mt-4">
-                                        <img src="images/services/img-5.jpg" class="img-fluid" alt="">
-                                    </div>
-                                </div> -->
+                                
                             </div>
                         </div>
 
@@ -163,11 +153,6 @@
                                     </div>
                                 </div>
 
-                                <!-- <div class="col-lg-6">
-                                    <div class="onepage-services-img mt-4">
-                                        <img src="images/services/img-6.jpg" class="img-fluid" alt="">
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>

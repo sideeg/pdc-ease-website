@@ -92,13 +92,13 @@ data-aos-delay="100" --}}
         </div>
         <div class="row justify-content-center">
             @forelse ($service as $item)
-            <div class="my-md-5 col-lg-4 col-md-6 col-sm-12 py-2 service radius d-flex justify-content-center align-items-center">
+            <div class="sm-my-3 col-lg-4 col-md-6 col-sm-12 py-2 service radius d-flex justify-content-center align-items-center">
                 <div class="my-2">
                     <div class="service-img text-center" >
                         <img src="{{asset($item->image)}}" class="img-fluid" alt="sevice img" srcset="">
                     </div>
                     <div class="service-text">
-                        <a href="{{ route('service', $item->id)}}"><h2 class="text-center color-dark font-22">{{ $item->title_en}}</h2></a>
+                        <a href="{{ route('service', $item->id)}}"><h2 class="text-center color-dark font-22 my-2">{{ $item->title_en}}</h2></a>
                         <p class="">{{ $item->desc_en}}</p>
                         <div class="d-flex justify-content-center">
                             <a href="{{route('serviceOrderForm',$item->id )}}" class="btn-service">@lang('content.orderNow')</a>
