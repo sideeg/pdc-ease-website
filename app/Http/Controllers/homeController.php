@@ -9,6 +9,7 @@ class homeController extends Controller
 {
     public function index()
     {
+
         $slider = Models\slide_bar::all();
         $blogs = Models\blogs::with("tag")->take(3)->get();
         $service = Models\services::all();
@@ -32,7 +33,7 @@ class homeController extends Controller
         $message->subject = $request->subject;
         $message->message = $request->message;
         $message->save();
-    
+
         return redirect('/');
 
 
@@ -50,7 +51,7 @@ class homeController extends Controller
         ]);
 
         $order = new Models\orders();
-        
+
         $order->name = $request->name;
         $order->email = $request->email;
         $order->phone = $request->phone;
@@ -60,19 +61,19 @@ class homeController extends Controller
         if(is_array($request['tags'])){
             for ($i =0;$i < sizeof($request['tags']);$i++){
                 $order_tag = new Models\orders_tags();
-    
+
                 $order_tag->order_id = $order->id;
                 $order_tag->tag_id = $request['tags'][$i];
-    
+
                 $order_tag->save();
-    
+
             }
         }else{
                 $order_tag = new Models\orders_tags();
-    
+
                 $order_tag->order_id = $order->id;
                 $order_tag->tag_id = $request['tags'];
-    
+
                 $order_tag->save();
         }
 

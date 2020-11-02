@@ -5,7 +5,11 @@
 
 
 <!-- HOME START-->
+<<<<<<< HEAD
+<section class="bg-home" style="background-image: url({{asset($service->image)}})" id="home">
+=======
 <section class="bg-home" style="background-image: url({{asset('images/about/about-pic.jpg')}})" id="home">
+>>>>>>> 9b09de5e731077a1fa18c078827b046e096728bd
     <div class="bg-overlay"></div>
     <div class="home-center">
         <div class="home-desc-center">
