@@ -21,7 +21,7 @@
                         <p  class="mx-3">Lorem ipsum dolor sit, amet consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi itaque neque porro corporis debitis deserunt voluptates excepturi quod eos repellat natus eum, tempore sit! Excepturi rem consequuntur veniam aliquid placeat.</p>
                     </div>
                 </div>
-                
+
             </div>
             <div class="item">
                 <div class="banner-img">
@@ -57,16 +57,16 @@
                     <p>Lorem ipsum dolor sit, amet consectetur.</p>
                 </div>
             </div>
-            
+
             <div class="item">
                 <video class="one-slide" autoplay loop muted>
 
                     <!-- <source src="/media/cc0-videos/flower.webm"
                             type="video/webm"> -->
-                
+
                     <source src="./images/videos/video.mp4"
                             type="video/mp4" >
-                
+
                 </video>
             </div>
 
@@ -75,9 +75,9 @@
 </section>
 
 <!-- ABOUT US START -->
-<section class="section bg-white" id="service" 
+<section class="section bg-white" id="service"
 {{-- data-aos="fade-up-right"
-data-aos-duration="1000" 
+data-aos-duration="1000"
 data-aos-delay="100" --}}
 >
     <div class="container">
@@ -110,7 +110,7 @@ data-aos-delay="100" --}}
                 </div>
             </div>
             @empty
-                
+
             @endforelse
 
             {{-- <div class="col-lg-4 col-md-4 col-sm-12 service">
@@ -136,7 +136,7 @@ data-aos-delay="100" --}}
             </div> --}}
         </div>
     </div>
-   
+
 </section>
 <!-- ABOUT US END -->
 
@@ -146,15 +146,15 @@ data-aos-delay="100" --}}
 <section class="section bg-dark" id="client"
 data-aos="fade-up"
 data-aos-anchor-placement="top-bottom"
-> 
+>
     <div class="container">
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="slider autoplay">
                     @forelse ($clint as $item)
-                        <div><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
+                <div><img src="{{asset($item->logo)}}" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     @empty
-                        
+
                     @endforelse
                     <div><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     <div><img src="images/client/partner-2.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
@@ -202,7 +202,7 @@ data-aos-anchor-placement="top-bottom"
             </div>
             <div class="col-lg-3 col-md-3">
                 <div class="text-center counter-funfact p-4 mt-3 text-white">
-                    <i class="pe-7s-wine counter-icon"></i>                      
+                    <i class="pe-7s-wine counter-icon"></i>
                     <h2 class="counter-value" data-count="532">2</h2>
                     <p class="counter-name mb-0">Tea Cup</p>
                 </div>
@@ -283,9 +283,9 @@ data-aos-anchor-placement="top-bottom"
                 </article>
             </div>
             @empty
-                
+
             @endforelse
-            
+
             {{-- <div class="col-md-4">
                 <article class="post bg-white mt-30">
                     <div class="post-preview">
@@ -314,14 +314,14 @@ data-aos-anchor-placement="top-bottom"
                                     </li>
                                 </ul>
                             </div> -->
-                            <div class="post-more"><a href="#">Read More 
+                            <div class="post-more"><a href="#">Read More
                                 <!-- <i class="mdi mdi-arrow-right"></i> -->
                             </a></div>
                         </div>
                     </div>
                 </article>
             </div>
-                
+
             <div class="col-md-4">
                 <article class="post bg-white mt-30">
                     <div class="post-preview">
@@ -364,7 +364,7 @@ data-aos-anchor-placement="top-bottom"
             <a href="{{ route('blog') }}" class="btn btn-buttons btn-radius btn-visit-blog">@lang('content.visitBlog')</a>
         </div>
     </div>
-    
+
 </section>
 <!-- BLOG END -->
 
@@ -407,14 +407,14 @@ data-aos-anchor-placement="top-bottom"
                                                 @forelse ($item->tag as $tag)
                                                     <option value="{{$tag->id}}">{{$tag->name_en}}</option>
                                                 @empty
-                                                    
+
                                                 @endforelse
 
                                             </optgroup>
                                         @empty
-                                            
+
                                         @endforelse
-                                        
+
                                         {{-- <optgroup label="Web&App">
                                             <option>Web</option>
                                             <option>App</option>
@@ -426,7 +426,7 @@ data-aos-anchor-placement="top-bottom"
                                       </select>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <div class="row">
                             <div class="col-sm-12 d-flex justify-content-end">
@@ -442,7 +442,7 @@ data-aos-anchor-placement="top-bottom"
         <div class="col-md-6 col-sm-12 m-auto">
             <h3 class="slogan"></h3>
         </div>
-        
+
     </div>
 </section>
 
@@ -479,7 +479,7 @@ data-aos-anchor-placement="top-bottom"
                     <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d6030.418742494061!2d-111.34563870463673!3d26.01036670629853!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1471908546569" style="border: 0" allowfullscreen></iframe> -->
                 </div>
             </div>
-            
+
             <div class="col-md-6">
                 <div class="custom-form mt-30">
                     <div id="message"></div>
@@ -518,7 +518,7 @@ data-aos-anchor-placement="top-bottom"
             </div>
         </div>
 
-  
+
     </div>
 </section>
 <!-- CONTACT END -->

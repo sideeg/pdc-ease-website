@@ -22,7 +22,39 @@ class clintSeeder extends Seeder
             \File::makeDirectory($path, $mode = 0755, true, true);
         }
         clints::create([
-            'logo' => $Factory->imageUrl(400,300, 'business', false) ,
+            'logo' => "images\svg\clints\CC.svg" ,
+            'name' => $Factory->name,
+        ]);
+        clints::create([
+            'logo' => "images\svg\clints\fss.svg" ,
+            'name' => $Factory->name,
+        ]);
+        clints::create([
+            'logo' => "images\svg\clints\khaber.svg" ,
+            'name' => $Factory->name,
+        ]);
+        clints::create([
+            'logo' => "images\svg\clints\logo_mat.svg" ,
+            'name' => $Factory->name,
+        ]);
+        clints::create([
+            'logo' => "images\svg\clints\Mask.svg" ,
+            'name' => $Factory->name,
+        ]);
+        clints::create([
+            'logo' => "images\svg\clints\mvmv.svg" ,
+            'name' => $Factory->name,
+        ]);
+        clints::create([
+            'logo' => "images\svg\clints\Ocean_Media.svg" ,
+            'name' => $Factory->name,
+        ]);
+        clints::create([
+            'logo' => "images\svg\clints\investin.svg" ,
+            'name' => $Factory->name,
+        ]);
+        clints::create([
+            'logo' => "images\svg\clints\TOPAZ.svg" ,
             'name' => $Factory->name,
         ]);
     }
