@@ -134,7 +134,7 @@
 @media (max-width: 768px) and (min-width: 425px){
 
 	.owl-wrapper .owl-item .item{
-		display: flex;
+		/* display: flex; */
 		/* flex-grow: 1; */
 		/* flex-wrap: wrap; */
 

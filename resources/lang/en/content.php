@@ -8,6 +8,10 @@ return [
     'clients' => 'Clients',
     'blog' => 'Blog',
     'contact' => 'Contact',
+    // Labels
+    // 'blog' => 'Blog',
+    'whatWeDo' => 'What We Do',
+    'getInTouch' => 'Get In Touch',
 
     // Forms
     'yourName' => 'Your Name',

@@ -44,7 +44,7 @@ body {
     right: 0;
     width: 0;
     height: 2px;
-    background: blue;
+    background: #212147;
     transition: all 0.4s;
 
 }
@@ -129,16 +129,16 @@ body {
 }
 
 
-@media (max-width: 425px) {
-    .btn-service {
-        opacity: 0;
-        border: 2px solid #212147;
+@media (min-width: 425px) {
+    /* .btn-service {
+        opacity: 1;
+        border: 2px solid #33CCCC;
+        background: #212147;
+        color: #33CCCC;
         padding: 0.2rem 0.7rem;
         border-radius: 20rem;
         text-align: center;
-        
-    
-    }
+    } */
 }
 
 /* ********* Blog Section ********** */
