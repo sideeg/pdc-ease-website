@@ -13,6 +13,9 @@ class slideSeeder extends Seeder
      */
     public function run()
     {
-        //
+        slide_bar::create([
+            'sourse' => "images\svg\slider\588.svg" ,
+            'type' => 0,
+        ]);
     }
 }
