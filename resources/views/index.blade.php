@@ -104,7 +104,7 @@ data-aos-delay="100" --}}
                         <a href="{{ route('service', $item->id)}}"><h2 class="text-center color-dark">{{ $item->title_en}}</h2></a>
                         <p class="">{{ $item->desc_en}}</p>
                         <div class="d-flex justify-content-center">
-                            <a href="javascript:void(0);" class="btn-service">@lang('content.orderNow')</a>
+                            <a href="{{route('serviceOrderForm',$item->id )}}" class="btn-service">@lang('content.orderNow')</a>
                         </div>
                     </div>
                 </div>

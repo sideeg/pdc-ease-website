@@ -13,11 +13,11 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <div class="title-heading text-center text-white">
-                            <h1 class="">{{$service->title_en}}</h1>
+                            <h1 class="service-header">{{$service->title_en}}</h1>
                             {{-- <p class="mx-auto">{{$service->desc_en}}</p> --}}
                             <div class="row ">
                                 <div class="col-sm-12">
-                                    <a href="{{route('serviceOrderForm',$service->id )}}" id="submit" name="send" class="btn btn-buttons btn-radius">Customize Your Order</a>
+                                    <a href="{{route('serviceOrderForm',$service->id )}}" id="submit" name="send" class="btn btn-buttons btn-radius">@lang('content.orderNow')</a>
                                     <div id="simple-msg"></div>
                                 </div>
                             </div>
