@@ -4,20 +4,20 @@
 
 
 
-<section class="bg-dark" id="home">
+<section class="" id="home">
     <!-- <h2 class="text-center mb-4">
         Slider Test
     </h2> -->
     <!-- <div class="container"> -->
-        <div class="owl-carousel text-white" id="owl-demo">
+        <div class="owl-carousel text-white bg-dark" id="owl-demo">
             <div class="item">
                 <div class="banner-img">
-                    <img src="./images/about/about-pic.jpg" class="img-fluid" alt="" srcset="">
+                    <img src="./images/client/img-6.jpg" class="img-fluid" alt="" srcset="">
                 </div>
                 <div class="banner-text bg-svg">
                     {{-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> --}}
                     <div class="banner-content p-4">
-                        <h2>Move Digatal At Ease</h2>
+                        <h2 class="color-blue">Move Digatal At Ease</h2>
                         <p  class="mx-3">Lorem ipsum dolor sit, amet consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi itaque neque porro corporis debitis deserunt voluptates excepturi quod eos repellat natus eum, tempore sit! Excepturi rem consequuntur veniam aliquid placeat.</p>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
 </section>
 
 <!-- ABOUT US START -->
-<section class="section bg-white" id="service"
+<section class="section bg-white pt-5" id="service"
 {{-- data-aos="fade-up-right"
 data-aos-duration="1000"
 data-aos-delay="100" --}}
@@ -291,7 +291,7 @@ data-aos-anchor-placement="top-bottom"
         <div class="row">
             <div class="col-md-6">
                 <div class="m-auto mt-30 ">
-                    <p>
+                    <p class="text-center">
                         Khartoum, Arkaweet, Eastern Child City
                     </p>
                     <div class="map-icon-container">
