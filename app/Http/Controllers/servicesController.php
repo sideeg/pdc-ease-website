@@ -16,7 +16,8 @@ class servicesController extends Controller
     {
         // dd($id);
         $service = services::where('id',$id)->with("tag")->get();
-        // dd($service);
+        $service = $service[0];
+        // dd($service->tag);
         return view('pages.service', compact('service'));
     }
 

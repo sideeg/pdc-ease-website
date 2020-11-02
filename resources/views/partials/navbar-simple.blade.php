@@ -22,7 +22,7 @@
                         @if (App::isLocale('ar')) 
                             <a href="{{ url('locale/en') }}" class="nav-link"><img src="{{ asset('images/flags/uk.svg') }}" class="lang-svg" alt="" srcset=""></a>
                         @else
-                            <a href="{{ url('locale/ar') }}" class="nav-link"><img src="{{ asset('images/flags/sudan.svg') }}" class="lang-svg" alt="" srcset=""></a>
+                            {{-- <a href="{{ url('locale/ar') }}" class="nav-link"><img src="{{ asset('images/flags/sudan.svg') }}" class="lang-svg" alt="" srcset=""></a> --}}
                         @endif
                     </li>
                 </ul>

@@ -227,6 +227,8 @@ h4 {
     font-size: 14px !important;
 }
 
+
+
 .pad-bot-0 {
     padding-bottom: 0;
 }
@@ -632,10 +634,17 @@ h4 {
 .onepage-services .nav-tabs .nav-link {
     text-transform: uppercase;
     color: #303030;
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
     padding: 16px 10px;
     border-bottom: 3px solid #3498db;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.onepage-services .nav-tabs .nav-item .nav-link a p{
+    font-size: 0.5;
 }
 
 .onepage-services .nav-tabs .nav-item.show .nav-link,
@@ -644,7 +653,7 @@ h4 {
 .onepage-services .nav-tabs .nav-link.active {
     border-color: transparent;
     border-bottom: 3px solid #3498db;
-    background: #212147;
+    /* background: #212147; */
     transition: all 0.5s;
 }
 

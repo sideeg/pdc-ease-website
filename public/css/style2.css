@@ -44,7 +44,7 @@ body {
     right: 0;
     width: 0;
     height: 2px;
-    background: blue;
+    background: #212147;
     transition: all 0.4s;
 
 }
@@ -80,12 +80,12 @@ body {
     }
 }
 /* ********* Services Section ********** */
-#service {
+#service-cute {
     margin-top: -4rem;
 }
 
 @media (max-width: 425px) {
-    #service {
+    #service-cute {
         margin-top: 0;
     }
 }
@@ -126,6 +126,19 @@ body {
 
 .service:hover .btn-service {
     opacity: 1;
+}
+
+
+@media (min-width: 425px) {
+    /* .btn-service {
+        opacity: 1;
+        border: 2px solid #33CCCC;
+        background: #212147;
+        color: #33CCCC;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20rem;
+        text-align: center;
+    } */
 }
 
 /* ********* Blog Section ********** */
@@ -321,5 +334,17 @@ body {
     }
 
 }
+
+
+/* ===================== SERVICE PAGE =========================== */
+/* 
+.service-header {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 1px;
+} */
+
+
+
 
 

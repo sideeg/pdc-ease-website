@@ -9,6 +9,12 @@ return [
     'blog' => 'المدونة',
     'contact' => 'تواصل',
 
+    // Labels
+    // 'blog' => 'المدونة',
+    'whatWeDo' => 'خدمتنا',
+    'getInTouch' => 'كن على تواصل',
+
+
     // Forms
     'yourName' => 'الإسم',
     'yourEmail' => 'البريد الألكتروني',
