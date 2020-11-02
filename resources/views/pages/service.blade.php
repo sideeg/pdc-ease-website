@@ -5,7 +5,7 @@
 
 
 <!-- HOME START-->
-<section class="bg-home" style="background-image: url({{asset('images/home/bg-home-7.jpg')}})" id="home">
+<section class="bg-home" style="background-image: url({{asset('images/about/about-pic.jpg')}})" id="home">
     <div class="bg-overlay"></div>
     <div class="home-center">
         <div class="home-desc-center">

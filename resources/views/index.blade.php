@@ -251,15 +251,15 @@ data-aos-anchor-placement="top-bottom"
             <div class="col-md-4">
                 <article class="post bg-white mt-30">
                     <div class="post-preview">
-                        <a href="#"><img src="images/blog/blog-1.jpg" alt="" class="img-fluid mx-auto d-block"></a>
+                        <a href="{{route('article', $item->id)}}"><img src="images/blog/blog-1.jpg" alt="" class="img-fluid mx-auto d-block"></a>
                     </div>
 
                     <div class="post-header">
-                        <h4 class="post-title"><a href="#"> {{$item->title_en}}</a></h4>
+                        <h4 class="post-title"><a href="{{route('article', $item->id)}}"> {{$item->title_en}}</a></h4>
                         <ul class="post-meta">
                             <li><i class="mdi mdi-calendar"></i> <small>{{\Carbon\Carbon::parse($item->created_at)->format('M  d,yy') }}</small></li>
                             <li><i class="mdi mdi-tag-text-outline"></i>
-                                <a href="#"> <small>{{$item->tag->name_en}}</small></a></li>
+                                <a href="{{route('blogByTag',$item->tag->id )}}"> <small>{{$item->tag->name_en}}</small></a></li>
                         </ul>
 
                         <div class="post-content">

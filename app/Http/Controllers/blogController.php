@@ -17,10 +17,10 @@ class blogController extends Controller
         // $orders = Order::paginate(10);
         // return view('orders.index', compact('orders'));
         //$blog = json_encode( blog::orderBy('id', 'asc')->select('id','blog_name', 'Brief',"created_at","image")->get());
-       $blog = blogs::paginate(5);
+    //    $blog = blogs::paginate(5);
         // dd($blog);
         
-       $blog = blogs::paginate(10);
+       $blog = blogs::paginate(9);
         // dd($blog);
         return view('pages.blog', compact('blog')); // TODO view name
 
@@ -38,5 +38,13 @@ class blogController extends Controller
        $related_articles = blogs::select('image','title_en')->where('tag_id',$article->tag_id)->take(3)->get();
         // dd($related_tags);
         return view("pages.article", compact('article','related_tags','related_articles'));
+    }
+
+    public function blogByTag($tag_id)
+    {
+        $blog = blogs::where('tag_id',$tag_id)->paginate(9);
+        // dd($blog);
+        return view("pages.blog", compact('blog'));
+
     }
 }
