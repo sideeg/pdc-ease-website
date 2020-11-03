@@ -32,11 +32,10 @@ class blogSeeder extends Seeder
                 'image' => $faker_en->imageUrl(400,300, 'technics', false) ,
                 'title_ar' => $faker_ar->name,
                 'title_en' => $faker_en->name,
-                'desc_en' => $faker_ar->realText(),
-                'desc_ar' => $faker_en->realText(),
+
                 'tag_id' => $faker_en->randomElement($tags),
                 // 'tag_id' => 1,
-    
+
             ]);
         }
 
