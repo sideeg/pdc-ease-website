@@ -18,8 +18,8 @@ class CreateBlogsTable extends Migration
             $table->string("image");
             $table->text("title_en");
             $table->text("title_ar");
-            $table->string("desc_en");
-            $table->string("desc_ar");
+            $table->string("desc_en")->nullable();
+            $table->string("desc_ar")->nullable();
 
             $table->string("tag_id");
 

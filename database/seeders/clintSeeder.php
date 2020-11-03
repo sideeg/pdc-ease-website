@@ -50,7 +50,7 @@ class clintSeeder extends Seeder
             'name' => $Factory->name,
         ]);
         clints::create([
-            'logo' => "images\svg\clints\Linvestin.svg" ,
+            'logo' => "images\svg\clints\investin.svg" ,
             'name' => $Factory->name,
         ]);
         clints::create([
