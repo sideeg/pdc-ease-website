@@ -25,10 +25,6 @@ class tagSeeder extends Seeder
             'name_ar'=> $faker_ar->name,
             'name_en'=> "Branding & Brand Positioning Positioning",
 
-            "desc_en" => $faker_ar->realText(),
-            'desc_ar' => $faker_en->realText(),
-
-
             "services_id"=> '2',
         ]);
 
@@ -42,6 +38,74 @@ class tagSeeder extends Seeder
             'name_en'=> "Digital Marketing",
             "services_id"=> '2',
         ]);
+
+        tags::create([
+
+            'name_en'=> "Process Mapping",
+            "services_id"=> '3',
+        ]);
+
+        tags::create([
+
+            'name_en'=> "Process Improvement",
+            "services_id"=> '3',
+        ]);
+
+        tags::create([
+            'name_en'=> "Organizational Capabilities Assessment & Improvement",
+            "services_id"=> '3',
+        ]);
+
+        tags::create([
+            'name_en'=> "Business & Marketing Strategy Formulation",
+            "services_id"=> '3',
+        ]);
+
+        tags::create([
+            'name_en'=> "Mobile app Android & IOS development ",
+            "services_id"=> '1',
+        ]);
+
+        tags::create([
+            'name_en'=> "E-Commerce Design & Development",
+            "services_id"=> '1',
+        ]);
+
+        tags::create([
+            'name_en'=> "Website Design & Development",
+            "services_id"=> '1',
+        ]);
+
+        tags::create([
+            'name_en'=> "UI & UX Design",
+            "services_id"=> '1',
+        ]);
+
+        tags::create([
+            'name_en'=> "Email & Domains Hosting Services",
+            "services_id"=> '1',
+        ]);
+
+        tags::create([
+            'name_en'=> "IT hardware/ Software Consumable      Sales – Support – Upgrade – Repairs",
+            "services_id"=> '5',
+        ]);
+
+        tags::create([
+            'name_en'=> "Network Hardware ( Infrastructure Planning, Deployment and support)",
+            "services_id"=> '5',
+        ]);
+
+        tags::create([
+            'name_en'=> "Server Support ( Remote and physical support )",
+            "services_id"=> '5',
+        ]);
+
+        tags::create([
+            'name_en'=> "  Anti-Virus, Internet Security, websites restrictions Data Recovery solutions",
+            "services_id"=> '5',
+        ]);
+
 
     }
 }
