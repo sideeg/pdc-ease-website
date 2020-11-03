@@ -23,13 +23,25 @@ class tagSeeder extends Seeder
         $service = services::pluck('id')->toArray();
         tags::create([
             'name_ar'=> $faker_ar->name,
-            'name_en'=> $faker_en->name,
+            'name_en'=> "Branding & Brand Positioning Positioning",
 
             "desc_en" => $faker_ar->realText(),
             'desc_ar' => $faker_en->realText(),
-            
 
-            "services_id"=> $faker_en->randomElement($service),
+
+            "services_id"=> '2',
         ]);
+
+        tags::create([
+            'name_ar'=> $faker_ar->name,
+            'name_en'=> "Marketing Planning",
+            "services_id"=> '2',
+        ]);
+        tags::create([
+            'name_ar'=> $faker_ar->name,
+            'name_en'=> "Digital Marketing",
+            "services_id"=> '2',
+        ]);
+
     }
 }

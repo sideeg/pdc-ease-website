@@ -11,10 +11,10 @@ class slide_bar extends Model
 
       /**
      * The attributes that are mass assignable.
-     * 
+     *
      *
      * @var array
      */
-    protected $fillable = [  "tilte","desc","sourse","type",
+    protected $fillable = [  "title_en",'title_ar',"desc_en",'desc_ar',"sourse","type",
     ];
 }
