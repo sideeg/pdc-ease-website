@@ -5,9 +5,6 @@
 
 
 <section class="" id="home">
-    <!-- <h2 class="text-center mb-4">
-        Slider Test
-    </h2> -->
     <!-- <div class="container"> -->
         <div class="owl-carousel text-white bg-dark" id="owl-demo">
             @forelse ($slider as $item)
@@ -149,7 +146,7 @@ data-aos-anchor-placement="top-bottom"
                     @empty
 
                     @endforelse
-                    <div><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
+                    {{-- <div><img src="images/client/partner-1.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     <div><img src="images/client/partner-2.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     <div><img src="images/client/partner-3.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     <div><img src="images/client/partner-4.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
@@ -158,7 +155,7 @@ data-aos-anchor-placement="top-bottom"
                     <div><img src="images/client/partner-2.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     <div><img src="images/client/partner-3.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
                     <div><img src="images/client/partner-4.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
-                    <div><img src="images/client/partner-5.png" class="mx-auto d-block img-fluid" alt="img-missing"></div>
+                    <div><img src="images/client/partner-5.png" class="mx-auto d-block img-fluid" alt="img-missing"></div> --}}
                 </div>
             </div>
         </div>
