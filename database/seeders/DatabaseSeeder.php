@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(blogSeeder::class);
         $this->call(slideSeeder::class);
 
-
+        
 
 
     }

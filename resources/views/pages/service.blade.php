@@ -5,11 +5,7 @@
 
 
 <!-- HOME START-->
-<<<<<<< HEAD
-<section class="bg-home" style="background-image: url({{asset($service->image)}})" id="home">
-=======
 <section class="bg-home" style="background-image: url({{asset('images/about/about-pic.jpg')}})" id="home">
->>>>>>> 9b09de5e731077a1fa18c078827b046e096728bd
     <div class="bg-overlay"></div>
     <div class="home-center">
         <div class="home-desc-center">
@@ -40,9 +36,9 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
                 <div class="section-title text-center">
-                    <h3>Select Single Service</h3>
+                    <h3 class="color-blue">Select Single Service</h3>
                     <div class="spacer-15"></div>
-                        <p class="text-muted mb-0">
+                        <p class="mb-0 color-dark">
                             We at EASE offer you a wide range of digital transformation solutions.
                             Don't stay behind, move digital at ease
                         </p>

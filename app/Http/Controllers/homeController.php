@@ -16,7 +16,7 @@ class homeController extends Controller
         $clint = Models\clints::all();
 
 
-        // dd($clint);
+        // dd($slider);
         return view('index', compact(['slider','blogs', 'service', 'clint'])); //TODO page name
     }
 

@@ -11,6 +11,7 @@ class slide_bar extends Model
 
       /**
      * The attributes that are mass assignable.
+     * 
      *
      * @var array
      */
