@@ -22,7 +22,7 @@
 
                 </div>
             @empty
-                
+
             @endforelse
 
             {{-- <div class="item">
@@ -114,7 +114,7 @@ data-aos-delay="100" --}}
                     </div>
                     <div class="service-text">
                         <a href="{{ route('service', $item->id)}}"><h2 class="text-center color-dark font-22 my-2">{{ $item->title_en}}</h2></a>
-                        <p class="">{{ $item->desc_en}}</p>
+                        <p class="two-lines">{{ $item->desc_en}}</p>
                         <div class="d-flex justify-content-center">
                             <a href="{{route('serviceOrderForm',$item->id )}}" class="btn-service">@lang('content.orderNow')</a>
                         </div>

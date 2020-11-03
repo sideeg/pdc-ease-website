@@ -28,7 +28,7 @@ class serviceSeeder extends Seeder
             'title_ar'=> "صفحات الويب وتطبيقات الهاتف",
             'title_en'=> "Web and Mobile Applications",
 
-            "desc_en" => "Build new custom software for desktop and  mobile to address complex business problems.",
+            "desc_en" => "We create a high-quality software solution to address your needs and business challenges",
             'desc_ar' => $faker_ar->realText(),
 
             'image' => 'images\svg\services\mobileAndWeb.svg' ,
@@ -37,10 +37,9 @@ class serviceSeeder extends Seeder
 
         services::create([
             'title_ar'=> "التسويق والعلامات التجارية",
-            'title_en'=> "Markting and Branding",
+            'title_en'=> "Digital Markting",
 
-            "desc_en" =>"Whenever we talk business, we talk marketing.  Make sure that your message is being heard everywhere through our different channel:
-                ",
+            "desc_en" =>"When it comes to marketing, going digital become a must, now that properties of digital media have created whole new marketing opportunities. With us you are assured that your message is being heard everywhere through our diggerent digital marketing skills and tools",
             'desc_ar' => $faker_ar->realText(),
 
             'image' => 'images\svg\services\markting.svg' ,

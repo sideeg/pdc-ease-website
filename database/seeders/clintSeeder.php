@@ -21,10 +21,10 @@ class clintSeeder extends Seeder
         if (!is_dir($path)) {
             \File::makeDirectory($path, $mode = 0755, true, true);
         }
-        clints::create([
-            'logo' => "images\svg\clints\CC.svg" ,
-            'name' => $Factory->name,
-        ]);
+        // clints::create([
+        //     'logo' => "images\svg\clints\CC.svg" ,
+        //     'name' => $Factory->name,
+        // ]);
         clints::create([
             'logo' => "images\svg\clints\Lfss.svg" ,
             'name' => $Factory->name,
@@ -37,10 +37,10 @@ class clintSeeder extends Seeder
             'logo' => "images\svg\clints\kumani.svg" ,
             'name' => $Factory->name,
         ]);
-        clints::create([
-            'logo' => "images\svg\clints\Mask.svg" ,
-            'name' => $Factory->name,
-        ]);
+        // clints::create([
+        //     'logo' => "images\svg\clints\Mask.svg" ,
+        //     'name' => $Factory->name,
+        // ]);
         clints::create([
             'logo' => "images\svg\clints\mvmv.svg" ,
             'name' => $Factory->name,

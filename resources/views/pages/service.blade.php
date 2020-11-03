@@ -16,6 +16,7 @@
                             <h1 class="service-header">{{$service->title_en}}</h1>
                             <div class="row ">
                                 <div class="col-sm-12">
+                                    <p class="">{{ $service->desc_en}}</p>
                                     <a href="{{route('serviceOrderForm',$service->id )}}" id="submit" name="send" class="btn btn-buttons btn-radius">@lang('content.orderNow')</a>
                                     <div id="simple-msg"></div>
                                 </div>
@@ -31,8 +32,8 @@
 
 <!-- SERVICE START -->
 <section class="section" id="service-cute">
-    <div class="container"> 
-        
+    <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
                 <div class="section-title text-center">
@@ -71,12 +72,12 @@
                                     </a>
                                 </li>
                             @endif
-                            
+
                         @empty
 
                         @endforelse
-                       
-                        
+
+
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
