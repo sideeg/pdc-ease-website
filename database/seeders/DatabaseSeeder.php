@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(tagSeeder::class);
 
         $this->call(blogSeeder::class);
+        $this->call(slideSeeder::class);
+
         
 
 

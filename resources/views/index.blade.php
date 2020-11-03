@@ -10,15 +10,15 @@
     </h2> -->
     <!-- <div class="container"> -->
         <div class="owl-carousel text-white bg-dark" id="owl-demo">
-            @forelse ($collection as $item)
+            @forelse ($slider as $item)
                 <div class="item">
                     <div class="banner-img">
-                        <img src="{{ asset($item->source)}}" class="img-fluid" alt="" srcset="">
+                        <img src="{{ asset($item->sourse)}}" class="img-fluid" alt="" srcset="">
                     </div>
                     <div class="banner-text bg-svg">
                         <!-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> -->
                         <div class="banner-content p-4">
-                            <h2 class="color-blue">{{ $item->title_en}}</h2>
+                            <h4 class="color-blue font-22">{{ $item->title_en}}</h4>
                             <p  class="mx-3">{{ $item->desc_en}}</p>
                         </div>
                     </div>

@@ -11,7 +11,7 @@
                         <li class="list-inline-item"><a href="https://www.instagram.com/easegroup_sd/"><i class="fab fa-instagram" target="_blank"></i></a></li>
                         {{-- <li class="list-inline-item"><a href="#"><i class="fab fa-twitter" target="_blank"></i></a></li> --}}
                     </ul>
-                    <p class="pt-4 pb-2"> &copy; 2010 - 2020 INISTORY ALL RIGHT RESERVED </p>
+                    <p class="pt-4 pb-2"> &copy; 2010 - 2020 ALL RIGHT RESERVED </p>
                 </div>
             </div>
         </div>
