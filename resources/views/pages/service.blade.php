@@ -57,7 +57,7 @@
                         @forelse ($service->tag as $item)
                             @if ($active)
                                 <li class="nav-item">
-                                    <a class="nav-link active show" id="{{ explode(' ',trim($item->name_en))[0] }}-tab" data-toggle="tab" href="#{{ explode(' ',trim($item->name_en))[0] }}" role="tab" aria-controls="{{ explode(' ',trim($item->name_en))[0] }}" aria-selected="false">
+                                    <a class="nav-link active show" id="{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}-tab" data-toggle="tab" href="#{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}" role="tab" aria-controls="{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}" aria-selected="false">
                                         <p class="mb-0 text-uppercase mt-3">{{$item->name_en}}</p>
                                     </a>
                                 </li>
@@ -66,7 +66,7 @@
                                  @endphp
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link" id="{{ explode(' ',trim($item->name_en))[0] }}-tab" data-toggle="tab" href="#{{ explode(' ',trim($item->name_en))[0] }}" role="tab" aria-controls="{{ explode(' ',trim($item->name_en))[0] }}" aria-selected="false">
+                                    <a class="nav-link" id="{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}-tab" data-toggle="tab" href="#{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}" role="tab" aria-controls="{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}" aria-selected="false">
                                         <p class="mb-0 text-uppercase mt-3">{{$item->name_en}}</p>
                                     </a>
                                 </li>
@@ -85,7 +85,7 @@
                         @endphp
                         @forelse ($service->tag as $item)
                             @if ($active)
-                                <div class="tab-pane fade bg-dark text-white pb-3 active show" id="{{ explode(' ',trim($item->name_en))[0] }}" role="tabpanel" aria-labelledby="{{ explode(' ',trim($item->name_en))[0] }}-tab">
+                                <div class="tab-pane fade bg-dark text-white pb-3 active show" id="{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}" role="tabpanel" aria-labelledby="{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}-tab">
                                     <div class="row justify-content-center p-3">
                                         <div class="col-lg-6">
                                             <div class="interior-services-info mt-4">
@@ -102,7 +102,7 @@
                                     $active = false;
                                 @endphp
                             @else
-                                <div class="tab-pane fade bg-dark text-white pb-3" id="{{ explode(' ',trim($item->name_en))[0] }}" role="tabpanel" aria-labelledby="{{ explode(' ',trim($item->name_en))[0] }}-tab">
+                                <div class="tab-pane fade bg-dark text-white pb-3" id="{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}" role="tabpanel" aria-labelledby="{{str_replace(' ', '_',  str_replace('&', '_',  $item->name_en)) }}-tab">
                                     <div class="row justify-content-center p-3">
                                         <div class="col-lg-6">
                                             <div class="interior-services-info mt-4">
