@@ -13,7 +13,7 @@ class OrdersTags extends Migration
      */
     public function up()
     {
-        Schema::create('orders_Tags', function (Blueprint $table) {
+        Schema::create('orders_tags', function (Blueprint $table) {
             $table->id();
             $table->string("order_id");
             $table->string("tag_id");
