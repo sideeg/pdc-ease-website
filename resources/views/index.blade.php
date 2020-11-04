@@ -223,7 +223,7 @@ data-aos-anchor-placement="top-bottom"
 
 <!-- ORDER FORM -->
 <section class="section bg-light pt-0" >
-    <div class="row d-flex aligm-items-center justify-content-center" data-jarallax='{"speed": 0.2}' style="background-image: url('images/blog/blog-4.jpg');width:100vw;">
+    <div class="row d-flex aligm-items-center justify-content-center mx-0 w-100" data-jarallax='{"speed": 0.2}' style="background-image: url('images/blog/blog-4.jpg');width:100vw;">
         <div class="bg-overlay"></div>
 
         <div class="col-md-6 col-sm-12 px-0 bg-dark">

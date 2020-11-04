@@ -3,8 +3,8 @@
 @section('content')
 
 <!-- ORDER FORM -->
-<section class="section bg-light mt-3" >
-    <div class="row d-flex aligm-items-center justify-content-center">
+<section class="section bg-light mt-3"  id="home" >
+    <div class="row d-flex aligm-items-center justify-content-center mx-0 w-100">
         {{-- <div class="bg-overlay"></div> --}}
 
         <div class="col-md-6 col-sm-12 px-0 bg-dark">
