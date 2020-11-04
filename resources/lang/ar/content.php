@@ -11,6 +11,8 @@ return [
 
 
     'successToast' => 'تم إستلام طلبك سيتم التواصل معك قريباَ',
+    'failToast' => 'Something went wrong Please Check your Information',
+
 
     // Labels
     // 'blog' => 'المدونة',

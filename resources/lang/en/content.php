@@ -10,7 +10,9 @@ return [
     'contact' => 'Contact',
 
 
-    'successToast' => 'Your Order Recived you will be contacted soon',
+    'successToast' => 'Your order received you will be contacted Soon',
+    'failToast' => 'Something went wrong please check your information',
+
     // Labels
     // 'blog' => 'Blog',
     'whatWeDo' => 'What We Do',

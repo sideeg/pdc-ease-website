@@ -1,3 +1,29 @@
+
+<!-- TOASTER  -->
+
+<span id="successToast" hidden>@lang('content.successToast')</span>
+<span id="failToast" hidden>@lang('content.failToast')</span>
+
+<!-- TOASTER END -->
+
+<!-- SCRIPTS -->
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({
+        });
+    });
+    
+    function successToast() {
+    
+        toastr.success(document.getElementById('successToast').innerText);
+        // alert('here');
+    }
+    function failToast() {
+    
+        toastr.error(document.getElementById('failToast').innerText);
+    }
+</script>
+
 <!-- FOOTER START -->
 <section class="footer bg-dark">
     <div class="container">

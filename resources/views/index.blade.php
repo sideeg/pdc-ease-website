@@ -143,6 +143,7 @@ data-aos-anchor-placement="top-bottom"
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="slider autoplay">
+                    {{-- <div><img src="{{asset('images/svg/clints/aa.jpg')}}" class="mx-auto d-block img-fluid" alt="img-missing"></div> --}}
                     @forelse ($clint as $item)
                 <div><img src="{{asset($item->logo)}}" class="mx-auto d-block img-fluid bg-dark" alt="img-missing"></div>
                     @empty
@@ -384,25 +385,5 @@ data-aos-anchor-placement="top-bottom"
     </div>
 </section>
 <!-- CONTACT END -->
-
-<!-- TOASTER  -->
-
-<span id="toastMessage" onload="toast()">@lang('content.successToast')</span>
-
-<!-- TOASTER END -->
-
-<!-- SCRIPTS -->
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="popover"]').popover({
-        });
-    });
-    
-    function toast() {
-    
-        toastr.success(document.getElementById('toastMessage').innerText);
-        alert('here');
-    }
-</script>
 
 @endsection
