@@ -84,7 +84,7 @@ body {
     margin-top: -4rem;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 426px) {
     #service-cute {
         margin-top: 0;
     }
@@ -101,6 +101,17 @@ body {
                 0px 10px 50px rgb(173, 173, 173, 0.5);
 
 }
+.service-img {
+    display: flex;
+    justify-content: center;
+}
+.service-img img{
+    display: inline-block;
+    margin: auto;
+    width: 40%;
+    height: 40%;
+}
+
 .service-text {
     /* text-align: center; */
     display: inline-block;
@@ -208,6 +219,16 @@ body {
 }
 
 /* ********* Contact Section ********** */
+
+.invalid-feedback {
+    display: inline-block;
+}
+
+#toaster-container > .toast-success {
+    background: chartreuse;
+    background-image: none;
+}
+
 
 .map-icon-container {
     display: flex;

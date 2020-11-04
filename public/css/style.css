@@ -47,16 +47,17 @@ h6 {
 }
 
 ::selection {
-    background: #cfe2ab;
-    color: #ffffff;
+    background: #4e9ccf;
+    color: #212147;
 }
 ::-moz-selection {
-    background: #cfe2ab;
-    color: #ffffff;
+    background: #4e9ccf;
+    color: #212147;
 }
 
 a {
     text-decoration: none !important;
+    color: #212147;
 }
 
 p {
@@ -396,6 +397,20 @@ h4 {
     position: relative;
     -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 50% 85%, 0 100%);
     clip-path: polygon(0 0, 100% 0%, 100% 100%, 50% 85%, 0 100%);
+}
+
+.bg-banner {
+    background-image: url('.images/svg/banner-01.svg');
+    overflow:hidden;
+    background-size: cover;
+    background-position: center center;
+    align-self: center;
+    height: auto;
+    /* overflow: hidden; */
+    position: relative;
+    /* z-index:; */
+    /* -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 50% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 50% 85%, 0 100%); */
 }
 
 @media (max-width: 425px) {

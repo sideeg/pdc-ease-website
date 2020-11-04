@@ -9,6 +9,9 @@
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="{{ asset('js/toaster.js') }}"></script>
+
 <!-- Portfolio -->
 <!-- <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script> -->
 <script src="{{ asset('js/isotope.js') }}"></script>
@@ -41,5 +44,13 @@
 
     $(document).ready(function() {
         $('.order-multiple-services').select2();
+        
     });
+
+    // function toast() {
+    //     var message = document.getElementById('toastMessage').innerText;
+    
+    //     toastr.success(document.getElementById('toastMessage').innerText);
+    
+    // }
 </script>

@@ -12,7 +12,9 @@
             <!-- SIDEBAR -->
             <div class="col-lg-4 col-md-4">
                 <div class="post-preview sidebar my-30">
-                    <a href="single-post.html"><img src="images/blog/blog-3.jpg" alt="" class="img-fluid mx-auto d-block"></a>
+                    <a href="javascript:void(0);"><img src="{{asset('images/blog/blog-1.jpg')}}" alt="" class="img-fluid mx-auto d-block"></a>
+
+                    {{-- <a href="javascript:void(0);"><img src="{{ asset($article->image)}}" alt="" class="img-fluid mx-auto d-block"></a> --}}
                 </div>
 
                 
@@ -27,17 +29,6 @@
                                 @empty
                                     
                                 @endforelse
-                                {{-- <a href="#">Consulting</a>
-                                <a href="#">Finance</a>
-                                <a href="#">Marketing</a>
-                                <a href="#">Services</a>
-                                <a href="#">Portfolio</a>
-                                <a href="#">Fashion</a>
-                                <a href="#">Lifestyle</a>
-                                <a href="#">Travel</a>
-                                <a href="#">Blog</a>
-                                <a href="#">Video</a>
-                                <a href="#">Audio</a> --}}
                             </div>
                         </div>
                     </div>
@@ -50,7 +41,9 @@
                             <div class="slider single">
                                 @forelse ($related_articles as $item)
                                     <div>
-                                        <a href="#"><img src="images/blog/blog-1.jpg" class="mx-auto d-block img-fluid" alt="img-missing"></a>
+                                        <a href="#"><img src="{{asset('images/blog/blog-1.jpg')}}" class="mx-auto d-block img-fluid" alt="img-missing"></a>
+
+                                        {{-- <a href="#"><img src="{{ asset($item->image)}}" class="mx-auto d-block img-fluid" alt="img-missing"></a> --}}
                                         <div class="spacer-15"></div>
                                         <a href="#"><h4 class="pr-2 pl-2">{{$item->title_en}}</h4></a>
                                     </div>

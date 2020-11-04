@@ -7,9 +7,9 @@
                 <img src="{{asset('images/logo/ease.png') }}" alt="missing_logo" height="60">
                 <!-- EaseGroup -->
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="mdi mdi-menu"></i>
-            </button>
+            </button> --}}
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <ul class="navbar-nav navbar-center" id="mySidenav">
                     {{-- <li class="nav-item active">

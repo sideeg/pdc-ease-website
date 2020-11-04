@@ -8,6 +8,9 @@ return [
     'clients' => 'Clients',
     'blog' => 'Blog',
     'contact' => 'Contact',
+
+
+    'successToast' => 'Your Order Recived you will be contacted soon',
     // Labels
     // 'blog' => 'Blog',
     'whatWeDo' => 'What We Do',
@@ -22,6 +25,7 @@ return [
     'message' => 'Message',
 
     // Buttons
+    'getStarted' => 'Get Started',
     'orderNow' => 'Order Now',
     'readMore' => 'Read More',
     'visitBlog' => 'Visit Blog',

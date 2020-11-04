@@ -9,7 +9,11 @@
   
 </head>
 
-    <body>
+    <body 
+    @if($code)
+    onload="toast()
+    @endif
+    >
         
     {{-- @include('partials.preloader') --}}
     @if (Route::is('home'))

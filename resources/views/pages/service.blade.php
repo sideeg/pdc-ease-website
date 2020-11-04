@@ -17,7 +17,7 @@
                             <div class="row ">
                                 <div class="col-sm-12">
                                     <p class="">{{ $service->desc_en}}</p>
-                                    <a href="{{route('serviceOrderForm',$service->id )}}" id="submit" name="send" class="btn btn-buttons btn-radius">@lang('content.orderNow')</a>
+                                    <a href="{{route('serviceOrderForm',$service->id )}}" id="submit" name="send" class="btn btn-buttons btn-radius">@lang('content.getStarted')</a>
                                     <div id="simple-msg"></div>
                                 </div>
                             </div>

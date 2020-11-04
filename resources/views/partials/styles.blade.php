@@ -8,6 +8,7 @@
 
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <!-- Magnificpopup Css -->
 <!-- <link rel="stylesheet" type="text/css" href="css/magnific-popup.css"> -->
 <!-- Bootstrap core CSS -->
@@ -23,6 +24,8 @@
 <link href="{{ asset('css/materialdesignicons.min.css') }}" rel="stylesheet">
 <link href="{{ asset('css/fontawesome.css') }}" rel="stylesheet">
 <link href="{{ asset('css/pe-icon-7-stroke.css') }}" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 <!--Slider-->
 <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/> 
