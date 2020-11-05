@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models;
 
 class homeController extends Controller
@@ -43,12 +44,20 @@ class homeController extends Controller
     {
 
         // dd($request);
-        $validatedData = $request->validate([
+        $code = 0;
+        
+        $validatedData = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'phone' => 'required',
             'email' => 'required',
             'tags' => 'required',
         ]);
+
+        if ($validatedData->fails()) {
+            // dd('here');
+            return back()->withErrors($validatedData)
+                         ->withInput()->with('code',$code);
+        }
 
         $order = new Models\orders();
 
@@ -76,8 +85,8 @@ class homeController extends Controller
 
                 $order_tag->save();
         }
-
-        return redirect('/');
+        $code = 1;
+        return redirect('/')->with('code',$code);
 
     }
 }

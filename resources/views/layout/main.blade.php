@@ -9,9 +9,17 @@
   
 </head>
 
-    <body>
+    <body 
+    {{-- onload="failToast()" --}}
+    @if(Session::has('code'))
+    {{-- onload="toast()" --}}
+        @if(Session::get('code') == 1) onload="successToast()" @elseif(Session::get('code') == 0) onload="failToast()" @endif
+    @endif
+    >
+    {{-- @php
+        dd(Session::get('code'));
+    @endphp --}}
         
-    {{-- @include('partials.preloader') --}}
     @if (Route::is('home'))
         @include('partials.navbar')    
     @else

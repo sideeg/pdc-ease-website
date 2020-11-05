@@ -3,8 +3,8 @@
 @section('content')
 
 <!-- ORDER FORM -->
-<section class="section bg-light mt-3" >
-    <div class="row d-flex aligm-items-center justify-content-center">
+<section class="section bg-light mt-3"  id="home" >
+    <div class="row d-flex aligm-items-center justify-content-center mx-0 w-100">
         {{-- <div class="bg-overlay"></div> --}}
 
         <div class="col-md-6 col-sm-12 px-0 bg-dark">
@@ -18,24 +18,39 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="name" id="name" type="text" class="form-control" placeholder="@lang('content.yourName')">
+                                    <input name="name" id="name" type="text" class="form-control" placeholder="@lang('content.yourName')" required>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="email" id="email" type="email" class="form-control" placeholder="@lang('content.yourEmail')">
+                                    <input name="email" id="email" type="email" class="form-control" placeholder="@lang('content.yourEmail')" required>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="phone" id="phone" class="form-control" placeholder="@lang('content.yourPhone')">
+                                    <input name="phone" id="phone" class="form-control" placeholder="@lang('content.yourPhone')" required>
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group app-label">
                                     <label for="" class=" text-white">@lang('content.chooseService')</label>
-                                    <select class="order-multiple-services form-control" id="id_label_single" name="tags[]" multiple="multiple">
+                                    <select class="order-multiple-services form-control" id="id_label_single" name="tags[]" multiple="multiple" required>
                                         {{-- @forelse ($service_tags as $item) --}}
                                             {{-- <optgroup label="{{$item->title_en}}"> --}}
                                                 @forelse ($service_tags as $tag)
@@ -58,6 +73,11 @@
                                             <option>odoo</option>
                                         </optgroup> --}}
                                       </select>
+                                      @error('tags')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                      @enderror
                                 </div>
                             </div>
                             

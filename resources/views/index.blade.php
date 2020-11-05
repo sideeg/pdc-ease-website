@@ -4,15 +4,15 @@
 
 
 
-<section class="" id="home">
-    <!-- <div class="container"> -->
-        <div class="owl-carousel text-white bg-dark" id="owl-demo">
+<section class="bg-dark" id="home">
+    <div class=" bg-banner" style="background-image: url({{asset('images/svg/banner-01.svg')}});"> 
+        <div class="owl-carousel text-white " id="owl-demo">
             @forelse ($slider as $item)
-                <div class="item">
+                <div class="item" >
                     <div class="banner-img">
                         <img src="{{ asset($item->sourse)}}" class="img-fluid" alt="" srcset="">
                     </div>
-                    <div class="banner-text bg-svg">
+                    <div class="banner-text">
                         <!-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> -->
                         <div class="banner-content p-4">
                             <h4 class="color-blue font-22">{{ $item->title_en}}</h4>
@@ -86,7 +86,7 @@
             </div> --}}
 
         </div>
-    <!-- </div> -->
+    </div> 
 </section>
 
 <!-- ABOUT US START -->
@@ -99,7 +99,7 @@ data-aos-delay="100" --}}
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
                 <div class="section-title text-center">
-                    <h3 class="sliding-line">@lang('content.whatWeDo') <span class="color-blue font-30">?</span></h3>
+                    <h3 class="sliding-line font-weight-bold">@lang('content.whatWeDo') <span class="color-blue font-30">?</span></h3>
                     <div class="spacer-15"></div>
                     <div class="spacer-30"></div>
                 </div>
@@ -109,11 +109,13 @@ data-aos-delay="100" --}}
             @forelse ($service as $item)
             <div class="sm-my-3 col-lg-4 col-md-6 col-sm-12 py-2 service radius d-flex justify-content-center align-items-center">
                 <div class="my-2">
-                    <div class="service-img text-center" >
-                        <img src="{{asset($item->image)}}" class="img-fluid" alt="sevice img" srcset="">
-                    </div>
+                    <a href="{{ route('service', $item->id)}}">
+                        <div class="service-img text-center" >
+                            <img src="{{asset($item->image)}}" class="img-fluid" alt="sevice img" srcset="">
+                        </div>
+                    </a>
                     <div class="service-text">
-                        <a href="{{ route('service', $item->id)}}"><h2 class="text-center color-dark font-22 my-2">{{ $item->title_en}}</h2></a>
+                        <a href="{{ route('service', $item->id)}}"><h2 class="text-center color-dark font-22 my-2 font-weight-bold">{{ $item->title_en}}</h2></a>
                         <p class="two-lines">{{ $item->desc_en}}</p>
                         <div class="d-flex justify-content-center">
                             <a href="{{route('serviceOrderForm',$item->id )}}" class="btn-service">@lang('content.orderNow')</a>
@@ -141,8 +143,9 @@ data-aos-anchor-placement="top-bottom"
         <div class="row mt-4">
             <div class="col-lg-12">
                 <div class="slider autoplay">
+                    {{-- <div><img src="{{asset('images/svg/clints/aa.jpg')}}" class="mx-auto d-block img-fluid" alt="img-missing"></div> --}}
                     @forelse ($clint as $item)
-                <div><img src="{{asset($item->logo)}}" class="mx-auto d-block img-fluid" alt="img-missing"></div>
+                <div><img src="{{asset($item->logo)}}" class="mx-auto d-block img-fluid bg-dark" alt="img-missing"></div>
                     @empty
 
                     @endforelse
@@ -169,7 +172,7 @@ data-aos-anchor-placement="top-bottom"
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
                 <div class="section-title text-center">
-                    <h3 class="sliding-line">@lang('content.blog')</h3>
+                    <h3 class="sliding-line font-weight-bold">@lang('content.blog')</h3>
                     <div class="spacer-15"></div>
                     <div class="spacer-30"></div>
                 </div>
@@ -181,7 +184,7 @@ data-aos-anchor-placement="top-bottom"
             <div class="col-md-4">
                 <article class="post bg-white mt-30">
                     <div class="post-preview">
-                        <a href="{{route('article', $item->id)}}"><img src="images/blog/blog-1.jpg" alt="" class="img-fluid mx-auto d-block"></a>
+                        <a href="{{route('article', $item->id)}}"><img src="{{asset('images/blog/blog-1.jpg')}}" alt="" class="img-fluid mx-auto d-block"></a>
                     </div>
 
                     <div class="post-header">
@@ -220,7 +223,7 @@ data-aos-anchor-placement="top-bottom"
 
 <!-- ORDER FORM -->
 <section class="section bg-light pt-0" >
-    <div class="row d-flex aligm-items-center justify-content-center" data-jarallax='{"speed": 0.2}' style="background-image: url('images/blog/blog-4.jpg');width:100vw;">
+    <div class="row d-flex aligm-items-center justify-content-center mx-0 w-100" data-jarallax='{"speed": 0.2}' style="background-image: url('images/blog/blog-4.jpg');width:100vw;">
         <div class="bg-overlay"></div>
 
         <div class="col-md-6 col-sm-12 px-0 bg-dark">
@@ -234,24 +237,39 @@ data-aos-anchor-placement="top-bottom"
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="name" id="name" type="text" class="form-control" placeholder="@lang('content.yourName')">
+                                    <input name="name" id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="@lang('content.yourName')" required>
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="email" id="email" type="email" class="form-control" placeholder="@lang('content.yourEmail')">
+                                    <input name="email" id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="@lang('content.yourEmail')" required>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="phone" id="phone" class="form-control" placeholder="@lang('content.yourPhone')">
+                                    <input name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="@lang('content.yourPhone')" required>
+                                    @error('phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="form-group app-label">
                                     <label for="" class=" text-white">@lang('content.chooseService')</label>
-                                    <select class="order-multiple-services form-control" id="id_label_single" name="tags[]" multiple="multiple">
+                                    <select class="order-multiple-services form-control" id="id_label_single" name="tags[]" multiple="multiple" required>
                                         @forelse ($service as $item)
                                             <optgroup label="{{$item->title_en}}">
                                                 @forelse ($item->tag as $tag)
@@ -266,6 +284,11 @@ data-aos-anchor-placement="top-bottom"
                                         @endforelse
 
                                       </select>
+                                      @error('tags')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                      @enderror
                                 </div>
                             </div>
 
@@ -296,7 +319,7 @@ data-aos-anchor-placement="top-bottom"
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12">
                 <div class="section-title text-center">
-                    <h3>@lang('content.getInTouch')</h3>
+                    <h3 class="font-weight-bold">@lang('content.getInTouch')</h3>
                     <div class="spacer-15"></div>
                     <div class="spacer-30"></div>
                 </div>
@@ -311,7 +334,7 @@ data-aos-anchor-placement="top-bottom"
                     </p>
                     <div class="map-icon-container">
                         <div class="map-icon text-center mt-30">
-                            <a href="http://maps.google.com/?q=1200 Pennsylvania Ave SE, Washington, District of Columbia, 20003" target="_blank">
+                            <a href="http://maps.google.com/?q=EASE group، أركويت، الخرطوم،، Sudan" target="_blank">
                                 <i class="fas fa-map-marker-alt" style="color: red;"></i>
                             </a>
                         </div>
@@ -328,7 +351,7 @@ data-aos-anchor-placement="top-bottom"
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group app-label">
-                                    <input name="name" id="name" type="text" class="form-control" placeholder="@lang('content.yourName') :">
+                                    <input name="name" id="name" type="text" class="form-control" placeholder="@lang('content.yourName') :" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -338,12 +361,12 @@ data-aos-anchor-placement="top-bottom"
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <input name="subject" id="subject" class="form-control" placeholder="@lang('content.subject') :">
+                                    <input name="subject" id="subject" class="form-control" placeholder="@lang('content.subject') :" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group app-label">
-                                    <textarea name="message" id="comments" rows="3" class="form-control" placeholder="@lang('content.message') :"></textarea>
+                                    <textarea name="message" id="comments" rows="3" class="form-control" placeholder="@lang('content.message') :" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -362,13 +385,5 @@ data-aos-anchor-placement="top-bottom"
     </div>
 </section>
 <!-- CONTACT END -->
-
-<!-- SCRIPTS -->
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="popover"]').popover({
-        });
-    });
-</script>
 
 @endsection
