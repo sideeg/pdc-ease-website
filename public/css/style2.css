@@ -330,10 +330,21 @@ body {
 .slogan::before {
     content: '';
     color: white;
+    font-size: 2rem;
     animation: Slogan infinite 4s linear;
 }
 
+@media(max-width: 426px){
+    .slogan::before {
+        font-size: 1.5rem;
+    }   
+}
+
 @keyframes Slogan {
+    0% {
+        content: '|';
+    }
+
     25% {
 
         content: 'Move';

@@ -14,6 +14,8 @@
 .footer-subscribe i:hover,
 .company-sub-menu li a:hover {
     color: #33CCCC !important;
+    /* color: #243B55 !important; */
+
 }
 
 
@@ -25,7 +27,7 @@ button:focus {
     outline: none !important;
     box-shadow: none !important;
     border-color: transparent;
-    !important;
+    /* !important; */
 }
 
 .bg-custom,
@@ -36,7 +38,7 @@ button:focus {
 .back-to-top:hover,
 .social .social-icon:hover,
 #carouselExampleIndicators .carousel-indicators .active {
-    background-color: #33CCCC;
+    background-color: #3498db;
 }
 
 .btn-custom,
@@ -47,7 +49,7 @@ button:focus {
 .main-slider .flex-control-paging li a,
 #carouselExampleIndicators .carousel-control-prev span,
 #carouselExampleIndicators .carousel-control-next span  {
-    border-color: #33CCCC;
+    border-color: #3498db;
 }
 
 .btn-custom:hover,
@@ -111,11 +113,11 @@ button:focus {
     background-color: rgba(63, 135, 245, 0.05);
 }
 
-.bg-gradient-custom {
-    background: #56ab2f;
+/* .bg-gradient-custom {
+    background: #216796;
     background: -webkit-linear-gradient(to right, #56ab2f, #33CCCC, #56ab2f);
     background: linear-gradient(to right, #56ab2f, #33CCCC, #56ab2f);
-}
+} */
 
 .bg-navyblue {
     background-color: #243B55;

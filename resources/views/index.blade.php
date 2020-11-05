@@ -4,15 +4,16 @@
 
 
 
-<section class="" id="home">
-    <!-- <div class="container"> -->
-        <div class="owl-carousel text-white bg-dark" id="owl-demo">
+
+<section class="bg-dark" id="home">
+    <div class=" bg-banner" style="background-image: url({{asset('images/svg/banner-01.svg')}});"> 
+        <div class="owl-carousel text-white " id="owl-demo">
             @forelse ($slider as $item)
-                <div class="item">
+                <div class="item" >
                     <div class="banner-img">
                         <img src="{{ asset($item->sourse)}}" class="img-fluid" alt="" srcset="">
                     </div>
-                    <div class="banner-text bg-svg">
+                    <div class="banner-text">
                         <!-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> -->
                         <div class="banner-content p-4">
                             <h4 class="color-blue font-22">{{ $item->title_en}}</h4>
@@ -86,7 +87,7 @@
             </div> --}}
 
         </div>
-    <!-- </div> -->
+    </div> 
 </section>
 
 <!-- ABOUT US START -->
@@ -109,9 +110,11 @@ data-aos-delay="100" --}}
             @forelse ($service as $item)
             <div class="sm-my-3 col-lg-4 col-md-6 col-sm-12 py-2 service radius d-flex justify-content-center align-items-center">
                 <div class="my-2">
-                    <div class="service-img text-center" >
-                        <img src="{{asset($item->image)}}" class="img-fluid" alt="sevice img" srcset="">
-                    </div>
+                    <a href="{{ route('service', $item->id)}}">
+                        <div class="service-img text-center" >
+                            <img src="{{asset($item->image)}}" class="img-fluid" alt="sevice img" srcset="">
+                        </div>
+                    </a>
                     <div class="service-text">
                         <a href="{{ route('service', $item->id)}}"><h2 class="text-center color-dark font-22 my-2">{{ $item->title_en}}</h2></a>
                         <p class="two-lines">{{ $item->desc_en}}</p>
@@ -133,7 +136,6 @@ data-aos-delay="100" --}}
 
 
 <!-- CLIENTS START -->
-se
 <section class="section bg-dark" id="client"
 data-aos="fade-up"
 data-aos-anchor-placement="top-bottom"
@@ -221,7 +223,7 @@ data-aos-anchor-placement="top-bottom"
 
 <!-- ORDER FORM -->
 <section class="section bg-light pt-0" >
-    <div class="row d-flex aligm-items-center justify-content-center" data-jarallax='{"speed": 0.2}' style="background-image: url('images/blog/blog-4.jpg');width:100vw;">
+    <div class="row d-flex aligm-items-center justify-content-center mx-0 w-100" data-jarallax='{"speed": 0.2}' style="background-image: url('images/blog/blog-4.jpg');width:100vw;">
         <div class="bg-overlay"></div>
 
         <div class="col-md-6 col-sm-12 px-0 bg-dark">
@@ -312,7 +314,7 @@ data-aos-anchor-placement="top-bottom"
                     </p>
                     <div class="map-icon-container">
                         <div class="map-icon text-center mt-30">
-                            <a href="http://maps.google.com/?q=1200 Pennsylvania Ave SE, Washington, District of Columbia, 20003" target="_blank">
+                            <a href="http://maps.google.com/?q=EASE group، أركويت، الخرطوم،، Sudan" target="_blank">
                                 <i class="fas fa-map-marker-alt" style="color: red;"></i>
                             </a>
                         </div>
