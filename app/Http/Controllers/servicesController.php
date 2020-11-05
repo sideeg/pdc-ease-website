@@ -29,10 +29,10 @@ class servicesController extends Controller
             'email' => 'required',
             'tags' => 'required',
         ]);
-            if ($validatedData->fails()){
-                $code = 0;
-                return redirect()->back()->with('code');
-            }
+        if ($validatedData->fails()){
+            $code = 0;
+            return redirect()->back()->with('code');
+        }
         $order = new Models\orders();
 
         $order->name = $request->name;
