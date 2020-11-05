@@ -31,7 +31,7 @@ class blogSeeder extends Seeder
             blogs::create([
                 'image' => $faker_en->imageUrl(400,300, 'technics', false) ,
                 'title_ar' => 'soon',
-                'title_en' => $faker_en->name,
+                'title_en' => 'soon',
 
                 'tag_id' => $faker_en->randomElement($tags),
                 // 'tag_id' => 1,
