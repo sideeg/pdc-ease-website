@@ -13,6 +13,10 @@ return [
     'successToast' => 'Your order received you will be contacted Soon',
     'failToast' => 'Something went wrong please check your information',
 
+    //contact form
+    'contactSuccessToast' => 'Your message received you will be contacted Soon',
+    'contactfailToast' => 'Something went wrong please check your information',
+
     // Labels
     // 'blog' => 'Blog',
     'whatWeDo' => 'What We Do',

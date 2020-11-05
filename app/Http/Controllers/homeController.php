@@ -23,10 +23,19 @@ class homeController extends Controller
 
     public function contactForm(Request $request)
     {
-        $validatedData = $request->validate([
+        $code = 3;
+
+        $validatedData = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'message' => 'required',
         ]);
+
+        if ($validatedData->fails()) {
+            // dd('here');
+            return back()->withErrors($validatedData)
+                         ->withInput()->with('code',$code);
+        }
+
         $message = new Models\message();
 
         $message->name = $request->name;
@@ -35,7 +44,9 @@ class homeController extends Controller
         $message->message = $request->message;
         $message->save();
 
-        return redirect('/');
+        $code = 2;
+        // dd($code);
+        return redirect('/')->with('code',$code);
 
 
     }
@@ -45,7 +56,7 @@ class homeController extends Controller
 
         // dd($request);
         $code = 0;
-        
+
         $validatedData = Validator::make($request->all(), [
             'name' => 'required|max:255',
             'phone' => 'required',

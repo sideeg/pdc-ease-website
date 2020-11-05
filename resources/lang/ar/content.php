@@ -12,6 +12,9 @@ return [
 
     'successToast' => 'تم إستلام طلبك سيتم التواصل معك قريباَ',
     'failToast' => 'Something went wrong Please Check your Information',
+    //contact form
+    'contactSuccessToast' => 'تم استلام رسالتك سيتم التواصل معك قريبا',
+    'contactfailToast' => 'Something went wrong please check your information',
 
 
     // Labels
@@ -27,7 +30,7 @@ return [
     'chooseService' => 'إختر الخدمة',
     'subject' => 'الموضوع',
     'message' => 'الرسالة',
-    
+
 
     // Buttons
     'getStarted' => 'Get Started',
@@ -35,5 +38,5 @@ return [
     'readMore' => 'المزيد',
     'visitBlog' => 'المدونة',
     'sendMessage' => 'إرسال',
-    
+
 ];

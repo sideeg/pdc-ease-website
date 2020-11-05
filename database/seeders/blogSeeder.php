@@ -30,8 +30,8 @@ class blogSeeder extends Seeder
         for($i = 0;$i < 20 ; $i++){
             blogs::create([
                 'image' => $faker_en->imageUrl(400,300, 'technics', false) ,
-                'title_ar' => $faker_ar->name,
-                'title_en' => $faker_en->name,
+                'title_ar' => 'soon',
+                'title_en' => 'soon',
 
                 'tag_id' => $faker_en->randomElement($tags),
                 // 'tag_id' => 1,

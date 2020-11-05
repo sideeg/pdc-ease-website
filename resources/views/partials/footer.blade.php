@@ -4,6 +4,9 @@
 <span id="successToast" hidden>@lang('content.successToast')</span>
 <span id="failToast" hidden>@lang('content.failToast')</span>
 
+<span id="contactfailToast" hidden>@lang('content.contactfailToast')</span>
+<span id="contactSuccessToast" hidden>@lang('content.contactSuccessToast')</span>
+
 <!-- TOASTER END -->
 
 <!-- SCRIPTS -->
@@ -12,16 +15,28 @@
         $('[data-toggle="popover"]').popover({
         });
     });
-    
+
     function successToast() {
-    
+
         toastr.success(document.getElementById('successToast').innerText);
         // alert('here');
     }
     function failToast() {
-    
+
         toastr.error(document.getElementById('failToast').innerText);
     }
+
+    //contact
+
+    function contactSuccessToast() {
+
+toastr.success(document.getElementById('contactSuccessToast').innerText);
+// alert('here');
+}
+function contactfailToast() {
+
+toastr.error(document.getElementById('contactfailToast').innerText);
+}
 </script>
 
 <!-- FOOTER START -->
@@ -44,11 +59,11 @@
     </div>
 </section>
 
-<!-- Back to top -->    
+<!-- Back to top -->
 <!-- <a href="#" class="back-to-top" id="back-to-top"> target="_blank"
 target="_blank"
 target="_blank"
 target="_blank"
-    <i class="mdi mdi-chevron-up"> </i> 
+    <i class="mdi mdi-chevron-up"> </i>
 </a> -->
-<!-- Back to top --> 
+<!-- Back to top -->
