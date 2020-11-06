@@ -3487,9 +3487,12 @@ a.faq-black[data-toggle=collapse]{
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 426px) {
     .tagline {
         display: none;
+    }
+    .title-heading h1 {
+        font-size: 30px;
     }
 }
 
