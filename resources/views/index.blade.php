@@ -173,7 +173,6 @@ data-aos-anchor-placement="top-bottom"
             <div class="col-lg-8 col-md-12">
                 <div class="section-title text-center">
                     <h3 class="sliding-line">@lang('content.blog')</h3>
-                    <div class="spacer-15"></div>
                     <div class="spacer-30"></div>
                 </div>
             </div>
