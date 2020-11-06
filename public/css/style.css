@@ -242,6 +242,13 @@ h4 {
     height: 30px !important;
 }
 
+@media(max-width:426px){
+    .spacer-30 {
+        height: 15px !important;
+    }
+    
+}
+
 .p-30 {
     padding: 30px !important;
 }
