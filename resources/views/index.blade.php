@@ -6,7 +6,7 @@
 
 
 <section class="bg-dark" id="home">
-    <div class=" bg-banner" style="background-image: url({{asset('images/svg/banner-01.svg')}});"> 
+    <div class=" bg-banner" style="background-image: url({{asset('images/svg/banner-01.svg')}});">
         <div class="owl-carousel text-white " id="owl-demo">
             @forelse ($slider as $item)
                 <div class="item" >
@@ -87,7 +87,7 @@
             </div> --}}
 
         </div>
-    </div> 
+    </div>
 </section>
 
 <!-- ABOUT US START -->

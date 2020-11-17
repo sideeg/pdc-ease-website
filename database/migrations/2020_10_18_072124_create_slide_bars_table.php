@@ -22,7 +22,7 @@ class CreateSlideBarsTable extends Migration
             $table->text("desc_ar")->nullable();
 
             $table->string("sourse");
-            $table->string("type");
+            $table->string("type")->nullable();
             $table->timestamps();
         });
     }
