@@ -32,3 +32,11 @@ Route::put("/service","App\Http\Controllers\AdminApi\ServiceController@serviceUp
 Route::get('/service/{id}','App\Http\Controllers\AdminApi\ServiceController@serviceById');
 Route::delete("/service/{id}","App\Http\Controllers\AdminApi\ServiceController@serviceDelete");
 
+
+
+Route::post('/blog','App\Http\Controllers\AdminApi\BlogController@blogSave');
+Route::get('/blog','App\Http\Controllers\AdminApi\BlogController@blog');
+Route::put("/blog","App\Http\Controllers\AdminApi\BlogController@blogUpdate");
+Route::get('/blog/{id}','App\Http\Controllers\AdminApi\BlogController@blogById');
+Route::delete("/blog/{id}","App\Http\Controllers\AdminApi\BlogController@blogDelete");
+

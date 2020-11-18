@@ -71,7 +71,7 @@ class ServiceController extends Controller
          */
         public function serviceById($id)
         {
-            $service = services::find($id);
+            $service = services::with('tag')->find($id);
             if (is_null($service)){
                 return response()->json('service not found',404);
             }
