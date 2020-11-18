@@ -40,3 +40,8 @@ Route::put("/blog","App\Http\Controllers\AdminApi\BlogController@blogUpdate");
 Route::get('/blog/{id}','App\Http\Controllers\AdminApi\BlogController@blogById');
 Route::delete("/blog/{id}","App\Http\Controllers\AdminApi\BlogController@blogDelete");
 
+
+Route::get('/order','App\Http\Controllers\AdminApi\OrderController@order');
+Route::put("/order/{id}","App\Http\Controllers\AdminApi\OrderController@orderUpdate");
+Route::get('/order/{id}','App\Http\Controllers\AdminApi\OrderController@orderById');
+Route::delete("/order/{id}","App\Http\Controllers\AdminApi\OrderController@orderDelete");

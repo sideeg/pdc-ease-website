@@ -88,7 +88,7 @@ class BlogController extends Controller
 
         public function blog(Request $request){
 
-            return response()->json(blogs::get(),200);
+            return response()->json(blogs::paginate(9),200);
         }
 
 

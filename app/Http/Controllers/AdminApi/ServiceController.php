@@ -61,7 +61,7 @@ class ServiceController extends Controller
 
         public function services(Request $request){
 
-            return response()->json(services::with('tag')->get(),200);
+            return response()->json(services::with('tag')->paginate(9),200);
         }
 
         /****************************************************************

@@ -76,7 +76,7 @@ class SliderController extends Controller
 
         public function sliders(Request $request){
 
-            return response()->json(slide_bar::all(),200);
+            return response()->json(slide_bar::paginate(9),200);
         }
 
         /****************************************************************
