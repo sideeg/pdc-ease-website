@@ -61,3 +61,7 @@ Route::get("/blog","App\Http\Controllers\blogController@index")->name('blog');
 Route::get("/blog/{id}","App\Http\Controllers\blogController@blogByTag")->name('blogByTag');
 Route::get("/article/{id}","App\Http\Controllers\blogController@blogById")->name('article');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
