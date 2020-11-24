@@ -8,6 +8,25 @@ use App\Models;
 
 class homeController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
+    public function dashboard()
+    {
+        # code...
+            // dd('hello');
+            return view('admin-layout.dashboard');
+    }
+
     public function index()
     {
 

@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['role:admin']], function () {
+// Route::group(['middleware' => ['role:admin']], function () {
 Route::post('/slider','App\Http\Controllers\AdminApi\SliderController@sliderSave');
 Route::get('/slider','App\Http\Controllers\AdminApi\SliderController@sliders');
 Route::put("slider/","App\Http\Controllers\AdminApi\SliderController@sliderUpdate");
@@ -33,7 +33,7 @@ Route::put("/service","App\Http\Controllers\AdminApi\ServiceController@serviceUp
 Route::get('/service/{id}','App\Http\Controllers\AdminApi\ServiceController@serviceById');
 Route::delete("/service/{id}","App\Http\Controllers\AdminApi\ServiceController@serviceDelete");
 
-});
+// });
 
 Route::group(['middleware' => ['role:bloger']], function () {
 
@@ -48,3 +48,4 @@ Route::get('/order','App\Http\Controllers\AdminApi\OrderController@order');
 Route::put("/order/{id}","App\Http\Controllers\AdminApi\OrderController@orderUpdate");
 Route::get('/order/{id}','App\Http\Controllers\AdminApi\OrderController@orderById');
 Route::delete("/order/{id}","App\Http\Controllers\AdminApi\OrderController@orderDelete");
+

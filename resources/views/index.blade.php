@@ -165,7 +165,7 @@ data-aos-anchor-placement="top-bottom"
     </div>
 </section>
 <!-- CLIENTS END -->
-
+@php Auth::logout() @endphp
 <!-- BLOG START -->
 <section class="section bg-light" id="blog">
     <div class="container">

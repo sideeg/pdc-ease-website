@@ -20,29 +20,29 @@ Route::get('locale/{locale}', function ($locale){
     return redirect()->back();
 });
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 // Route::get('/blog', function () {
 //     return view('pages.blog');
 // });
 
-Route::get('/article', function () {
-    return view('pages.article');
-});
+// Route::get('/article', function () {
+//     return view('pages.article');
+// });
 
-Route::get('/service', function () {
-    return view('pages.service');
-});
+// Route::get('/service', function () {
+//     return view('pages.service');
+// });
 
-Route::get('/service_order', function () {
-    return view('pages.service-order');
-});
+// Route::get('/service_order', function () {
+//     return view('pages.service-order');
+// });
 
-Route::get('/tag_order', function () {
-    return view('pages.tag-order');
-});
+// Route::get('/tag_order', function () {
+//     return view('pages.tag-order');
+// });
 
 Route::get('/',"App\Http\Controllers\homeController@index")->name('home');
 Route::post('/contact',"App\Http\Controllers\homeController@contactForm")->name('contactForm');
@@ -63,6 +63,10 @@ Route::get("/blog","App\Http\Controllers\blogController@index")->name('blog');
 Route::get("/blog/{id}","App\Http\Controllers\blogController@blogByTag")->name('blogByTag');
 Route::get("/article/{id}","App\Http\Controllers\blogController@blogById")->name('article');
 
+// Route::group(['middleware' => ['role:admin','auth']], function () {
+
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+// });
 
 Auth::routes();
 
