@@ -35,14 +35,14 @@ Route::delete("/service/{id}","App\Http\Controllers\AdminApi\ServiceController@s
 
 // });
 
-Route::group(['middleware' => ['role:bloger']], function () {
+// Route::group(['middleware' => ['role:bloger']], function () {
 
 Route::post('/blog','App\Http\Controllers\AdminApi\BlogController@blogSave');
 Route::get('/blog','App\Http\Controllers\AdminApi\BlogController@blog');
 Route::put("/blog","App\Http\Controllers\AdminApi\BlogController@blogUpdate");
 Route::get('/blog/{id}','App\Http\Controllers\AdminApi\BlogController@blogById');
 Route::delete("/blog/{id}","App\Http\Controllers\AdminApi\BlogController@blogDelete");
-});
+// });
 
 Route::get('/order','App\Http\Controllers\AdminApi\OrderController@order');
 Route::get('/order-reverse','App\Http\Controllers\AdminApi\OrderController@orderreverse');
@@ -54,4 +54,8 @@ Route::delete("/order/{id}","App\Http\Controllers\AdminApi\OrderController@order
 Route::get('/message','App\Http\Controllers\AdminApi\MessageController@messages');
 Route::get('/message/{id}','App\Http\Controllers\AdminApi\MessageController@messageById');
 Route::delete("/message/{id}","App\Http\Controllers\AdminApi\MessageController@messageDelete");
+
+
+Route::get('/tags','App\Http\Controllers\AdminApi\TagController@tags');
+
 
