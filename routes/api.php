@@ -55,3 +55,7 @@ Route::get('/message','App\Http\Controllers\AdminApi\MessageController@messages'
 Route::get('/message/{id}','App\Http\Controllers\AdminApi\MessageController@messageById');
 Route::delete("/message/{id}","App\Http\Controllers\AdminApi\MessageController@messageDelete");
 
+
+Route::get('/tags','App\Http\Controllers\AdminApi\TagController@tags');
+
+
