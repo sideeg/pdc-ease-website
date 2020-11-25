@@ -45,6 +45,7 @@ Route::delete("/blog/{id}","App\Http\Controllers\AdminApi\BlogController@blogDel
 });
 
 Route::get('/order','App\Http\Controllers\AdminApi\OrderController@order');
+Route::get('/order-reverse','App\Http\Controllers\AdminApi\OrderController@orderreverse');
 Route::put("/order/{id}","App\Http\Controllers\AdminApi\OrderController@orderUpdate");
 Route::get('/order/{id}','App\Http\Controllers\AdminApi\OrderController@orderById');
 Route::delete("/order/{id}","App\Http\Controllers\AdminApi\OrderController@orderDelete");
