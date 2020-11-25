@@ -25,8 +25,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call(blogSeeder::class);
         $this->call(slideSeeder::class);
+        $this->call(orderSeeder::class);
+        $this->call(orderTagsSeeder::class);
 
-        
+
+
+
 
 
     }

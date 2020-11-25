@@ -67,10 +67,12 @@ class OrderController extends Controller
             if (is_null($order)){
                 return response()->json('order not found',404);
             }
-
             //change order status
-            $order->status = 1;
+            if ($order->status)
+                $order->status = 0;
+            else
+                $order->status = 1;
             $order->save();
-            return response()->json($order,200);
+            return response()->json($order->with('order_tags.tag')->get(),200);
         }
 }
