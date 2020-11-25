@@ -49,3 +49,8 @@ Route::put("/order/{id}","App\Http\Controllers\AdminApi\OrderController@orderUpd
 Route::get('/order/{id}','App\Http\Controllers\AdminApi\OrderController@orderById');
 Route::delete("/order/{id}","App\Http\Controllers\AdminApi\OrderController@orderDelete");
 
+
+Route::get('/message','App\Http\Controllers\AdminApi\MessageController@messages');
+Route::get('/message/{id}','App\Http\Controllers\AdminApi\MessageController@messageById');
+Route::delete("/message/{id}","App\Http\Controllers\AdminApi\MessageController@messageDelete");
+
