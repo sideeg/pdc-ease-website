@@ -30,7 +30,7 @@ class OrderController extends Controller
 
         public function orderreverse(Request $request){
 
-            return response()->json(orders::orderBy('status', 'desc')->with('order_tags')->paginate(9),200);
+            return response()->json(orders::orderBy('status', 'desc')->with('order_tags.tag')->paginate(9),200);
         }
 
 

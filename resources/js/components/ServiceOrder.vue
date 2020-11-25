@@ -5,14 +5,14 @@
             <div class="card-body">
                 <h4 class="header-title">Services Orders</h4>
                 <div class="row justify-content-end">
-                    <select name="" id="">
-                        <option @click="openOrders()">
+                    <!-- <select name="" id="" class="form-control"> -->
+                        <button @click="getOrders()">
                             Open
-                        </option>
-                        <option @click="closedOrders()">
+                        </button>
+                        <button @click="getOrders('api/order-reverse')">
                             Closed
-                        </option>
-                    </select>
+                        </button>
+                    <!-- </select> -->
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered text-center">
@@ -104,6 +104,7 @@
             getOrders(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/order';
+                console.log(page_url);
                 fetch(page_url)
                 .then(res => res.json())
                 .then(res => {
@@ -221,29 +222,6 @@
 
 
             },
-            // Open Orders
-            openOrders(){
-                fetch('api/orderr', {
-                    method: 'post',
-                    body: JSON.stringify(this.order),
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                })
-                .then(res => res.json())
-                .then(res => {
-                    // console.log(res);
-                    
-                    // this.resetModal();                        
-                    // alert('Order Added !');
-                    this.getOrders();
-                    // console.log(res);
-                })
-                .catch(err => console.log(err));
-                    
-
-            }
-            
             // File Handle
             selectFile(event) {
                 // `files` is always an array because the file input may be in multiple mode

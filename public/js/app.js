@@ -2125,9 +2125,242 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ServiceOrder.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\resources\\js\\components\\ServiceOrder.vue: Unexpected token, expected \",\" (248:11)\n\n  246 |            \n  247 |            // File Handle\n> 248 |            selectFile(event) {\n      |            ^\n  249 |                // `files` is always an array because the file input may be in multiple mode\n  250 |                this.sourse = event.target.files[0];\n  251 |                // console.log(this.sourse);\n    at Parser._raise (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:766:17)\n    at Parser.raiseWithData (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:759:17)\n    at Parser.raise (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:753:17)\n    at Parser.unexpected (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:8966:16)\n    at Parser.expect (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:8952:28)\n    at Parser.parseObjectLike (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:10655:14)\n    at Parser.parseExprAtom (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:10198:23)\n    at Parser.parseExprSubscripts (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9844:23)\n    at Parser.parseUpdate (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9824:21)\n    at Parser.parseMaybeUnary (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9813:17)\n    at Parser.parseExprOps (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9683:23)\n    at Parser.parseMaybeConditional (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9657:23)\n    at Parser.parseMaybeAssign (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9620:21)\n    at C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9586:39\n    at Parser.allowInAnd (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:11303:12)\n    at Parser.parseMaybeAssignAllowIn (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9586:17)\n    at Parser.parseObjectProperty (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:10816:101)\n    at Parser.parseObjPropValue (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:10841:100)\n    at Parser.parsePropertyDefinition (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:10772:10)\n    at Parser.parseObjectLike (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:10664:25)\n    at Parser.parseExprAtom (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:10198:23)\n    at Parser.parseExprSubscripts (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9844:23)\n    at Parser.parseUpdate (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9824:21)\n    at Parser.parseMaybeUnary (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9813:17)\n    at Parser.parseExprOps (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9683:23)\n    at Parser.parseMaybeConditional (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9657:23)\n    at Parser.parseMaybeAssign (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9620:21)\n    at C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9586:39\n    at Parser.allowInAnd (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:11297:16)\n    at Parser.parseMaybeAssignAllowIn (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:9586:17)\n    at Parser.parseExportDefaultExpression (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:12620:24)\n    at Parser.parseExport (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:12530:31)\n    at Parser.parseStatementContent (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:11537:27)\n    at Parser.parseStatement (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:11431:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:12013:25)\n    at Parser.parseBlockBody (C:\\xampp\\htdocs\\Projects\\EaseGroup\\pdc-ease-website\\node_modules\\@babel\\parser\\lib\\index.js:11999:10)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      orders: [],
+      order: {
+        // id: '',
+        name: '',
+        email: '',
+        phone: '',
+        status: 0,
+        order_tags: [{
+          tag: []
+        }]
+      },
+      // order_tag: {
+      tag: {
+        name_en: ''
+      },
+      // },
+      order_id: '',
+      pagination: {},
+      edit: false
+    };
+  },
+  created: function created() {
+    this.getOrders();
+  },
+  methods: {
+    getOrders: function getOrders(page_url) {
+      var _this = this;
+
+      var vm = this;
+      page_url = page_url || 'api/order';
+      console.log(page_url);
+      fetch(page_url).then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this.orders = res.data;
+        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    // Pagination
+    makePagination: function makePagination(current_page, last_page, next_page_url, prev_page_url) {
+      var pagination = {
+        current_page: current_page,
+        last_page: last_page,
+        next_page_url: next_page_url,
+        prev_page_url: prev_page_url
+      };
+      this.pagination = pagination;
+      console.log(this.pagination);
+    },
+    // Delete Order
+    deleteOrder: function deleteOrder(id) {
+      var _this2 = this;
+
+      if (confirm('Are You Sure ?')) {
+        fetch("api/order/".concat(id), {
+          method: 'delete'
+        }).then(function (res) {
+          return res.json();
+        }).then(function (res) {
+          alert('Order Deleted !');
+
+          _this2.getOrders(); // console.log(res);
+
+        });
+      }
+    },
+    // Update Order
+    updateOrder: function updateOrder(id) {
+      var _this3 = this;
+
+      if (confirm('Are You Sure ?')) {
+        fetch("api/order/".concat(id), {
+          method: 'put'
+        }).then(function (res) {
+          return res.json();
+        }).then(function (res) {
+          // alert('Order Deleted !');
+          _this3.getOrders(); // console.log(res);
+
+        });
+      }
+    },
+    // Add Order
+    addOrder: function addOrder() {
+      var _this4 = this;
+
+      if (this.edit === false) {
+        // Add 
+        fetch('api/orderr', {
+          method: 'post',
+          body: JSON.stringify(this.order),
+          headers: {
+            'content-type': 'application/json'
+          }
+        }).then(function (res) {
+          return res.json();
+        }).then(function (res) {
+          // console.log(res);
+          // this.resetModal();                        
+          // alert('Order Added !');
+          _this4.getOrders(); // console.log(res);
+
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      } else {
+        // Update
+        fetch('api/order', {
+          method: 'put',
+          body: JSON.stringify(this.order),
+          headers: {
+            'content-type': 'application/json'
+          }
+        }).then(function (res) {
+          return res.json();
+        }).then(function (res) {
+          // console.log(res);
+          // this.resetModal();                        
+          // alert('Order Added !');
+          _this4.getOrders(); // console.log(res);
+
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+        this.edit = false;
+      }
+
+      this.resetModal();
+    },
+    editOrder: function editOrder(order) {
+      this.edit = true;
+      this.order.id = order.id;
+      this.order.order_id = order.id;
+      this.order.title_en = order.title_en;
+      this.order.title_ar = order.title_ar;
+      this.order.desc_en = order.desc_en;
+      this.order.desc_ar = order.desc_ar;
+      this.order.sourse = order.sourse;
+    },
+    // File Handle
+    selectFile: function selectFile(event) {
+      // `files` is always an array because the file input may be in multiple mode
+      this.sourse = event.target.files[0]; // console.log(this.sourse);
+    },
+    resetModal: function resetModal() {
+      this.order.title_en = '';
+      this.order.title_ar = '';
+      this.order.desc_en = '';
+      this.order.desc_ar = '';
+      this.order.sourse = null;
+    }
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
 
 /***/ }),
 
@@ -38365,31 +38598,29 @@ var render = function() {
         _c("h4", { staticClass: "header-title" }, [_vm._v("Services Orders")]),
         _vm._v(" "),
         _c("div", { staticClass: "row justify-content-end" }, [
-          _c("select", { attrs: { name: "", id: "" } }, [
-            _c(
-              "option",
-              {
-                on: {
-                  click: function($event) {
-                    return _vm.openOrders()
-                  }
+          _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  return _vm.getOrders()
                 }
-              },
-              [_vm._v("\n                        Open\n                    ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "option",
-              {
-                on: {
-                  click: function($event) {
-                    return _vm.closedOrders()
-                  }
+              }
+            },
+            [_vm._v("\n                        Open\n                    ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  return _vm.getOrders("api/order-reverse")
                 }
-              },
-              [_vm._v("\n                        Closed\n                    ")]
-            )
-          ])
+              }
+            },
+            [_vm._v("\n                        Closed\n                    ")]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "table-responsive" }, [
@@ -51495,14 +51726,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/components/ServiceOrder.vue ***!
   \**************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ServiceOrder_vue_vue_type_template_id_356eb904___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ServiceOrder.vue?vue&type=template&id=356eb904& */ "./resources/js/components/ServiceOrder.vue?vue&type=template&id=356eb904&");
 /* harmony import */ var _ServiceOrder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ServiceOrder.vue?vue&type=script&lang=js& */ "./resources/js/components/ServiceOrder.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ServiceOrder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ServiceOrder_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -51532,7 +51764,7 @@ component.options.__file = "resources/js/components/ServiceOrder.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/components/ServiceOrder.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
