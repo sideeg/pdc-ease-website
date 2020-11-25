@@ -22,6 +22,19 @@ class OrderController extends Controller
         }
 
 
+    /************************************************************
+         *
+         * get all order with defernt sort
+         *
+         */
+
+        public function orderreverse(Request $request){
+
+            return response()->json(orders::orderBy('status', 'desc')->with('order_tags')->paginate(9),200);
+        }
+
+
+
 
          /****************************************************************
          *
