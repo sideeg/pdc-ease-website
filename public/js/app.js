@@ -2081,8 +2081,10 @@ __webpack_require__.r(__webpack_exports__);
     deleteMessage: function deleteMessage(id) {
       var _this2 = this;
 
+      console.log(id);
+
       if (confirm('Are You Sure ?')) {
-        fetch("api/messages/".concat(id), {
+        fetch("api/message/".concat(id), {
           method: 'delete'
         }).then(function (res) {
           return res.json();
@@ -2112,8 +2114,7 @@ __webpack_require__.r(__webpack_exports__);
       this.message.message = '';
     }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
   }
 });
 
@@ -38073,7 +38074,7 @@ var render = function() {
       "div",
       { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
       [
-        _c("div", { staticClass: "modal fade show-slide-details-modal" }, [
+        _c("div", { staticClass: "modal fade show-message-modal" }, [
           _c("div", { staticClass: "modal-dialog modal-lg" }, [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
@@ -38143,74 +38144,92 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "container row justify-content-between" }, [
-            _c("nav", { attrs: { "aria-label": "page navigation example" } }, [
-              _c("ul", { staticClass: "pagination" }, [
-                _c(
-                  "li",
+            _c(
+              "nav",
+              {
+                directives: [
                   {
-                    staticClass: "page-item",
-                    class: [{ disabled: !_vm.pagination.prev_page_url }]
-                  },
-                  [
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.pagination.last_page,
+                    expression: "pagination.last_page"
+                  }
+                ],
+                attrs: { "aria-label": "page navigation example" }
+              },
+              [
+                _c("ul", { staticClass: "pagination" }, [
+                  _c(
+                    "li",
+                    {
+                      staticClass: "page-item",
+                      class: [{ disabled: !_vm.pagination.prev_page_url }]
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.getMessages(
+                                _vm.pagination.prev_page_url
+                              )
+                            }
+                          }
+                        },
+                        [_vm._v("Previous")]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "page-item disabled" }, [
                     _c(
                       "a",
                       {
-                        staticClass: "page-link",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.getMessages(_vm.pagination.prev_page_url)
-                          }
-                        }
+                        staticClass: "page-link text-dark",
+                        attrs: { href: "#" }
                       },
-                      [_vm._v("Previous")]
+                      [
+                        _vm._v(
+                          "\n                                    Page " +
+                            _vm._s(_vm.pagination.current_page) +
+                            " of " +
+                            _vm._s(_vm.pagination.last_page) +
+                            "\n                                "
+                        )
+                      ]
                     )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("li", { staticClass: "page-item disabled" }, [
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "a",
+                    "li",
                     {
-                      staticClass: "page-link text-dark",
-                      attrs: { href: "#" }
+                      staticClass: "page-item",
+                      class: [{ disabled: !_vm.pagination.next_page_url }]
                     },
                     [
-                      _vm._v(
-                        "\n                                    Page " +
-                          _vm._s(_vm.pagination.current_page) +
-                          " of " +
-                          _vm._s(_vm.pagination.last_page) +
-                          "\n                                "
+                      _c(
+                        "a",
+                        {
+                          staticClass: "page-link",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.getMessages(
+                                _vm.pagination.next_page_url
+                              )
+                            }
+                          }
+                        },
+                        [_vm._v("Next")]
                       )
                     ]
                   )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass: "page-item",
-                    class: [{ disabled: !_vm.pagination.next_page_url }]
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { href: "#" },
-                        on: {
-                          click: function($event) {
-                            return _vm.getMessages(_vm.pagination.next_page_url)
-                          }
-                        }
-                      },
-                      [_vm._v("Next")]
-                    )
-                  ]
-                )
-              ])
-            ])
+                ])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "single-table" }, [
@@ -38247,8 +38266,7 @@ var render = function() {
                                     attrs: {
                                       href: "#",
                                       "data-toggle": "modal",
-                                      "data-target":
-                                        ".show-service-details-modal"
+                                      "data-target": ".show-message-modal"
                                     },
                                     on: {
                                       click: function($event) {
