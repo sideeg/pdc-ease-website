@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <!-- Show Service Details Modal -->
             <div class="col-lg-10 mt-3 d-flex justify-content-between">
-                <div class="modal fade show-slide-details-modal">
+                <div class="modal fade show-message-modal">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -43,7 +43,7 @@
                     <div class="card-body">
                         <h4 class="header-title">Contact Messages</h4>
                         <div class="container row justify-content-between">
-                        <nav aria-label="page navigation example">
+                        <nav aria-label="page navigation example" v-show="pagination.last_page">
                             <ul class="pagination">
                                 <li class="page-item" v-bind:class="[{disabled: !pagination.prev_page_url}]" >
                                     <a href="#" class="page-link" @click="getMessages(pagination.prev_page_url)">Previous</a>
@@ -81,7 +81,7 @@
                                             <td >{{message.subject}}</td>
                                             <td class="">
                                                 <ul class="d-flex justify-content-center align-items-center">
-                                                    <li class="mr-3"><a href="#" @click="showMessage(message)" class="text-primary" data-toggle="modal" data-target=".show-service-details-modal"><i class="ti-eye o-icon"></i></a></li>
+                                                    <li class="mr-3"><a href="#" @click="showMessage(message)" class="text-primary" data-toggle="modal" data-target=".show-message-modal"><i class="ti-eye o-icon"></i></a></li>
                                                     <li><a href="#" @click="deleteMessage(message.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
                                                 </ul>
                                             </td>
@@ -139,8 +139,10 @@
             },
             // Delete Slide
             deleteMessage(id){
+                console.log(id);
+
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/messages/${id}`, {
+                    fetch(`api/message/${id}`, {
                         method: 'delete'
                     })
                     .then(res => res.json())
@@ -177,7 +179,7 @@
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>
