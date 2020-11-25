@@ -11,11 +11,11 @@ class SliderController extends Controller
 {
     public function sliderSave(Request $request)
     {
-
+        // dd($request->file('sourse'));
         $validatedData = Validator::make($request->all(),[
             'sourse' => 'required|mimes:jpeg,bmp,png,jpg,avi,wmv,flv,gif,asf,m4v,mp4,m4p|max:2048',
         ]);
-        // dd($validatedData);
+        
         if(filesize($request->file('sourse'))>2e+6){
             return response()->json("the sourse(image or video) is too big", 401);
           }else{
@@ -77,6 +77,7 @@ class SliderController extends Controller
         public function sliders(Request $request){
 
             return response()->json(slide_bar::paginate(9),200);
+            // return json_encode(slide_bar::paginate(9));
         }
 
         /****************************************************************
@@ -111,9 +112,13 @@ class SliderController extends Controller
          * delete slider
          *
          */
-        public function sliderDelete(Request $request,slide_bar $slider)
+        public function sliderDelete($id)
         {
-            $slider->delete($request);
+            $slider = slide_bar::find($id);
+            if (is_null($slider)){
+                return response()->json('slider not found',404);
+            }
+            $slider->delete($id);
             return response()->json("done",200);
 
         }

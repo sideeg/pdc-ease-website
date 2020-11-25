@@ -8,6 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window.Axios = require('axios');
+
+
 window.$ = window.jQuery = require('jquery');
 
 /**
