@@ -34,15 +34,16 @@ class DashboardController extends Controller
     public function slider()
     {
         return view('admin-layout.pages.slider');
-        // dd($slider);
-        // return view('index', compact(['slider','blogs', 'service', 'clint'])); //TODO page name
+    }
+
+    public function servicesOrders()
+    {
+        return view('admin-layout.pages.service-order');
     }
 
     public function message()
     {
         return view('admin-layout.pages.message');
-        // dd($slider);
-        // return view('index', compact(['slider','blogs', 'service', 'clint'])); //TODO page name
     }
     
     

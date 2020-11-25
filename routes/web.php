@@ -71,6 +71,8 @@ Route::get('/dashboard-sliders', [App\Http\Controllers\DashboardController::clas
 
 Route::get('/dashboard-messages', [App\Http\Controllers\DashboardController::class, 'message'])->name('message');
 
+Route::get('/dashboard-services-orders', [App\Http\Controllers\DashboardController::class, 'servicesOrders'])->name('servicesOrders');
+
 
 
 
