@@ -4,11 +4,21 @@
         <div class=" col-lg-11 card mt-5">
             <div class="card-body">
                 <h4 class="header-title">Services Orders</h4>
+                <div class="row justify-content-end">
+                    <select name="" id="">
+                        <option @click="openOrders()">
+                            Open
+                        </option>
+                        <option @click="closedOrders()">
+                            Closed
+                        </option>
+                    </select>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered text-center">
                         <thead class="text-uppercase bg-light">
                             <tr>
-                                <th scope="col">Service</th>
+                                <!-- <th scope="col">Service</th> -->
                                 <th scope="col">Customer Name</th>
                                 <th scope="col">Customer Email</th>
                                 <th scope="col">Customer Phone</th>
@@ -23,17 +33,22 @@
                                 <!-- <td>Lorem, ipsum.</td> -->
                                 <td>{{order.email}}</td>
                                 <td>{{order.phone}}</td>
-                                <td v-for="order_tag in order.order_tags" :key="order.order_tages.id">
-                                    <span class="badge badge-pill badge-info p-1 my-1"> Web Development Web Development Web Development</span>
-                                    <span class="badge badge-pill badge-info p-1 my-1"> Web Development</span>
-                                    <span class="badge badge-pill badge-info p-1 my-1"> Web Development</span>
-                                    <span class="badge badge-pill badge-info p-1 my-1"> Web Development</span>
-                                    <span class="badge badge-pill badge-info p-1 my-1"> Web Development Web Development Web Development</span>
-                                    <span class="badge badge-pill badge-info p-1 my-1"> Web Development</span>
-                                    <span class="badge badge-pill badge-info p-1 my-1"> Web Development</span>
-                                    
+                                <td>
+                                    <div v-for="tag in order.order_tags" :key="tag.id">
+                                        <span class="badge badge-pill badge-info p-1 my-1"> {{tag.tag.name_en}}</span>
+                                    </div>
                                 </td>
-                                <td>Order Status</td>
+                                <td>
+                                    <ul class="d-flex justify-content-center align-items-center">
+                                        <li class="mr-3">
+                                            <div class="custom-control custom-checkbox mr-sm-2">
+                                                <input type="checkbox" class="custom-control-input o-icon" @change="updateOrder(order.id)" :id="'customcheck'+ order.id" v-bind:checked="(order.status > 0)">
+                                                <label class="custom-control-label" :for="'customcheck'+ order.id"></label>
+                                            </div>
+                                        </li>
+                                        <li><a href="#" @click="deleteOrder(order.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
+                                    </ul>
+                                </td>
                             </tr>
                             
                         </tbody>
@@ -64,13 +79,17 @@
                     name: '',
                     email: '',
                     phone: '',
-                    status: '',
-                    order_tags: []
+                    status: 0,
+                    order_tags: [{
+                        tag: []
+                    }]
                 },
-                order_tags: {
-                    order_id: '',
-                    
-                },
+                // order_tag: {
+                    tag: {
+                        name_en: '',
+                    },
+
+                // },
                 order_id: '',
                 pagination: {},
                 edit: false,
@@ -122,6 +141,21 @@
                     .then(res => res.json())
                     .then(res => {
                         alert('Order Deleted !');
+                        this.getOrders();
+                        // console.log(res);
+
+                    });
+                }
+            },
+            // Update Order
+            updateOrder(id){
+                if(confirm('Are You Sure ?')){
+                    fetch(`api/order/${id}`, {
+                        method: 'put'
+                    })
+                    .then(res => res.json())
+                    .then(res => {
+                        // alert('Order Deleted !');
                         this.getOrders();
                         // console.log(res);
 
@@ -187,6 +221,29 @@
 
 
             },
+            // Open Orders
+            openOrders(){
+                fetch('api/orderr', {
+                    method: 'post',
+                    body: JSON.stringify(this.order),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                })
+                .then(res => res.json())
+                .then(res => {
+                    // console.log(res);
+                    
+                    // this.resetModal();                        
+                    // alert('Order Added !');
+                    this.getOrders();
+                    // console.log(res);
+                })
+                .catch(err => console.log(err));
+                    
+
+            }
+            
             // File Handle
             selectFile(event) {
                 // `files` is always an array because the file input may be in multiple mode

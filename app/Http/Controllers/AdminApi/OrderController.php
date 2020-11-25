@@ -18,7 +18,7 @@ class OrderController extends Controller
 
         public function order(Request $request){
 
-            return response()->json(orders::orderBy('status')->with('order_tags')->paginate(9),200);
+            return response()->json(orders::orderBy('status')->with('order_tags.tag')->paginate(9),200);
         }
 
 
