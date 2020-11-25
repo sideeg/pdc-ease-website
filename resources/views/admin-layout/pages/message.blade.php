@@ -6,8 +6,6 @@
 
 {{-- @php Auth::logout() @endphp --}}
 
-{{-- <slider></slider> --}}
 <message></message>
-
 
 @endsection
