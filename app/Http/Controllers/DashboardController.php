@@ -36,6 +36,11 @@ class DashboardController extends Controller
         return view('admin-layout.pages.slider');
     }
 
+    public function blog()
+    {
+        return view('admin-layout.pages.blog');
+    }
+
     public function servicesOrders()
     {
         return view('admin-layout.pages.service-order');

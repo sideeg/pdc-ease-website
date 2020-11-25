@@ -73,6 +73,7 @@ Route::get('/dashboard-messages', [App\Http\Controllers\DashboardController::cla
 
 Route::get('/dashboard-services-orders', [App\Http\Controllers\DashboardController::class, 'servicesOrders'])->name('servicesOrders');
 
+Route::get('/dashboard-blog', [App\Http\Controllers\DashboardController::class, 'blog'])->name('blog');
 
 
 
