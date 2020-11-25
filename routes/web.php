@@ -65,7 +65,7 @@ Route::get("/article/{id}","App\Http\Controllers\blogController@blogById")->name
 
 // Route::group(['middleware' => ['role:admin','auth']], function () {
 
-    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
 // });
 
 Auth::routes();
