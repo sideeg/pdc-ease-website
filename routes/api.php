@@ -29,6 +29,8 @@ Route::delete("slider/{id}","App\Http\Controllers\AdminApi\SliderController@slid
 
 Route::post('/service','App\Http\Controllers\AdminApi\ServiceController@serviceSave');
 Route::get('/service','App\Http\Controllers\AdminApi\ServiceController@services');
+Route::get('/services_names','App\Http\Controllers\AdminApi\ServiceController@servicesnames');
+
 Route::put("/service","App\Http\Controllers\AdminApi\ServiceController@serviceUpdate");
 Route::get('/service/{id}','App\Http\Controllers\AdminApi\ServiceController@serviceById');
 Route::delete("/service/{id}","App\Http\Controllers\AdminApi\ServiceController@serviceDelete");
