@@ -52,6 +52,17 @@ class TagController extends Controller
             return response()->json(tags::paginate(9),200);
         }
 
+         /************************************************************
+         *
+         * get all tag names
+         *
+         */
+
+        public function tags_names(Request $request){
+
+            return response()->json(tags::select('name_en','name_ar','id'),200);
+        }
+
 
 
         /****************************************************************
