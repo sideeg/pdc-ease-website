@@ -36,7 +36,7 @@
                                                                 <textarea name="" id="example-email-input" v-model="tag.desc_en" class="form-control" cols="30" rows="4"></textarea>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
+                                                                <label for="example-email-input" class="col-form-label d-block">Services</label>
                                                                 <select id="example-email-input" class="form-control" v-model='tag.service_id'>
                                                                    
                                                                     <option v-for="service in services" :key="service.id" v-bind:value="service.id">{{service.title_en}}</option>
@@ -262,6 +262,8 @@
                     
                 }else {
                     // Update
+                        // console.log(tag);
+
                     fetch('api/tag', {
                         method: 'put',
                         body: JSON.stringify(this.tag),
@@ -282,7 +284,7 @@
                     this.edit = false;
 
                 }
-                this.resetModal();                        
+                // this.resetModal();                        
 
             },
             editTag(tag){
@@ -294,6 +296,7 @@
                 this.tag.name_ar = tag.name_ar;
                 this.tag.desc_en = tag.desc_en;
                 this.tag.desc_ar = tag.desc_ar;
+                this.getSetServices()
             },
             // Get and Set Services
             getSetServices(){
@@ -301,7 +304,7 @@
                 .then(res => res.json())
                 .then(res => {
                     this.services = res;
-                    // console.log(res);
+                    console.log(res);
                 })
                 
             },

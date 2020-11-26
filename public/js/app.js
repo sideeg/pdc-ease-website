@@ -2036,9 +2036,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 // import 'axios' from axios;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2177,11 +2174,11 @@ __webpack_require__.r(__webpack_exports__);
     getSetTags: function getSetTags() {
       var _this4 = this;
 
-      fetch('api/tags').then(function (res) {
+      fetch('api/tag').then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this4.tags = res;
         console.log(res);
+        _this4.tags = res;
       });
     },
     // File Handle
@@ -3251,6 +3248,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         // Update
+        // console.log(tag);
         fetch('api/tag', {
           method: 'put',
           body: JSON.stringify(this.tag),
@@ -3269,9 +3267,8 @@ __webpack_require__.r(__webpack_exports__);
           return console.log(err);
         });
         this.edit = false;
-      }
+      } // this.resetModal();                        
 
-      this.resetModal();
     },
     editTag: function editTag(tag) {
       console.log(tag);
@@ -3282,6 +3279,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tag.name_ar = tag.name_ar;
       this.tag.desc_en = tag.desc_en;
       this.tag.desc_ar = tag.desc_ar;
+      this.getSetServices();
     },
     // Get and Set Services
     getSetServices: function getSetServices() {
@@ -3290,7 +3288,8 @@ __webpack_require__.r(__webpack_exports__);
       fetch('api/services_names').then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this4.services = res; // console.log(res);
+        _this4.services = res;
+        console.log(res);
       });
     },
     resetModal: function resetModal() {
@@ -40703,7 +40702,7 @@ var render = function() {
                                   staticClass: "col-form-label d-block",
                                   attrs: { for: "example-email-input" }
                                 },
-                                [_vm._v("Article Tag")]
+                                [_vm._v("Services")]
                               ),
                               _vm._v(" "),
                               _c(

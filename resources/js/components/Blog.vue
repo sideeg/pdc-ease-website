@@ -41,10 +41,7 @@
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
                                                 <select id="example-email-input" class="form-control" v-model='article.tag_id'>
-                                                    <!-- <optgroup>Web & App Development</optgroup> -->
-                                                    <!-- <option  v-show="!article.edit" v-bind:value="article.edit ? article.id : ''">
-                                                        found
-                                                    </option> -->
+                                                
                                                     <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id">{{tag.name_en}}</option>
                                                 </select>
                                             </div>
@@ -273,12 +270,12 @@
             },
             // Get and Set Tags
             getSetTags(){
-                fetch('api/tags')
+                fetch('api/tag')
                 .then(res => res.json())
                 .then(res => {
+                    console.log(res);
 
                     this.tags = res;
-                    console.log(res);
                 })
                 
             },
