@@ -56,6 +56,10 @@ Route::get('/message/{id}','App\Http\Controllers\AdminApi\MessageController@mess
 Route::delete("/message/{id}","App\Http\Controllers\AdminApi\MessageController@messageDelete");
 
 
-Route::get('/tags','App\Http\Controllers\AdminApi\TagController@tags');
+Route::get('/tag','App\Http\Controllers\AdminApi\TagController@tags');
+Route::post('/tag','App\Http\Controllers\AdminApi\TagController@tagSave');
+Route::put("/tag","App\Http\Controllers\AdminApi\TagController@tagUpdate");
+Route::get('/tag/{id}','App\Http\Controllers\AdminApi\TagController@tagById');
+Route::delete("/tag/{id}","App\Http\Controllers\AdminApi\TagController@tagDelete");
 
 
