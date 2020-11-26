@@ -35,11 +35,13 @@
                                                                 <label for="example-email-input" class="col-form-label">Description en <code>*</code></label>
                                                                 <textarea name="" id="example-email-input" v-model="tag.desc_en" class="form-control" cols="30" rows="4"></textarea>
                                                             </div>
-                                                            <!-- <div class="form-group row">
-                                                                <label for="example-email-input"  class="col-form-label d-block">Video or Image</label>
-                                                                <input type="file" @change="selectFile" class="col-form-label">
-                                                                <img v-bind:src="tag.sourse" alt="">
-                                                            </div> -->
+                                                            <div class="form-group">
+                                                                <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
+                                                                <select id="example-email-input" class="form-control" v-model='tag.service_id'>
+                                                                   
+                                                                    <option v-for="service in services" :key="service.id" v-bind:value="service.id">{{service.title_en}}</option>
+                                                                </select>
+                                                            </div>
 
                                                         </div>
                                                     <!-- </div> -->
@@ -104,7 +106,7 @@
             <div class="col-lg-10 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Tagrs</h4>
+                        <h4 class="header-title">Tags</h4>
                         <div class="container row justify-content-between">
                         <nav aria-label="page navigation example">
                             <ul class="pagination">
@@ -123,7 +125,7 @@
                                 </li>
                             </ul>
                         </nav>
-                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="ti-plus mr-1"></i> Add Tagr</button>
+                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" data-toggle="modal" data-target=".bd-example-modal-lg" @click="getSetServices()" ><i class="ti-plus mr-1"></i> Add Tag</button>
                         </div>
                         <div class="single-table">
                             <div class="table-responsive">
@@ -171,9 +173,14 @@
                     name_ar: '',
                     desc_en: '',
                     desc_ar: '',
-                    // sourse: null,
-                    // type: 0,
+                    service_id: '',
                 },
+                services: [],
+                service: {
+                    id: '',
+                    name_en: '',
+                },
+
                 tag_id: '',
                 pagination: {},
                 edit: false,
@@ -194,7 +201,6 @@
                     this.tags = res.data;
                     vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
                     // console.log(res.data);
-
                 }
                 )
                 .catch(err => console.log(err));
@@ -233,6 +239,7 @@
             },
             // Add Tag
             addTag(){
+                console.log(this.tag);
                 if(this.edit === false){
                     // Add 
                     fetch('api/tag', {
@@ -249,7 +256,7 @@
                         // this.resetModal();                        
                         // alert('Tag Added !');
                         this.getTags();
-                        console.log(res);
+                        // console.log(res);
                     })
                     .catch(err => console.log(err));
                     
@@ -288,8 +295,16 @@
                 this.tag.desc_en = tag.desc_en;
                 this.tag.desc_ar = tag.desc_ar;
             },
-           
-
+            // Get and Set Services
+            getSetServices(){
+                fetch('api/services_names')
+                .then(res => res.json())
+                .then(res => {
+                    this.services = res;
+                    // console.log(res);
+                })
+                
+            },
             resetModal() {
                 this.tag.name_en = '';
                 this.tag.name_ar = '';

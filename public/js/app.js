@@ -3153,6 +3153,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 // import 'axios' from axios;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3163,9 +3165,13 @@ __webpack_require__.r(__webpack_exports__);
         name_en: '',
         name_ar: '',
         desc_en: '',
-        desc_ar: '' // sourse: null,
-        // type: 0,
-
+        desc_ar: '',
+        service_id: ''
+      },
+      services: [],
+      service: {
+        id: '',
+        name_en: ''
       },
       tag_id: '',
       pagination: {},
@@ -3222,6 +3228,8 @@ __webpack_require__.r(__webpack_exports__);
     addTag: function addTag() {
       var _this3 = this;
 
+      console.log(this.tag);
+
       if (this.edit === false) {
         // Add 
         fetch('api/tag', {
@@ -3236,9 +3244,8 @@ __webpack_require__.r(__webpack_exports__);
           // console.log(res);
           // this.resetModal();                        
           // alert('Tag Added !');
-          _this3.getTags();
+          _this3.getTags(); // console.log(res);
 
-          console.log(res);
         })["catch"](function (err) {
           return console.log(err);
         });
@@ -3275,6 +3282,16 @@ __webpack_require__.r(__webpack_exports__);
       this.tag.name_ar = tag.name_ar;
       this.tag.desc_en = tag.desc_en;
       this.tag.desc_ar = tag.desc_ar;
+    },
+    // Get and Set Services
+    getSetServices: function getSetServices() {
+      var _this4 = this;
+
+      fetch('api/services_names').then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this4.services = res; // console.log(res);
+      });
     },
     resetModal: function resetModal() {
       this.tag.name_en = '';
@@ -40677,6 +40694,66 @@ var render = function() {
                                   }
                                 }
                               })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "col-form-label d-block",
+                                  attrs: { for: "example-email-input" }
+                                },
+                                [_vm._v("Article Tag")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.tag.service_id,
+                                      expression: "tag.service_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { id: "example-email-input" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.tag,
+                                        "service_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.services, function(service) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: service.id,
+                                      domProps: { value: service.id }
+                                    },
+                                    [_vm._v(_vm._s(service.title_en))]
+                                  )
+                                }),
+                                0
+                              )
                             ])
                           ])
                         ])
@@ -40721,7 +40798,7 @@ var render = function() {
     _c("div", { staticClass: "col-lg-10 mt-5" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body" }, [
-          _c("h4", { staticClass: "header-title" }, [_vm._v("Tagrs")]),
+          _c("h4", { staticClass: "header-title" }, [_vm._v("Tags")]),
           _vm._v(" "),
           _c("div", { staticClass: "container row justify-content-between" }, [
             _c("nav", { attrs: { "aria-label": "page navigation example" } }, [
@@ -40793,13 +40870,28 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(5)
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": ".bd-example-modal-lg"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.getSetServices()
+                  }
+                }
+              },
+              [_c("i", { staticClass: "ti-plus mr-1" }), _vm._v(" Add Tag")]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "single-table" }, [
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table table-hover progress-table" }, [
-                _vm._m(6),
+                _vm._m(5),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -40815,7 +40907,7 @@ var render = function() {
                               "d-flex justify-content-center align-items-center"
                           },
                           [
-                            _vm._m(7, true),
+                            _vm._m(6, true),
                             _vm._v(" "),
                             _c("li", { staticClass: "mr-3" }, [
                               _c(
@@ -40980,19 +41072,6 @@ var staticRenderFns = [
           ])
         ])
       ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3",
-        attrs: { "data-toggle": "modal", "data-target": ".bd-example-modal-lg" }
-      },
-      [_c("i", { staticClass: "ti-plus mr-1" }), _vm._v(" Add Tagr")]
     )
   },
   function() {
