@@ -23,7 +23,7 @@ class TagController extends Controller
             'name_ar' => 'required',
             'desc_en' => 'required',
             'desc_ar' => 'required',
-            'services_id' => 'required',
+            'service_id' => 'required',
 
         ]);
 

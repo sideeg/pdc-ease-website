@@ -17,11 +17,11 @@ class CreateTagsTable extends Migration
             $table->id();
             $table->string("name_en");
             $table->string("name_ar")->nullable();
-            
+
             $table->string("desc_en")->nullable();
             $table->string("desc_ar")->nullable();
 
-            $table->string("services_id");
+            $table->string("service_id");
             $table->timestamps();
         });
     }
