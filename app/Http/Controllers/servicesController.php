@@ -101,7 +101,7 @@ class servicesController extends Controller
       public function showServiceForm($service_id)
       {
         //   dd($service_id);
-        $service_tags = Models\tags::where('services_id',$service_id)->get();
+        $service_tags = Models\tags::where('service_id',$service_id)->get();
 
         return view('pages.service-order', compact('service_tags')); //TODO page name
 
@@ -110,7 +110,7 @@ class servicesController extends Controller
     public function showTagForm($tag_id)
       {
         //   dd($service_id);
-        // $service_tags = Models\tags::where('services_id',$service_id)->get();
+        // $service_tags = Models\tags::where('service_id',$service_id)->get();
 
         return view('pages.tag-order', compact('tag_id')); //TODO page name
 

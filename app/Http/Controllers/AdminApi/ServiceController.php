@@ -45,7 +45,7 @@ class ServiceController extends Controller
             //add the new tags to this new service as the user done
         for ($i =0;$i<sizeof($tags_list);$i++){
             $tag = tags::find($tags_list[$i]);
-            $tag->services_id = $service->id;
+            $tag->service_id = $service->id;
             $tag->save();
         }
 
@@ -114,7 +114,7 @@ class ServiceController extends Controller
             //add the new tags to this new service as the user done
             for ($i =0;$i<sizeof($tags_list);$i++){
                 $tag = tags::find($tags_list[$i]);
-                $tag->services_id = $service->id;
+                $tag->service_id = $service->id;
                 $tag->save();
             }
 
