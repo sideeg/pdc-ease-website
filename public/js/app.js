@@ -2965,7 +2965,8 @@ __webpack_require__.r(__webpack_exports__);
     // File Handle
     selectFile: function selectFile(event) {
       // `files` is always an array because the file input may be in multiple mode
-      this.sourse = event.target.files[0]; // console.log(this.sourse);
+      this.sourse = event.target.files[0];
+      console.log(this.sourse);
     },
     resetModal: function resetModal() {
       this.slide.title_en = '';
@@ -3179,7 +3180,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var vm = this;
-      page_url = page_url || 'api/tags';
+      page_url = page_url || 'api/tag';
       fetch(page_url).then(function (res) {
         return res.json();
       }).then(function (res) {
@@ -3205,7 +3206,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (confirm('Are You Sure ?')) {
-        fetch("api/tags/".concat(id), {
+        fetch("api/tag/".concat(id), {
           method: 'delete'
         }).then(function (res) {
           return res.json();
@@ -3223,7 +3224,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.edit === false) {
         // Add 
-        fetch('api/tags', {
+        fetch('api/tag', {
           method: 'post',
           body: JSON.stringify(this.tag),
           headers: {
@@ -3235,14 +3236,15 @@ __webpack_require__.r(__webpack_exports__);
           // console.log(res);
           // this.resetModal();                        
           // alert('Tag Added !');
-          _this3.getTags(); // console.log(res);
+          _this3.getTags();
 
+          console.log(res);
         })["catch"](function (err) {
           return console.log(err);
         });
       } else {
         // Update
-        fetch('api/tags', {
+        fetch('api/tag', {
           method: 'put',
           body: JSON.stringify(this.tag),
           headers: {

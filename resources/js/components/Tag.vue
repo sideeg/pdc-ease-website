@@ -187,7 +187,7 @@
         methods: {
             getTags(page_url) {
                 let vm = this;
-                page_url = page_url || 'api/tags';
+                page_url = page_url || 'api/tag';
                 fetch(page_url)
                 .then(res => res.json())
                 .then(res => {
@@ -219,7 +219,7 @@
             // Delete Tag
             deleteTag(id){
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/tags/${id}`, {
+                    fetch(`api/tag/${id}`, {
                         method: 'delete'
                     })
                     .then(res => res.json())
@@ -235,7 +235,7 @@
             addTag(){
                 if(this.edit === false){
                     // Add 
-                    fetch('api/tags', {
+                    fetch('api/tag', {
                         method: 'post',
                         body: JSON.stringify(this.tag),
                         headers: {
@@ -249,13 +249,13 @@
                         // this.resetModal();                        
                         // alert('Tag Added !');
                         this.getTags();
-                        // console.log(res);
+                        console.log(res);
                     })
                     .catch(err => console.log(err));
                     
                 }else {
                     // Update
-                    fetch('api/tags', {
+                    fetch('api/tag', {
                         method: 'put',
                         body: JSON.stringify(this.tag),
                         headers: {
