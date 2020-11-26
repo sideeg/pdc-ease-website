@@ -64,6 +64,18 @@ class ServiceController extends Controller
             return response()->json(services::with('tag')->paginate(9),200);
         }
 
+
+    /************************************************************
+         *
+         * get all service
+         *
+         */
+
+        public function servicesnames(Request $request){
+
+            return response()->json(services::select('title_en','title_ar','id')->get(),200);
+        }
+
         /****************************************************************
          *
          * get serviceby id
