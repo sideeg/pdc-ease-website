@@ -67,7 +67,7 @@ class ServiceController extends Controller
 
     /************************************************************
          *
-         * get all service
+         * get all service names
          *
          */
 
