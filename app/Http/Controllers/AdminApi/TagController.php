@@ -17,6 +17,6 @@ class TagController extends Controller
 
         public function tags(Request $request){
 
-            return response()->json(tags::all(),200);
+            return response()->json(tags::paginate(9),200);
         }
 }

@@ -51,6 +51,10 @@ class DashboardController extends Controller
         return view('admin-layout.pages.message');
     }
     
+    public function tag()
+    {
+        return view('admin-layout.pages.tag');
+    }
     
 
 }

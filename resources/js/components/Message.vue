@@ -6,25 +6,25 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Message</h5>
+                                <h5 class="modal-title">{{message.subject}}</h5>
                                 <button type="button" class="close" @click="resetModal()" data-dismiss="modal"><code>&times;</code></button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body border-none">
                                 <div class="row">
                                     <!-- Textual inputs start -->
                                     <div class="col-12">
-                                        <div class="card">
+                                        <!-- <div class="card"> -->
                                             <div class="card-body p-0">
                                                 <div class="media">
                                                     <div class="media-body">
 
-                                                        <h4 class="mb-2 md-mt-2">{{message.subject}}</h4>
+                                                        <!-- <h4 class="mb-2 md-mt-2"></h4> -->
                                                         <p>{{message.message}}</p>
                                                         
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <!-- </div> -->
                                     </div>
                                     <!-- Textual inputs end -->
                                 </div>
@@ -64,14 +64,14 @@
                         </div>
                         <div class="single-table">
                             <div class="table-responsive">
-                                <table class="table table-hover progress-table text-center">
+                                <table class="table table-hover progress-table">
                                     <thead class="text-uppercase">
                                         <tr>
                                             <!-- <th scope="col">ID</th> -->
                                             <th scope="col">Name</th>
                                             <th scope="col">Email</th>
                                             <th scope="col">Subject</th>
-                                            <th scope="col">Actions</th>
+                                            <th scope="col" class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>

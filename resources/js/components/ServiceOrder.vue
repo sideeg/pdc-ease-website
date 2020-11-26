@@ -15,7 +15,7 @@
                     <!-- </select> -->
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered">
                         <thead class="text-uppercase bg-light">
                             <tr>
                                 <!-- <th scope="col">Service</th> -->

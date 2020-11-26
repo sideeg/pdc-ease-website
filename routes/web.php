@@ -75,6 +75,8 @@ Route::get('/dashboard-services-orders', [App\Http\Controllers\DashboardControll
 
 Route::get('/dashboard-blog', [App\Http\Controllers\DashboardController::class, 'blog'])->name('blog');
 
+Route::get('/dashboard-tags', [App\Http\Controllers\DashboardController::class, 'tag'])->name('tag');
+
 
 
 

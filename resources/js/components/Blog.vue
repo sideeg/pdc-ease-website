@@ -7,64 +7,60 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">New Article</h5>
-                            <button type="button" class="close" data-dismiss="modal"><code>&times;</code></button>
+                            <button type="button" class="close" data-dismiss="modal" @click="resetModal()"><code>&times;</code></button>
                         </div>
+                        <form @submit.prevent="addArticle" enctype="multipart/form-data">
+
                         <div class="modal-body">
                             <div class="row">
                                 <!-- Textual inputs start -->
                                 <div class="col-12">
-                                    <div class="card  p-0">
+                                    <!-- <div class="card  p-0"> -->
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="example-text-input" class="col-form-label">Article Title <b>( ar )</b></label>
-                                                <input class="form-control" type="text" value="" id="example-text-input">
+                                                <input class="form-control" type="text" v-model="article.title_ar">
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-text-input" class="col-form-label">Article Title <b>( en )</b></label>
-                                                <input class="form-control" type="text" value="" id="example-text-input">
+                                                <input class="form-control" type="text" v-model="article.title_en">
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label">Article <b>( ar )</b></label>
-                                                <textarea name="" id="example-email-input" class="form-control" cols="30" rows="4"></textarea>
+                                                <textarea name=""  class="form-control" cols="30" rows="4" v-model="article.desc_ar"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label">Article <b>( en )</b></label>
-                                                <textarea name="" id="example-email-input" class="form-control" cols="30" rows="4"></textarea>
+                                                <textarea name=""  class="form-control" cols="30" rows="4" v-model="article.desc_en"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label d-block">Article Image</label>
-                                                <input type="file" class="col-form-label">
+                                                <input type="file" class="col-form-label" @change="selectFile">
                                             </div>
+                                            <input type="text" hidden :value="article.edit ? article.created_at : ''">
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
-                                                <select name="" id="" class="form-control">
-                                                    <optgroup>Web & App Development</optgroup>
-                                                    <option value="">Web Development</option>
-                                                    <option value="">Android Development</option>
-                                                    <option value="">IOS Development</option>
-                                                    
-                                                    <optgroup>Web & App Development</optgroup>
-                                                    <option value="">Web Development</option>
-                                                    <option value="">Android Development</option>
-                                                    <option value="">IOS Development</option>
-                                                    
-                                                    <optgroup>Web & App Development</optgroup>
-                                                    <option value="">Web Development</option>
-                                                    <option value="">Android Development</option>
-                                                    <option value="">IOS Development</option>
+                                                <select id="example-email-input" class="form-control" v-model='article.tag_id'>
+                                                    <!-- <optgroup>Web & App Development</optgroup> -->
+                                                    <!-- <option  v-show="!article.edit" v-bind:value="article.edit ? article.id : ''">
+                                                        found
+                                                    </option> -->
+                                                    <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id">{{tag.name_en}}</option>
                                                 </select>
                                             </div>
 
                                         </div>
-                                    </div>
+                                    <!-- </div> -->
                                 </div>
                                 <!-- Textual inputs end -->
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-warning mt-4 py-2 px-4" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary mt-4 py-2 px-4">Submit</button>
+                            <button type="button" class="btn btn-warning mt-4 py-2 px-4" data-dismiss="modal" @click="resetModal()">Close</button>
+                            <button type="submit" class="btn btn-primary mt-4 py-2 px-4">Submit</button>
                         </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
@@ -97,20 +93,31 @@
                     </li>
                 </ul>
             </nav>
-            <button class="btn btn-rounded btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="ti-plus"></i> New Article</button>
+            <button class="btn btn-rounded btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" @click="getSetTags()"><i class="ti-plus"></i> New Article</button>
         </div>
     </div>
-    <div class="row justify-content-center" v-for="article in blog" :key="article.id">
+    <div class="row justify-content-center" v-for="article in articles" :key="article.id">
         <div class="col-lg-10 mt-3">
             <div class="card">
                 <div class="card-body">
                     <div class="media mb-2">
-                        <img class="img-card mr-md-4" :src="article.image_full_path" alt="image">
+                        <img class="img-card mr-md-4" :src="article.image" alt="image">
                         <div class="media-body">
                             <h4 class="mb-2 md-mt-2">{{article.title_en}}</h4>
-                            <div class="row mb-3"><span class="col-lg-3 col-sm-6 font-italic"><b>Tag: &ThickSpace;</b ><span class="badge badge-pill badge-info p-1"> {{article.tag.name_en}}</span></span> <span class="col-lg-3 col-sm-6 font-italic"><b>Date:&ThickSpace; </b> {{article.created_at}}</span></div>
+                            <div class="row mb-3">
+                                <span class="col-lg-3 col-sm-6 font-italic">
+                                    <b>Tag: &ThickSpace;</b >
+                                    <span class="badge badge-pill badge-info p-1"> {{article.tag.name_en}}</span>
+                                </span> 
+                                <span class="col-lg-3 col-sm-6 font-italic">
+                                    <b>Date:&ThickSpace; </b> {{article.created_at }}
+                                </span>
+                            </div>
                             <p>{{article.desc_en}}</p>
-                            <div class="row mt-3 ml-1"><a href="javascript:void(0);" class="btn btn-rounded btn-outline-warning py-1 px-4 mr-4" data-toggle="modal" data-target=".bd-example-modal-lg"><i  class="fa fa-edit"></i></a><a href="javascript:void(0);" class="btn btn-rounded btn-outline-danger py-1 px-4"><i  class="ti-trash"></i></a></div>
+                            <div class="row mt-3 ml-1">
+                                <a href="#" class="btn btn-rounded btn-outline-warning py-1 px-4 mr-4" data-toggle="modal" data-target=".bd-example-modal-lg" @click="editArticle(article)"><i  class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-rounded btn-outline-danger py-1 px-4" @click="deleteArticle(article.id)"><i  class="ti-trash"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,21 +134,23 @@
     export default {
         data() {
             return {
-                blog: [],
+                articles: [],
                 article: {
                     // id: '',
                     title_en: '',
                     title_ar: '',
                     desc_en: '',
                     desc_ar: '',
-                    image_full_path: null,
+                    image: null,
                     created_at: '',
-                    tag: {},
+                    tag_id: '',
                 },
+                tags: [],
                 tag: {
                     id: '',
                     name_en: '',
                 },
+                // selected_tags: [],
                 article_id: '',
                 pagination: {},
                 edit: false,
@@ -159,7 +168,7 @@
                 fetch(page_url)
                 .then(res => res.json())
                 .then(res => {
-                    this.blog = res.data;
+                    this.articles = res.data;
                     vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
                     // console.log(res.data);
 
@@ -184,23 +193,24 @@
 
 
             },
-            // Delete Slide
-            deleteSlide(id){
+            // Delete Article
+            deleteArticle(id){
                 if(confirm('Are You Sure ?')){
                     fetch(`api/blog/${id}`, {
                         method: 'delete'
                     })
                     .then(res => res.json())
                     .then(res => {
-                        alert('Slide Deleted !');
+                        alert('Article Deleted !');
                         this.getArticles();
                         // console.log(res);
 
                     });
                 }
             },
-            // Add Slide
-            addSlide(){
+            // Add Article
+            addArticle(){
+                console.log(this.article);
                 if(this.edit === false){
                     // Add 
                     fetch('api/blog', {
@@ -212,14 +222,16 @@
                     })
                     .then(res => res.json())
                     .then(res => {
-                        // console.log(res);
+                        console.log(res);
                         
                         // this.resetModal();                        
-                        // alert('Slide Added !');
+                        // alert('Article Added !');
                         this.getArticles();
                         // console.log(res);
                     })
                     .catch(err => console.log(err));
+
+                    // this.getSetTags();
                     
                 }else {
                     // Update
@@ -235,18 +247,18 @@
                         // console.log(res);
 
                         // this.resetModal();                        
-                        // alert('Slide Added !');
+                        // alert('Article Added !');
                         this.getArticles();
                         // console.log(res);
                     })
                     .catch(err => console.log(err));
                     this.edit = false;
-
                 }
-                this.resetModal();                        
+                // this.resetModal();                        
 
             },
-            editSlide(article){
+            // Edit Article
+            editArticle(article){
                 this.edit = true;
                 this.article.id = article.id;
                 this.article.article_id = article.id;
@@ -254,15 +266,28 @@
                 this.article.title_ar = article.title_ar;
                 this.article.desc_en = article.desc_en;
                 this.article.desc_ar = article.desc_ar;
-                this.article.sourse = article.sourse;
-
-
+                this.article.image = article.image;
+                this.article.tag_id = article.tag_id;
+                this.article.created_at = article.created_at;
+                this.getSetTags();
             },
+            // Get and Set Tags
+            getSetTags(){
+                fetch('api/tags')
+                .then(res => res.json())
+                .then(res => {
+
+                    this.tags = res;
+                    console.log(res);
+                })
+                
+            },
+
             // File Handle
             selectFile(event) {
                 // `files` is always an array because the file input may be in multiple mode
-                this.sourse = event.target.files[0];
-                // console.log(this.sourse);
+                this.image = event.target.files[0];
+                console.log(this.image);
             },
 
             resetModal() {
@@ -270,11 +295,12 @@
                 this.article.title_ar = '';
                 this.article.desc_en = '';
                 this.article.desc_ar = '';
-                this.article.sourse = null;
+                this.article.image = null;
+                this.article.tag_id = '';
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>
