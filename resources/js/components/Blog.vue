@@ -207,48 +207,56 @@
             },
             // Add Article
             addArticle(){
-                console.log(this.article);
                 if(this.edit === false){
                     // Add 
-                    fetch('api/blog', {
-                        method: 'post',
-                        body: JSON.stringify(this.article),
-                        headers: {
-                            'content-type': 'application/json'
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(res => {
-                        console.log(res);
-                        
-                        // this.resetModal();                        
-                        // alert('Article Added !');
-                        this.getArticles();
-                        // console.log(res);
-                    })
-                    .catch(err => console.log(err));
+                    let vm = this;
+ 
+                    const config = {
+                        headers: { 'content-type': 'multipart/form-data' }
+                    }
+    
+                    let formData = new FormData();
+                    formData.append('image', this.image);
+                    formData.append('title_ar', this.article.title_ar);
+                    formData.append('title_en', this.article.title_en);
+                    formData.append('desc_en', this.article.desc_en);
+                    formData.append('desc_ar', this.article.desc_ar);
+                    formData.append('tag_id', this.article.tag_id);
+    
+                    axios.post('/api/blog', formData, config)
+                        .then(res => {
+                            vm.success = res.success;
+                            // console.log(res);
+                            this.getArticles();
 
-                    // this.getSetTags();
+                        })
+                        .catch(err => console.log(err));
                     
                 }else {
                     // Update
-                    fetch('api/blog', {
-                        method: 'put',
-                        body: JSON.stringify(this.article),
-                        headers: {
-                            'content-type': 'application/json'
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(res => {
-                        // console.log(res);
+                    let vm = this;
+ 
+                    const config = {
+                        headers: { 'content-type': 'multipart/form-data' }
+                    }
+    
+                    let formData = new FormData();
+                    formData.append('image', this.image);
+                    formData.append('title_ar', this.article.title_ar);
+                    formData.append('title_en', this.article.title_en);
+                    formData.append('desc_en', this.article.desc_en);
+                    formData.append('desc_ar', this.article.desc_ar);
+                    // formData.append('type', this.article.type);
+    
+                    axios.put('/api/blog', formData, config)
+                        .then(res => {
+                            vm.success = res.success;
+                            // console.log(res);
+                            this.getArticles();
 
-                        // this.resetModal();                        
-                        // alert('Article Added !');
-                        this.getArticles();
-                        // console.log(res);
-                    })
-                    .catch(err => console.log(err));
+                        })
+                        .catch(err => console.log(err));
+                    
                     this.edit = false;
                 }
                 // this.resetModal();                        
@@ -284,7 +292,6 @@
             selectFile(event) {
                 // `files` is always an array because the file input may be in multiple mode
                 this.image = event.target.files[0];
-                console.log(this.image);
             },
 
             resetModal() {

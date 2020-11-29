@@ -2,6 +2,6 @@
 
 @section('content')
 
-<blog></blog>
+<service></service>
 
 @endsection
