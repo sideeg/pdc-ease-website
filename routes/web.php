@@ -85,3 +85,9 @@ Route::get('/dashboard-tags', [App\Http\Controllers\DashboardController::class, 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/login', 'App\Http\Controllers\Auth\LoginController@showEmployeeLoginForm')->name('login');;
+Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@showEmployeeRegisterForm')->name('register');;
+Route::post('/login', 'App\Http\Controllers\Auth\LoginController@employeeLogin');
+Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@create');
