@@ -19,7 +19,7 @@ class services extends Model
 
     public function tag()
     {
-        return $this->hasMany('App\Models\tags');
+        return $this->hasMany('App\Models\tags','service_id');
     }
 
 }

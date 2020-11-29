@@ -19,7 +19,7 @@ class tags extends Model
 
     public function service()
     {
-        return $this->belongsTo('App\Models\services');
+        return $this->belongsTo('App\Models\services','service_id');
     }
 
 }

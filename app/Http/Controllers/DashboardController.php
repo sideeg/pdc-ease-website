@@ -50,6 +50,11 @@ class DashboardController extends Controller
         return view('admin-layout.pages.service-order');
     }
 
+    public function service()
+    {
+        return view('admin-layout.pages.service');
+    }
+
     public function message()
     {
         return view('admin-layout.pages.message');
