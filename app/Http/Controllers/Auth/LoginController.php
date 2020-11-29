@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 
 
@@ -55,7 +57,12 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+            $user = Auth::user();
+            $token = Str::random(60);
 
+            $request->user()->forceFill([
+                'remember_token' => $token,
+            ])->save();
             return redirect()->intended('/dashboard');
         }
         return back()->withInput($request->only('email', 'remember'));
