@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,29 +21,9 @@ Route::get('locale/{locale}', function ($locale){
     return redirect()->back();
 });
 
-// Route::get('/', function () {
-//     return view('index');
-// });
 
-// Route::get('/blog', function () {
-//     return view('pages.blog');
-// });
 
-// Route::get('/article', function () {
-//     return view('pages.article');
-// });
-
-// Route::get('/service', function () {
-//     return view('pages.service');
-// });
-
-// Route::get('/service_order', function () {
-//     return view('pages.service-order');
-// });
-
-// Route::get('/tag_order', function () {
-//     return view('pages.tag-order');
-// });
+Route::get('/ccache', function() { $exitCode = Artisan::call('config:clear'); $exitCode = Artisan::call('cache:clear'); $exitCode = Artisan::call('config:cache'); return 'DONE';  });
 
 Route::get('/',"App\Http\Controllers\homeController@index")->name('home');
 Route::post('/contact',"App\Http\Controllers\homeController@contactForm")->name('contactForm');

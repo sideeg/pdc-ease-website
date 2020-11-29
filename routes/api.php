@@ -49,6 +49,13 @@ Route::get('/blog','App\Http\Controllers\AdminApi\BlogController@blog');
 Route::put("/blog","App\Http\Controllers\AdminApi\BlogController@blogUpdate");
 Route::get('/blog/{id}','App\Http\Controllers\AdminApi\BlogController@blogById');
 Route::delete("/blog/{id}","App\Http\Controllers\AdminApi\BlogController@blogDelete");
+
+
+Route::post('/clint','App\Http\Controllers\AdminApi\clintController@clintSave');
+Route::get('/clint','App\Http\Controllers\AdminApi\clintController@clint');
+Route::put("/clint","App\Http\Controllers\AdminApi\clintController@clintUpdate");
+Route::get('/clint/{id}','App\Http\Controllers\AdminApi\clintController@clintById');
+Route::delete("/clint/{id}","App\Http\Controllers\AdminApi\clintController@clintDelete");
 // });
 
 Route::get('/order','App\Http\Controllers\AdminApi\OrderController@order');

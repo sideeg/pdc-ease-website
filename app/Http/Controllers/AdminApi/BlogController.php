@@ -36,7 +36,22 @@ class BlogController extends Controller
         }
 
         //create new blog
-        $blog = blogs::create($request->all());
+        // $blog = blogs::create($request->all());
+        $ext= $request->image->extension();
+
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(storage_path('app/public/sliders'), $imageName);
+
+
+        $blog = blogs::create([
+            'title_en' => $request->title_en,
+            'title_ar' => $request->title_ar,
+            'desc_en' => $request->desc_en,
+            'desc_ar' => $request->desc_ar,
+            'image' => $imageName,
+            'tag_id' => $request->tag_id,
+
+        ]);
 
 
 
