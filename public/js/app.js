@@ -2628,6 +2628,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2648,6 +2649,10 @@ __webpack_require__.r(__webpack_exports__);
       tag: {
         id: '',
         title_en: ''
+      },
+      tags_ids: [],
+      tag_id: {
+        id: ''
       },
       service_id: '',
       pagination: {},
@@ -39800,7 +39805,7 @@ var render = function() {
                   _c("div", { staticClass: "media mb-2" }, [
                     _c("img", {
                       staticClass: "img-card mr-md-4",
-                      attrs: { src: article.image, alt: "image" }
+                      attrs: { src: article.image.path, alt: "image" }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "media-body" }, [
@@ -40502,12 +40507,18 @@ var render = function() {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.service.id,
-                                        expression: "service.id"
+                                        value: _vm.tags_ids,
+                                        expression: "tags_ids"
                                       }
                                     ],
                                     staticClass: "form-control",
-                                    attrs: { id: "example-email-input" },
+                                    attrs: {
+                                      id: "example-email-input",
+                                      multiple: ""
+                                    },
+                                    domProps: {
+                                      value: _vm.edit ? _vm.tags : []
+                                    },
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -40521,13 +40532,9 @@ var render = function() {
                                               "_value" in o ? o._value : o.value
                                             return val
                                           })
-                                        _vm.$set(
-                                          _vm.service,
-                                          "id",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
+                                        _vm.tags_ids = $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
                                       }
                                     }
                                   },
@@ -40538,7 +40545,7 @@ var render = function() {
                                         key: tag.id,
                                         domProps: { value: tag.id }
                                       },
-                                      [_vm._v(_vm._s(tag.title_en))]
+                                      [_vm._v(_vm._s(tag.title_en) + " hhhh")]
                                     )
                                   }),
                                   0

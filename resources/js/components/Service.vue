@@ -39,6 +39,7 @@
                                                     <label for="example-email-input" class="col-form-label d-block">Service Image</label>
                                                     <input type="file" v-on:change="onImageChange" class="col-form-label">
                                                 </div>
+                                                <!-- <input type="text" hidden :value="article.edit ? article.created_at : ''"> -->
                                                 
                                                 <div class="border p-3">
                                                     <!-- <h5>Tags:&ThickSpace;</h5> -->
@@ -49,8 +50,8 @@
                                                     </span>
                                                     <div class="form-group mt-3">
                                                         <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
-                                                        <select id="example-email-input" class="form-control" v-model="service.id">
-                                                            <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id">{{tag.title_en}}</option>
+                                                        <select id="example-email-input" class="form-control" v-model="tags_ids" :value="edit ? tags : []" multiple>
+                                                            <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id">{{tag.title_en}} hhhh</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -205,7 +206,10 @@
                     id: '',
                     title_en: '',
                 },
-
+                tags_ids: [],
+                tag_id: {
+                    id:'',
+                },
                 service_id: '',
                 pagination: {},
                 edit: false,
