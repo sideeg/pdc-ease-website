@@ -6,11 +6,13 @@
             <div class="col-lg-10 mt-3 d-flex justify-content-between">
                 <div class="modal fade bd-example-modal-lg">
                     <div class="modal-dialog modal-lg">
+                        <form @submit.prevent="addService" enctype="multipart/form-data">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">New Service</h5>
-                                <button type="button" class="close" data-dismiss="modal"><code>&times;</code></button>
+                                <button type="button" class="close" @click="resetModal()" data-dismiss="modal"><code>&times;</code></button>
                             </div>
+
                             <div class="modal-body">
                                 <div class="row">
                                     <!-- Textual inputs start -->
@@ -35,31 +37,21 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="example-email-input" class="col-form-label d-block">Service Image</label>
-                                                    <input type="file" class="col-form-label">
+                                                    <input type="file" v-on:change="onImageChange" class="col-form-label">
                                                 </div>
                                                 
                                                 <div class="border p-3">
                                                     <!-- <h5>Tags:&ThickSpace;</h5> -->
                                                     <span class="font-italic">
                                                         <b>Tags: &ThickSpace;</b >
-
-                                                        <span class="badge badge-pill badge-info p-1" v-for="tag in service.tags" :key="tag.id" > {{tag.title_en}}</span>
-                                                        <!-- <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                        <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                        <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                        <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                        <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                        <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                        <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                        <span class="badge badge-pill badge-info p-1"> Web Development</span> -->
+                                                        <span class="badge badge-pill badge-info p-1" v-for="tag in tags" :key="tag.id" > {{tag.title_en}}</span>
                                                         
                                                     </span>
                                                     <div class="form-group mt-3">
-                                                        <label for="example-text-input" class="col-form-label">New Tag</label>
-                                                        <div class="container row mx-0 px-0 d-flex justify-content-between">
-                                                            <input class="form-control col-lg-9 col-md-9 col-sm-12 md-mb-2" type="text" id="example-text-input">
-                                                            <button class="col-lg-2 col-md-2 col-sm-4 btn btn-primary py-1 pl-0 pr-2"><i class="ti-plus"></i> Add</button>
-                                                        </div>
+                                                        <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
+                                                        <select id="example-email-input" class="form-control" v-model="service.id">
+                                                            <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id">{{tag.title_en}}</option>
+                                                        </select>
                                                     </div>
                                                 </div>
         
@@ -70,10 +62,11 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-warning mt-4 py-2 px-4" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary mt-4 py-2 px-4">Submit</button>
+                                <button type="button" class="btn btn-warning mt-4 py-2 px-4" @click="resetModal()" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary mt-4 py-2 px-4">Submit</button>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -212,6 +205,7 @@
                     id: '',
                     title_en: '',
                 },
+
                 service_id: '',
                 pagination: {},
                 edit: false,
@@ -293,11 +287,12 @@
                     formData.append('desc_en', this.service.desc_en);
                     formData.append('desc_ar', this.service.desc_ar);
                     // formData.append('type', this.service.type);
-    
+
+                    console.log(formData);
                     axios.post('/api/service', formData, config)
                         .then(res => {
                             vm.success = res.success;
-                            // console.log(res);
+                            console.log(res);
                             this.getServices();
 
                         })
@@ -318,6 +313,7 @@
                     formData.append('desc_en', this.service.desc_en);
                     formData.append('desc_ar', this.service.desc_ar);
                     // formData.append('type', this.service.type);
+                            console.log(formData);
     
                     axios.put('/api/service', formData, config)
                         .then(res => {
@@ -331,6 +327,7 @@
                     this.edit = false;
 
                 }
+
                 // this.resetModal();                        
 
             },
@@ -367,32 +364,10 @@
                 this.image = e.target.files[0];
                 // this.service.type = e.target.files[0].type;
             },
-            // formSubmit(e) {
-            //     e.preventDefault();
-            //     let vm = this;
- 
-            //     const config = {
-            //         headers: { 'content-type': 'multipart/form-data' }
-            //     }
- 
-            //     let formData = new FormData();
-            //     formData.append('image', this.image);
-            //     formData.append('title_ar', this.service.title_ar);
-            //     formData.append('title_en', this.service.title_en);
-            //     formData.append('desc_en', this.service.desc_en);
-            //     formData.append('desc_ar', this.service.desc_ar);
-            //     // formData.append('type', this.service.type);
- 
-            //     axios.post('/api/servicer', formData, config)
-            //         .then(res => {
-            //             vm.success = res.success;
-            //             console.log(res);
-            //         })
-            //         .catch(err => console.log(err));
-            // },
+            
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>

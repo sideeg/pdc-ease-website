@@ -2125,8 +2125,8 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('title_ar', this.article.title_ar);
         formData.append('title_en', this.article.title_en);
         formData.append('desc_en', this.article.desc_en);
-        formData.append('desc_ar', this.article.desc_ar); // formData.append('type', this.article.type);
-
+        formData.append('desc_ar', this.article.desc_ar);
+        formData.append('tag_id', this.article.tag_id);
         axios.post('/api/blog', formData, config).then(function (res) {
           vm.success = res.success; // console.log(res);
 
@@ -2628,13 +2628,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2743,8 +2736,10 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('desc_en', this.service.desc_en);
         formData.append('desc_ar', this.service.desc_ar); // formData.append('type', this.service.type);
 
+        console.log(formData);
         axios.post('/api/service', formData, config).then(function (res) {
-          vm.success = res.success; // console.log(res);
+          vm.success = res.success;
+          console.log(res);
 
           _this4.getServices();
         })["catch"](function (err) {
@@ -2773,6 +2768,7 @@ __webpack_require__.r(__webpack_exports__);
         _formData.append('desc_ar', this.service.desc_ar); // formData.append('type', this.service.type);
 
 
+        console.log(_formData);
         axios.put('/api/service', _formData, _config).then(function (res) {
           _vm.success = res.success; // console.log(res);
 
@@ -2815,30 +2811,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     onImageChange: function onImageChange(e) {
       this.image = e.target.files[0]; // this.service.type = e.target.files[0].type;
-    } // formSubmit(e) {
-    //     e.preventDefault();
-    //     let vm = this;
-    //     const config = {
-    //         headers: { 'content-type': 'multipart/form-data' }
-    //     }
-    //     let formData = new FormData();
-    //     formData.append('image', this.image);
-    //     formData.append('title_ar', this.service.title_ar);
-    //     formData.append('title_en', this.service.title_en);
-    //     formData.append('desc_en', this.service.desc_en);
-    //     formData.append('desc_ar', this.service.desc_ar);
-    //     // formData.append('type', this.service.type);
-    //     axios.post('/api/servicer', formData, config)
-    //         .then(res => {
-    //             vm.success = res.success;
-    //             console.log(res);
-    //         })
-    //         .catch(err => console.log(err));
-    // },
-
+    }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
   }
 });
 
@@ -40313,174 +40288,302 @@ var render = function() {
       [
         _c("div", { staticClass: "modal fade bd-example-modal-lg" }, [
           _c("div", { staticClass: "modal-dialog modal-lg" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12" }, [
-                    _c("div", { staticClass: "card" }, [
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("div", { staticClass: "form-group" }, [
-                          _vm._m(1),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.service.title_ar,
-                                expression: "service.title_ar"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.service.title_ar },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.service,
-                                  "title_ar",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _vm._m(2),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.service.title_en,
-                                expression: "service.title_en"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.service.title_en },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.service,
-                                  "title_en",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _vm._m(3),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.service.desc_ar,
-                                expression: "service.desc_ar"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { cols: "30", rows: "4" },
-                            domProps: { value: _vm.service.desc_ar },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.service,
-                                  "desc_ar",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _vm._m(4),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.service.desc_en,
-                                expression: "service.desc_en"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { cols: "30", rows: "4" },
-                            domProps: { value: _vm.service.desc_en },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.service,
-                                  "desc_en",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(5),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "border p-3" }, [
-                          _c(
-                            "span",
-                            { staticClass: "font-italic" },
-                            [
-                              _c("b", [_vm._v("Tags:   ")]),
+            _c(
+              "form",
+              {
+                attrs: { enctype: "multipart/form-data" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addService($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c("h5", { staticClass: "modal-title" }, [
+                      _vm._v("New Service")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "close",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: {
+                          click: function($event) {
+                            return _vm.resetModal()
+                          }
+                        }
+                      },
+                      [_c("code", [_vm._v("×")])]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-12" }, [
+                        _c("div", { staticClass: "card" }, [
+                          _c("div", { staticClass: "card-body" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _vm._m(0),
                               _vm._v(" "),
-                              _vm._l(_vm.service.tags, function(tag) {
-                                return _c(
-                                  "span",
+                              _c("input", {
+                                directives: [
                                   {
-                                    key: tag.id,
-                                    staticClass:
-                                      "badge badge-pill badge-info p-1"
-                                  },
-                                  [_vm._v(" " + _vm._s(tag.title_en))]
-                                )
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.service.title_ar,
+                                    expression: "service.title_ar"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.service.title_ar },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.service,
+                                      "title_ar",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
                               })
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _vm._m(6)
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _vm._m(1),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.service.title_en,
+                                    expression: "service.title_en"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.service.title_en },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.service,
+                                      "title_en",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _vm._m(2),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.service.desc_ar,
+                                    expression: "service.desc_ar"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { cols: "30", rows: "4" },
+                                domProps: { value: _vm.service.desc_ar },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.service,
+                                      "desc_ar",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _vm._m(3),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.service.desc_en,
+                                    expression: "service.desc_en"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { cols: "30", rows: "4" },
+                                domProps: { value: _vm.service.desc_en },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.service,
+                                      "desc_en",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "col-form-label d-block",
+                                  attrs: { for: "example-email-input" }
+                                },
+                                [_vm._v("Service Image")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "col-form-label",
+                                attrs: { type: "file" },
+                                on: { change: _vm.onImageChange }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "border p-3" }, [
+                              _c(
+                                "span",
+                                { staticClass: "font-italic" },
+                                [
+                                  _c("b", [_vm._v("Tags:   ")]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.tags, function(tag) {
+                                    return _c(
+                                      "span",
+                                      {
+                                        key: tag.id,
+                                        staticClass:
+                                          "badge badge-pill badge-info p-1"
+                                      },
+                                      [_vm._v(" " + _vm._s(tag.title_en))]
+                                    )
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group mt-3" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "col-form-label d-block",
+                                    attrs: { for: "example-email-input" }
+                                  },
+                                  [_vm._v("Article Tag")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.service.id,
+                                        expression: "service.id"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { id: "example-email-input" },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.service,
+                                          "id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  _vm._l(_vm.tags, function(tag) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: tag.id,
+                                        domProps: { value: tag.id }
+                                      },
+                                      [_vm._v(_vm._s(tag.title_en))]
+                                    )
+                                  }),
+                                  0
+                                )
+                              ])
+                            ])
+                          ])
                         ])
                       ])
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning mt-4 py-2 px-4",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: {
+                          click: function($event) {
+                            return _vm.resetModal()
+                          }
+                        }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary mt-4 py-2 px-4",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Submit")]
+                    )
                   ])
                 ])
-              ]),
-              _vm._v(" "),
-              _vm._m(7)
-            ])
+              ]
+            )
           ])
         ])
       ]
     ),
     _vm._v(" "),
-    _vm._m(8),
+    _vm._m(4),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-10 mt-5" }, [
       _c("div", { staticClass: "card" }, [
@@ -40557,13 +40660,13 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(9)
+            _vm._m(5)
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "single-table" }, [
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table table-hover progress-table" }, [
-                _vm._m(10),
+                _vm._m(6),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -40579,7 +40682,7 @@ var render = function() {
                               "d-flex justify-content-center align-items-center"
                           },
                           [
-                            _vm._m(11, true),
+                            _vm._m(7, true),
                             _vm._v(" "),
                             _c("li", { staticClass: "mr-3" }, [
                               _c(
@@ -40636,23 +40739,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("New Service")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_c("code", [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "label",
       { staticClass: "col-form-label", attrs: { for: "example-text-input" } },
@@ -40688,81 +40774,6 @@ var staticRenderFns = [
       { staticClass: "col-form-label", attrs: { for: "example-email-input" } },
       [_vm._v("Service Description "), _c("b", [_vm._v("( en )")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-form-label d-block",
-          attrs: { for: "example-email-input" }
-        },
-        [_vm._v("Service Image")]
-      ),
-      _vm._v(" "),
-      _c("input", { staticClass: "col-form-label", attrs: { type: "file" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group mt-3" }, [
-      _c(
-        "label",
-        { staticClass: "col-form-label", attrs: { for: "example-text-input" } },
-        [_vm._v("New Tag")]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "container row mx-0 px-0 d-flex justify-content-between"
-        },
-        [
-          _c("input", {
-            staticClass: "form-control col-lg-9 col-md-9 col-sm-12 md-mb-2",
-            attrs: { type: "text", id: "example-text-input" }
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass:
-                "col-lg-2 col-md-2 col-sm-4 btn btn-primary py-1 pl-0 pr-2"
-            },
-            [_c("i", { staticClass: "ti-plus" }), _vm._v(" Add")]
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-warning mt-4 py-2 px-4",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary mt-4 py-2 px-4",
-          attrs: { type: "button" }
-        },
-        [_vm._v("Submit")]
-      )
-    ])
   },
   function() {
     var _vm = this

@@ -221,7 +221,7 @@
                     formData.append('title_en', this.article.title_en);
                     formData.append('desc_en', this.article.desc_en);
                     formData.append('desc_ar', this.article.desc_ar);
-                    // formData.append('type', this.article.type);
+                    formData.append('tag_id', this.article.tag_id);
     
                     axios.post('/api/blog', formData, config)
                         .then(res => {
