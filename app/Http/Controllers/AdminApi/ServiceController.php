@@ -142,9 +142,13 @@ class ServiceController extends Controller
          * delete service
          *
          */
-        public function serviceDelete(Request $request,services $service)
+        public function serviceDelete($id)
         {
-            $service->delete($request);
+            $service = services::find($id);
+            if (is_null($service)){
+                return response()->json('service not found',404);
+            }
+            $service->delete();
             return response()->json("done",200);
 
         }

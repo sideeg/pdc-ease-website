@@ -19,10 +19,12 @@ class admin
     public function handle(Request $request, Closure $next)
     {
         $user = User::where('remember_token',$request->remember_token);
+
         if(is_null($user)){
             return redirect(RouteServiceProvider::HOME);
         }else{
-            return $next($request);
+            if ($user->role_id == 1)
+                return $next($request);
         }
 
     }

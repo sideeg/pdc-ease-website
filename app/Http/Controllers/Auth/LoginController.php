@@ -63,7 +63,7 @@ class LoginController extends Controller
             $request->user()->forceFill([
                 'remember_token' => $token,
             ])->save();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/dashboard')->with('token',$token);;
         }
         return back()->withInput($request->only('email', 'remember'));
     }

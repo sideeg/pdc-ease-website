@@ -58,7 +58,7 @@ Route::get('/clint/{id}','App\Http\Controllers\AdminApi\clintController@clintByI
 Route::delete("/clint/{id}","App\Http\Controllers\AdminApi\clintController@clintDelete");
 // });
 
-Route::get('/order','App\Http\Controllers\AdminApi\OrderController@order');
+Route::get('/order','App\Http\Controllers\AdminApi\OrderController@order')->middleware('super_admin_api_auth');
 Route::get('/order-reverse','App\Http\Controllers\AdminApi\OrderController@orderreverse');
 Route::put("/order/{id}","App\Http\Controllers\AdminApi\OrderController@orderUpdate");
 Route::get('/order/{id}','App\Http\Controllers\AdminApi\OrderController@orderById');
