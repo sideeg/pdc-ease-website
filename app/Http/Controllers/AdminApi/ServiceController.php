@@ -33,7 +33,19 @@ class ServiceController extends Controller
         }
 
         //create new service
-        $service = services::create($request->all());
+        // $service = services::create($request->all());
+        $ext= $request->image->extension();
+
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(storage_path('app/public/sliders'), $imageName);
+
+        $service = services::create([
+            'title_en' => $request->title_en,
+            'title_ar' => $request->title_ar,
+            'desc_en' => $request->desc_en,
+            'desc_ar' => $request->desc_ar,
+            'image' => $imageName,
+        ]);
 
          //check if the given tags list is string or not if it is convert it to array
          if (gettype($request->tags) == "string")

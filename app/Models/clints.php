@@ -9,12 +9,12 @@ class clints extends Model
 {
     use HasFactory;
 
-    
+
      /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ["logos","name"
+    protected $fillable = ["logo","name"
     ];
 }

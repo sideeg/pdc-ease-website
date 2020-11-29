@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+
 
 class RegisterController extends Controller
 {
@@ -56,18 +58,28 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function showEmployeeRegisterForm()
+    {
+        return view('auth.register', ['url' => 'employee']);
+    }
+
+
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $this->validator($request->all())->validate();
+        $user =  User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'role_id' => 1,
         ]);
+
+        return redirect()->intended('login');
     }
 }
