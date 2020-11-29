@@ -27,6 +27,7 @@ window.$ = window.jQuery = require('jquery');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 Vue.component('slider', require('./components/Slider.vue').default);
+Vue.component('slider-new', require('./components/SliderNew.vue').default);
 Vue.component('message', require('./components/Message.vue').default);
 Vue.component('service-order', require('./components/ServiceOrder.vue').default);
 Vue.component('blog', require('./components/Blog.vue').default);

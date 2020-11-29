@@ -270,7 +270,7 @@
             },
             // Get and Set Tags
             getSetTags(){
-                fetch('api/tag')
+                fetch('api/tag-names')
                 .then(res => res.json())
                 .then(res => {
                     console.log(res);
