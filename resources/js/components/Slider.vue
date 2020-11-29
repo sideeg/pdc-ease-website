@@ -7,12 +7,16 @@
                         <div class="modal fade bd-example-modal-lg">
                             <div class="modal-dialog modal-lg">
                                 <form @submit.prevent="addSlide" enctype="multipart/form-data">
+                                <!-- <form @submit="formSubmit" enctype="multipart/form-data"> -->
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">Slide</h5>
                                             <button type="button" class="close" data-dismiss="modal" @click="resetModal()"><code>&times;</code></button>
                                         </div>
                                         <div class="modal-body">
+                                            <div v-if="success != ''" class="alert alert-success" role="alert">
+                                                {{success}}
+                                            </div>
                                             <div class="row">
                                                 <!-- Textual inputs start -->
                                                 <div class="col-12">
@@ -37,7 +41,8 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <label for="example-email-input"  class="col-form-label d-block">Video or Image</label>
-                                                                <input type="file" @change="selectFile" class="col-form-label">
+                                                                <!-- <input ref="file" type="file" @change.prevent="selectFile" class="col-form-label"> -->
+                                                                <input type="file" class="col-form-label d-block" v-on:change="onImageChange">
                                                                 <img v-bind:src="slide.sourse" alt="">
                                                             </div>
 
@@ -172,11 +177,12 @@
                     desc_en: '',
                     desc_ar: '',
                     sourse: null,
-                    type: 0,
+                    // type: 0,
                 },
                 slide_id: '',
                 pagination: {},
                 edit: false,
+                success: '',
             }
         },
 
@@ -209,11 +215,7 @@
                     next_page_url : next_page_url,
                     prev_page_url : prev_page_url
                 }
-
                 this.pagination = pagination;
-
-                console.log(this.pagination);
-
 
             },
             // Delete Slide
@@ -235,47 +237,58 @@
             addSlide(){
                 if(this.edit === false){
                     // Add 
-                    fetch('api/slider', {
-                        method: 'post',
-                        body: JSON.stringify(this.slide),
-                        headers: {
-                            'content-type': 'application/json'
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(res => {
-                        // console.log(res);
+                   let vm = this;
+ 
+                    const config = {
+                        headers: { 'content-type': 'multipart/form-data' }
+                    }
+    
+                    let formData = new FormData();
+                    formData.append('image', this.image);
+                    formData.append('title_ar', this.slide.title_ar);
+                    formData.append('title_en', this.slide.title_en);
+                    formData.append('desc_en', this.slide.desc_en);
+                    formData.append('desc_ar', this.slide.desc_ar);
+                    // formData.append('type', this.slide.type);
+    
+                    axios.post('/api/slider', formData, config)
+                        .then(res => {
+                            vm.success = res.success;
+                            // console.log(res);
+                            this.getSlides();
+
+                        })
+                        .catch(err => console.log(err));
                         
-                        // this.resetModal();                        
-                        // alert('Slide Added !');
-                        this.getSlides();
-                        // console.log(res);
-                    })
-                    .catch(err => console.log(err));
-                    
                 }else {
                     // Update
-                    fetch('api/slider', {
-                        method: 'put',
-                        body: JSON.stringify(this.slide),
-                        headers: {
-                            'content-type': 'application/json'
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(res => {
-                        // console.log(res);
+                    let vm = this;
+ 
+                    const config = {
+                        headers: { 'content-type': 'multipart/form-data' }
+                    }
+    
+                    let formData = new FormData();
+                    formData.append('image', this.image);
+                    formData.append('title_ar', this.slide.title_ar);
+                    formData.append('title_en', this.slide.title_en);
+                    formData.append('desc_en', this.slide.desc_en);
+                    formData.append('desc_ar', this.slide.desc_ar);
+                    // formData.append('type', this.slide.type);
+    
+                    axios.put('/api/slider', formData, config)
+                        .then(res => {
+                            vm.success = res.success;
+                            // console.log(res);
+                            this.getSlides();
 
-                        // this.resetModal();                        
-                        // alert('Slide Added !');
-                        this.getSlides();
-                        // console.log(res);
-                    })
-                    .catch(err => console.log(err));
+                        })
+                        .catch(err => console.log(err));
+                        
                     this.edit = false;
 
                 }
-                this.resetModal();                        
+                // this.resetModal();                        
 
             },
             editSlide(slide){
@@ -292,9 +305,26 @@
             },
             // File Handle
             selectFile(event) {
+                event.preventDefault();
                 // `files` is always an array because the file input may be in multiple mode
-                this.sourse = event.target.files[0];
-                console.log(this.sourse);
+                this.slide.sourse = event.target.files[0];
+                console.log(event.target.files)
+                // console.log(this.sourse);
+                // this.slide.sourse = this.sourse
+                // let files = event.target.files || e.dataTransfer.files;
+                // if (!files.length)
+                //     return;
+                // this.createImage(files[0]);
+                // console.log(this.sourse);
+
+            },
+            createImage(file) {
+                let reader = new FileReader();
+                let vm = this;
+                reader.onload = (e) => {
+                    vm.sourse = e.target.result;
+                };
+                reader.readAsDataURL(file);
             },
 
             resetModal() {
@@ -303,7 +333,35 @@
                 this.slide.desc_en = '';
                 this.slide.desc_ar = '';
                 this.slide.sourse = null;
-            }
+            },
+            onImageChange(e){
+                // console.log(e.target.files[0]);
+                this.image = e.target.files[0];
+                // this.slide.type = e.target.files[0].type;
+            },
+            // formSubmit(e) {
+            //     e.preventDefault();
+            //     let vm = this;
+ 
+            //     const config = {
+            //         headers: { 'content-type': 'multipart/form-data' }
+            //     }
+ 
+            //     let formData = new FormData();
+            //     formData.append('image', this.image);
+            //     formData.append('title_ar', this.slide.title_ar);
+            //     formData.append('title_en', this.slide.title_en);
+            //     formData.append('desc_en', this.slide.desc_en);
+            //     formData.append('desc_ar', this.slide.desc_ar);
+            //     // formData.append('type', this.slide.type);
+ 
+            //     axios.post('/api/slider', formData, config)
+            //         .then(res => {
+            //             vm.success = res.success;
+            //             console.log(res);
+            //         })
+            //         .catch(err => console.log(err));
+            // },
         },
         mounted() {
             console.log('Component mounted.')

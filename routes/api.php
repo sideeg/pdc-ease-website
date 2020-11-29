@@ -19,7 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // Route::group(['middleware' => ['role:admin']], function () {
-Route::post('/slider','App\Http\Controllers\AdminApi\SliderController@sliderSave');
+
+// fix for files upload
+// Route::post('/sliders','App\Http\Controllers\AdminApi\SliderController@upload_image');
+Route::post('/slider','App\Http\Controllers\AdminApi\SliderController@storeSlider');
+
+// Route::post('/slider','App\Http\Controllers\AdminApi\SliderController@sliderSave');
 Route::get('/slider','App\Http\Controllers\AdminApi\SliderController@sliders');
 Route::put("slider/","App\Http\Controllers\AdminApi\SliderController@sliderUpdate");
 Route::get('/slider/{id}','App\Http\Controllers\AdminApi\SliderController@sliderById');
