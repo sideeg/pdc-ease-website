@@ -5,6 +5,8 @@
             <!-- <button class="btn btn-rounded btn-primary" data-toggle="modal" data-target=".add-admin-modal"><i class="ti-plus"></i> New Article</button> -->
             <div class="modal fade add-admin-modal">
                 <div class="modal-dialog modal-lg">
+                    <form @submit.prevent="addAdmin" enctype="multipart/form-data">
+
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Admin</h5>
@@ -19,25 +21,24 @@
                                             <!-- <p class="text-muted font-14 mb-3">The <code>*</code> endicates an optional input</p> -->
                                             <div class="form-group">
                                                 <label for="example-text-input" class="col-form-label">Name</label>
-                                                <input class="form-control" type="text" value="" id="example-text-input">
+                                                <input class="form-control" type="text" v-model="admin.name">
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-text-input" class="col-form-label">Email</label>
-                                                <input class="form-control" type="text" value="" id="example-text-input">
+                                                <input class="form-control" type="text" v-model="admin.email">
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-text-input" class="col-form-label">Password</label>
-                                                <input class="form-control" type="Password" value="" id="example-text-input">
+                                                <input class="form-control" type="Password" v-model="admin.password">
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-text-input" class="col-form-label">Confirm Password</label>
-                                                <input class="form-control" type="Password" value="" id="example-text-input">
+                                                <input class="form-control" type="Password" v-model="admin.password">
                                             </div>
                                             <div class="form-group">
                                                 <label for="roles" class="col-form-label">Roles</label>
-                                                <select name="roles" id="roles" class="form-control">
-                                                    <option value="">Content Manager</option>
-                                                    <option value="">Bloger</option>
+                                                <select name="roles" id="roles" class="form-control" v-model='admin.role_id'>
+                                                    <option v-for="role in roles" :key="role.id" v-bind:value="role.id">{{role.role_name}}</option>
                                                 </select>
                                             </div>
                                             
@@ -49,16 +50,17 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-warning mt-4 py-2 px-4" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary mt-4 py-2 px-4">Submit</button>
+                            <button type="submit" class="btn btn-primary mt-4 py-2 px-4">Submit</button>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <!-- Show Service Details Modal -->
+        <!-- Show Role Details Modal -->
         <div class="col-lg-10 mt-3 d-flex justify-content-between">
-            <div class="modal fade show-slide-details-modal">
+            <div class="modal fade show-admin-details-modal">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -94,8 +96,7 @@
                 </div>
             </div>
         </div>
-
-    <!-- End Modal -->
+        <!-- End Modal -->
     
 
         <!-- Progress Table start -->
@@ -107,7 +108,7 @@
                         <nav aria-label="page navigation example">
                             <ul class="pagination">
                                 <li class="page-item" v-bind:class="[{disabled: !pagination.prev_page_url}]" >
-                                    <a href="#" class="page-link" @click="getTags(pagination.prev_page_url)">Previous</a>
+                                    <a href="#" class="page-link" @click="getAdmins(pagination.prev_page_url)">Previous</a>
                                 </li>
 
                                 <li class="page-item disabled">
@@ -117,11 +118,11 @@
                                 </li>
 
                                 <li class="page-item" v-bind:class="[{disabled: !pagination.next_page_url}]">
-                                    <a href="#" class="page-link" @click="getTags(pagination.next_page_url)">Next</a>
+                                    <a href="#" class="page-link" @click="getAdmins(pagination.next_page_url)">Next</a>
                                 </li>
                             </ul>
                         </nav>
-                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" data-toggle="modal" data-target=".add-admin-modal" @click="getSetServices()" ><i class="ti-plus mr-1"></i>New Admin</button>
+                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" data-toggle="modal" data-target=".add-admin-modal" @click="getSetRoles()" ><i class="ti-plus mr-1"></i>New Admin</button>
                         </div>
                     <div class="single-table">
                         <div class="table-responsive">
@@ -137,18 +138,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr v-for="admin in admins" :key="admin.id">
                                         <!-- <th scope="row">1</th> -->
-                                        <td>Mark</td>
-                                        <td>example@example.com</td>
+                                        <td>{{admin.name}}</td>
+                                        <td>{{admin.email}}</td>
                                         <td>
-                                            <span class="badge badge-pill badge-info p-1 my-1"> Content Manger</span>    
+                                            <span class="badge badge-pill badge-info p-1 my-1"> {{admin.role.role_name}}</span>    
                                         </td>
                                         <td class="">
                                             <ul class="d-flex justify-content-center align-items-center">
-                                                <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-service-details-modal"><i class="ti-eye o-icon"></i></a></li>
-                                                <li class="mr-3"><a href="#" @click="editTag(tag)" class="text-secondary" data-toggle="modal" data-target=".add-admin-modal"><i class="ti-pencil o-icon"></i></a></li>
-                                                <li><a href="#" @click="deleteTag(tag.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
+                                                <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-role-details-modal"><i class="ti-eye o-icon"></i></a></li>
+                                                <li class="mr-3"><a href="#" @click="editAdmin(admin)" class="text-secondary" data-toggle="modal" data-target=".add-admin-modal"><i class="ti-pencil o-icon"></i></a></li>
+                                                <li><a href="#" @click="deleteAdmin(admin.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -169,43 +170,45 @@
     export default {
         data() {
             return {
-                slides: [],
-                slide: {
-                    title_en: '',
-                    title_ar: '',
-                    desc_en: '',
-                    desc_ar: '',
-                    sourse: null,
-                    type: 0,
+                admins: [],
+                admin: {
+                    // id: '',
+                    name: '',
+                    email: '',
+                    password: '',
+                    role_id: '',
                 },
-                slide_id: '',
+                roles: [],
+                role: {
+                    id: '',
+                    role_name: '',
+                },
+
+                admin_id: '',
                 pagination: {},
                 edit: false,
-                success: '',
             }
         },
 
         created() {
-            this.getSlides()
+            this.getAdmins()
         },
 
         methods: {
-            getSlides(page_url) {
+            getAdmins(page_url) {
                 let vm = this;
-                page_url = page_url || 'api/slider';
+                page_url = page_url || 'api/user';
                 fetch(page_url)
                 .then(res => res.json())
                 .then(res => {
-                    this.slides = res.data;
+                    this.admins = res.data;
                     vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
                     // console.log(res.data);
-
                 }
                 )
                 .catch(err => console.log(err));
             },
             // Pagination
-
             makePagination(current_page, last_page, next_page_url , prev_page_url) {
 
                 let pagination = {
@@ -214,53 +217,33 @@
                     next_page_url : next_page_url,
                     prev_page_url : prev_page_url
                 }
+
                 this.pagination = pagination;
 
+                console.log(this.pagination);
+
+
             },
-            // Delete Slide
-            deleteSlide(id){
+            // Delete Admin
+            deleteAdmin(id){
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/slider/${id}`, {
+                    fetch(`api/user/${id}`, {
                         method: 'delete'
                     })
                     .then(res => res.json())
                     .then(res => {
-                        alert('Slide Deleted !');
-                        this.getSlides();
+                        alert('Admin Deleted !');
+                        this.getAdmins();
                         // console.log(res);
 
                     });
                 }
             },
-            // Add Slide
-            addSlide(){
+            // Add Admin
+            addAdmin(){
+                console.log(this.admin);
                 if(this.edit === false){
                     // Add 
-                   let vm = this;
- 
-                    const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
-                    }
-    
-                    let formData = new FormData();
-                    formData.append('image', this.image);
-                    formData.append('title_ar', this.slide.title_ar);
-                    formData.append('title_en', this.slide.title_en);
-                    formData.append('desc_en', this.slide.desc_en);
-                    formData.append('desc_ar', this.slide.desc_ar);
-                    // formData.append('type', this.slide.type);
-    
-                    axios.post('/api/slider', formData, config)
-                        .then(res => {
-                            vm.success = res.success;
-                            // console.log(res);
-                            this.getSlides();
-
-                        })
-                        .catch(err => console.log(err));
-                        
-                }else {
-                    // Update
                     let vm = this;
  
                     const config = {
@@ -268,83 +251,77 @@
                     }
     
                     let formData = new FormData();
-                    formData.append('image', this.image);
-                    formData.append('title_ar', this.slide.title_ar);
-                    formData.append('title_en', this.slide.title_en);
-                    formData.append('desc_en', this.slide.desc_en);
-                    formData.append('desc_ar', this.slide.desc_ar);
-                    // formData.append('type', this.slide.type);
+                    formData.append('name', this.admin.name);
+                    formData.append('email', this.admin.email);
+                    formData.append('password', this.admin.password);
+                    formData.append('role_id', this.admin.role_id);
+                   
     
-                    axios.put('/api/slider', formData, config)
+                    axios.post('/api/user', formData, config)
                         .then(res => {
                             vm.success = res.success;
-                            // console.log(res);
-                            this.getSlides();
+                            console.log(res);
+                            this.getAdmins();
 
                         })
                         .catch(err => console.log(err));
-                        
+                    
+                }else {
+                    // Update
+                        // console.log(admin);
+
+                    fetch('api/user', {
+                        method: 'put',
+                        body: JSON.stringify(this.admin),
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(res => {
+                        // console.log(res);
+
+                        // this.resetModal();                        
+                        // alert('Admin Added !');
+                        this.getAdmins();
+                        // console.log(res);
+                    })
+                    .catch(err => console.log(err));
                     this.edit = false;
 
                 }
                 // this.resetModal();                        
 
             },
-            editSlide(slide){
+            editAdmin(admin){
+                // console.log(admin);
                 this.edit = true;
-                this.slide.id = slide.id;
-                this.slide.slide_id = slide.id;
-                this.slide.title_en = slide.title_en;
-                this.slide.title_ar = slide.title_ar;
-                this.slide.desc_en = slide.desc_en;
-                this.slide.desc_ar = slide.desc_ar;
-                this.slide.sourse = slide.sourse;
+                this.admin.id = admin.id;
+                this.admin.admin_id = admin.id;
+                this.admin.name = admin.name;
+                this.admin.email = admin.email;
+                this.role_id = admin.role.role_id;
+                // console.log(this.admin);
 
+                this.getSetRoles()
             },
-            // File Handle
-            createImage(file) {
-                let reader = new FileReader();
-                let vm = this;
-                reader.onload = (e) => {
-                    vm.sourse = e.target.result;
-                };
-                reader.readAsDataURL(file);
+            // Get and Set Roles
+            getSetRoles(){
+                fetch('api/role')
+                .then(res => res.json())
+                .then(res => {
+                    this.roles = res;
+                    // console.log(res);
+                })
+                
             },
-
             resetModal() {
-                this.slide.title_en = '';
-                this.slide.title_ar = '';
-                this.slide.desc_en = '';
-                this.slide.desc_ar = '';
-                this.slide.sourse = null;
-            },
-            onImageChange(e){
-                this.image = e.target.files[0];
-                // this.slide.type = e.target.files[0].type;
-            },
-            // formSubmit(e) {
-            //     e.preventDefault();
-            //     let vm = this;
- 
-            //     const config = {
-            //         headers: { 'content-type': 'multipart/form-data' }
-            //     }
- 
-            //     let formData = new FormData();
-            //     formData.append('image', this.image);
-            //     formData.append('title_ar', this.slide.title_ar);
-            //     formData.append('title_en', this.slide.title_en);
-            //     formData.append('desc_en', this.slide.desc_en);
-            //     formData.append('desc_ar', this.slide.desc_ar);
-            //     // formData.append('type', this.slide.type);
- 
-            //     axios.post('/api/slider', formData, config)
-            //         .then(res => {
-            //             vm.success = res.success;
-            //             console.log(res);
-            //         })
-            //         .catch(err => console.log(err));
-            // },
+                this.admin.name_en = '';
+                this.admin.name_ar = '';
+                this.admin.desc_en = '';
+                this.admin.desc_ar = '';
+                // this.admin.sourse = null;
+            }
         },
         mounted() {
             console.log('Component mounted.')

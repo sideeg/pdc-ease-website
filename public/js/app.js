@@ -2075,37 +2075,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      slides: [],
-      slide: {
-        title_en: '',
-        title_ar: '',
-        desc_en: '',
-        desc_ar: '',
-        sourse: null,
-        type: 0
+      admins: [],
+      admin: {
+        // id: '',
+        name: '',
+        email: '',
+        password: '',
+        role_id: ''
       },
-      slide_id: '',
+      roles: [],
+      role: {
+        id: '',
+        role_name: ''
+      },
+      admin_id: '',
       pagination: {},
-      edit: false,
-      success: ''
+      edit: false
     };
   },
   created: function created() {
-    this.getSlides();
+    this.getAdmins();
   },
   methods: {
-    getSlides: function getSlides(page_url) {
+    getAdmins: function getAdmins(page_url) {
       var _this = this;
 
       var vm = this;
-      page_url = page_url || 'api/slider';
+      page_url = page_url || 'api/user';
       fetch(page_url).then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this.slides = res.data;
+        _this.admins = res.data;
         vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
@@ -2120,27 +2124,30 @@ __webpack_require__.r(__webpack_exports__);
         prev_page_url: prev_page_url
       };
       this.pagination = pagination;
+      console.log(this.pagination);
     },
-    // Delete Slide
-    deleteSlide: function deleteSlide(id) {
+    // Delete Admin
+    deleteAdmin: function deleteAdmin(id) {
       var _this2 = this;
 
       if (confirm('Are You Sure ?')) {
-        fetch("api/slider/".concat(id), {
+        fetch("api/user/".concat(id), {
           method: 'delete'
         }).then(function (res) {
           return res.json();
         }).then(function (res) {
-          alert('Slide Deleted !');
+          alert('Admin Deleted !');
 
-          _this2.getSlides(); // console.log(res);
+          _this2.getAdmins(); // console.log(res);
 
         });
       }
     },
-    // Add Slide
-    addSlide: function addSlide() {
+    // Add Admin
+    addAdmin: function addAdmin() {
       var _this3 = this;
+
+      console.log(this.admin);
 
       if (this.edit === false) {
         // Add 
@@ -2151,46 +2158,35 @@ __webpack_require__.r(__webpack_exports__);
           }
         };
         var formData = new FormData();
-        formData.append('image', this.image);
-        formData.append('title_ar', this.slide.title_ar);
-        formData.append('title_en', this.slide.title_en);
-        formData.append('desc_en', this.slide.desc_en);
-        formData.append('desc_ar', this.slide.desc_ar); // formData.append('type', this.slide.type);
+        formData.append('name', this.admin.name);
+        formData.append('email', this.admin.email);
+        formData.append('password', this.admin.password);
+        formData.append('role_id', this.admin.role_id);
+        axios.post('/api/user', formData, config).then(function (res) {
+          vm.success = res.success;
+          console.log(res);
 
-        axios.post('/api/slider', formData, config).then(function (res) {
-          vm.success = res.success; // console.log(res);
-
-          _this3.getSlides();
+          _this3.getAdmins();
         })["catch"](function (err) {
           return console.log(err);
         });
       } else {
         // Update
-        var _vm = this;
-
-        var _config = {
+        // console.log(admin);
+        fetch('api/user', {
+          method: 'put',
+          body: JSON.stringify(this.admin),
           headers: {
-            'content-type': 'multipart/form-data'
+            'content-type': 'application/json'
           }
-        };
+        }).then(function (res) {
+          return res.json();
+        }).then(function (res) {
+          // console.log(res);
+          // this.resetModal();                        
+          // alert('Admin Added !');
+          _this3.getAdmins(); // console.log(res);
 
-        var _formData = new FormData();
-
-        _formData.append('image', this.image);
-
-        _formData.append('title_ar', this.slide.title_ar);
-
-        _formData.append('title_en', this.slide.title_en);
-
-        _formData.append('desc_en', this.slide.desc_en);
-
-        _formData.append('desc_ar', this.slide.desc_ar); // formData.append('type', this.slide.type);
-
-
-        axios.put('/api/slider', _formData, _config).then(function (res) {
-          _vm.success = res.success; // console.log(res);
-
-          _this3.getSlides();
         })["catch"](function (err) {
           return console.log(err);
         });
@@ -2198,57 +2194,33 @@ __webpack_require__.r(__webpack_exports__);
       } // this.resetModal();                        
 
     },
-    editSlide: function editSlide(slide) {
+    editAdmin: function editAdmin(admin) {
+      // console.log(admin);
       this.edit = true;
-      this.slide.id = slide.id;
-      this.slide.slide_id = slide.id;
-      this.slide.title_en = slide.title_en;
-      this.slide.title_ar = slide.title_ar;
-      this.slide.desc_en = slide.desc_en;
-      this.slide.desc_ar = slide.desc_ar;
-      this.slide.sourse = slide.sourse;
+      this.admin.id = admin.id;
+      this.admin.admin_id = admin.id;
+      this.admin.name = admin.name;
+      this.admin.email = admin.email;
+      this.role_id = admin.role.role_id; // console.log(this.admin);
+
+      this.getSetRoles();
     },
-    // File Handle
-    createImage: function createImage(file) {
-      var reader = new FileReader();
-      var vm = this;
+    // Get and Set Roles
+    getSetRoles: function getSetRoles() {
+      var _this4 = this;
 
-      reader.onload = function (e) {
-        vm.sourse = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
+      fetch('api/role').then(function (res) {
+        return res.json();
+      }).then(function (res) {
+        _this4.roles = res; // console.log(res);
+      });
     },
     resetModal: function resetModal() {
-      this.slide.title_en = '';
-      this.slide.title_ar = '';
-      this.slide.desc_en = '';
-      this.slide.desc_ar = '';
-      this.slide.sourse = null;
-    },
-    onImageChange: function onImageChange(e) {
-      this.image = e.target.files[0]; // this.slide.type = e.target.files[0].type;
-    } // formSubmit(e) {
-    //     e.preventDefault();
-    //     let vm = this;
-    //     const config = {
-    //         headers: { 'content-type': 'multipart/form-data' }
-    //     }
-    //     let formData = new FormData();
-    //     formData.append('image', this.image);
-    //     formData.append('title_ar', this.slide.title_ar);
-    //     formData.append('title_en', this.slide.title_en);
-    //     formData.append('desc_en', this.slide.desc_en);
-    //     formData.append('desc_ar', this.slide.desc_ar);
-    //     // formData.append('type', this.slide.type);
-    //     axios.post('/api/slider', formData, config)
-    //         .then(res => {
-    //             vm.success = res.success;
-    //             console.log(res);
-    //         })
-    //         .catch(err => console.log(err));
-    // },
-
+      this.admin.name_en = '';
+      this.admin.name_ar = '';
+      this.admin.desc_en = '';
+      this.admin.desc_ar = ''; // this.admin.sourse = null;
+    }
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -39783,9 +39755,255 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row justify-content-center" }, [
-    _vm._m(0),
+    _c(
+      "div",
+      { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
+      [
+        _c("div", { staticClass: "modal fade add-admin-modal" }, [
+          _c("div", { staticClass: "modal-dialog modal-lg" }, [
+            _c(
+              "form",
+              {
+                attrs: { enctype: "multipart/form-data" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addAdmin($event)
+                  }
+                }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-12" }, [
+                        _c("div", { staticClass: "card" }, [
+                          _c("div", { staticClass: "card-body" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "col-form-label",
+                                  attrs: { for: "example-text-input" }
+                                },
+                                [_vm._v("Name")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.admin.name,
+                                    expression: "admin.name"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.admin.name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.admin,
+                                      "name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "col-form-label",
+                                  attrs: { for: "example-text-input" }
+                                },
+                                [_vm._v("Email")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.admin.email,
+                                    expression: "admin.email"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "text" },
+                                domProps: { value: _vm.admin.email },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.admin,
+                                      "email",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "col-form-label",
+                                  attrs: { for: "example-text-input" }
+                                },
+                                [_vm._v("Password")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.admin.password,
+                                    expression: "admin.password"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "Password" },
+                                domProps: { value: _vm.admin.password },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.admin,
+                                      "password",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "col-form-label",
+                                  attrs: { for: "example-text-input" }
+                                },
+                                [_vm._v("Confirm Password")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.admin.password,
+                                    expression: "admin.password"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: { type: "Password" },
+                                domProps: { value: _vm.admin.password },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.admin,
+                                      "password",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "col-form-label",
+                                  attrs: { for: "roles" }
+                                },
+                                [_vm._v("Roles")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.admin.role_id,
+                                      expression: "admin.role_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { name: "roles", id: "roles" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.admin,
+                                        "role_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                _vm._l(_vm.roles, function(role) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: role.id,
+                                      domProps: { value: role.id }
+                                    },
+                                    [_vm._v(_vm._s(role.role_name))]
+                                  )
+                                }),
+                                0
+                              )
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ])
+              ]
+            )
+          ])
+        ])
+      ]
+    ),
     _vm._v(" "),
-    _vm._m(1),
+    _vm._m(2),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-10 mt-5" }, [
       _c("div", { staticClass: "card" }, [
@@ -39809,7 +40027,7 @@ var render = function() {
                         attrs: { href: "#" },
                         on: {
                           click: function($event) {
-                            return _vm.getTags(_vm.pagination.prev_page_url)
+                            return _vm.getAdmins(_vm.pagination.prev_page_url)
                           }
                         }
                       },
@@ -39851,7 +40069,7 @@ var render = function() {
                         attrs: { href: "#" },
                         on: {
                           click: function($event) {
-                            return _vm.getTags(_vm.pagination.next_page_url)
+                            return _vm.getAdmins(_vm.pagination.next_page_url)
                           }
                         }
                       },
@@ -39872,7 +40090,7 @@ var render = function() {
                 },
                 on: {
                   click: function($event) {
-                    return _vm.getSetServices()
+                    return _vm.getSetRoles()
                   }
                 }
               },
@@ -39886,66 +40104,79 @@ var render = function() {
                 "table",
                 { staticClass: "table table-hover progress-table " },
                 [
-                  _vm._m(2),
+                  _vm._m(3),
                   _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", [_vm._v("Mark")]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v("example@example.com")]),
-                      _vm._v(" "),
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _c("td", {}, [
-                        _c(
-                          "ul",
-                          {
-                            staticClass:
-                              "d-flex justify-content-center align-items-center"
-                          },
-                          [
-                            _vm._m(4),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "mr-3" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "text-secondary",
-                                  attrs: {
-                                    href: "#",
-                                    "data-toggle": "modal",
-                                    "data-target": ".add-admin-modal"
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.admins, function(admin) {
+                      return _c("tr", { key: admin.id }, [
+                        _c("td", [_vm._v(_vm._s(admin.name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(admin.email))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "badge badge-pill badge-info p-1 my-1"
+                            },
+                            [_vm._v(" " + _vm._s(admin.role.role_name))]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", {}, [
+                          _c(
+                            "ul",
+                            {
+                              staticClass:
+                                "d-flex justify-content-center align-items-center"
+                            },
+                            [
+                              _vm._m(4, true),
+                              _vm._v(" "),
+                              _c("li", { staticClass: "mr-3" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-secondary",
+                                    attrs: {
+                                      href: "#",
+                                      "data-toggle": "modal",
+                                      "data-target": ".add-admin-modal"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editAdmin(admin)
+                                      }
+                                    }
                                   },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.editTag(_vm.tag)
+                                  [_c("i", { staticClass: "ti-pencil o-icon" })]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("li", [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-danger",
+                                    attrs: { href: "#" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteAdmin(admin.id)
+                                      }
                                     }
-                                  }
-                                },
-                                [_c("i", { staticClass: "ti-pencil o-icon" })]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("li", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "text-danger",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.deleteTag(_vm.tag.id)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "ti-trash o-icon" })]
-                              )
-                            ])
-                          ]
-                        )
+                                  },
+                                  [_c("i", { staticClass: "ti-trash o-icon" })]
+                                )
+                              ])
+                            ]
+                          )
+                        ])
                       ])
-                    ])
-                  ])
+                    }),
+                    0
+                  )
                 ]
               )
             ])
@@ -39960,168 +40191,42 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
-      [
-        _c("div", { staticClass: "modal fade add-admin-modal" }, [
-          _c("div", { staticClass: "modal-dialog modal-lg" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [_vm._v("Admin")]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_c("code", [_vm._v("×")])]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12" }, [
-                    _c("div", { staticClass: "card" }, [
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "col-form-label",
-                              attrs: { for: "example-text-input" }
-                            },
-                            [_vm._v("Name")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              value: "",
-                              id: "example-text-input"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "col-form-label",
-                              attrs: { for: "example-text-input" }
-                            },
-                            [_vm._v("Email")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              value: "",
-                              id: "example-text-input"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "col-form-label",
-                              attrs: { for: "example-text-input" }
-                            },
-                            [_vm._v("Password")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "Password",
-                              value: "",
-                              id: "example-text-input"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "col-form-label",
-                              attrs: { for: "example-text-input" }
-                            },
-                            [_vm._v("Confirm Password")]
-                          ),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "Password",
-                              value: "",
-                              id: "example-text-input"
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "col-form-label",
-                              attrs: { for: "roles" }
-                            },
-                            [_vm._v("Roles")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              staticClass: "form-control",
-                              attrs: { name: "roles", id: "roles" }
-                            },
-                            [
-                              _c("option", { attrs: { value: "" } }, [
-                                _vm._v("Content Manager")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "" } }, [
-                                _vm._v("Bloger")
-                              ])
-                            ]
-                          )
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-warning mt-4 py-2 px-4",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary mt-4 py-2 px-4",
-                    attrs: { type: "button" }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Admin")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("code", [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning mt-4 py-2 px-4",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary mt-4 py-2 px-4",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Submit")]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -40131,7 +40236,7 @@ var staticRenderFns = [
       "div",
       { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
       [
-        _c("div", { staticClass: "modal fade show-slide-details-modal" }, [
+        _c("div", { staticClass: "modal fade show-admin-details-modal" }, [
           _c("div", { staticClass: "modal-dialog modal-lg" }, [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
@@ -40219,16 +40324,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("span", { staticClass: "badge badge-pill badge-info p-1 my-1" }, [
-        _vm._v(" Content Manger")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("li", { staticClass: "mr-3" }, [
       _c(
         "a",
@@ -40237,7 +40332,7 @@ var staticRenderFns = [
           attrs: {
             href: "#",
             "data-toggle": "modal",
-            "data-target": ".show-service-details-modal"
+            "data-target": ".show-role-details-modal"
           }
         },
         [_c("i", { staticClass: "ti-eye o-icon" })]
@@ -55523,14 +55618,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!*******************************************!*\
   !*** ./resources/js/components/Admin.vue ***!
   \*******************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Admin_vue_vue_type_template_id_58b78718___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Admin.vue?vue&type=template&id=58b78718& */ "./resources/js/components/Admin.vue?vue&type=template&id=58b78718&");
 /* harmony import */ var _Admin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Admin.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Admin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Admin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -55560,7 +55656,7 @@ component.options.__file = "resources/js/components/Admin.vue"
 /*!********************************************************************!*\
   !*** ./resources/js/components/Admin.vue?vue&type=script&lang=js& ***!
   \********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
