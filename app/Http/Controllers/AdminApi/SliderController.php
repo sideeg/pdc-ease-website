@@ -20,8 +20,13 @@ class SliderController extends Controller
         $type = 0;
         $ext= $request->image->extension();
 
+        $uploads_folder = storage_path('app/public/sliders');
+        if (!file_exists($uploads_folder)) {
+            mkdir($uploads_folder, 0777, true);
+        }
+
         $imageName = time().'.'.$request->image->extension();
-        $request->image->move(storage_path('app/public/sliders'), $imageName);
+        $request->image->move($uploads_folder, $imageName);
 
         // List of Possible Extentions
         $images_list = ["jpeg","bmp","png","jpg"];

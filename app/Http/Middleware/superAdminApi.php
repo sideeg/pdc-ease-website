@@ -17,12 +17,14 @@ class superAdminApi
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = User::where('remember_token',$request->remember_token)->get();
-        //  return response()->json($user);
-        if(is_null($user)){
+        $user = User::where('remember_token',$request->header('remember_token', 'default'))->get();
+        $user = $user->toArray();
+
+        if(is_null($user) || sizeof($user) ==0){
             return response()->json(" plese login first",400);
         }else{
-            if ($user->role_id == 1 )
+            $user = $user[0];
+            if ($user['role_id'] == 1 )
                 return $next($request);
             else
             return response()->json("you don't have premmissin ",400);
