@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models;
 use App\Models\User;
+use App\Notifications\NewMessageNotification;
 
 class homeController extends Controller
 {
@@ -92,7 +93,9 @@ class homeController extends Controller
 
         $order = new Models\orders();
 
-        $order->name = $request->name;
+        $order->name_ar = $request->name_ar;
+        $order->name_en = $request->name_en;
+
         $order->email = $request->email;
         $order->phone = $request->phone;
 
@@ -119,7 +122,7 @@ class homeController extends Controller
 
         $users = User::where('role_id','1')->get();
         foreach($users as $user)
-            $user->notify(new InvoicePaid("new order service need to check"));
+            $user->notify(new NewMessageNotification($order));
         $code = 1;
         return redirect('/')->with('code',$code);
 

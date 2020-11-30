@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -77,7 +79,7 @@ class UserController extends Controller
         $User = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'role_id' => $request->role_id,
         ]);
 
