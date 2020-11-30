@@ -24,7 +24,7 @@ class CreateRolesTable extends Migration
         DB::table('roles')->insert(
             array(
                 array("id"=>'1',"role_name"=>"super-admin" , "created_at" => $mytime->toDateTimeString()),
-                array("id"=>'2',"role_name"=>"admin" , "created_at" => $mytime->toDateTimeString()),
+                array("id"=>'2',"role_name"=>"content mannger" , "created_at" => $mytime->toDateTimeString()),
                 array("id"=>'3',"role_name"=>"bloger supervisor" , "created_at" => $mytime->toDateTimeString()),
             )
         );
