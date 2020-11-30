@@ -147,7 +147,7 @@
                                         </td>
                                         <td class="">
                                             <ul class="d-flex justify-content-center align-items-center">
-                                                <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-role-details-modal"><i class="ti-eye o-icon"></i></a></li>
+                                                <!-- <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-role-details-modal"><i class="ti-eye o-icon"></i></a></li> -->
                                                 <li class="mr-3"><a href="#" @click="editAdmin(admin)" class="text-secondary" data-toggle="modal" data-target=".add-admin-modal"><i class="ti-pencil o-icon"></i></a></li>
                                                 <li><a href="#" @click="deleteAdmin(admin.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
                                             </ul>

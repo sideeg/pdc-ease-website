@@ -40133,8 +40133,6 @@ var render = function() {
                                 "d-flex justify-content-center align-items-center"
                             },
                             [
-                              _vm._m(4, true),
-                              _vm._v(" "),
                               _c("li", { staticClass: "mr-3" }, [
                                 _c(
                                   "a",
@@ -40318,25 +40316,6 @@ var staticRenderFns = [
           _vm._v("Actions")
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "mr-3" }, [
-      _c(
-        "a",
-        {
-          staticClass: "text-primary",
-          attrs: {
-            href: "#",
-            "data-toggle": "modal",
-            "data-target": ".show-role-details-modal"
-          }
-        },
-        [_c("i", { staticClass: "ti-eye o-icon" })]
-      )
     ])
   }
 ]
