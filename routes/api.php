@@ -22,13 +22,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 /******************************** super Admin access *************************************** */
-Route::group(['middleware' => 'super_admin_api_auth'], function () {
+// Route::group(['middleware' => 'super_admin_api_auth'], function () {
 
-Route::post('/User','App\Http\Controllers\AdminApi\UserController@UserSave');
-Route::get('/User','App\Http\Controllers\AdminApi\UserController@Users');
-Route::put("/User","App\Http\Controllers\AdminApi\UserController@UserUpdate");
-Route::get('/User/{id}','App\Http\Controllers\AdminApi\UserController@UserById');
-Route::delete("/User/{id}","App\Http\Controllers\AdminApi\UserController@UserDelete");
+Route::post('/user','App\Http\Controllers\AdminApi\UserController@UserSave');
+Route::get('/user','App\Http\Controllers\AdminApi\UserController@Users');
+Route::put("/user","App\Http\Controllers\AdminApi\UserController@UserUpdate");
+Route::get('/user/{id}','App\Http\Controllers\AdminApi\UserController@UserById');
+Route::delete("/user/{id}","App\Http\Controllers\AdminApi\UserController@UserDelete");
 
 Route::get('/order','App\Http\Controllers\AdminApi\OrderController@order')->middleware('super_admin_api_auth');
 Route::get('/order-reverse','App\Http\Controllers\AdminApi\OrderController@orderreverse');
@@ -48,7 +48,8 @@ Route::get('/role','App\Http\Controllers\AdminApi\roleController@roles');
 Route::get('/role/{id}','App\Http\Controllers\AdminApi\roleController@roleById');
 Route::delete("/role/{id}","App\Http\Controllers\AdminApi\roleController@roleDelete");
 
-});/*********************************** end super admin access ******************************************** */
+// });
+/*********************************** end super admin access ******************************************** */
 
 /************************************** blogger access *****************************************************/
 Route::group(['middleware' => 'bloger_api_auth'], function () {
