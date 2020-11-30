@@ -17,7 +17,7 @@ class UserController extends Controller
 
         public function Users(Request $request){
 
-            return response()->json(User::paginate(9),200);
+            return response()->json(User::with('role')->paginate(9),200);
             // return json_encode(User::paginate(9));
         }
 
@@ -28,7 +28,7 @@ class UserController extends Controller
          */
         public function UserById($id)
         {
-            $User = User::find($id);
+            $User = User::with('role')->find($id);
             if (is_null($User)){
                 return response()->json('User not found',404);
             }
