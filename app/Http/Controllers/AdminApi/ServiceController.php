@@ -138,7 +138,31 @@ class ServiceController extends Controller
 
             }
 
-            $service->update($request->all());
+            if(!is_null($request->image)){
+                $uploads_folder = storage_path('app/public/services');
+                if (!file_exists($uploads_folder)) {
+                     mkdir($uploads_folder, 0777, true);
+                }
+
+                 $ext= $request->image->extension();
+
+                $imageName = time().'.'.$request->image->extension();
+                $request->image->move($uploads_folder, $imageName);
+
+                $service->image = $imageName;
+
+            }
+
+            if (!is_null($request->title_en))
+                $service->title_en = $request->title_en;
+            if (!is_null($request->title_ar))
+                $service->title_ar = $request->title_ar;
+            if (!is_null($request->desc_en))
+                $service->desc_en = $request->desc_en;
+            if (!is_null($request->desc_ar))
+                $service->desc_ar = $request->desc_ar;
+
+            // $service->update($request->all());
             $service->save();
             return response()->json($service,200);
         }
