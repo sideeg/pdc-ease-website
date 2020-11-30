@@ -43,6 +43,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
         ],
     ];
 
@@ -55,6 +56,11 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
+
+        'super_admin_auth' => \App\Http\Middleware\superadmin::class,
+        'admin_auth' => \App\Http\Middleware\admin::class,
+        'bloger_auth' => \App\Http\Middleware\bloger::class,
+
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
@@ -66,5 +72,8 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
     'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
     'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+    'super_admin_api_auth' => \App\Http\Middleware\superAdminApi::class,
+            'admin_api_auth' => \App\Http\Middleware\adminApi::class,
+            'bloger_api_auth' => \App\Http\Middleware\bloggerApi::class,
     ];
 }

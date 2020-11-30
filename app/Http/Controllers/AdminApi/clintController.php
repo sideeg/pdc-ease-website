@@ -29,10 +29,15 @@ class clintController extends Controller
         //create new clint
         // $clint = clints::create($request->all());
 
+        $uploads_folder = storage_path('app/public/clints');
+        if (!file_exists($uploads_folder)) {
+            mkdir($uploads_folder, 0777, true);
+        }
+
         $ext= $request->logo->extension();
 
         $imageName = time().'.'.$request->logo->extension();
-        $request->logo->move(storage_path('app/public/sliders'), $imageName);
+        $request->logo->move($uploads_folder, $imageName);
 
 
         $clint = clints::create([
@@ -59,9 +64,27 @@ class clintController extends Controller
                 return response()->json('clint not found',404);
             }
 
+            if(!is_null($request->logo)){
+                $uploads_folder = storage_path('app/public/clints');
+                if (!file_exists($uploads_folder)) {
+                     mkdir($uploads_folder, 0777, true);
+                }
+
+                 $ext= $request->logo->extension();
+
+                $logoName = time().'.'.$request->logo->extension();
+                $request->logo->move($uploads_folder, $logoName);
+
+                $clint->logo = $logoName;
+
+            }
+
+            if (!is_null($request->name))
+                $clint->name = $request->name;
 
 
-            $clint->update($request->all());
+
+            // $clint->update($request->all());
             $clint->save();
             return response()->json($clint,200);
         }

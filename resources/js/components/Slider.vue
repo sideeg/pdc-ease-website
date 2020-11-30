@@ -160,24 +160,22 @@
                     </div>
                 </div>
             </div>
-            <!-- Progress Table end -->
+        <!-- Progress Table end -->
     </div>
 </template>
 
 <script>
-    // import 'axios' from axios;
     export default {
         data() {
             return {
                 slides: [],
                 slide: {
-                    // id: '',
                     title_en: '',
                     title_ar: '',
                     desc_en: '',
                     desc_ar: '',
                     sourse: null,
-                    // type: 0,
+                    type: 0,
                 },
                 slide_id: '',
                 pagination: {},
@@ -301,23 +299,8 @@
                 this.slide.desc_ar = slide.desc_ar;
                 this.slide.sourse = slide.sourse;
 
-
             },
             // File Handle
-            selectFile(event) {
-                event.preventDefault();
-                // `files` is always an array because the file input may be in multiple mode
-                this.slide.sourse = event.target.files[0];
-                console.log(event.target.files)
-                // console.log(this.sourse);
-                // this.slide.sourse = this.sourse
-                // let files = event.target.files || e.dataTransfer.files;
-                // if (!files.length)
-                //     return;
-                // this.createImage(files[0]);
-                // console.log(this.sourse);
-
-            },
             createImage(file) {
                 let reader = new FileReader();
                 let vm = this;
@@ -335,7 +318,6 @@
                 this.slide.sourse = null;
             },
             onImageChange(e){
-                // console.log(e.target.files[0]);
                 this.image = e.target.files[0];
                 // this.slide.type = e.target.files[0].type;
             },

@@ -9,6 +9,7 @@ class blogs extends Model
 {
     use HasFactory;
 
+
      /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +27,7 @@ class blogs extends Model
 
     public function getImageFullPathAttribute()
 	{
-		return isset($this->attributes['image']) ?  '/images/' . $this->attributes['image'] : null;
+		return isset($this->attributes['image']) ?  '/app/public/blogs/' . $this->attributes['image'] : null;
     }
 
 

@@ -20,8 +20,13 @@ class SliderController extends Controller
         $type = 0;
         $ext= $request->image->extension();
 
+        $uploads_folder = storage_path('app/public/sliders');
+        if (!file_exists($uploads_folder)) {
+            mkdir($uploads_folder, 0777, true);
+        }
+
         $imageName = time().'.'.$request->image->extension();
-        $request->image->move(storage_path('app/public/sliders'), $imageName);
+        $request->image->move($uploads_folder, $imageName);
 
         // List of Possible Extentions
         $images_list = ["jpeg","bmp","png","jpg"];
@@ -87,7 +92,47 @@ class SliderController extends Controller
     {
         // dd($request->id);
         $slider = slide_bar::find($request->id);
-        $slider->update($request->all());
+
+        if(!is_null($request->sourse)){
+            $uploads_folder = storage_path('app/public/slider');
+            if (!file_exists($uploads_folder)) {
+                 mkdir($uploads_folder, 0777, true);
+            }
+
+             $ext= $request->sourse->extension();
+
+            $sourseName = time().'.'.$request->sourse->extension();
+            $request->sourse->move($uploads_folder, $sourseName);
+
+            $slider->sourse = $sourseName;
+
+             // List of Possible Extentions
+            $images_list = ["jpeg","bmp","png","jpg"];
+            $videos_list = ["avi","wmv","flv","gif","asf","m4v","mp4","m4p"];
+
+            //check the source to detect is it image or video
+            if (in_array ($ext, $images_list)){
+                $type = 0 ;// type is image
+             } else if (in_array ($ext, $videos_list)){
+                $type = 1 ;// type is video
+            }
+
+
+        }
+
+        if (!is_null($request->title_en))
+            $slider->title_en = $request->title_en;
+        if (!is_null($request->title_ar))
+            $slider->title_ar = $request->title_ar;
+        if (!is_null($request->desc_en))
+            $slider->desc_en = $request->desc_en;
+        if (!is_null($request->desc_ar))
+            $slider->desc_ar = $request->desc_ar;
+
+
+
+
+        // $slider->update($request->all());
         $slider->save();
         return response()->json($slider,200);
     }

@@ -34,10 +34,15 @@ class ServiceController extends Controller
 
         //create new service
         // $service = services::create($request->all());
+        $uploads_folder = storage_path('app/public/services');
+        if (!file_exists($uploads_folder)) {
+            mkdir($uploads_folder, 0777, true);
+        }
+
         $ext= $request->image->extension();
 
         $imageName = time().'.'.$request->image->extension();
-        $request->image->move(storage_path('app/public/sliders'), $imageName);
+        $request->image->move($uploads_folder, $imageName);
 
         $service = services::create([
             'title_en' => $request->title_en,
@@ -116,22 +121,48 @@ class ServiceController extends Controller
                 return response()->json('service not found',404);
             }
 
-            //check if the given tags list is string or not if it is convert it to array
-            if (gettype($request->tags) == "string")
-                $tags_list = explode(',', substr($request->tags,1,-1));
-            else
-                $tags_list = $request->tags;
+            if($request->tags != null){
+                //check if the given tags list is string or not if it is convert it to array
+                if (gettype($request->tags) == "string")
+                    $tags_list = explode(',', substr($request->tags,1,-1));
+                else
+                    $tags_list = $request->tags;
 
-            // var_dump($fruits_ar);
-            //add the new tags to this new service as the user done
-            for ($i =0;$i<sizeof($tags_list);$i++){
-                $tag = tags::find($tags_list[$i]);
-                $tag->service_id = $service->id;
-                $tag->save();
+                // var_dump($fruits_ar);
+                //add the new tags to this new service as the user done
+                for ($i =0;$i<sizeof($tags_list);$i++){
+                    $tag = tags::find($tags_list[$i]);
+                    $tag->service_id = $service->id;
+                    $tag->save();
+                }
+
             }
 
+            if(!is_null($request->image)){
+                $uploads_folder = storage_path('app/public/services');
+                if (!file_exists($uploads_folder)) {
+                     mkdir($uploads_folder, 0777, true);
+                }
 
-            $service->update($request->all());
+                 $ext= $request->image->extension();
+
+                $imageName = time().'.'.$request->image->extension();
+                $request->image->move($uploads_folder, $imageName);
+
+                $service->image = $imageName;
+
+            }
+
+            if (!is_null($request->title_en))
+                $service->title_en = $request->title_en;
+            if (!is_null($request->title_ar))
+                $service->title_ar = $request->title_ar;
+            if (!is_null($request->desc_en))
+                $service->desc_en = $request->desc_en;
+            if (!is_null($request->desc_ar))
+                $service->desc_ar = $request->desc_ar;
+
+            // $service->update($request->all());
             $service->save();
             return response()->json($service,200);
         }
@@ -140,9 +171,13 @@ class ServiceController extends Controller
          * delete service
          *
          */
-        public function serviceDelete(Request $request,services $service)
+        public function serviceDelete($id)
         {
-            $service->delete($request);
+            $service = services::find($id);
+            if (is_null($service)){
+                return response()->json('service not found',404);
+            }
+            $service->delete();
             return response()->json("done",200);
 
         }

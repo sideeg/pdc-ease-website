@@ -50,6 +50,11 @@ class DashboardController extends Controller
         return view('admin-layout.pages.service-order');
     }
 
+    public function service()
+    {
+        return view('admin-layout.pages.service');
+    }
+
     public function message()
     {
         return view('admin-layout.pages.message');
@@ -58,6 +63,11 @@ class DashboardController extends Controller
     public function tag()
     {
         return view('admin-layout.pages.tag');
+    }
+
+    public function admin()
+    {
+        return view('admin-layout.pages.admin');
     }
 
 

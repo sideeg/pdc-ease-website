@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
-use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class admin
+class adminApi
 {
     /**
      * Handle an incoming request.
@@ -21,6 +20,7 @@ class admin
         $user = User::where('remember_token',$request->remember_token);
         $user = $user->toArray();
 
+
         if(is_null($user) || sizeof($user) ==0){
             return response()->json(" plese login first",401);
         }else{
@@ -30,7 +30,5 @@ class admin
             else
             return response()->json("you don't have premmissin ",401);
         }
-        }
-
     }
-
+}

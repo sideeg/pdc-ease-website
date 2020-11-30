@@ -30,8 +30,12 @@ Vue.component('slider', require('./components/Slider.vue').default);
 Vue.component('slider-new', require('./components/SliderNew.vue').default);
 Vue.component('message', require('./components/Message.vue').default);
 Vue.component('service-order', require('./components/ServiceOrder.vue').default);
+Vue.component('service', require('./components/Service.vue').default);
 Vue.component('blog', require('./components/Blog.vue').default);
 Vue.component('tag', require('./components/Tag.vue').default);
+
+Vue.component('admin', require('./components/Admin.vue').default);
+
 
 
 

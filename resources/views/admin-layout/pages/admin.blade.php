@@ -2,6 +2,6 @@
 
 @section('content')
 
-<blog></blog>
+<admin></admin>
 
 @endsection

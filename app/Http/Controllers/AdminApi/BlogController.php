@@ -37,10 +37,14 @@ class BlogController extends Controller
 
         //create new blog
         // $blog = blogs::create($request->all());
+        $uploads_folder = storage_path('app/public/blogs');
+        if (!file_exists($uploads_folder)) {
+            mkdir($uploads_folder, 0777, true);
+        }
         $ext= $request->image->extension();
 
         $imageName = time().'.'.$request->image->extension();
-        $request->image->move(storage_path('app/public/sliders'), $imageName);
+        $request->image->move($uploads_folder, $imageName);
 
 
         $blog = blogs::create([
@@ -74,8 +78,34 @@ class BlogController extends Controller
             }
 
 
+            if(!is_null($request->image)){
+                $uploads_folder = storage_path('app/public/blogs');
+                if (!file_exists($uploads_folder)) {
+                     mkdir($uploads_folder, 0777, true);
+                }
 
-            $blog->update($request->all());
+                 $ext= $request->image->extension();
+
+                $imageName = time().'.'.$request->image->extension();
+                $request->image->move($uploads_folder, $imageName);
+
+                $blog->image = $imageName;
+
+            }
+
+            if (!is_null($request->title_en))
+                $blog->title_en = $request->title_en;
+            if (!is_null($request->title_ar))
+                $blog->title_ar = $request->title_ar;
+            if (!is_null($request->desc_en))
+                $blog->desc_en = $request->desc_en;
+            if (!is_null($request->desc_ar))
+                $blog->desc_ar = $request->desc_ar;
+            if (!is_null($request->tag_id))
+                $blog->tag_id = $request->tag_id;
+
+
+            // $blog->update($request->all());
             $blog->save();
             return response()->json($blog,200);
         }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 
-class admin
+class bloggerApi
 {
     /**
      * Handle an incoming request.
@@ -18,6 +17,7 @@ class admin
      */
     public function handle(Request $request, Closure $next)
     {
+
         $user = User::where('remember_token',$request->remember_token);
         $user = $user->toArray();
 
@@ -25,12 +25,10 @@ class admin
             return response()->json(" plese login first",401);
         }else{
             $user = $user[0];
-            if ($user['role_id'] == 1 || $user['role_id'] == 2)
+            if ($user['role_id'] == 1 || $user['role_id'] == 3)
                 return $next($request);
             else
             return response()->json("you don't have premmissin ",401);
         }
-        }
-
     }
-
+}
