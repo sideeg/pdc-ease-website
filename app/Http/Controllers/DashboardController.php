@@ -65,6 +65,11 @@ class DashboardController extends Controller
         return view('admin-layout.pages.tag');
     }
 
+    public function admin()
+    {
+        return view('admin-layout.pages.admin');
+    }
+
 
     public function sliderSave(Request $request)
     {

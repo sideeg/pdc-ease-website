@@ -107,7 +107,8 @@
                                     <span class="badge badge-pill badge-info p-1"> {{article.tag.name_en}}</span>
                                 </span> 
                                 <span class="col-lg-3 col-sm-6 font-italic">
-                                    <b>Date:&ThickSpace; </b> {{article.created_at }}
+                                    <b>Date:&ThickSpace; </b> ${{article.created_at }}
+                                    <!-- {{Carbon:parse(article->created_at)->format('M  d,yy') }} -->
                                 </span>
                             </div>
                             <p>{{article.desc_en}}</p>

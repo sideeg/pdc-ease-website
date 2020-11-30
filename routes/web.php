@@ -60,6 +60,9 @@ Route::get('/dashboard-blog', [App\Http\Controllers\DashboardController::class, 
 
 Route::get('/dashboard-tags', [App\Http\Controllers\DashboardController::class, 'tag'])->name('tag');
 
+Route::get('/dashboard-admin', [App\Http\Controllers\DashboardController::class, 'admin'])->name('admin');
+
+
 Route::post('/dashboard-saveSlider', [App\Http\Controllers\DashboardController::class, 'sliderSave'])->name('sliderSave');
 
 

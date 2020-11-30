@@ -34,10 +34,15 @@ class ServiceController extends Controller
 
         //create new service
         // $service = services::create($request->all());
+        $uploads_folder = storage_path('app/public/services');
+        if (!file_exists($uploads_folder)) {
+            mkdir($uploads_folder, 0777, true);
+        }
+
         $ext= $request->image->extension();
 
         $imageName = time().'.'.$request->image->extension();
-        $request->image->move(storage_path('app/public/sliders'), $imageName);
+        $request->image->move($uploads_folder, $imageName);
 
         $service = services::create([
             'title_en' => $request->title_en,

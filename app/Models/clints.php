@@ -17,4 +17,13 @@ class clints extends Model
      */
     protected $fillable = ["logo","name"
     ];
+
+    protected $appends = ['logo_full_path'];
+
+    public function getLogoFullPathAttribute()
+	{
+		return isset($this->attributes['logo']) ?  '/app/public/clints/' . $this->attributes['logo'] : null;
+    }
+
+
 }

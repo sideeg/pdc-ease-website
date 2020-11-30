@@ -34,6 +34,9 @@ Vue.component('service', require('./components/Service.vue').default);
 Vue.component('blog', require('./components/Blog.vue').default);
 Vue.component('tag', require('./components/Tag.vue').default);
 
+Vue.component('admin', require('./components/Admin.vue').default);
+
+
 
 
 
