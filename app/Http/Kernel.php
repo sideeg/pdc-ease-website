@@ -43,9 +43,9 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            'super_admin_api_auth' => \App\Http\Middleware\superAdminApi::class,
-            'admin_api_auth' => \App\Http\Middleware\adminApi::class,
-            'bloger_api_auth' => \App\Http\Middleware\bloggerApi::class,
+            // 'super_admin_api_auth' => \App\Http\Middleware\superAdminApi::class,
+            // 'admin_api_auth' => \App\Http\Middleware\adminApi::class,
+            // 'bloger_api_auth' => \App\Http\Middleware\bloggerApi::class,
 
         ],
     ];

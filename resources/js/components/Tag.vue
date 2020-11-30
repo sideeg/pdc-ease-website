@@ -288,7 +288,7 @@
 
             },
             editTag(tag){
-                console.log(tag);
+                // console.log(tag);
                 this.edit = true;
                 this.tag.id = tag.id;
                 this.tag.tag_id = tag.id;

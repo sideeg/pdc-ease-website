@@ -98,7 +98,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="media mb-2">
-                        <img class="img-card mr-md-4" :src="article.image.path" alt="image">
+                        <img class="img-card mr-md-4" :src="article.image" alt="image">
                         <div class="media-body">
                             <h4 class="mb-2 md-mt-2">{{article.title_en}}</h4>
                             <div class="row mb-3">
@@ -167,7 +167,7 @@
                 .then(res => {
                     this.articles = res.data;
                     vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
-                    // console.log(res.data);
+                    console.log(res.data);
 
                 }
                 )

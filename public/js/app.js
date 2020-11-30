@@ -2075,7 +2075,8 @@ __webpack_require__.r(__webpack_exports__);
         return res.json();
       }).then(function (res) {
         _this.articles = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url);
+        console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2674,6 +2675,7 @@ __webpack_require__.r(__webpack_exports__);
         return res.json();
       }).then(function (res) {
         _this.services = res.data;
+        console.log(_this.services);
         vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url);
       })["catch"](function (err) {
         return console.log(err);
@@ -2683,12 +2685,12 @@ __webpack_require__.r(__webpack_exports__);
     getSetTags: function getSetTags() {
       var _this2 = this;
 
+      // console.log('getsettags');
       var vm = this;
       fetch('api/tag').then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this2.services.tags = res.data;
-        console.log(_this2.services.tags);
+        _this2.tags = res.data; // console.log(this.tags);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2743,8 +2745,7 @@ __webpack_require__.r(__webpack_exports__);
 
         console.log(formData);
         axios.post('/api/service', formData, config).then(function (res) {
-          vm.success = res.success;
-          console.log(res);
+          vm.success = res.success; // console.log(res);
 
           _this4.getServices();
         })["catch"](function (err) {
@@ -2786,6 +2787,7 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     editService: function editService(service) {
+      console.log(service.tags);
       this.getSetTags();
       this.edit = true;
       this.service.id = service.id;
@@ -2794,7 +2796,9 @@ __webpack_require__.r(__webpack_exports__);
       this.service.title_ar = service.title_ar;
       this.service.desc_en = service.desc_en;
       this.service.desc_ar = service.desc_ar;
-      this.service.image = service.image;
+      this.service.image = service.image; // service tags
+
+      this.service.tags = service.tag;
     },
     // File Handle
     createImage: function createImage(file) {
@@ -3794,7 +3798,7 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     editTag: function editTag(tag) {
-      console.log(tag);
+      // console.log(tag);
       this.edit = true;
       this.tag.id = tag.id;
       this.tag.tag_id = tag.id;
@@ -39805,7 +39809,7 @@ var render = function() {
                   _c("div", { staticClass: "media mb-2" }, [
                     _c("img", {
                       staticClass: "img-card mr-md-4",
-                      attrs: { src: article.image.path, alt: "image" }
+                      attrs: { src: article.image, alt: "image" }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "media-body" }, [
@@ -40475,7 +40479,7 @@ var render = function() {
                                 [
                                   _c("b", [_vm._v("Tags:   ")]),
                                   _vm._v(" "),
-                                  _vm._l(_vm.tags, function(tag) {
+                                  _vm._l(_vm.service.tags, function(tag) {
                                     return _c(
                                       "span",
                                       {
@@ -40503,42 +40507,13 @@ var render = function() {
                                 _c(
                                   "select",
                                   {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.tags_ids,
-                                        expression: "tags_ids"
-                                      }
-                                    ],
                                     staticClass: "form-control",
                                     attrs: {
                                       id: "example-email-input",
                                       multiple: ""
-                                    },
-                                    domProps: {
-                                      value: _vm.edit ? _vm.tags : []
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.tags_ids = $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      }
                                     }
                                   },
-                                  _vm._l(_vm.tags, function(tag) {
+                                  _vm._l(_vm.service.tags, function(tag) {
                                     return _c(
                                       "option",
                                       {
@@ -40667,13 +40642,28 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(5)
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": ".bd-example-modal-lg"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.getSetTags()
+                  }
+                }
+              },
+              [_c("i", { staticClass: "ti-plus mr-1" }), _vm._v(" New Service")]
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "single-table" }, [
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table table-hover progress-table" }, [
-                _vm._m(6),
+                _vm._m(5),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -40689,7 +40679,7 @@ var render = function() {
                               "d-flex justify-content-center align-items-center"
                           },
                           [
-                            _vm._m(7, true),
+                            _vm._m(6, true),
                             _vm._v(" "),
                             _c("li", { staticClass: "mr-3" }, [
                               _c(
@@ -40909,19 +40899,6 @@ var staticRenderFns = [
           ])
         ])
       ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3",
-        attrs: { "data-toggle": "modal", "data-target": ".bd-example-modal-lg" }
-      },
-      [_c("i", { staticClass: "ti-plus mr-1" }), _vm._v(" New Service")]
     )
   },
   function() {

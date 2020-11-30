@@ -45,13 +45,13 @@
                                                     <!-- <h5>Tags:&ThickSpace;</h5> -->
                                                     <span class="font-italic">
                                                         <b>Tags: &ThickSpace;</b >
-                                                        <span class="badge badge-pill badge-info p-1" v-for="tag in tags" :key="tag.id" > {{tag.title_en}}</span>
+                                                        <span class="badge badge-pill badge-info p-1" v-for="tag in service.tags" :key="tag.id" > {{tag.title_en}}</span>
                                                         
                                                     </span>
                                                     <div class="form-group mt-3">
                                                         <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
-                                                        <select id="example-email-input" class="form-control" v-model="tags_ids" :value="edit ? tags : []" multiple>
-                                                            <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id">{{tag.title_en}} hhhh</option>
+                                                        <select id="example-email-input" class="form-control" multiple>
+                                                            <option v-for="tag in service.tags" :key="tag.id" v-bind:value="tag.id">{{tag.title_en}} hhhh</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -145,7 +145,7 @@
                                 </li>
                             </ul>
                         </nav>
-                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="ti-plus mr-1"></i> New Service</button>
+                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" @click="getSetTags()" data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="ti-plus mr-1"></i> New Service</button>
                         </div>
                     <div class="single-table">
                         <div class="table-responsive">
@@ -230,18 +230,21 @@
                 .then(res => res.json())
                 .then(res => {
                     this.services = res.data;
-                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
+                    console.log(this.services)
+                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url);
                 })
                 .catch(err => console.log(err));
             },
             // Get Tags
             getSetTags() {
+                // console.log('getsettags');
+
                 let vm = this;
                 fetch('api/tag')
                 .then(res => res.json())
                 .then(res => {
-                    this.services.tags = res.data;
-                    console.log(this.services.tags);
+                    this.tags = res.data;
+                    // console.log(this.tags);
                 })
                 .catch(err => console.log(err));
             },
@@ -296,7 +299,7 @@
                     axios.post('/api/service', formData, config)
                         .then(res => {
                             vm.success = res.success;
-                            console.log(res);
+                            // console.log(res);
                             this.getServices();
 
                         })
@@ -336,6 +339,7 @@
 
             },
             editService(service){
+                console.log(service.tags)
                 this.getSetTags();
                 this.edit = true;
                 this.service.id = service.id;
@@ -345,6 +349,8 @@
                 this.service.desc_en = service.desc_en;
                 this.service.desc_ar = service.desc_ar;
                 this.service.image = service.image;
+                // service tags
+                this.service.tags = service.tag;
 
             },
             // File Handle
