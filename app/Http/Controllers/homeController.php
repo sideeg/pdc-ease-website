@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models;
+use App\Models\User;
 
 class homeController extends Controller
 {
@@ -115,6 +116,10 @@ class homeController extends Controller
 
                 $order_tag->save();
         }
+
+        $users = User::where('role_id','1')->get();
+        foreach($users as $user)
+            $user->notify(new InvoicePaid("new order service need to check"));
         $code = 1;
         return redirect('/')->with('code',$code);
 
