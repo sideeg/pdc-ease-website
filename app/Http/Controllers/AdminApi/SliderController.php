@@ -123,7 +123,7 @@ class SliderController extends Controller
         if (!is_null($request->title_en))
             $slider->title_en = $request->title_en;
         if (!is_null($request->title_ar))
-            $slider->title_en = $request->title_ar;
+            $slider->title_ar = $request->title_ar;
         if (!is_null($request->desc_en))
             $slider->desc_en = $request->desc_en;
         if (!is_null($request->desc_ar))

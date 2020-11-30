@@ -156,7 +156,7 @@ class ServiceController extends Controller
             if (!is_null($request->title_en))
                 $service->title_en = $request->title_en;
             if (!is_null($request->title_ar))
-                $service->title_en = $request->title_ar;
+                $service->title_ar = $request->title_ar;
             if (!is_null($request->desc_en))
                 $service->desc_en = $request->desc_en;
             if (!is_null($request->desc_ar))

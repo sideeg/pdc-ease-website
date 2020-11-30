@@ -96,7 +96,7 @@ class BlogController extends Controller
             if (!is_null($request->title_en))
                 $blog->title_en = $request->title_en;
             if (!is_null($request->title_ar))
-                $blog->title_en = $request->title_ar;
+                $blog->title_ar = $request->title_ar;
             if (!is_null($request->desc_en))
                 $blog->desc_en = $request->desc_en;
             if (!is_null($request->desc_ar))

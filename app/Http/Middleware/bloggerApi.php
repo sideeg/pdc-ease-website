@@ -22,13 +22,13 @@ class bloggerApi
         $user = $user->toArray();
 
         if(is_null($user) || sizeof($user) ==0){
-            return response()->json(" plese login first",400);
+            return response()->json(" plese login first",401);
         }else{
             $user = $user[0];
             if ($user['role_id'] == 1 || $user['role_id'] == 3)
                 return $next($request);
             else
-            return response()->json("you don't have premmissin ",400);
+            return response()->json("you don't have premmissin ",401);
         }
     }
 }
