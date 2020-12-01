@@ -17,7 +17,7 @@ class adminApi
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = User::where('remember_token',$request->remember_token)->get();
+        $user = User::where('remember_token',$request->header('remember_token', 'default'))->get();
         $user = $user->toArray();
 
 

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models;
 use App\Models\User;
 use App\Notifications\NewMessageNotification;
+use App\Notifications\NewOrderNotification;
 
 class homeController extends Controller
 {
@@ -65,6 +66,13 @@ class homeController extends Controller
         $message->message = $request->message;
         $message->save();
 
+        $users = User::where('role_id','1')->get();
+        foreach($users as $user){
+            $user->notify(new NewMessageNotification($message));
+            $temp = $user;
+        }
+
+
         $code = 2;
         // dd($code);
         return redirect('/')->with('code',$code);
@@ -93,8 +101,7 @@ class homeController extends Controller
 
         $order = new Models\orders();
 
-        $order->name_ar = $request->name_ar;
-        $order->name_en = $request->name_en;
+        $order->name = $request->name;
 
         $order->email = $request->email;
         $order->phone = $request->phone;
@@ -121,8 +128,10 @@ class homeController extends Controller
         }
 
         $users = User::where('role_id','1')->get();
-        foreach($users as $user)
-            $user->notify(new NewMessageNotification($order));
+        foreach($users as $user){
+            $user->notify(new NewOrderNotification($order));
+        }
+
         $code = 1;
         return redirect('/')->with('code',$code);
 

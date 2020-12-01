@@ -19,16 +19,14 @@ class orderSeeder extends Seeder
         $faker_ar = Factory::create('ar_JO');
         $faker_en = Factory::create('en_JO');
         orders::create([
-            'name_ar'=> $faker_ar->name,
-            'name_en'=> $faker_en->name,
+            'name'=> $faker_ar->name,
             'email'=> $faker_ar->email,
             'phone'=> $faker_ar->phoneNumber,
 
         ]);
 
         orders::create([
-            'name_ar'=> $faker_ar->name,
-            'name_en'=> $faker_en->name,
+            'name'=> $faker_ar->name,
             'email'=> $faker_ar->email,
             'phone'=> $faker_ar->phoneNumber,
 
