@@ -19,6 +19,9 @@
                                 <a href="{{route('service')}}"><i class="ti-rocket"></i><span>Services</span></a>
                             </li>
                             <li>
+                                <a href="{{route('servicesOrders')}}"><i class="ti-shopping-cart"></i><span>Services Orders</span></a>
+                            </li>
+                            <li>
                                 <a href="{{route('blog')}}"><i class="ti-write"></i><span>Blog</span></a>
                             </li>
                             <li>

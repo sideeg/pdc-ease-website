@@ -2147,7 +2147,8 @@ __webpack_require__.r(__webpack_exports__);
     addAdmin: function addAdmin() {
       var _this3 = this;
 
-      console.log(this.admin);
+      // console.log(this.admin);
+      this.resetModal();
 
       if (this.edit === false) {
         // Add 
@@ -2163,8 +2164,7 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('password', this.admin.password);
         formData.append('role_id', this.admin.role_id);
         axios.post('/api/user', formData, config).then(function (res) {
-          vm.success = res.success;
-          console.log(res);
+          vm.success = res.success; // console.log(res);
 
           _this3.getAdmins();
         })["catch"](function (err) {
@@ -2191,17 +2191,18 @@ __webpack_require__.r(__webpack_exports__);
           return console.log(err);
         });
         this.edit = false;
-      } // this.resetModal();                        
+      }
 
+      this.resetModal();
     },
     editAdmin: function editAdmin(admin) {
-      // console.log(admin);
+      console.log(admin);
       this.edit = true;
       this.admin.id = admin.id;
       this.admin.admin_id = admin.id;
+      this.admin.role_id = admin.role_id;
       this.admin.name = admin.name;
-      this.admin.email = admin.email;
-      this.role_id = admin.role.role_id; // console.log(this.admin);
+      this.admin.email = admin.email; // console.log(this.admin);
 
       this.getSetRoles();
     },
@@ -2213,17 +2214,19 @@ __webpack_require__.r(__webpack_exports__);
         return res.json();
       }).then(function (res) {
         _this4.roles = res; // console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
       });
     },
     resetModal: function resetModal() {
-      this.admin.name_en = '';
-      this.admin.name_ar = '';
-      this.admin.desc_en = '';
-      this.admin.desc_ar = ''; // this.admin.sourse = null;
+      // console.log('kkkk')
+      this.admin.name = '';
+      this.admin.email = '';
+      this.admin.role_id = '';
+      this.roles = []; // this.admin.sourse = null;
     }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
   }
 });
 
@@ -2238,7 +2241,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -2433,8 +2435,7 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (res) {
           return res.json();
         }).then(function (res) {
-          alert('Article Deleted !');
-
+          // alert('Article Deleted !');
           _this2.getArticles(); // console.log(res);
 
         });
@@ -2489,6 +2490,7 @@ __webpack_require__.r(__webpack_exports__);
         _formData.append('desc_ar', this.article.desc_ar); // formData.append('type', this.article.type);
 
 
+        console.log('here');
         axios.put('/api/blog', _formData, _config).then(function (res) {
           _vm.success = res.success; // console.log(res);
 
@@ -2505,12 +2507,12 @@ __webpack_require__.r(__webpack_exports__);
       this.edit = true;
       this.article.id = article.id;
       this.article.article_id = article.id;
+      this.article.tag_id = article.id;
       this.article.title_en = article.title_en;
       this.article.title_ar = article.title_ar;
       this.article.desc_en = article.desc_en;
       this.article.desc_ar = article.desc_ar;
       this.article.image = article.image;
-      this.article.tag_id = article.tag_id;
       this.article.created_at = article.created_at;
       this.getSetTags();
     },
@@ -2961,6 +2963,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3118,11 +3121,21 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     editService: function editService(service) {
-      console.log(service.tags);
+      // console.log(service.tag)
       this.getSetTags();
       this.edit = true;
       this.service.id = service.id;
       this.service.service_id = service.id;
+      this.service.title_en = service.title_en;
+      this.service.title_ar = service.title_ar;
+      this.service.desc_en = service.desc_en;
+      this.service.desc_ar = service.desc_ar;
+      this.service.image = service.image; // service tags
+
+      this.service.tags = service.tag;
+    },
+    // Show Service
+    showService: function showService(service) {
       this.service.title_en = service.title_en;
       this.service.title_ar = service.title_ar;
       this.service.desc_en = service.desc_en;
@@ -3412,6 +3425,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -39774,7 +39789,23 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(0),
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c("h5", { staticClass: "modal-title" }, [_vm._v("Admin")]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "close",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: {
+                          click: function($event) {
+                            return _vm.resetModal()
+                          }
+                        }
+                      },
+                      [_c("code", [_vm._v("×")])]
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c("div", { staticClass: "row" }, [
@@ -39994,7 +40025,30 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(1)
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning mt-4 py-2 px-4",
+                        attrs: { type: "button", "data-dismiss": "modal" },
+                        on: {
+                          click: function($event) {
+                            return _vm.resetModal()
+                          }
+                        }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary mt-4 py-2 px-4",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Submit")]
+                    )
+                  ])
                 ])
               ]
             )
@@ -40003,7 +40057,7 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(2),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-10 mt-5" }, [
       _c("div", { staticClass: "card" }, [
@@ -40104,7 +40158,7 @@ var render = function() {
                 "table",
                 { staticClass: "table table-hover progress-table " },
                 [
-                  _vm._m(3),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -40185,47 +40239,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("Admin")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_c("code", [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-warning mt-4 py-2 px-4",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary mt-4 py-2 px-4",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Submit")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -40520,15 +40533,6 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("input", {
-                            attrs: { type: "text", hidden: "" },
-                            domProps: {
-                              value: _vm.article.edit
-                                ? _vm.article.created_at
-                                : ""
-                            }
-                          }),
-                          _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
                             _c(
                               "label",
@@ -40757,7 +40761,7 @@ var render = function() {
                           [
                             _c("b", [_vm._v("Date:   ")]),
                             _vm._v(
-                              " $" +
+                              " " +
                                 _vm._s(article.created_at) +
                                 "\n                                "
                             )
@@ -41404,7 +41408,7 @@ var render = function() {
                                         staticClass:
                                           "badge badge-pill badge-info p-1"
                                       },
-                                      [_vm._v(" " + _vm._s(tag.title_en))]
+                                      [_vm._v(" " + _vm._s(tag.name_en))]
                                     )
                                   })
                                 ],
@@ -41435,9 +41439,12 @@ var render = function() {
                                       "option",
                                       {
                                         key: tag.id,
-                                        domProps: { value: tag.id }
+                                        domProps: {
+                                          value: tag.id,
+                                          selected: _vm.edit
+                                        }
                                       },
-                                      [_vm._v(_vm._s(tag.title_en) + " hhhh")]
+                                      [_vm._v(_vm._s(tag.name_en))]
                                     )
                                   }),
                                   0
@@ -41482,7 +41489,78 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(4),
+    _c(
+      "div",
+      { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
+      [
+        _c("div", { staticClass: "modal fade show-service-details-modal" }, [
+          _c("div", { staticClass: "modal-dialog modal-lg" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-body p-0" }, [
+                        _c("div", { staticClass: "media" }, [
+                          _c("img", {
+                            staticClass: "img-card mr-md-4",
+                            attrs: {
+                              src: "assets/images/about/about-page.jpg",
+                              alt: "image"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "media-body" }, [
+                            _c("h4", { staticClass: "mb-2 md-mt-2" }, [
+                              _vm._v(_vm._s(_vm.service.title_en))
+                            ]),
+                            _vm._v(" "),
+                            _c("h4", { staticClass: "mb-2 md-mt-2" }, [
+                              _vm._v(_vm._s(_vm.service.title_ar))
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v(_vm._s(_vm.service.desc_en))]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v(_vm._s(_vm.service.desc_ar))]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row mb-3" }, [
+                              _c(
+                                "span",
+                                { staticClass: "col-lg-12 font-italic" },
+                                [
+                                  _c("b", [_vm._v("Tags:   ")]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.service.tags, function(tag) {
+                                    return _c(
+                                      "span",
+                                      {
+                                        key: tag.id,
+                                        staticClass:
+                                          "badge badge-pill badge-info p-1 mx-1"
+                                      },
+                                      [_vm._v(" " + _vm._s(tag.name_en))]
+                                    )
+                                  })
+                                ],
+                                2
+                              )
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(5)
+            ])
+          ])
+        ])
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-10 mt-5" }, [
       _c("div", { staticClass: "card" }, [
@@ -41580,7 +41658,7 @@ var render = function() {
           _c("div", { staticClass: "single-table" }, [
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table table-hover progress-table" }, [
-                _vm._m(5),
+                _vm._m(6),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -41596,7 +41674,25 @@ var render = function() {
                               "d-flex justify-content-center align-items-center"
                           },
                           [
-                            _vm._m(6, true),
+                            _c("li", { staticClass: "mr-3" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-primary",
+                                  attrs: {
+                                    href: "#",
+                                    "data-toggle": "modal",
+                                    "data-target": ".show-service-details-modal"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showService(service)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "ti-eye o-icon" })]
+                              )
+                            ]),
                             _vm._v(" "),
                             _c("li", { staticClass: "mr-3" }, [
                               _c(
@@ -41693,130 +41789,33 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
-      [
-        _c("div", { staticClass: "modal fade show-service-details-modal" }, [
-          _c("div", { staticClass: "modal-dialog modal-lg" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [
-                  _vm._v("Service Details")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_c("code", [_vm._v("×")])]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12" }, [
-                    _c("div", { staticClass: "card" }, [
-                      _c("div", { staticClass: "card-body p-0" }, [
-                        _c("div", { staticClass: "media" }, [
-                          _c("img", {
-                            staticClass: "img-card mr-md-4",
-                            attrs: {
-                              src: "assets/images/about/about-page.jpg",
-                              alt: "image"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("h4", { staticClass: "mb-2 md-mt-2" }, [
-                              _vm._v("Media heading")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", [
-                              _vm._v(
-                                "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "row mb-3" }, [
-                              _c(
-                                "span",
-                                { staticClass: "col-lg-12 font-italic" },
-                                [
-                                  _c("b", [_vm._v("Tags:   ")]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "badge badge-pill badge-info p-1"
-                                    },
-                                    [_vm._v(" Web Development")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "badge badge-pill badge-info p-1"
-                                    },
-                                    [_vm._v(" Web Development")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "badge badge-pill badge-info p-1"
-                                    },
-                                    [_vm._v(" Web Development")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "badge badge-pill badge-info p-1"
-                                    },
-                                    [_vm._v(" Web Development")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "badge badge-pill badge-info p-1"
-                                    },
-                                    [_vm._v(" Web Development")]
-                                  )
-                                ]
-                              )
-                            ])
-                          ])
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-warning mt-4 py-2 px-4",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                )
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Service Details")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("code", [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning mt-4 py-2 px-4",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -41830,25 +41829,6 @@ var staticRenderFns = [
           _vm._v("Actions")
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "mr-3" }, [
-      _c(
-        "a",
-        {
-          staticClass: "text-primary",
-          attrs: {
-            href: "#",
-            "data-toggle": "modal",
-            "data-target": ".show-service-details-modal"
-          }
-        },
-        [_c("i", { staticClass: "ti-eye o-icon" })]
-      )
     ])
   }
 ]

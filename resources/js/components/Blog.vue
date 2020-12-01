@@ -37,11 +37,10 @@
                                                 <label for="example-email-input" class="col-form-label d-block">Article Image</label>
                                                 <input type="file" class="col-form-label" @change="selectFile">
                                             </div>
-                                            <input type="text" hidden :value="article.edit ? article.created_at : ''">
+                                            <!-- <input type="text" hidden :value="article.edit ? article.created_at : ''"> -->
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
                                                 <select id="example-email-input" class="form-control" v-model='article.tag_id'>
-                                                
                                                     <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id">{{tag.name_en}}</option>
                                                 </select>
                                             </div>
@@ -107,7 +106,7 @@
                                     <span class="badge badge-pill badge-info p-1"> {{article.tag.name_en}}</span>
                                 </span> 
                                 <span class="col-lg-3 col-sm-6 font-italic">
-                                    <b>Date:&ThickSpace; </b> ${{article.created_at }}
+                                    <b>Date:&ThickSpace; </b> {{article.created_at }}
                                     <!-- {{Carbon:parse(article->created_at)->format('M  d,yy') }} -->
                                 </span>
                             </div>
@@ -199,7 +198,7 @@
                     })
                     .then(res => res.json())
                     .then(res => {
-                        alert('Article Deleted !');
+                        // alert('Article Deleted !');
                         this.getArticles();
                         // console.log(res);
 
@@ -248,6 +247,7 @@
                     formData.append('desc_en', this.article.desc_en);
                     formData.append('desc_ar', this.article.desc_ar);
                     // formData.append('type', this.article.type);
+                            console.log('here');
     
                     axios.put('/api/blog', formData, config)
                         .then(res => {
@@ -268,12 +268,13 @@
                 this.edit = true;
                 this.article.id = article.id;
                 this.article.article_id = article.id;
+                this.article.tag_id = article.id;
+                
                 this.article.title_en = article.title_en;
                 this.article.title_ar = article.title_ar;
                 this.article.desc_en = article.desc_en;
                 this.article.desc_ar = article.desc_ar;
                 this.article.image = article.image;
-                this.article.tag_id = article.tag_id;
                 this.article.created_at = article.created_at;
                 this.getSetTags();
             },
