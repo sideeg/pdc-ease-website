@@ -7,22 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class NewMessageNotification extends Notification
+class NewOrderNotification extends Notification
 {
     use Queueable;
-
-    public $messagedata;
+    public $order_data;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($order)
     {
-
-        $this->messagedata= $message;
-
+        $this->order_data = $order;
     }
 
     /**
@@ -58,13 +55,14 @@ class NewMessageNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        // dd($this->messagedata);
         return [
-             'message_id' => $this->messagedata->id,
-             'name' => $this->messagedata->name,
-             'email' => $this->messagedata->email,
-             'subject' => $this->messagedata->subject,
-             'message' => $this->messagedata->message,
+            'order_id'=>$this->order_data['id'],
+            'name_en'=>$this->order_data['name'],
+            'emai'=>$this->order_data['email'],
+            'phone'=>$this->order_data['phone'],
+            'status'=>$this->order_data['status'],
+
+
 
 
 

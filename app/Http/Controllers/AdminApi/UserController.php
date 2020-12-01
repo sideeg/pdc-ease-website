@@ -119,5 +119,20 @@ class UserController extends Controller
             return response()->json($User,200);
         }
 
+        /*******************************************************
+         *
+         *
+         *
+         */
+        public function notficationNum(Request $request){
+            $user = User::where('remember_token',$request->remember_token)->get();
+            if (is_null($user)){
+                return response()->json('User not found',404);
+            }
+
+            $num = sizeof($user->unreadNotifications );
+            return response()->json($num,200);
+        }
+
 
 }
