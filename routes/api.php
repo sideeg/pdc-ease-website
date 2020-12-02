@@ -18,8 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::group(['middleware' => ['role:admin']], function () {
-
 Route::get('/user-notification-num','App\Http\Controllers\AdminApi\UserController@orderNotficationNum');
 Route::get('/user-notification','App\Http\Controllers\AdminApi\UserController@notfication');
 Route::get('/user-message-num','App\Http\Controllers\AdminApi\UserController@messageNotficationNum');
@@ -47,15 +45,17 @@ Route::get('/message','App\Http\Controllers\AdminApi\MessageController@messages'
 Route::get('/message/{id}','App\Http\Controllers\AdminApi\MessageController@messageById');
 Route::delete("/message/{id}","App\Http\Controllers\AdminApi\MessageController@messageDelete");
 
-
-
-
 Route::get('/role','App\Http\Controllers\AdminApi\roleController@roles');
 Route::get('/role/{id}','App\Http\Controllers\AdminApi\roleController@roleById');
 Route::delete("/role/{id}","App\Http\Controllers\AdminApi\roleController@roleDelete");
 
 // });
 /*********************************** end super admin access ******************************************** */
+
+
+
+
+
 
 /************************************** blogger access *****************************************************/
 // Route::group(['middleware' => 'bloger_api_auth'], function () {
@@ -69,6 +69,10 @@ Route::delete("/blog/{id}","App\Http\Controllers\AdminApi\BlogController@blogDel
 // });
 
 /*************************************************************end blogger access *********************** */
+
+
+
+
 
 /************************************** admin access *****************************************************/
 // Route::group(['middleware' => 'admin_api_auth'], function () {
