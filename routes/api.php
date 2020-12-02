@@ -20,8 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Route::group(['middleware' => ['role:admin']], function () {
 
-Route::get('/user-notification-num','App\Http\Controllers\AdminApi\UserController@UserSave');
-Route::get('/user-notification','App\Http\Controllers\AdminApi\UserController@UserSave');
+Route::get('/user-notification-num','App\Http\Controllers\AdminApi\UserController@orderNotficationNum');
+Route::get('/user-notification','App\Http\Controllers\AdminApi\UserController@notfication');
+Route::get('/user-message-num','App\Http\Controllers\AdminApi\UserController@messageNotficationNum');
+Route::get('/user-message','App\Http\Controllers\AdminApi\UserController@message');
+
+
 
 /******************************** super Admin access *************************************** */
 // Route::group(['middleware' => 'super_admin_api_auth'], function () {

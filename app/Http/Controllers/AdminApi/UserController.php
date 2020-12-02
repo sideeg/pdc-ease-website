@@ -124,15 +124,93 @@ class UserController extends Controller
          *
          *
          */
-        public function notficationNum(Request $request){
-            $user = User::where('remember_token',$request->remember_token)->get();
+        public function orderNotficationNum(Request $request){
+            $OrderType = 'App\Notifications\NewOrderNotification';
+            $count = 0;
+            $user =  User::where('remember_token',$request->header('remember_token', 'default'))->first();
+            // $user = User::find(1);
+            //  var_dump($user);
             if (is_null($user)){
                 return response()->json('User not found',404);
             }
+            foreach ($user->unreadNotifications as $notification) {
+                if( $notification->type == $OrderType)
+                    $count+=1;
+            }
 
-            $num = sizeof($user->unreadNotifications );
-            return response()->json($num,200);
+            // $num = sizeof($user->unreadNotifications );
+            return response()->json($count,200);
         }
+
+         /**************************************************************************************************
+         *
+         *
+         *
+         */
+        public function messageNotficationNum(Request $request){
+            $MessageType = 'App\Notifications\NewMessageNotification';
+            $count = 0;
+            $user =  User::where('remember_token',$request->header('remember_token', 'default'))->first();
+            // $user = User::find(1);
+            //  var_dump($user);
+            if (is_null($user)){
+                return response()->json('User not found',404);
+            }
+            foreach ($user->unreadNotifications as $notification) {
+                if( $notification->type == $MessageType)
+                    $count+=1;
+            }
+
+            // $num = sizeof($user->unreadNotifications );
+            return response()->json($count,200);
+        }
+
+
+         /***********************************************************************************************
+         *
+         *
+         *
+         */
+        public function message(Request $request){
+            $MessageType = 'App\Notifications\NewMessageNotification';
+            $array[] = array();
+            $user =  User::where('remember_token',$request->header('remember_token', 'default'))->first();
+
+            if (is_null($user)){
+                return response()->json('User not found',404);
+            }
+            foreach ($user->unreadNotifications as $notification) {
+                if( $notification->type == $MessageType)
+                    $array[]=$notification;
+            }
+
+
+            return response()->json($array,200);
+        }
+
+         /*************************************************************************************************
+         *
+         *
+         *
+         */
+        public function notfication(Request $request){
+            $OrderType = 'App\Notifications\NewOrderNotification';
+            $array[] = array();
+            $user =  User::where('remember_token',$request->header('remember_token', 'default'))->first();
+
+
+            if (is_null($user)){
+                return response()->json('User not found',404);
+            }
+            foreach ($user->unreadNotifications as $notification) {
+                if( $notification->type == $OrderType)
+                    $array[] =$notification;
+            }
+
+            // $num = sizeof($user->unreadNotifications );
+            return response()->json($array,200);
+        }
+
 
 
 }
