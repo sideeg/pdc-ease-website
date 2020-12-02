@@ -15,9 +15,7 @@ class Orders extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string("name_ar");
-            $table->string("name_en");
-
+            $table->string("name")->nullable();
             $table->string("email");
             $table->string("phone");
             $table->string("status")->default('0');

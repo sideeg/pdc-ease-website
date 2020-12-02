@@ -18,7 +18,7 @@ class superadmin
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = User::where('remember_token',$request->remember_token);
+        $user = User::where('remember_token',$request->header('remember_token', 'default'));
         $user = $user->toArray();
 
         if(is_null($user) || sizeof($user) ==0){

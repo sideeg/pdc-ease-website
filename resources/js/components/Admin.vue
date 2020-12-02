@@ -10,7 +10,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Admin</h5>
-                            <button type="button" class="close" data-dismiss="modal"><code>&times;</code></button>
+                            <button type="button" class="close" @click="resetModal()" data-dismiss="modal"><code>&times;</code></button>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-warning mt-4 py-2 px-4" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-warning mt-4 py-2 px-4" @click="resetModal()" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary mt-4 py-2 px-4">Submit</button>
                         </div>
                     </div>
@@ -147,7 +147,7 @@
                                         </td>
                                         <td class="">
                                             <ul class="d-flex justify-content-center align-items-center">
-                                                <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-role-details-modal"><i class="ti-eye o-icon"></i></a></li>
+                                                <!-- <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-role-details-modal"><i class="ti-eye o-icon"></i></a></li> -->
                                                 <li class="mr-3"><a href="#" @click="editAdmin(admin)" class="text-secondary" data-toggle="modal" data-target=".add-admin-modal"><i class="ti-pencil o-icon"></i></a></li>
                                                 <li><a href="#" @click="deleteAdmin(admin.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
                                             </ul>
@@ -241,7 +241,9 @@
             },
             // Add Admin
             addAdmin(){
-                console.log(this.admin);
+                // console.log(this.admin);
+                this.resetModal();                        
+
                 if(this.edit === false){
                     // Add 
                     let vm = this;
@@ -260,7 +262,7 @@
                     axios.post('/api/user', formData, config)
                         .then(res => {
                             vm.success = res.success;
-                            console.log(res);
+                            // console.log(res);
                             this.getAdmins();
 
                         })
@@ -290,17 +292,18 @@
                     this.edit = false;
 
                 }
-                // this.resetModal();                        
+
+                this.resetModal();                        
 
             },
             editAdmin(admin){
-                // console.log(admin);
+                console.log(admin);
                 this.edit = true;
                 this.admin.id = admin.id;
                 this.admin.admin_id = admin.id;
+                this.admin.role_id = admin.role_id;
                 this.admin.name = admin.name;
                 this.admin.email = admin.email;
-                this.role_id = admin.role.role_id;
                 // console.log(this.admin);
 
                 this.getSetRoles()
@@ -313,18 +316,20 @@
                     this.roles = res;
                     // console.log(res);
                 })
+                .catch(err => console.log(err));
                 
             },
             resetModal() {
-                this.admin.name_en = '';
-                this.admin.name_ar = '';
-                this.admin.desc_en = '';
-                this.admin.desc_ar = '';
+                // console.log('kkkk')
+                this.admin.name = '';
+                this.admin.email = '';
+                this.admin.role_id = '';
+                this.roles = [];
                 // this.admin.sourse = null;
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>
