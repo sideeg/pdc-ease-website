@@ -58,6 +58,7 @@ class LoginController extends Controller
 
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
             $user = Auth::user();
+            Auth::login($request->user());
             $token = Str::random(60);
 
             $request->user()->forceFill([
