@@ -58,7 +58,7 @@ Route::delete("/role/{id}","App\Http\Controllers\AdminApi\roleController@roleDel
 /*********************************** end super admin access ******************************************** */
 
 /************************************** blogger access *****************************************************/
-Route::group(['middleware' => 'bloger_api_auth'], function () {
+// Route::group(['middleware' => 'bloger_api_auth'], function () {
 
 Route::post('/blog','App\Http\Controllers\AdminApi\BlogController@blogSave');
 Route::get('/blog','App\Http\Controllers\AdminApi\BlogController@blog');
@@ -66,10 +66,12 @@ Route::put("/blog","App\Http\Controllers\AdminApi\BlogController@blogUpdate");
 Route::get('/blog/{id}','App\Http\Controllers\AdminApi\BlogController@blogById');
 Route::delete("/blog/{id}","App\Http\Controllers\AdminApi\BlogController@blogDelete");
 
-});/*************************************************************end blogger access *********************** */
+// });
+
+/*************************************************************end blogger access *********************** */
 
 /************************************** admin access *****************************************************/
-Route::group(['middleware' => 'admin_api_auth'], function () {
+// Route::group(['middleware' => 'admin_api_auth'], function () {
 Route::post('/clint','App\Http\Controllers\AdminApi\clintController@clintSave');
 Route::get('/clint','App\Http\Controllers\AdminApi\clintController@clint');
 Route::put("/clint","App\Http\Controllers\AdminApi\clintController@clintUpdate");
@@ -102,4 +104,5 @@ Route::put("/service","App\Http\Controllers\AdminApi\ServiceController@serviceUp
 Route::get('/service/{id}','App\Http\Controllers\AdminApi\ServiceController@serviceById');
 Route::delete("/service/{id}","App\Http\Controllers\AdminApi\ServiceController@serviceDelete");
 
-});/*******************************end admin access *************************************************** */
+// });
+/*******************************end admin access *************************************************** */

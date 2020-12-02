@@ -45,13 +45,13 @@
                                                     <!-- <h5>Tags:&ThickSpace;</h5> -->
                                                     <span class="font-italic">
                                                         <b>Tags: &ThickSpace;</b >
-                                                        <span class="badge badge-pill badge-info p-1" v-for="tag in service.tags" :key="tag.id" > {{tag.title_en}}</span>
+                                                        <span class="badge badge-pill badge-info p-1" v-for="tag in service.tags" :key="tag.id" > {{tag.name_en}}</span>
                                                         
                                                     </span>
                                                     <div class="form-group mt-3">
                                                         <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
                                                         <select id="example-email-input" class="form-control" multiple>
-                                                            <option v-for="tag in service.tags" :key="tag.id" v-bind:value="tag.id">{{tag.title_en}} hhhh</option>
+                                                            <option v-for="tag in service.tags" :key="tag.id" v-bind:value="tag.id" :selected="edit">{{tag.name_en}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -90,17 +90,18 @@
                                                 <div class="media">
                                                     <img class="img-card mr-md-4" src="assets/images/about/about-page.jpg" alt="image">
                                                     <div class="media-body">
-                                                        <h4 class="mb-2 md-mt-2">Media heading</h4>
+                                                        <h4 class="mb-2 md-mt-2">{{ service.title_en}}</h4>
+                                                        <h4 class="mb-2 md-mt-2">{{ service.title_ar}}</h4>
+
                                                         <!-- <div class="row mb-3"><span class="col-lg-6 col-sm-12 font-italic"><b>Date:&ThickSpace; </b> 5 Fab, 2020</span></div> -->
-                                                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                                        <p>{{ service.desc_en}}</p>
+                                                        <p>{{ service.desc_ar}}</p>
+
                                                         <div class="row mb-3">
                                                             <span class="col-lg-12 font-italic">
                                                                 <b>Tags: &ThickSpace;</b >
-                                                                <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                                <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                                <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                                <span class="badge badge-pill badge-info p-1"> Web Development</span>
-                                                                <span class="badge badge-pill badge-info p-1"> Web Development</span>
+                                                                <span class="badge badge-pill badge-info p-1 mx-1" v-for="tag in service.tags" :key="tag.id"> {{tag.name_en}}</span>
+                                                                
                                                             </span> 
                                                         </div>
                                                         
@@ -164,7 +165,7 @@
                                         <td >{{service.title_en}}</td>
                                         <td class="">
                                             <ul class="d-flex justify-content-center align-items-center">
-                                                <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-service-details-modal"><i class="ti-eye o-icon"></i></a></li>
+                                                <li class="mr-3"><a href="#" class="text-primary" @click="showService(service)" data-toggle="modal" data-target=".show-service-details-modal"><i class="ti-eye o-icon"></i></a></li>
                                                 <li class="mr-3"><a href="#" @click="editService(service)" class="text-secondary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="ti-pencil o-icon"></i></a></li>
                                                 <li><a href="#" @click="deleteService(service.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
                                             </ul>
@@ -339,7 +340,7 @@
 
             },
             editService(service){
-                console.log(service.tags)
+                // console.log(service.tag)
                 this.getSetTags();
                 this.edit = true;
                 this.service.id = service.id;
@@ -352,6 +353,16 @@
                 // service tags
                 this.service.tags = service.tag;
 
+            },
+            // Show Service
+            showService(service){
+                this.service.title_en = service.title_en;
+                this.service.title_ar = service.title_ar;
+                this.service.desc_en = service.desc_en;
+                this.service.desc_ar = service.desc_ar;
+                this.service.image = service.image;
+                // service tags
+                this.service.tags = service.tag;
             },
             // File Handle
             createImage(file) {
