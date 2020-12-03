@@ -4,14 +4,32 @@
         <div class=" col-lg-11 card mt-5">
             <div class="card-body">
                 <h4 class="header-title">Services Orders</h4>
-                <div class="row justify-content-end">
+                <div class="container row justify-content-between">
                     <!-- <select name="" id="" class="form-control"> -->
-                        <button @click="getOrders()">
-                            Open
-                        </button>
-                        <button @click="getOrders('api/order-reverse')">
-                            Closed
-                        </button>
+                        <nav aria-label="page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item" v-bind:class="[{disabled: !pagination.prev_page_url}]" >
+                                    <a href="#" class="page-link" @click="getOrders(pagination.prev_page_url)">Previous</a>
+                                </li>
+
+                                <li class="page-item disabled">
+                                    <a href="#" class="page-link text-dark">
+                                        Page {{pagination.current_page}} of {{pagination.last_page}}
+                                    </a>
+                                </li>
+
+                                <li class="page-item" v-bind:class="[{disabled: !pagination.next_page_url}]">
+                                    <a href="#" class="page-link" @click="getOrders(pagination.next_page_url)">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div>
+                            <!-- <input type="checkbox" @click="changeStatus()" :checked="open"> -->
+                            <div class="custom-control custom-checkbox mr-sm-2 text-right">
+                                <input type="checkbox" class="custom-control-input o-icon" @click="changeStatus()" :checked="!open" id="status">
+                                <label class="custom-control-label" for="status">{{ open ? "Open" : "Closed "}} Orders</label>
+                            </div>
+                        </div>
                     <!-- </select> -->
                 </div>
                 <div class="table-responsive">
@@ -92,7 +110,7 @@
                 // },
                 order_id: '',
                 pagination: {},
-                edit: false,
+                open: true,
             }
         },
 
@@ -103,7 +121,8 @@
         methods: {
             getOrders(page_url) {
                 let vm = this;
-                page_url = page_url || 'api/order';
+                console.log(this.open ? 'api/order' : 'api/order-reverse')
+                page_url = page_url || this.open ? 'api/order' : 'api/order-reverse';
                 console.log(page_url);
                 fetch(page_url)
                 .then(res => res.json())
@@ -150,91 +169,22 @@
             },
             // Update Order
             updateOrder(id){
-                if(confirm('Are You Sure ?')){
-                    fetch(`api/order/${id}`, {
-                        method: 'put'
-                    })
-                    .then(res => res.json())
-                    .then(res => {
-                        // alert('Order Deleted !');
-                        this.getOrders();
-                        // console.log(res);
+                fetch(`api/order/${id}`, {
+                    method: 'put'
+                })
+                .then(res => res.json())
+                .then(res => {
+                    // alert('Order Deleted !');
+                    this.getOrders();
+                    // console.log(res);
 
-                    });
-                }
+                });
             },
-            // Add Order
-            addOrder(){
-                if(this.edit === false){
-                    // Add 
-                    fetch('api/orderr', {
-                        method: 'post',
-                        body: JSON.stringify(this.order),
-                        headers: {
-                            'content-type': 'application/json'
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(res => {
-                        // console.log(res);
-                        
-                        // this.resetModal();                        
-                        // alert('Order Added !');
-                        this.getOrders();
-                        // console.log(res);
-                    })
-                    .catch(err => console.log(err));
-                    
-                }else {
-                    // Update
-                    fetch('api/order', {
-                        method: 'put',
-                        body: JSON.stringify(this.order),
-                        headers: {
-                            'content-type': 'application/json'
-                        }
-                    })
-                    .then(res => res.json())
-                    .then(res => {
-                        // console.log(res);
-
-                        // this.resetModal();                        
-                        // alert('Order Added !');
-                        this.getOrders();
-                        // console.log(res);
-                    })
-                    .catch(err => console.log(err));
-                    this.edit = false;
-
-                }
-                this.resetModal();                        
-
-            },
-            editOrder(order){
-                this.edit = true;
-                this.order.id = order.id;
-                this.order.order_id = order.id;
-                this.order.title_en = order.title_en;
-                this.order.title_ar = order.title_ar;
-                this.order.desc_en = order.desc_en;
-                this.order.desc_ar = order.desc_ar;
-                this.order.sourse = order.sourse;
-
-
-            },
-            // File Handle
-            selectFile(event) {
-                // `files` is always an array because the file input may be in multiple mode
-                this.sourse = event.target.files[0];
-                // console.log(this.sourse);
-            },
-
-            resetModal() {
-                this.order.title_en = '';
-                this.order.title_ar = '';
-                this.order.desc_en = '';
-                this.order.desc_ar = '';
-                this.order.sourse = null;
+            // Change the Orders View
+            changeStatus(){
+                this.open = !this.open;
+                this.getOrders();
+                console.log(this.open);
             }
         },
         mounted() {

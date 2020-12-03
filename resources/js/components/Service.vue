@@ -29,11 +29,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="example-email-input" class="col-form-label">Service Description <b>( ar )</b></label>
-                                                    <textarea  class="form-control" v-model="service.desc_ar" cols="30" rows="4"></textarea>
+                                                    <textarea  class="form-control" id="desc_ar" v-model="service.desc_ar" cols="30" rows="4"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="example-email-input" class="col-form-label">Service Description <b>( en )</b></label>
-                                                    <textarea  class="form-control" v-model="service.desc_en" cols="30" rows="4"></textarea>
+                                                    <textarea  class="form-control" id="desc_en" v-model="service.desc_en" cols="30" rows="4"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="example-email-input" class="col-form-label d-block">Service Image</label>

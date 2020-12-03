@@ -60,6 +60,8 @@ Route::get('/dashboard-blog', [App\Http\Controllers\DashboardController::class, 
 
 Route::get('/dashboard-tags', [App\Http\Controllers\DashboardController::class, 'tag'])->name('tag');
 
+Route::get('/dashboard-clients', [App\Http\Controllers\DashboardController::class, 'client'])->name('client');
+
 Route::get('/dashboard-admin', [App\Http\Controllers\DashboardController::class, 'admin'])->name('admin');
 
 
