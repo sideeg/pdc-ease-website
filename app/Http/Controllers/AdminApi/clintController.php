@@ -29,7 +29,7 @@ class clintController extends Controller
         //create new clint
         // $clint = clints::create($request->all());
 
-        $uploads_folder = 'public/images\svg\clints'; // storage_path('app/public/clints');
+        $uploads_folder = 'images\svg\clints\\'; // storage_path('app/public/clints');
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
@@ -41,7 +41,7 @@ class clintController extends Controller
 
 
         $clint = clints::create([
-            'logo' => $imageName,
+            'logo' => $uploads_folder.$imageName,
         ]);
 
 
@@ -65,7 +65,7 @@ class clintController extends Controller
             }
 
             if(!is_null($request->logo)){
-                $uploads_folder = storage_path('app/public/clints');
+                $uploads_folder = 'images\svg\clints\\';//storage_path('app/public/clints');
                 if (!file_exists($uploads_folder)) {
                      mkdir($uploads_folder, 0777, true);
                 }
@@ -75,7 +75,7 @@ class clintController extends Controller
                 $logoName = time().'.'.$request->logo->extension();
                 $request->logo->move($uploads_folder, $logoName);
 
-                $clint->logo = $logoName;
+                $clint->logo = $uploads_folder.$logoName;
 
             }
 

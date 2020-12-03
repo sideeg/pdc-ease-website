@@ -20,7 +20,7 @@ class SliderController extends Controller
         $type = 0;
         $ext= $request->image->extension();
 
-        $uploads_folder = storage_path('app/public/sliders');
+        $uploads_folder = 'images\svg\slider\\' ;//storage_path('app/public/sliders');
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
@@ -46,7 +46,7 @@ class SliderController extends Controller
             'desc_en' => $request->desc_en,
             'desc_ar' => $request->desc_ar,
             'type' => $type,
-            'sourse' => $imageName,
+            'sourse' => $uploads_folder.$imageName,
         ]);
 
         return response()->json([
@@ -94,7 +94,7 @@ class SliderController extends Controller
         $slider = slide_bar::find($request->id);
 
         if(!is_null($request->sourse)){
-            $uploads_folder = 'public\images\svg\clints';//storage_path('app/public/slider');
+            $uploads_folder = 'images\svg\slider\\';//storage_path('app/public/slider');
             if (!file_exists($uploads_folder)) {
                  mkdir($uploads_folder, 0777, true);
             }

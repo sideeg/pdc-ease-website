@@ -34,7 +34,7 @@ class ServiceController extends Controller
 
         //create new service
         // $service = services::create($request->all());
-        $uploads_folder = storage_path('app/public/services');
+        $uploads_folder = "images\svg\slider\\";storage_path('app/public/services');
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
@@ -49,21 +49,23 @@ class ServiceController extends Controller
             'title_ar' => $request->title_ar,
             'desc_en' => $request->desc_en,
             'desc_ar' => $request->desc_ar,
-            'image' => $imageName,
+            'image' => $uploads_folder.$imageName,
         ]);
 
-         //check if the given tags list is string or not if it is convert it to array
-         if (gettype($request->tags) == "string")
-            $tags_list = explode(',', substr($request->tags,1,-1));
-        else
-            $tags_list = $request->tags;
+        if (is_null($request->tags)){
+            //check if the given tags list is string or not if it is convert it to array
+            if (gettype($request->tags) == "string")
+                $tags_list = explode(',', substr($request->tags,1,-1));
+            else
+                $tags_list = $request->tags;
 
 
-            //add the new tags to this new service as the user done
-        for ($i =0;$i<sizeof($tags_list);$i++){
-            $tag = tags::find($tags_list[$i]);
-            $tag->service_id = $service->id;
-            $tag->save();
+                //add the new tags to this new service as the user done
+            for ($i =0;$i<sizeof($tags_list);$i++){
+                $tag = tags::find($tags_list[$i]);
+                $tag->service_id = $service->id;
+                $tag->save();
+            }
         }
 
         return response()->json($service,201);
@@ -139,7 +141,7 @@ class ServiceController extends Controller
             }
 
             if(!is_null($request->image)){
-                $uploads_folder = storage_path('app/public/services');
+                $uploads_folder = 'images\svg\slider\\';//storage_path('app/public/services');
                 if (!file_exists($uploads_folder)) {
                      mkdir($uploads_folder, 0777, true);
                 }
@@ -149,7 +151,7 @@ class ServiceController extends Controller
                 $imageName = time().'.'.$request->image->extension();
                 $request->image->move($uploads_folder, $imageName);
 
-                $service->image = $imageName;
+                $service->image = $uploads_folder.$imageName;
 
             }
 
