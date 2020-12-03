@@ -206,6 +206,7 @@ class UserController extends Controller
                 if( $notification->type == $OrderType)
                     $array[] =$notification->data;
             }
+            unset($array[0]);
 
             $user->unreadNotifications->markAsRead();
 
