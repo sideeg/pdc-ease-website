@@ -204,8 +204,10 @@ class UserController extends Controller
             }
             foreach ($user->unreadNotifications as $notification) {
                 if( $notification->type == $OrderType)
-                    $array[] =$notification;
+                    $array[] =$notification->data;
             }
+
+            $user->unreadNotifications->markAsRead();
 
             // $num = sizeof($user->unreadNotifications );
             return response()->json($array,200);

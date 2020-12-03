@@ -61,6 +61,7 @@ class NewOrderNotification extends Notification
             'emai'=>$this->order_data['email'],
             'phone'=>$this->order_data['phone'],
             'status'=>$this->order_data['status'],
+            'created_at'=> $this->order_data['created_at']
 
 
 
