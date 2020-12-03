@@ -94,7 +94,7 @@ class SliderController extends Controller
         $slider = slide_bar::find($request->id);
 
         if(!is_null($request->sourse)){
-            $uploads_folder = storage_path('app/public/slider');
+            $uploads_folder = 'public\images\svg\clints';//storage_path('app/public/slider');
             if (!file_exists($uploads_folder)) {
                  mkdir($uploads_folder, 0777, true);
             }
@@ -104,7 +104,7 @@ class SliderController extends Controller
             $sourseName = time().'.'.$request->sourse->extension();
             $request->sourse->move($uploads_folder, $sourseName);
 
-            $slider->sourse = $sourseName;
+            $slider->sourse =$uploads_folder.$sourseName;
 
              // List of Possible Extentions
             $images_list = ["jpeg","bmp","png","jpg"];

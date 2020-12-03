@@ -29,7 +29,7 @@ class clintController extends Controller
         //create new clint
         // $clint = clints::create($request->all());
 
-        $uploads_folder = storage_path('app/public/clints');
+        $uploads_folder = 'public/images\svg\clints'; // storage_path('app/public/clints');
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
