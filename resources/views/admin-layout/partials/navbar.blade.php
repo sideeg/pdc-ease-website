@@ -42,7 +42,7 @@
             </div>
         </div>
         <!-- profile info & task notification -->
-        <notify></notify>
+        <notify ordersRoute="{{ route('servicesOrders') }}" messagesRoute="{{ route('message') }}"></notify>
 
     </div>
 </div>

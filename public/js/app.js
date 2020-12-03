@@ -3240,139 +3240,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      clients: [],
-      client: {
-        name: '',
-        logo: null
+      orders: [],
+      order: {
+        name_en: '',
+        phone: ''
       },
-      client_id: '',
-      pagination: {},
-      edit: false,
-      success: ''
+      messages: [],
+      message: {
+        name_en: '',
+        phone: ''
+      },
+      orders_num: 0,
+      messages_num: 0
     };
   },
-  props: ['remember_token'],
+  props: ['ordersRoute', 'messagesRoute'],
   created: function created() {
     // this.http.headers.common['remember_token'] = this.remember_token;
-    this.getClients();
-    console.log(this.remember_token);
+    this.getNotifyNumber(); // this.getMessagesNumber();
   },
   methods: {
-    getClients: function getClients(page_url) {
+    getNotifyNumber: function getNotifyNumber() {
       var _this = this;
 
-      var vm = this;
-      page_url = page_url || 'api/clint';
-      fetch(page_url).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this.clients = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+      // Orders Nutification Number
+      axios.get('api/user-notification-num').then(function (res) {
+        _this.orders_num = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      }); // Messages Nutification Number
+
+      axios.get('api/user-message-num').then(function (res) {
+        _this.messages_num = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+      console.log(this.ordersRoute);
+    },
+    // Get Orders
+    getOrders: function getOrders() {
+      var _this2 = this;
+
+      axios.get('api/user-notification').then(function (res) {
+        _this2.orders = res.data;
+        console.log(_this2.orders);
       })["catch"](function (err) {
         return console.log(err);
       });
     },
-    // Pagination
-    makePagination: function makePagination(current_page, last_page, next_page_url, prev_page_url) {
-      var pagination = {
-        current_page: current_page,
-        last_page: last_page,
-        next_page_url: next_page_url,
-        prev_page_url: prev_page_url
-      };
-      this.pagination = pagination;
-    },
-    // Delete Client
-    deleteClient: function deleteClient(id) {
-      var _this2 = this;
-
-      if (confirm('Are You Sure ?')) {
-        fetch("api/clint/".concat(id), {
-          method: 'delete'
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
-          // alert('Client Deleted !');
-          _this2.getClients(); // console.log(res);
-
-        });
-      }
-    },
-    // Add Client
-    addClient: function addClient() {
+    // Get Messages
+    getMessages: function getMessages() {
       var _this3 = this;
 
-      if (this.edit === false) {
-        // Add 
-        var vm = this;
-        var config = {
-          headers: {
-            'content-type': 'multipart/form-data' // 'remember_token' : this.remember_token
-
-          }
-        };
-        var formData = new FormData();
-        formData.append('logo', this.image);
-        formData.append('name', this.client.name); // console.log(this.client.logo);
-
-        axios.post('/api/clint', formData, config).then(function (res) {
-          vm.success = res.success; // console.log(res);
-
-          _this3.getClients();
-        })["catch"](function (err) {
-          return console.log(err);
-        });
-      } else {
-        // Update
-        var _vm = this;
-
-        var _config = {
-          headers: {
-            'content-type': 'multipart/form-data'
-          }
-        };
-
-        var _formData = new FormData();
-
-        _formData.append('image', this.image);
-
-        _formData.append('name', this.client.title_ar);
-
-        axios.put('/api/clint', _formData, _config).then(function (res) {
-          _vm.success = res.success; // console.log(res);
-
-          _this3.getClients();
-        })["catch"](function (err) {
-          return console.log(err);
-        });
-        this.edit = false;
-      } // this.resetModal();                        
-
-    },
-    editClient: function editClient(client) {
-      this.edit = true;
-      this.client.id = client.id;
-      this.client.client_id = client.id;
-      this.client.name = client.name;
-      this.client.logo = client.logo;
-    },
-    // File Handle
-    createImage: function createImage(file) {
-      var reader = new FileReader();
-      var vm = this;
-
-      reader.onload = function (e) {
-        vm.logo = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    },
-    resetModal: function resetModal() {
-      this.client.name = '';
-      this.client.logo = null;
-    },
-    onImageChange: function onImageChange(e) {
-      this.image = e.target.files[0]; // this.client.logo = e.target.files[0];
+      axios.get('api/user-notification').then(function (res) {
+        _this3.messages = res.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
     }
   },
   mounted: function mounted() {
@@ -42253,295 +42177,245 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "col-md-6 col-sm-4 clearfix" }, [
+    _c("ul", { staticClass: "notification-area pull-right" }, [
+      _c("li", { staticClass: "dropdown" }, [
+        _c(
+          "i",
+          {
+            staticClass: "ti-bell dropdown-toggle",
+            attrs: { "data-toggle": "dropdown" },
+            on: {
+              click: function($event) {
+                return _vm.getOrders()
+              }
+            }
+          },
+          [_c("span", [_vm._v(_vm._s(_vm.orders_num))])]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "dropdown-menu bell-notify-box notify-box" }, [
+          _c("span", { staticClass: "notify-title" }, [
+            _vm._v("You have " + _vm._s(_vm.orders_num) + " new orders "),
+            _c("a", { attrs: { href: this.ordersRoute } }, [
+              _vm._v(" " + _vm._s(this.ordersRoute) + " view all")
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "nofity-list" },
+            _vm._l(_vm.orders, function(order) {
+              return _c(
+                "a",
+                {
+                  key: order.id,
+                  staticClass: "notify-item",
+                  attrs: { href: "#" }
+                },
+                [
+                  _vm._m(0, true),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "notify-text" }, [
+                    _c("p", [_vm._v(_vm._s(order.data.name_en))]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("Just Now")])
+                  ])
+                ]
+              )
+            }),
+            0
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "dropdown" }, [
+        _c(
+          "i",
+          {
+            staticClass: "fa fa-envelope-o dropdown-toggle",
+            attrs: { "data-toggle": "dropdown" }
+          },
+          [_c("span", [_vm._v(_vm._s(_vm.messages_num))])]
+        ),
+        _vm._v(" "),
+        _vm._m(1)
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6 col-sm-4 clearfix" }, [
-      _c("ul", { staticClass: "notification-area pull-right" }, [
-        _c("li", { staticClass: "dropdown" }, [
-          _c(
-            "i",
-            {
-              staticClass: "ti-bell dropdown-toggle",
-              attrs: { "data-toggle": "dropdown" }
-            },
-            [_c("span", [_vm._v("2")])]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown-menu bell-notify-box notify-box" },
-            [
-              _c("span", { staticClass: "notify-title" }, [
-                _vm._v("You have 3 new notifications "),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("view all")])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "nofity-list" }, [
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("i", { staticClass: "ti-key btn-danger" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("You have Changed Your Password")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Just Now")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("i", { staticClass: "ti-comments-smiley btn-info" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("New Commetns On Post")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("30 Seconds ago")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("i", { staticClass: "ti-key btn-primary" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("Some special like you")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Just Now")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("i", { staticClass: "ti-comments-smiley btn-info" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("New Commetns On Post")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("30 Seconds ago")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("i", { staticClass: "ti-key btn-primary" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("Some special like you")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Just Now")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("i", { staticClass: "ti-key btn-danger" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("You have Changed Your Password")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Just Now")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("i", { staticClass: "ti-key btn-danger" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("You have Changed Your Password")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Just Now")])
-                  ])
-                ])
-              ])
-            ]
-          )
+    return _c("div", { staticClass: "notify-thumb" }, [
+      _c("i", { staticClass: "ti-shopping-cart-full btn-danger" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "dropdown-menu notify-box nt-enveloper-box" },
+      [
+        _c("span", { staticClass: "notify-title" }, [
+          _vm._v("You have 3 new notifications "),
+          _c("a", { attrs: { href: "#" } }, [_vm._v("view all")])
         ]),
         _vm._v(" "),
-        _c("li", { staticClass: "dropdown" }, [
-          _c(
-            "i",
-            {
-              staticClass: "fa fa-envelope-o dropdown-toggle",
-              attrs: { "data-toggle": "dropdown" }
-            },
-            [_c("span", [_vm._v("3")])]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "dropdown-menu notify-box nt-enveloper-box" },
-            [
-              _c("span", { staticClass: "notify-title" }, [
-                _vm._v("You have 3 new notifications "),
-                _c("a", { attrs: { href: "#" } }, [_vm._v("view all")])
+        _c("div", { staticClass: "nofity-list" }, [
+          _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
+            _c("div", { staticClass: "notify-thumb" }, [
+              _c("img", {
+                attrs: {
+                  src: "assets/images/author/author-img1.jpg",
+                  alt: "image"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "notify-text" }, [
+              _c("p", [_vm._v("Aglae Mayer")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "msg" }, [
+                _vm._v("Hey I am waiting for you...")
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "nofity-list" }, [
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/images/author/author-img1.jpg",
-                        alt: "image"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("Aglae Mayer")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "msg" }, [
-                      _vm._v("Hey I am waiting for you...")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("3:15 PM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/images/author/author-img2.jpg",
-                        alt: "image"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("Aglae Mayer")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "msg" }, [
-                      _vm._v("When you can connect with me...")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("3:15 PM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/images/author/author-img3.jpg",
-                        alt: "image"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("Aglae Mayer")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "msg" }, [
-                      _vm._v("I missed you so much...")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("3:15 PM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/images/author/author-img4.jpg",
-                        alt: "image"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("Aglae Mayer")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "msg" }, [
-                      _vm._v("Your product is completely Ready...")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("3:15 PM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/images/author/author-img2.jpg",
-                        alt: "image"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("Aglae Mayer")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "msg" }, [
-                      _vm._v("Hey I am waiting for you...")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("3:15 PM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/images/author/author-img1.jpg",
-                        alt: "image"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("Aglae Mayer")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "msg" }, [
-                      _vm._v("Hey I am waiting for you...")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("3:15 PM")])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
-                  _c("div", { staticClass: "notify-thumb" }, [
-                    _c("img", {
-                      attrs: {
-                        src: "assets/images/author/author-img3.jpg",
-                        alt: "image"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v("Aglae Mayer")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "msg" }, [
-                      _vm._v("Hey I am waiting for you...")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("3:15 PM")])
-                  ])
-                ])
-              ])
-            ]
-          )
+              _c("span", [_vm._v("3:15 PM")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
+            _c("div", { staticClass: "notify-thumb" }, [
+              _c("img", {
+                attrs: {
+                  src: "assets/images/author/author-img2.jpg",
+                  alt: "image"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "notify-text" }, [
+              _c("p", [_vm._v("Aglae Mayer")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "msg" }, [
+                _vm._v("When you can connect with me...")
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v("3:15 PM")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
+            _c("div", { staticClass: "notify-thumb" }, [
+              _c("img", {
+                attrs: {
+                  src: "assets/images/author/author-img3.jpg",
+                  alt: "image"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "notify-text" }, [
+              _c("p", [_vm._v("Aglae Mayer")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "msg" }, [
+                _vm._v("I missed you so much...")
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v("3:15 PM")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
+            _c("div", { staticClass: "notify-thumb" }, [
+              _c("img", {
+                attrs: {
+                  src: "assets/images/author/author-img4.jpg",
+                  alt: "image"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "notify-text" }, [
+              _c("p", [_vm._v("Aglae Mayer")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "msg" }, [
+                _vm._v("Your product is completely Ready...")
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v("3:15 PM")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
+            _c("div", { staticClass: "notify-thumb" }, [
+              _c("img", {
+                attrs: {
+                  src: "assets/images/author/author-img2.jpg",
+                  alt: "image"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "notify-text" }, [
+              _c("p", [_vm._v("Aglae Mayer")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "msg" }, [
+                _vm._v("Hey I am waiting for you...")
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v("3:15 PM")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
+            _c("div", { staticClass: "notify-thumb" }, [
+              _c("img", {
+                attrs: {
+                  src: "assets/images/author/author-img1.jpg",
+                  alt: "image"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "notify-text" }, [
+              _c("p", [_vm._v("Aglae Mayer")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "msg" }, [
+                _vm._v("Hey I am waiting for you...")
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v("3:15 PM")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "notify-item", attrs: { href: "#" } }, [
+            _c("div", { staticClass: "notify-thumb" }, [
+              _c("img", {
+                attrs: {
+                  src: "assets/images/author/author-img3.jpg",
+                  alt: "image"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "notify-text" }, [
+              _c("p", [_vm._v("Aglae Mayer")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "msg" }, [
+                _vm._v("Hey I am waiting for you...")
+              ]),
+              _vm._v(" "),
+              _c("span", [_vm._v("3:15 PM")])
+            ])
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true

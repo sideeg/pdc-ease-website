@@ -4,20 +4,20 @@
             <!-- <li id="full-view"><i class="ti-fullscreen"></i></li>
             <li id="full-view-exit"><i class="ti-zoom-out"></i></li> -->
             <li class="dropdown">
-                <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                    <span>2</span>
+                <i class="ti-bell dropdown-toggle" data-toggle="dropdown" @click="getOrders()">
+                    <span>{{orders_num}}</span>
                 </i>
                 <div class="dropdown-menu bell-notify-box notify-box">
-                    <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
+                    <span class="notify-title">You have {{orders_num}} new orders <a :href="this.ordersRoute"> {{this.ordersRoute}} view all</a></span>
                     <div class="nofity-list">
-                        <a href="#" class="notify-item">
-                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
+                        <a href="#" class="notify-item" v-for="order in orders" :key="order.id" >
+                            <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
                             <div class="notify-text">
-                                <p>You have Changed Your Password</p>
+                                <p>{{order.data.name_en}}</p>
                                 <span>Just Now</span>
                             </div>
                         </a>
-                        <a href="#" class="notify-item">
+                        <!-- <a href="#" class="notify-item">
                             <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
                             <div class="notify-text">
                                 <p>New Commetns On Post</p>
@@ -58,12 +58,12 @@
                                 <p>You have Changed Your Password</p>
                                 <span>Just Now</span>
                             </div>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </li>
             <li class="dropdown">
-                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
+                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>{{messages_num}}</span></i>
                 <div class="dropdown-menu notify-box nt-enveloper-box">
                     <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
                     <div class="nofity-list">
@@ -148,146 +148,69 @@
     export default {
         data() {
             return {
-                clients: [],
-                client: {
-                    name: '',
-                    logo: null,
-                },
-                client_id: '',
-                pagination: {},
-                edit: false,
-                success: '',
+                orders:[],
+                order: {
+                    name_en: '',
+                    phone: '',
+                }, 
+
+                messages:[],
+                message: {
+                    name_en: '',
+                    phone: '',
+                }, 
+
+                orders_num: 0,
+                messages_num: 0,
             }
         },
-        props: ['remember_token'],
-
+       props: [
+           'ordersRoute',
+           'messagesRoute'
+       ],
         created() {
             // this.http.headers.common['remember_token'] = this.remember_token;
-            this.getClients()
-            console.log(this.remember_token)
+            this.getNotifyNumber();
+            // this.getMessagesNumber();
+
         },
 
         methods: {
-            getClients(page_url) {
-                let vm = this;
-                page_url = page_url || 'api/clint';
-                fetch(page_url)
-                .then(res => res.json())
+            getNotifyNumber() {
+                // Orders Nutification Number
+                axios.get('api/user-notification-num')
                 .then(res => {
-                    this.clients = res.data;
-                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
-                    // console.log(res.data);
-
-                }
-                )
+                    this.orders_num = res.data;
+                })
                 .catch(err => console.log(err));
-            },
-            // Pagination
 
-            makePagination(current_page, last_page, next_page_url , prev_page_url) {
-
-                let pagination = {
-                    current_page : current_page,
-                    last_page : last_page,
-                    next_page_url : next_page_url,
-                    prev_page_url : prev_page_url
-                }
-                this.pagination = pagination;
+                // Messages Nutification Number
+                axios.get('api/user-message-num')
+                .then(res => {
+                    this.messages_num = res.data;
+                })
+                .catch(err => console.log(err));
+                console.log(this.ordersRoute);
 
             },
-            // Delete Client
-            deleteClient(id){
-                if(confirm('Are You Sure ?')){
-                    fetch(`api/clint/${id}`, {
-                        method: 'delete'
-                    })
-                    .then(res => res.json())
-                    .then(res => {
-                        // alert('Client Deleted !');
-                        this.getClients();
-                        // console.log(res);
-
-                    });
-                }
-            },
-            // Add Client
-            addClient(){
-                if(this.edit === false){
-                    // Add 
-                   let vm = this;
- 
-                    const config = {
-                        headers: { 
-                            'content-type': 'multipart/form-data',
-                            // 'remember_token' : this.remember_token
-                             }
-                    }
-    
-                    let formData = new FormData();
-                    formData.append('logo', this.image);
-                    formData.append('name', this.client.name);
-                    // console.log(this.client.logo);
-                    axios.post('/api/clint', formData, config)
-                        .then(res => {
-                            vm.success = res.success;
-                            // console.log(res);
-                            this.getClients();
-
-                        })
-                        .catch(err => console.log(err));
-                        
-                }else {
-                    // Update
-                    let vm = this;
- 
-                    const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
-                    }
-    
-                    let formData = new FormData();
-                    formData.append('image', this.image);
-                    formData.append('name', this.client.title_ar);
-    
-                    axios.put('/api/clint', formData, config)
-                        .then(res => {
-                            vm.success = res.success;
-                            // console.log(res);
-                            this.getClients();
-
-                        })
-                        .catch(err => console.log(err));
-                        
-                    this.edit = false;
-
-                }
-                // this.resetModal();                        
+            // Get Orders
+            getOrders(){
+                axios.get('api/user-notification')
+                .then(res => {
+                    this.orders = res.data;
+                    console.log(this.orders);
+                })
+                .catch(err => console.log(err));
 
             },
-            editClient(client){
-                this.edit = true;
-                this.client.id = client.id;
-                this.client.client_id = client.id;
-                this.client.name = client.name;
-                this.client.logo = client.logo;
+            // Get Messages
+            getMessages(){
+                axios.get('api/user-notification')
+                .then(res => {
+                    this.messages = res.data;
+                })
+                .catch(err => console.log(err));
 
-            },
-            // File Handle
-            createImage(file) {
-                let reader = new FileReader();
-                let vm = this;
-                reader.onload = (e) => {
-                    vm.logo = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            },
-
-            resetModal() {
-                this.client.name = '';
-                this.client.logo = null;
-            },
-            onImageChange(e){
-                this.image = e.target.files[0];
-                // this.client.logo = e.target.files[0];
             },
            
         },
