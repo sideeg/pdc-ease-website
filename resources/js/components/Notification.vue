@@ -8,12 +8,12 @@
                     <span>{{orders_num}}</span>
                 </i>
                 <div class="dropdown-menu bell-notify-box notify-box">
-                    <span class="notify-title">You have {{orders_num}} new orders <a :href="this.ordersRoute"> {{this.ordersRoute}} view all</a></span>
+                    <span class="notify-title">You have {{orders_num}} new orders <a href="/dashboard-messages"> view all</a></span>
                     <div class="nofity-list">
-                        <a href="#" class="notify-item" v-for="order in orders" :key="order.id" >
+                        <a href="javascript:void(0);" class="notify-item" v-for="order in orders.data" :key="order.id" >
                             <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
                             <div class="notify-text">
-                                <p>{{order.data.name_en}}</p>
+                                <p>{{order.data}}</p>
                                 <span>Just Now</span>
                             </div>
                         </a>
@@ -63,21 +63,21 @@
                 </div>
             </li>
             <li class="dropdown">
-                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>{{messages_num}}</span></i>
+                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown" @click="getMessages()">
+                    <span>{{messages_num}}</span>
+                </i>
                 <div class="dropdown-menu notify-box nt-enveloper-box">
-                    <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
+                    <span class="notify-title">You have {{messages_num}} new messages <a href="/dashboard-services-orders">view all</a></span>
                     <div class="nofity-list">
-                        <a href="#" class="notify-item">
-                            <div class="notify-thumb">
-                                <img src="assets/images/author/author-img1.jpg" alt="image">
-                            </div>
+                        <a href="javascript:void(0);" class="notify-item" v-for="message in messages.data" :key="message.id">
+                            <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
                             <div class="notify-text">
-                                <p>Aglae Mayer</p>
+                                <p>{{ message.data }}</p>
                                 <span class="msg">Hey I am waiting for you...</span>
                                 <span>3:15 PM</span>
                             </div>
                         </a>
-                        <a href="#" class="notify-item">
+                        <!-- <a href="#" class="notify-item">
                             <div class="notify-thumb">
                                 <img src="assets/images/author/author-img2.jpg" alt="image">
                             </div>
@@ -136,7 +136,7 @@
                                 <span class="msg">Hey I am waiting for you...</span>
                                 <span>3:15 PM</span>
                             </div>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </li>
@@ -149,9 +149,11 @@
         data() {
             return {
                 orders:[],
-                order: {
-                    name_en: '',
-                    phone: '',
+                order: {         
+                    data: {
+                        name_en: '',
+                        phone: '',
+                    }
                 }, 
 
                 messages:[],
@@ -190,24 +192,25 @@
                     this.messages_num = res.data;
                 })
                 .catch(err => console.log(err));
-                console.log(this.ordersRoute);
+                // console.log(this.ordersRoute);
 
             },
             // Get Orders
             getOrders(){
                 axios.get('api/user-notification')
                 .then(res => {
-                    this.orders = res.data;
-                    console.log(this.orders);
+                    this.orders = res;
+                    console.log(this.orders.data);
                 })
                 .catch(err => console.log(err));
 
             },
             // Get Messages
             getMessages(){
-                axios.get('api/user-notification')
+                axios.get('api/user-message')
                 .then(res => {
-                    this.messages = res.data;
+                    this.messages = res;
+                    console.log(res);
                 })
                 .catch(err => console.log(err));
 
