@@ -17,7 +17,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body >
 
     <!-- preloader area start -->
     <div id="preloader">
@@ -59,6 +59,9 @@
         ]) !!};
 
         // console.log( window.Laravel.remember_token);
+
+        // CKEDITOR.replace( 'desc_en' );
+        // CKEDITOR.replace( 'desc_ar' );
      </script>
     
     <script src="{{ asset('js/app.js') }}" ></script>

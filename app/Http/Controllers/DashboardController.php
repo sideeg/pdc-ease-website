@@ -65,6 +65,11 @@ class DashboardController extends Controller
         return view('admin-layout.pages.tag');
     }
 
+    public function client()
+    {
+        return view('admin-layout.pages.client');
+    }
+
     public function admin()
     {
         return view('admin-layout.pages.admin');

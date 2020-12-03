@@ -2,15 +2,15 @@
     <div class="row justify-content-center">
         <!-- Modal -->
             <div class="row justify-content-center">
-                    <div class="col-lg-10 mt-3 d-flex justify-content-between">
+                    <div class="col-lg-10 mt-3 d-flex justify-content-between">       
                         <!-- <button class="btn btn-rounded btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="ti-plus"></i> New Article</button> -->
                         <div class="modal fade bd-example-modal-lg">
                             <div class="modal-dialog modal-lg">
-                                <form @submit.prevent="addSlide" enctype="multipart/form-data">
+                                <form @submit.prevent="addClient" enctype="multipart/form-data">
                                 <!-- <form @submit="formSubmit" enctype="multipart/form-data"> -->
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Slide</h5>
+                                            <h5 class="modal-title">Client</h5>
                                             <button type="button" class="close" data-dismiss="modal" @click="resetModal()"><code>&times;</code></button>
                                         </div>
                                         <div class="modal-body">
@@ -22,28 +22,17 @@
                                                 <div class="col-12">
                                                     <!-- <div class="card"> -->
                                                         <div class="card-body">
-                                                            <p class="text-muted font-14 mb-3">The <code>*</code> endicates an optional input</p>
+                                                            <!-- <p class="text-muted font-14 mb-3">The  endicates an optional input</p> -->
+                                                            
                                                             <div class="form-group">
-                                                                <label for="example-text-input" class="col-form-label">Title ar <code>*</code></label>
-                                                                <input class="form-control" type="text" v-model="slide.title_ar" id="example-text-input1">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="example-text-input" class="col-form-label">Title en <code>*</code></label>
-                                                                <input class="form-control" type="text" v-model="slide.title_en"  id="example-text-input2">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="desc_ar" class="col-form-label">Description ar <code>*</code></label>
-                                                                <textarea name="desc_ar" id="desc_ar" v-model="slide.desc_ar" class="form-control" cols="30" rows="4"></textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="desc_en" class="col-form-label">Description en <code>*</code></label>
-                                                                <textarea name="desc_en" id="desc_en" v-model="slide.desc_en" class="form-control" cols="30" rows="4"></textarea>
+                                                                <label for="example-text-input" class="col-form-label">Name </label>
+                                                                <input class="form-control" type="text" v-model="client.name" >
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label for="desc_"  class="col-form-label d-block">Video or Image</label>
+                                                                <label for="example-email-input"  class="col-form-label d-block">Client Logo</label>
                                                                 <!-- <input ref="file" type="file" @change.prevent="selectFile" class="col-form-label"> -->
                                                                 <input type="file" class="col-form-label d-block" v-on:change="onImageChange">
-                                                                <img v-bind:src="slide.sourse" alt="">
+                                                                <img v-bind:src="client.logo" alt="">
                                                             </div>
 
                                                         </div>
@@ -65,11 +54,11 @@
 
                     <!-- Show Service Details Modal -->
                     <div class="col-lg-10 mt-3 d-flex justify-content-between">
-                        <div class="modal fade show-slide-details-modal">
+                        <div class="modal fade show-client-details-modal">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Slide Details</h5>
+                                        <h5 class="modal-title">Client Details</h5>
                                         <button type="button" class="close" data-dismiss="modal"><code>&times;</code></button>
                                     </div>
                                     <div class="modal-body">
@@ -84,7 +73,7 @@
                                                                 <h4 class="mb-2 md-mt-2">Media heading</h4>
                                                                 <!-- <div class="row mb-3"><span class="col-lg-6 col-sm-12 font-italic"><b>Date:&ThickSpace; </b> 5 Fab, 2020</span></div> -->
                                                                 <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -105,18 +94,18 @@
             </div>
         <!-- End Modal -->
 
-
+        
 
         <!-- Progress Table start -->
             <div class="col-lg-10 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="header-title">Sliders</h4>
+                        <h4 class="header-title">Clients</h4>
                         <div class="container row justify-content-between">
                         <nav aria-label="page navigation example">
                             <ul class="pagination">
                                 <li class="page-item" v-bind:class="[{disabled: !pagination.prev_page_url}]" >
-                                    <a href="#" class="page-link" @click="getSlides(pagination.prev_page_url)">Previous</a>
+                                    <a href="#" class="page-link" @click="getClients(pagination.prev_page_url)">Previous</a>
                                 </li>
 
                                 <li class="page-item disabled">
@@ -126,11 +115,11 @@
                                 </li>
 
                                 <li class="page-item" v-bind:class="[{disabled: !pagination.next_page_url}]">
-                                    <a href="#" class="page-link" @click="getSlides(pagination.next_page_url)">Next</a>
+                                    <a href="#" class="page-link" @click="getClients(pagination.next_page_url)">Next</a>
                                 </li>
                             </ul>
                         </nav>
-                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="ti-plus mr-1"></i> Add Slider</button>
+                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" data-toggle="modal" data-target=".bd-example-modal-lg" ><i class="ti-plus mr-1"></i> New Client</button>
                         </div>
                         <div class="single-table">
                             <div class="table-responsive">
@@ -138,28 +127,23 @@
                                     <thead class="text-uppercase">
                                         <tr>
                                             <!-- <th scope="col">ID</th> -->
-                                            <th scope="col">Title</th>
+                                            <th scope="col">Name</th>
                                             <!-- <th scope="col">Description</th> -->
-                                            <th scope="col" class="text-center">Image</th>
+                                            <th scope="col">Image</th>
                                             <th scope="col"  class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="slide in slides" :key="slide.id" >
-                                            <td >{{slide.title_en ? slide.title_en : 'This Slide Has No Title'}}</td>
+                                        <tr v-for="client in clients" :key="client.id" >
+                                            <td >{{client.name ? client.name : 'This Client Has No Title'}}</td>
                                             <td>
-                                                <img v-if="slide.type == 0" :src="slide.sourse"  :alt="slide.title_en" class="table-img" srcset="">
-                                                <video v-if="slide.type == 1" width="320" height="240" controls class="table-img1">  
-                                                    <source :src="slide.sourse" type="video/mp4"> 
-                                                    <source :src="slide.sourse" type="video/ogg">
-                                                    Your browser does not support video.
-                                                </video>
+                                                <img :src="client.logo"  :alt="client.name" class="table-img bg-dark" srcset="">
                                             </td>
                                             <td class="">
                                                 <ul class="d-flex justify-content-center align-items-center">
-                                                    <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-service-details-modal"><i class="ti-eye o-icon"></i></a></li>
-                                                    <li class="mr-3"><a href="#" @click="editSlide(slide)" class="text-secondary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="ti-pencil o-icon"></i></a></li>
-                                                    <li><a href="#" @click="deleteSlide(slide.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
+                                                    <!-- <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-service-details-modal"><i class="ti-eye o-icon"></i></a></li> -->
+                                                    <li class="mr-3"><a href="#" @click="editClient(client)" class="text-secondary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="ti-pencil o-icon"></i></a></li>
+                                                    <li><a href="#" @click="deleteClient(client.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
                                                 </ul>
                                             </td>
                                         </tr>
@@ -178,17 +162,12 @@
     export default {
         data() {
             return {
-                slides: [],
-                slide: {
-                    title_en: '',
-                    title_ar: '',
-                    desc_en: '',
-                    desc_ar: '',
-                    sourse: null,
-                    // sourse_full_path: null,
-                    type: 0,
+                clients: [],
+                client: {
+                    name: '',
+                    logo: null,
                 },
-                slide_id: '',
+                client_id: '',
                 pagination: {},
                 edit: false,
                 success: '',
@@ -198,18 +177,18 @@
 
         created() {
             // this.http.headers.common['remember_token'] = this.remember_token;
-            this.getSlides()
+            this.getClients()
             console.log(this.remember_token)
         },
 
         methods: {
-            getSlides(page_url) {
+            getClients(page_url) {
                 let vm = this;
-                page_url = page_url || 'api/slider';
+                page_url = page_url || 'api/clint';
                 fetch(page_url)
                 .then(res => res.json())
                 .then(res => {
-                    this.slides = res.data;
+                    this.clients = res.data;
                     vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
                     // console.log(res.data);
 
@@ -230,91 +209,80 @@
                 this.pagination = pagination;
 
             },
-            // Delete Slide
-            deleteSlide(id){
+            // Delete Client
+            deleteClient(id){
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/slider/${id}`, {
+                    fetch(`api/clint/${id}`, {
                         method: 'delete'
                     })
                     .then(res => res.json())
                     .then(res => {
-                        alert('Slide Deleted !');
-                        this.getSlides();
+                        // alert('Client Deleted !');
+                        this.getClients();
                         // console.log(res);
 
                     });
                 }
             },
-            // Add Slide
-            addSlide(){
+            // Add Client
+            addClient(){
                 if(this.edit === false){
-                    // Add
+                    // Add 
                    let vm = this;
-
+ 
                     const config = {
-                        headers: {
+                        headers: { 
                             'content-type': 'multipart/form-data',
-                            'remember_token' : this.remember_token
+                            // 'remember_token' : this.remember_token
                              }
                     }
-
+    
                     let formData = new FormData();
-                    formData.append('image', this.image);
-                    formData.append('title_ar', this.slide.title_ar);
-                    formData.append('title_en', this.slide.title_en);
-                    formData.append('desc_en', this.slide.desc_en);
-                    formData.append('desc_ar', this.slide.desc_ar);
-                    // formData.append('type', this.slide.type);
-
-                    axios.post('/api/slider', formData, config)
+                    formData.append('logo', this.image);
+                    formData.append('name', this.client.name);
+                    // console.log(this.client.logo);
+                    axios.post('/api/clint', formData, config)
                         .then(res => {
                             vm.success = res.success;
                             // console.log(res);
-                            this.getSlides();
+                            this.getClients();
 
                         })
                         .catch(err => console.log(err));
-
+                        
                 }else {
                     // Update
                     let vm = this;
-
+ 
                     const config = {
                         headers: { 'content-type': 'multipart/form-data' }
                     }
-
+    
                     let formData = new FormData();
                     formData.append('image', this.image);
-                    formData.append('title_ar', this.slide.title_ar);
-                    formData.append('title_en', this.slide.title_en);
-                    formData.append('desc_en', this.slide.desc_en);
-                    formData.append('desc_ar', this.slide.desc_ar);
-                    // formData.append('type', this.slide.type);
-
-                    axios.put('/api/slider', formData, config)
+                    formData.append('name', this.client.title_ar);
+    
+                    axios.put('/api/clint', formData, config)
                         .then(res => {
                             vm.success = res.success;
                             // console.log(res);
-                            this.getSlides();
+                            this.getClients();
 
                         })
                         .catch(err => console.log(err));
-
+                        
                     this.edit = false;
 
                 }
-                // this.resetModal();
+                // this.resetModal();                        
 
             },
-            editSlide(slide){
+            editClient(client){
                 this.edit = true;
-                this.slide.id = slide.id;
-                this.slide.slide_id = slide.id;
-                this.slide.title_en = slide.title_en;
-                this.slide.title_ar = slide.title_ar;
-                this.slide.desc_en = slide.desc_en;
-                this.slide.desc_ar = slide.desc_ar;
-                this.slide.sourse = slide.sourse;
+                this.client.id = client.id;
+                this.client.client_id = client.id;
+                this.client.name = client.name;
+                this.client.logo = client.logo;
 
             },
             // File Handle
@@ -322,45 +290,20 @@
                 let reader = new FileReader();
                 let vm = this;
                 reader.onload = (e) => {
-                    vm.sourse = e.target.result;
+                    vm.logo = e.target.result;
                 };
                 reader.readAsDataURL(file);
             },
 
             resetModal() {
-                this.slide.title_en = '';
-                this.slide.title_ar = '';
-                this.slide.desc_en = '';
-                this.slide.desc_ar = '';
-                this.slide.sourse = null;
+                this.client.name = '';
+                this.client.logo = null;
             },
             onImageChange(e){
                 this.image = e.target.files[0];
-                // this.slide.type = e.target.files[0].type;
+                // this.client.logo = e.target.files[0];
             },
-            // formSubmit(e) {
-            //     e.preventDefault();
-            //     let vm = this;
-
-            //     const config = {
-            //         headers: { 'content-type': 'multipart/form-data' }
-            //     }
-
-            //     let formData = new FormData();
-            //     formData.append('image', this.image);
-            //     formData.append('title_ar', this.slide.title_ar);
-            //     formData.append('title_en', this.slide.title_en);
-            //     formData.append('desc_en', this.slide.desc_en);
-            //     formData.append('desc_ar', this.slide.desc_ar);
-            //     // formData.append('type', this.slide.type);
-
-            //     axios.post('/api/slider', formData, config)
-            //         .then(res => {
-            //             vm.success = res.success;
-            //             console.log(res);
-            //         })
-            //         .catch(err => console.log(err));
-            // },
+           
         },
         mounted() {
             console.log('Component mounted.')

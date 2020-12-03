@@ -33,6 +33,9 @@ Vue.component('service-order', require('./components/ServiceOrder.vue').default)
 Vue.component('service', require('./components/Service.vue').default);
 Vue.component('blog', require('./components/Blog.vue').default);
 Vue.component('tag', require('./components/Tag.vue').default);
+Vue.component('client', require('./components/Client.vue').default);
+Vue.component('notify', require('./components/Notification.vue').default);
+
 
 Vue.component('admin', require('./components/Admin.vue').default);
 

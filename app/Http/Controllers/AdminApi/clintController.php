@@ -16,7 +16,7 @@ class clintController extends Controller
      */
     public function clintSave(Request $request)
     {
-
+        // dd($request);
         $validatedData = Validator::make($request->all(),[
             'logo' => 'required',
         ]);
