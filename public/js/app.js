@@ -3611,8 +3611,11 @@ __webpack_require__.r(__webpack_exports__);
       success: ''
     };
   },
+  props: ['remember_token'],
   created: function created() {
+    // this.http.headers.common['remember_token'] = this.remember_token;
     this.getSlides();
+    console.log(this.remember_token);
   },
   methods: {
     getSlides: function getSlides(page_url) {
@@ -3665,7 +3668,8 @@ __webpack_require__.r(__webpack_exports__);
         var vm = this;
         var config = {
           headers: {
-            'content-type': 'multipart/form-data'
+            'content-type': 'multipart/form-data',
+            'remember_token': this.remember_token
           }
         };
         var formData = new FormData();
@@ -55516,6 +55520,14 @@ Vue.component('service', __webpack_require__(/*! ./components/Service.vue */ "./
 Vue.component('blog', __webpack_require__(/*! ./components/Blog.vue */ "./resources/js/components/Blog.vue")["default"]);
 Vue.component('tag', __webpack_require__(/*! ./components/Tag.vue */ "./resources/js/components/Tag.vue")["default"]);
 Vue.component('admin', __webpack_require__(/*! ./components/Admin.vue */ "./resources/js/components/Admin.vue")["default"]);
+axios.defaults.headers = {
+  'X-CSRF-TOKEN': Laravel.csrfToken,
+  'X-Requested-With': 'XMLHttpRequest',
+  'remember_token': window.Laravel.remember_token
+}; // Vue.http.headers.common['remember_token'] = window.Laravel.remember_token;
+// console.log(window.Laravel.remember_token);
+// window.Vue.prototype.$http = axios;
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -55577,15 +55589,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!*******************************************!*\
   !*** ./resources/js/components/Admin.vue ***!
   \*******************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Admin_vue_vue_type_template_id_58b78718___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Admin.vue?vue&type=template&id=58b78718& */ "./resources/js/components/Admin.vue?vue&type=template&id=58b78718&");
 /* harmony import */ var _Admin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Admin.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Admin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Admin_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -55615,7 +55626,7 @@ component.options.__file = "resources/js/components/Admin.vue"
 /*!********************************************************************!*\
   !*** ./resources/js/components/Admin.vue?vue&type=script&lang=js& ***!
   \********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

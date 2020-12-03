@@ -64,7 +64,7 @@ class SliderController extends Controller
      */
 
     public function sliders(Request $request){
-
+        // dd($request->header('remember_token', 'default'));
         return response()->json(slide_bar::paginate(9),200);
         // return json_encode(slide_bar::paginate(9));
     }
@@ -143,6 +143,7 @@ class SliderController extends Controller
          */
         public function sliderDelete($id)
         {
+            // dd($request);
             $slider = slide_bar::find($id);
             if (is_null($slider)){
                 return response()->json('slider not found',404);

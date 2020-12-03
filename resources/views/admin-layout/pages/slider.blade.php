@@ -6,7 +6,7 @@
 
 {{-- @php Auth::logout() @endphp --}}
 
-<slider></slider>
+<slider remember_token="{{ Auth::user()->remember_token}}"></slider>
 {{-- <slider-new></slider-new> --}}
 
 @endsection

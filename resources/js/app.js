@@ -38,7 +38,17 @@ Vue.component('admin', require('./components/Admin.vue').default);
 
 
 
+axios.defaults.headers = {
+    'X-CSRF-TOKEN': Laravel.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest',
+    'remember_token': window.Laravel.remember_token,
+};
 
+// Vue.http.headers.common['remember_token'] = window.Laravel.remember_token;
+
+// console.log(window.Laravel.remember_token);
+
+// window.Vue.prototype.$http = axios;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

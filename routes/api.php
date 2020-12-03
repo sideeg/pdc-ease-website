@@ -18,15 +18,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/user-notification-num','App\Http\Controllers\AdminApi\UserController@orderNotficationNum');
-Route::get('/user-notification','App\Http\Controllers\AdminApi\UserController@notfication');
-Route::get('/user-message-num','App\Http\Controllers\AdminApi\UserController@messageNotficationNum');
-Route::get('/user-message','App\Http\Controllers\AdminApi\UserController@message');
-
 
 
 /******************************** super Admin access *************************************** */
 // Route::group(['middleware' => 'super_admin_api_auth'], function () {
+
+Route::get('/user-notification-num','App\Http\Controllers\AdminApi\UserController@orderNotficationNum');
+Route::get('/user-notification','App\Http\Controllers\AdminApi\UserController@notfication');
+Route::get('/user-message-num','App\Http\Controllers\AdminApi\UserController@messageNotficationNum');
+Route::get('/user-message','App\Http\Controllers\AdminApi\UserController@message');
 
 Route::post('/user','App\Http\Controllers\AdminApi\UserController@UserSave');
 Route::get('/user','App\Http\Controllers\AdminApi\UserController@Users');
@@ -76,6 +76,7 @@ Route::delete("/blog/{id}","App\Http\Controllers\AdminApi\BlogController@blogDel
 
 /************************************** admin access *****************************************************/
 // Route::group(['middleware' => 'admin_api_auth'], function () {
+
 Route::post('/clint','App\Http\Controllers\AdminApi\clintController@clintSave');
 Route::get('/clint','App\Http\Controllers\AdminApi\clintController@clint');
 Route::put("/clint","App\Http\Controllers\AdminApi\clintController@clintUpdate");

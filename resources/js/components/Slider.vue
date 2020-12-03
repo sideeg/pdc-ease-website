@@ -185,9 +185,12 @@
                 success: '',
             }
         },
+        props: ['remember_token'],
 
         created() {
+            // this.http.headers.common['remember_token'] = this.remember_token;
             this.getSlides()
+            console.log(this.remember_token)
         },
 
         methods: {
@@ -240,7 +243,10 @@
                    let vm = this;
  
                     const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token' : this.remember_token
+                             }
                     }
     
                     let formData = new FormData();

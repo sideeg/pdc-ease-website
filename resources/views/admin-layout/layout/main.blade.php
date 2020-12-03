@@ -52,10 +52,16 @@
     </div>
     <!-- page container area end -->
 
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+            'remember_token' => Auth::user()->remember_token ?? null,
+        ]) !!};
 
-
+        // console.log( window.Laravel.remember_token);
+     </script>
+    
     <script src="{{ asset('js/app.js') }}" ></script>
-
 
     @include('admin-layout/partials.scripts')
 
