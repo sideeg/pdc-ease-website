@@ -9,12 +9,14 @@ class orders extends Model
 {
     use HasFactory;
 
-    protected $fillable = [  "name","email","phone",'status'];
+    protected $fillable = [  "name","email","phone",'status','created_at'];
 
     public function order_tags()
     {
         return $this->hasMany('App\Models\orders_tags','order_id');
     }
+
+
 
 
 }
