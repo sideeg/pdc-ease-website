@@ -37,7 +37,7 @@ class BlogController extends Controller
 
         //create new blog
         // $blog = blogs::create($request->all());
-        $uploads_folder = storage_path('app/public/blogs');
+        $uploads_folder = 'images\svg\blogs\\';//storage_path('app/public/blogs');
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
@@ -52,7 +52,7 @@ class BlogController extends Controller
             'title_ar' => $request->title_ar,
             'desc_en' => $request->desc_en,
             'desc_ar' => $request->desc_ar,
-            'image' => $imageName,
+            'image' => $uploads_folder.$imageName,
             'tag_id' => $request->tag_id,
 
         ]);
@@ -79,7 +79,7 @@ class BlogController extends Controller
 
 
             if(!is_null($request->image)){
-                $uploads_folder = storage_path('app/public/blogs');
+                $uploads_folder = 'images\svg\blogs\\';//storage_path('app/public/blogs');
                 if (!file_exists($uploads_folder)) {
                      mkdir($uploads_folder, 0777, true);
                 }
@@ -89,7 +89,7 @@ class BlogController extends Controller
                 $imageName = time().'.'.$request->image->extension();
                 $request->image->move($uploads_folder, $imageName);
 
-                $blog->image = $imageName;
+                $blog->image =$uploads_folder.$imageName;
 
             }
 

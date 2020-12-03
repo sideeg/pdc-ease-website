@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <!-- Modal -->
             <div class="row justify-content-center">
-                    <div class="col-lg-10 mt-3 d-flex justify-content-between">       
+                    <div class="col-lg-10 mt-3 d-flex justify-content-between">
                         <!-- <button class="btn btn-rounded btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="ti-plus"></i> New Article</button> -->
                         <div class="modal fade bd-example-modal-lg">
                             <div class="modal-dialog modal-lg">
@@ -84,7 +84,7 @@
                                                                 <h4 class="mb-2 md-mt-2">Media heading</h4>
                                                                 <!-- <div class="row mb-3"><span class="col-lg-6 col-sm-12 font-italic"><b>Date:&ThickSpace; </b> 5 Fab, 2020</span></div> -->
                                                                 <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -105,7 +105,7 @@
             </div>
         <!-- End Modal -->
 
-        
+
 
         <!-- Progress Table start -->
             <div class="col-lg-10 mt-5">
@@ -248,16 +248,16 @@
             // Add Slide
             addSlide(){
                 if(this.edit === false){
-                    // Add 
+                    // Add
                    let vm = this;
- 
+
                     const config = {
-                        headers: { 
+                        headers: {
                             'content-type': 'multipart/form-data',
                             'remember_token' : this.remember_token
                              }
                     }
-    
+
                     let formData = new FormData();
                     formData.append('image', this.image);
                     formData.append('title_ar', this.slide.title_ar);
@@ -265,7 +265,7 @@
                     formData.append('desc_en', this.slide.desc_en);
                     formData.append('desc_ar', this.slide.desc_ar);
                     // formData.append('type', this.slide.type);
-    
+
                     axios.post('/api/slider', formData, config)
                         .then(res => {
                             vm.success = res.success;
@@ -274,15 +274,15 @@
 
                         })
                         .catch(err => console.log(err));
-                        
+
                 }else {
                     // Update
                     let vm = this;
- 
+
                     const config = {
                         headers: { 'content-type': 'multipart/form-data' }
                     }
-    
+
                     let formData = new FormData();
                     formData.append('image', this.image);
                     formData.append('title_ar', this.slide.title_ar);
@@ -290,7 +290,7 @@
                     formData.append('desc_en', this.slide.desc_en);
                     formData.append('desc_ar', this.slide.desc_ar);
                     // formData.append('type', this.slide.type);
-    
+
                     axios.put('/api/slider', formData, config)
                         .then(res => {
                             vm.success = res.success;
@@ -299,11 +299,11 @@
 
                         })
                         .catch(err => console.log(err));
-                        
+
                     this.edit = false;
 
                 }
-                // this.resetModal();                        
+                // this.resetModal();
 
             },
             editSlide(slide){
@@ -341,11 +341,11 @@
             // formSubmit(e) {
             //     e.preventDefault();
             //     let vm = this;
- 
+
             //     const config = {
             //         headers: { 'content-type': 'multipart/form-data' }
             //     }
- 
+
             //     let formData = new FormData();
             //     formData.append('image', this.image);
             //     formData.append('title_ar', this.slide.title_ar);
@@ -353,7 +353,7 @@
             //     formData.append('desc_en', this.slide.desc_en);
             //     formData.append('desc_ar', this.slide.desc_ar);
             //     // formData.append('type', this.slide.type);
- 
+
             //     axios.post('/api/slider', formData, config)
             //         .then(res => {
             //             vm.success = res.success;
