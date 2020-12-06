@@ -2417,8 +2417,8 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
-        _this.articles = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+        _this.articles = res.data.data;
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2474,8 +2474,8 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('desc_ar', this.article.desc_ar);
         formData.append('tag_id', this.article.tag_id);
         axios.post('/api/blog', formData, config).then(function (res) {
-          vm.success = res.success; // console.log(res);
-
+          // vm.success = res.success;
+          // console.log(res);
           _this3.getArticles();
         })["catch"](function (err) {
           return console.log(err);
@@ -3322,6 +3322,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('api/user-message-num', config).then(function (res) {
         _this.messages_num = res.data;
+        console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       }); // console.log(this.ordersRoute);
@@ -3348,8 +3349,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       axios.get('api/user-message', config).then(function (res) {
-        _this3.messages = res;
-        console.log(res);
+        _this3.messages = res.data;
+        console.log(res.data.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -42425,7 +42426,7 @@ var render = function() {
                     _vm._m(1, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "notify-text" }, [
-                      _c("p", [_vm._v(_vm._s(message.data))]),
+                      _c("p", [_vm._v(_vm._s(message.name))]),
                       _vm._v(" "),
                       _c("span", { staticClass: "msg" }, [
                         _vm._v("Hey I am waiting for you...")

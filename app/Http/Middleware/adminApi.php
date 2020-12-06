@@ -22,11 +22,7 @@ class adminApi
         // dd($request->header('remember_token', 'default'));
         $user = User::where('remember_token',$request->header('remember_token', 'default'))->get();
         $user = $user->toArray();
-<<<<<<< HEAD
-        // dd($user[0]['name']);
-=======
         // dd($user);
->>>>>>> 1621b3b5c46a1b921f74393f1a49ef7b0245fdf7
 
 
         if(is_null($user) || sizeof($user) ==0){

@@ -72,7 +72,7 @@
                         <a href="javascript:void(0);" class="notify-item" v-for="message in messages.data" :key="message.id">
                             <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
                             <div class="notify-text">
-                                <p>{{ message.data }}</p>
+                                <p>{{ message.name }}</p>
                                 <span class="msg">Hey I am waiting for you...</span>
                                 <span>3:15 PM</span>
                             </div>
@@ -196,6 +196,7 @@
                 axios.get('api/user-message-num', config)
                 .then(res => {
                     this.messages_num = res.data;
+                    console.log(res.data)
                 })
                 .catch(err => console.log(err));
                 // console.log(this.ordersRoute);
@@ -221,8 +222,8 @@
                 }
                 axios.get('api/user-message', config)
                 .then(res => {
-                    this.messages = res;
-                    console.log(res);
+                    this.messages = res.data;
+                    console.log(res.data.data);
                 })
                 .catch(err => console.log(err));
 
