@@ -14,9 +14,9 @@
                                             <button type="button" class="close" data-dismiss="modal" @click="resetModal()"><code>&times;</code></button>
                                         </div>
                                         <div class="modal-body">
-                                            <div v-if="success != ''" class="alert alert-success" role="alert">
+                                            <!-- <div v-if="success != ''" class="alert alert-success" role="alert">
                                                 {{success}}
-                                            </div>
+                                            </div> -->
                                             <div class="row">
                                                 <!-- Textual inputs start -->
                                                 <div class="col-12">
@@ -28,11 +28,13 @@
                                                                 <label for="example-text-input" class="col-form-label">Name </label>
                                                                 <input class="form-control" type="text" v-model="client.name" >
                                                             </div>
-                                                            <div class="form-group row">
-                                                                <label for="example-email-input"  class="col-form-label d-block">Client Logo</label>
-                                                                <!-- <input ref="file" type="file" @change.prevent="selectFile" class="col-form-label"> -->
-                                                                <input type="file" class="col-form-label d-block" v-on:change="onImageChange">
-                                                                <img v-bind:src="client.logo" alt="">
+                                                            <div class="form-group container row justify-content-between align-items-center">
+                                                                <div>
+                                                                    <label for="example-email-input"  class="col-form-label d-block">Client Logo</label>
+                                                                    <!-- <input ref="file" type="file" @change.prevent="selectFile" class="col-form-label"> -->
+                                                                    <input type="file" class="col-form-label d-block" v-on:change="onImageChange">
+                                                                </div>
+                                                                <img v-bind:src="client.logo" class="bg-dark" alt="">
                                                             </div>
 
                                                         </div>
@@ -178,14 +180,22 @@
         created() {
             // this.http.headers.common['remember_token'] = this.remember_token;
             this.getClients()
-            console.log(this.remember_token)
+            // console.log(this.remember_token)
+            console.log(window.Laravel.remember_token)
+
         },
 
         methods: {
             getClients(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/clint';
-                fetch(page_url)
+                const config = {
+                        headers: { 
+                            // 'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
+                    }
+                axios.get(page_url, config)
                 .then(res => res.json())
                 .then(res => {
                     this.clients = res.data;
@@ -211,11 +221,15 @@
             },
             // Delete Client
             deleteClient(id){
+                const config = {
+                        headers: { 
+                            // 'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
+                    }
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/clint/${id}`, {
-                        method: 'delete'
-                    })
-                    .then(res => res.json())
+                    axios.delete(`api/clint/${id}`, config)
+                    // .then(res => res.json())
                     .then(res => {
                         // alert('Client Deleted !');
                         this.getClients();
@@ -233,14 +247,14 @@
                     const config = {
                         headers: { 
                             'content-type': 'multipart/form-data',
-                            // 'remember_token' : this.remember_token
+                            'remember_token' : this.remember_token
                              }
                     }
     
                     let formData = new FormData();
                     formData.append('logo', this.image);
                     formData.append('name', this.client.name);
-                    // console.log(this.client.logo);
+                    // console.log(this.image);
                     axios.post('/api/clint', formData, config)
                         .then(res => {
                             vm.success = res.success;
@@ -255,12 +269,16 @@
                     let vm = this;
  
                     const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
                     }
     
                     let formData = new FormData();
-                    formData.append('image', this.image);
-                    formData.append('name', this.client.title_ar);
+                    formData.append('logo', this.image);
+                    formData.append('name', this.client.name);
+                    console.log(formData);
     
                     axios.put('/api/clint', formData, config)
                         .then(res => {
@@ -283,6 +301,7 @@
                 this.client.client_id = client.id;
                 this.client.name = client.name;
                 this.client.logo = client.logo;
+                console.log(client.logo);
 
             },
             // File Handle
@@ -301,12 +320,12 @@
             },
             onImageChange(e){
                 this.image = e.target.files[0];
-                // this.client.logo = e.target.files[0];
+                this.client.logo = e.target.files[0];
             },
            
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>

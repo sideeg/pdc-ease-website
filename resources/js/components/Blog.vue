@@ -162,15 +162,23 @@
             getArticles(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/blog';
-                fetch(page_url)
-                .then(res => res.json())
-                .then(res => {
+
+                    const config = {
+                        headers: { 
+                            // 'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
+                    }
+
+
+                axios.get(page_url, config)
+                // .then(res => res.json())
+                .then((res) => {
                     this.articles = res.data;
                     vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
-                    console.log(res.data);
+                    // console.log(res.data);
 
-                }
-                )
+                })
                 .catch(err => console.log(err));
             },
             // Pagination
@@ -185,18 +193,20 @@
                 }
 
                 this.pagination = pagination;
-
-                console.log(this.pagination);
-
-
+                // console.log(this.pagination);
             },
             // Delete Article
             deleteArticle(id){
+                    const config = {
+                        headers: { 
+                            // 'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
+                    }
+
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/blog/${id}`, {
-                        method: 'delete'
-                    })
-                    .then(res => res.json())
+                    axios.delete(`api/blog/${id}`, config)
+                    // .then(res => res.json())
                     .then(res => {
                         // alert('Article Deleted !');
                         this.getArticles();
@@ -212,7 +222,10 @@
                     let vm = this;
  
                     const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
                     }
     
                     let formData = new FormData();
@@ -237,7 +250,10 @@
                     let vm = this;
  
                     const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
                     }
     
                     let formData = new FormData();
@@ -280,9 +296,15 @@
             },
             // Get and Set Tags
             getSetTags(){
-                fetch('api/tag-names')
-                .then(res => res.json())
-                .then(res => {
+                const config = {
+                        headers: { 
+                            // 'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
+                    }
+                axios.get('api/tag-names', config)
+                // .then(res => res.json())
+                .then((res) => {
                     console.log(res);
 
                     this.tags = res;

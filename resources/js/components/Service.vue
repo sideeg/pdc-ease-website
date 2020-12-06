@@ -41,17 +41,24 @@
                                                 </div>
                                                 <!-- <input type="text" hidden :value="article.edit ? article.created_at : ''"> -->
                                                 
-                                                <div class="border p-3">
+                                                <div class="form-group p-3">
                                                     <!-- <h5>Tags:&ThickSpace;</h5> -->
-                                                    <span class="font-italic">
-                                                        <b>Tags: &ThickSpace;</b >
-                                                        <span class="badge badge-pill badge-info p-1" v-for="tag in service.tags" :key="tag.id" > {{tag.name_en}}</span>
-                                                        
+                                                    <span class="">
+                                                        <label for="">Tags: &ThickSpace;</label>
+                                                        <span v-if="edit">
+                                                            <span class="badge badge-pill badge-info px-1 mx-1" v-for="tag in service.tags" :key="tag.id" > {{tag.name_en}}</span>
+                                                        </span>
                                                     </span>
                                                     <div class="form-group mt-3">
-                                                        <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
+                                                        <!-- <label for="example-email-input" class="col-form-label d-block">Article Tag</label> -->
                                                         <select id="example-email-input" class="form-control" multiple>
-                                                            <option v-for="tag in service.tags" :key="tag.id" v-bind:value="tag.id" :selected="edit">{{tag.name_en}}</option>
+                                                            <!-- <option v-for="tag in edit ? service.tags : tags " :key="tag.id" v-bind:value="tag.id" :selected="edit">{{tag.name_en}}</option> -->
+                                                            <option v-for="tag in edit ? service.tags : tags" :key="tag.id" v-bind:value="tag.id" :selected="edit">{{tag.name_en}}</option>
+
+                                                            <!-- <div>
+                                                                <option v-for="tag in service.tags" :key="tag.id" v-bind:value="tag.id" >{{tag.name_en}} vvv</option>
+                                                            </div> -->
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -85,10 +92,10 @@
                                 <div class="row">
                                     <!-- Textual inputs start -->
                                     <div class="col-12">
-                                        <div class="card">
+                                        <!-- <div class="card"> -->
                                             <div class="card-body p-0">
                                                 <div class="media">
-                                                    <img class="img-card mr-md-4" src="assets/images/about/about-page.jpg" alt="image">
+                                                    <img class="img-card mr-md-4" :src="service.image" alt="image">
                                                     <div class="media-body">
                                                         <h4 class="mb-2 md-mt-2">{{ service.title_en}}</h4>
                                                         <h4 class="mb-2 md-mt-2">{{ service.title_ar}}</h4>
@@ -108,7 +115,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <!-- </div> -->
                                     </div>
                                     <!-- Textual inputs end -->
                                 </div>
@@ -121,7 +128,7 @@
                     </div>
                 </div>
             </div>
-        <!-- End Modal -->
+            <!-- End Modal -->
 
         <!-- Progress Table start -->
         <div class="col-lg-10 mt-5">
@@ -199,13 +206,13 @@
                     tags:[],
                     tag:{
                         id: '',
-                        title_en: '',
+                        name_en: '',
                     },
                 },
                 tags:[],
                 tag:{
                     id: '',
-                    title_en: '',
+                    name_en: '',
                 },
                 tags_ids: [],
                 tag_id: {
@@ -227,8 +234,14 @@
             getServices(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/service';
-                fetch(page_url)
-                .then(res => res.json())
+                const config = {
+                    headers: { 
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
+                axios.get(page_url,config)
+                // .then(res => res.json())
                 .then(res => {
                     this.services = res.data;
                     console.log(this.services)
@@ -239,13 +252,18 @@
             // Get Tags
             getSetTags() {
                 // console.log('getsettags');
-
+                const config = {
+                    headers: { 
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
                 let vm = this;
-                fetch('api/tag')
+                axios.get('api/tag-names'. config)
                 .then(res => res.json())
                 .then(res => {
-                    this.tags = res.data;
-                    // console.log(this.tags);
+                    this.tags = res;
+                    console.log(this.tags);
                 })
                 .catch(err => console.log(err));
             },
@@ -264,11 +282,15 @@
             },
             // Delete Service
             deleteService(id){
+                const config = {
+                    headers: { 
+                        'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/service/${id}`, {
-                        method: 'delete'
-                    })
-                    .then(res => res.json())
+                    axios.delete(`api/service/${id}`, config)
+                    // .then(res => res.json())
                     .then(res => {
                         alert('Service Deleted !');
                         this.getServices();
@@ -280,13 +302,16 @@
             // Add Service
             addService(){
                 this.getSetTags();
+                const config = {
+                    headers: { 
+                        'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
                 if(this.edit === false){
                     // Add 
                    let vm = this;
- 
-                    const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
-                    }
+
     
                     let formData = new FormData();
                     formData.append('image', this.image);
@@ -296,7 +321,7 @@
                     formData.append('desc_ar', this.service.desc_ar);
                     // formData.append('type', this.service.type);
 
-                    console.log(formData);
+                    // console.log(formData);
                     axios.post('/api/service', formData, config)
                         .then(res => {
                             vm.success = res.success;
@@ -310,10 +335,6 @@
                     // Update
                     let vm = this;
  
-                    const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
-                    }
-    
                     let formData = new FormData();
                     formData.append('image', this.image);
                     formData.append('title_ar', this.service.title_ar);
@@ -340,7 +361,7 @@
 
             },
             editService(service){
-                // console.log(service.tag)
+                console.log(service.tag)
                 this.getSetTags();
                 this.edit = true;
                 this.service.id = service.id;
@@ -380,6 +401,8 @@
                 this.service.desc_en = '';
                 this.service.desc_ar = '';
                 this.service.image = null;
+                // this.service.tags = [];
+
             },
             onImageChange(e){
                 this.image = e.target.files[0];

@@ -19,6 +19,8 @@ class bloger
      */
     public function handle(Request $request, Closure $next)
     {
+        return $next($request);
+
         $user = User::where('remember_token',$request->header('remember_token', 'default'));
         $user = $user->toArray();
 

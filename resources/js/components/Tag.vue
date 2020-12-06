@@ -73,19 +73,23 @@
                                         <div class="row">
                                             <!-- Textual inputs start -->
                                             <div class="col-12">
-                                                <div class="card">
-                                                    <div class="card-body p-0">
+                                                <!-- <div class="card"> -->
+                                                    <div class=" p-0">
                                                         <div class="media">
-                                                            <img class="img-card mr-md-4" src="assets/images/about/about-page.jpg" alt="image">
+                                                            <!-- <img class="img-card mr-md-4" src="assets/images/about/about-page.jpg" alt="image"> -->
                                                             <div class="media-body">
-                                                                <h4 class="mb-2 md-mt-2">Media heading</h4>
+                                                                <h4 class="mb-2 md-mt-2">Title (en) : {{tag.name_en}}</h4>
+                                                                <h4 class="mb-2 md-mt-2">Title (en) : {{tag.name_ar}}</h4>
+
                                                                 <!-- <div class="row mb-3"><span class="col-lg-6 col-sm-12 font-italic"><b>Date:&ThickSpace; </b> 5 Fab, 2020</span></div> -->
-                                                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                                                <p class="py-2">Description (en) : <br> {{tag.desc_en}}</p>
+                                                                <p class="py-2">Description (ar) : <br> {{tag.desc_ar}}</p>
+
                                                                 
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                <!-- </div> -->
                                             </div>
                                             <!-- Textual inputs end -->
                                         </div>
@@ -125,7 +129,7 @@
                                 </li>
                             </ul>
                         </nav>
-                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" data-toggle="modal" data-target=".bd-example-modal-lg" @click="getSetServices()" ><i class="ti-plus mr-1"></i> Add Tag</button>
+                        <button class="btn btn-rounded btn-primary my-3 py-2 pr-4 pl-3" data-toggle="modal" data-target=".bd-example-modal-lg" @click="getSetServices()" ><i class="ti-plus mr-1"></i> New Tag</button>
                         </div>
                         <div class="single-table">
                             <div class="table-responsive">
@@ -144,7 +148,7 @@
                                             <td >{{tag.name_en}}</td>
                                             <td class="">
                                                 <ul class="d-flex justify-content-center align-items-center">
-                                                    <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-service-details-modal"><i class="ti-eye o-icon"></i></a></li>
+                                                    <li class="mr-3"><a href="#" @click="showTag(tag)" class="text-primary" data-toggle="modal" data-target=".show-tag-details-modal"><i class="ti-eye o-icon"></i></a></li>
                                                     <li class="mr-3"><a href="#" @click="editTag(tag)" class="text-secondary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="ti-pencil o-icon"></i></a></li>
                                                     <li><a href="#" @click="deleteTag(tag.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
                                                 </ul>
@@ -195,8 +199,14 @@
             getTags(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/tag';
-                fetch(page_url)
-                .then(res => res.json())
+                const config = {
+                    headers: { 
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
+                axios.get(page_url, config)
+                // .then(res => res.json())
                 .then(res => {
                     this.tags = res.data;
                     vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
@@ -224,10 +234,14 @@
             },
             // Delete Tag
             deleteTag(id){
+                const config = {
+                    headers: { 
+                        'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/tag/${id}`, {
-                        method: 'delete'
-                    })
+                    axios.delete(`api/tag/${id}`, config)
                     .then(res => res.json())
                     .then(res => {
                         alert('Tag Deleted !');
@@ -239,17 +253,16 @@
             },
             // Add Tag
             addTag(){
-                console.log(this.tag);
+                // console.log(this.tag);
+                const config = {
+                    headers: { 
+                        'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
                 if(this.edit === false){
                     // Add 
-                    fetch('api/tag', {
-                        method: 'post',
-                        body: JSON.stringify(this.tag),
-                        headers: {
-                            'content-type': 'application/json'
-                        }
-                    })
-                    .then(res => res.json())
+                    axios.post('api/tag', this.tag, config)
                     .then(res => {
                         // console.log(res);
                         
@@ -264,14 +277,8 @@
                     // Update
                         // console.log(tag);
 
-                    fetch('api/tag', {
-                        method: 'put',
-                        body: JSON.stringify(this.tag),
-                        headers: {
-                            'content-type': 'application/json'
-                        }
-                    })
-                    .then(res => res.json())
+                    axios.put('api/tag', this.tag, config)
+                    // .then(res => res.json())
                     .then(res => {
                         // console.log(res);
 
@@ -300,8 +307,14 @@
             },
             // Get and Set Services
             getSetServices(){
-                fetch('api/services_names')
-                .then(res => res.json())
+                const config = {
+                    headers: { 
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
+                axios.get('api/services_names')
+                // .then(res => res.json())
                 .then(res => {
                     this.services = res;
                     console.log(res);
@@ -314,6 +327,12 @@
                 this.tag.desc_en = '';
                 this.tag.desc_ar = '';
                 // this.tag.sourse = null;
+            },
+            showTag(tag){
+                this.tag.name_en = tag.name_en;
+                this.tag.name_ar = tag.name_ar;
+                this.tag.desc_en = tag.desc_en;
+                this.tag.desc_ar = tag.desc_ar;
             }
         },
         mounted() {

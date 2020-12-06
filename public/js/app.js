@@ -2155,7 +2155,8 @@ __webpack_require__.r(__webpack_exports__);
         var vm = this;
         var config = {
           headers: {
-            'content-type': 'multipart/form-data'
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
           }
         };
         var formData = new FormData();
@@ -2173,15 +2174,14 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         // Update
         // console.log(admin);
-        fetch('api/user', {
-          method: 'put',
-          body: JSON.stringify(this.admin),
+        var _config = {
           headers: {
-            'content-type': 'application/json'
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
           }
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        };
+        axios.put('api/user', this.admin, _config) // .then(res => res.json())
+        .then(function (res) {
           // console.log(res);
           // this.resetModal();                        
           // alert('Admin Added !');
@@ -2210,9 +2210,14 @@ __webpack_require__.r(__webpack_exports__);
     getSetRoles: function getSetRoles() {
       var _this4 = this;
 
-      fetch('api/role').then(function (res) {
-        return res.json();
-      }).then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get('api/role', config) // .then(res => res.json())
+      .then(function (res) {
         _this4.roles = res; // console.log(res);
       })["catch"](function (err) {
         return console.log(err);
@@ -2404,12 +2409,16 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       page_url = page_url || 'api/blog';
-      fetch(page_url).then(function (res) {
-        return res.json();
-      }).then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get(page_url, config) // .then(res => res.json())
+      .then(function (res) {
         _this.articles = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url);
-        console.log(res.data);
+        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2422,19 +2431,22 @@ __webpack_require__.r(__webpack_exports__);
         next_page_url: next_page_url,
         prev_page_url: prev_page_url
       };
-      this.pagination = pagination;
-      console.log(this.pagination);
+      this.pagination = pagination; // console.log(this.pagination);
     },
     // Delete Article
     deleteArticle: function deleteArticle(id) {
       var _this2 = this;
 
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+
       if (confirm('Are You Sure ?')) {
-        fetch("api/blog/".concat(id), {
-          method: 'delete'
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        axios["delete"]("api/blog/".concat(id), config) // .then(res => res.json())
+        .then(function (res) {
           // alert('Article Deleted !');
           _this2.getArticles(); // console.log(res);
 
@@ -2450,7 +2462,8 @@ __webpack_require__.r(__webpack_exports__);
         var vm = this;
         var config = {
           headers: {
-            'content-type': 'multipart/form-data'
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
           }
         };
         var formData = new FormData();
@@ -2473,7 +2486,8 @@ __webpack_require__.r(__webpack_exports__);
 
         var _config = {
           headers: {
-            'content-type': 'multipart/form-data'
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
           }
         };
 
@@ -2520,9 +2534,14 @@ __webpack_require__.r(__webpack_exports__);
     getSetTags: function getSetTags() {
       var _this4 = this;
 
-      fetch('api/tag-names').then(function (res) {
-        return res.json();
-      }).then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get('api/tag-names', config) // .then(res => res.json())
+      .then(function (res) {
         console.log(res);
         _this4.tags = res;
       });
@@ -2716,6 +2735,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2733,8 +2754,9 @@ __webpack_require__.r(__webpack_exports__);
   props: ['remember_token'],
   created: function created() {
     // this.http.headers.common['remember_token'] = this.remember_token;
-    this.getClients();
-    console.log(this.remember_token);
+    this.getClients(); // console.log(this.remember_token)
+
+    console.log(window.Laravel.remember_token);
   },
   methods: {
     getClients: function getClients(page_url) {
@@ -2742,7 +2764,13 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       page_url = page_url || 'api/clint';
-      fetch(page_url).then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get(page_url, config).then(function (res) {
         return res.json();
       }).then(function (res) {
         _this.clients = res.data;
@@ -2765,12 +2793,16 @@ __webpack_require__.r(__webpack_exports__);
     deleteClient: function deleteClient(id) {
       var _this2 = this;
 
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+
       if (confirm('Are You Sure ?')) {
-        fetch("api/clint/".concat(id), {
-          method: 'delete'
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        axios["delete"]("api/clint/".concat(id), config) // .then(res => res.json())
+        .then(function (res) {
           // alert('Client Deleted !');
           _this2.getClients(); // console.log(res);
 
@@ -2786,13 +2818,13 @@ __webpack_require__.r(__webpack_exports__);
         var vm = this;
         var config = {
           headers: {
-            'content-type': 'multipart/form-data' // 'remember_token' : this.remember_token
-
+            'content-type': 'multipart/form-data',
+            'remember_token': this.remember_token
           }
         };
         var formData = new FormData();
         formData.append('logo', this.image);
-        formData.append('name', this.client.name); // console.log(this.client.logo);
+        formData.append('name', this.client.name); // console.log(this.image);
 
         axios.post('/api/clint', formData, config).then(function (res) {
           vm.success = res.success; // console.log(res);
@@ -2807,16 +2839,18 @@ __webpack_require__.r(__webpack_exports__);
 
         var _config = {
           headers: {
-            'content-type': 'multipart/form-data'
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
           }
         };
 
         var _formData = new FormData();
 
-        _formData.append('image', this.image);
+        _formData.append('logo', this.image);
 
-        _formData.append('name', this.client.title_ar);
+        _formData.append('name', this.client.name);
 
+        console.log(_formData);
         axios.put('/api/clint', _formData, _config).then(function (res) {
           _vm.success = res.success; // console.log(res);
 
@@ -2834,6 +2868,7 @@ __webpack_require__.r(__webpack_exports__);
       this.client.client_id = client.id;
       this.client.name = client.name;
       this.client.logo = client.logo;
+      console.log(client.logo);
     },
     // File Handle
     createImage: function createImage(file) {
@@ -2851,11 +2886,11 @@ __webpack_require__.r(__webpack_exports__);
       this.client.logo = null;
     },
     onImageChange: function onImageChange(e) {
-      this.image = e.target.files[0]; // this.client.logo = e.target.files[0];
+      this.image = e.target.files[0];
+      this.client.logo = e.target.files[0];
     }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
   }
 });
 
@@ -3025,9 +3060,14 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       page_url = page_url || 'api/message';
-      fetch(page_url).then(function (res) {
-        return res.json();
-      }).then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get(page_url, config) // .then(res => res.json())
+      .then(function (res) {
         _this.messages = res.data;
         vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
@@ -3043,14 +3083,17 @@ __webpack_require__.r(__webpack_exports__);
     deleteMessage: function deleteMessage(id) {
       var _this2 = this;
 
-      console.log(id);
+      // console.log(id);
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
 
       if (confirm('Are You Sure ?')) {
-        fetch("api/message/".concat(id), {
-          method: 'delete'
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        axios["delete"]("api/message/".concat(id), config) // .then(res => res.json())
+        .then(function (res) {
           alert('Message Deleted !');
 
           _this2.getMessages(); // console.log(res);
@@ -3265,14 +3308,20 @@ __webpack_require__.r(__webpack_exports__);
     getNotifyNumber: function getNotifyNumber() {
       var _this = this;
 
-      // Orders Nutification Number
-      axios.get('api/user-notification-num').then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      }; // Orders Nutification Number
+
+      axios.get('api/user-notification-num', config).then(function (res) {
         _this.orders_num = res.data;
       })["catch"](function (err) {
         return console.log(err);
       }); // Messages Nutification Number
 
-      axios.get('api/user-message-num').then(function (res) {
+      axios.get('api/user-message-num', config).then(function (res) {
         _this.messages_num = res.data;
       })["catch"](function (err) {
         return console.log(err);
@@ -3293,7 +3342,13 @@ __webpack_require__.r(__webpack_exports__);
     getMessages: function getMessages() {
       var _this3 = this;
 
-      axios.get('api/user-message').then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get('api/user-message', config).then(function (res) {
         _this3.messages = res;
         console.log(res);
       })["catch"](function (err) {
@@ -3504,6 +3559,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3517,13 +3579,13 @@ __webpack_require__.r(__webpack_exports__);
         tags: [],
         tag: {
           id: '',
-          title_en: ''
+          name_en: ''
         }
       },
       tags: [],
       tag: {
         id: '',
-        title_en: ''
+        name_en: ''
       },
       tags_ids: [],
       tag_id: {
@@ -3545,9 +3607,14 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       page_url = page_url || 'api/service';
-      fetch(page_url).then(function (res) {
-        return res.json();
-      }).then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get(page_url, config) // .then(res => res.json())
+      .then(function (res) {
         _this.services = res.data;
         console.log(_this.services);
         vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url);
@@ -3560,11 +3627,18 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       // console.log('getsettags');
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
       var vm = this;
-      fetch('api/tag').then(function (res) {
+      axios.get('api/tag-names'.config).then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this2.tags = res.data; // console.log(this.tags);
+        _this2.tags = res;
+        console.log(_this2.tags);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3583,12 +3657,16 @@ __webpack_require__.r(__webpack_exports__);
     deleteService: function deleteService(id) {
       var _this3 = this;
 
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+
       if (confirm('Are You Sure ?')) {
-        fetch("api/service/".concat(id), {
-          method: 'delete'
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        axios["delete"]("api/service/".concat(id), config) // .then(res => res.json())
+        .then(function (res) {
           alert('Service Deleted !');
 
           _this3.getServices(); // console.log(res);
@@ -3601,23 +3679,24 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       this.getSetTags();
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
 
       if (this.edit === false) {
         // Add 
         var vm = this;
-        var config = {
-          headers: {
-            'content-type': 'multipart/form-data'
-          }
-        };
         var formData = new FormData();
         formData.append('image', this.image);
         formData.append('title_ar', this.service.title_ar);
         formData.append('title_en', this.service.title_en);
         formData.append('desc_en', this.service.desc_en);
         formData.append('desc_ar', this.service.desc_ar); // formData.append('type', this.service.type);
+        // console.log(formData);
 
-        console.log(formData);
         axios.post('/api/service', formData, config).then(function (res) {
           vm.success = res.success; // console.log(res);
 
@@ -3628,12 +3707,6 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         // Update
         var _vm = this;
-
-        var _config = {
-          headers: {
-            'content-type': 'multipart/form-data'
-          }
-        };
 
         var _formData = new FormData();
 
@@ -3649,7 +3722,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
         console.log(_formData);
-        axios.put('/api/service', _formData, _config).then(function (res) {
+        axios.put('/api/service', _formData, config).then(function (res) {
           _vm.success = res.success; // console.log(res);
 
           _this4.getServices();
@@ -3661,7 +3734,7 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     editService: function editService(service) {
-      // console.log(service.tag)
+      console.log(service.tag);
       this.getSetTags();
       this.edit = true;
       this.service.id = service.id;
@@ -3700,7 +3773,7 @@ __webpack_require__.r(__webpack_exports__);
       this.service.title_ar = '';
       this.service.desc_en = '';
       this.service.desc_ar = '';
-      this.service.image = null;
+      this.service.image = null; // this.service.tags = [];
     },
     onImageChange: function onImageChange(e) {
       this.image = e.target.files[0]; // this.service.type = e.target.files[0].type;
@@ -3843,9 +3916,15 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       console.log(this.open ? 'api/order' : 'api/order-reverse');
-      page_url = page_url || this.open ? 'api/order' : 'api/order-reverse';
-      console.log(page_url);
-      fetch(page_url).then(function (res) {
+      page_url = page_url || this.open ? 'api/order' : 'api/order-reverse'; // console.log(page_url);
+
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get(page_url, config).then(function (res) {
         return res.json();
       }).then(function (res) {
         _this.orders = res.data;
@@ -3869,12 +3948,16 @@ __webpack_require__.r(__webpack_exports__);
     deleteOrder: function deleteOrder(id) {
       var _this2 = this;
 
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+
       if (confirm('Are You Sure ?')) {
-        fetch("api/order/".concat(id), {
-          method: 'delete'
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        axios["delete"]("api/order/".concat(id), config) // .then(res => res.json())
+        .then(function (res) {
           alert('Order Deleted !');
 
           _this2.getOrders(); // console.log(res);
@@ -3886,11 +3969,14 @@ __webpack_require__.r(__webpack_exports__);
     updateOrder: function updateOrder(id) {
       var _this3 = this;
 
-      fetch("api/order/".concat(id), {
-        method: 'put'
-      }).then(function (res) {
-        return res.json();
-      }).then(function (res) {
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      fetch("api/order/".concat(id), config) // .then(res => res.json())
+      .then(function (res) {
         // alert('Order Deleted !');
         _this3.getOrders(); // console.log(res);
 
@@ -4095,6 +4181,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4118,7 +4253,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     // this.http.headers.common['remember_token'] = this.remember_token;
     this.getSlides();
-    console.log(this.remember_token);
   },
   methods: {
     getSlides: function getSlides(page_url) {
@@ -4126,9 +4260,14 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       page_url = page_url || 'api/slider';
-      fetch(page_url).then(function (res) {
-        return res.json();
-      }).then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get(page_url, config) // .then(res => res.json())
+      .then(function (res) {
         _this.slides = res.data;
         vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
@@ -4149,12 +4288,16 @@ __webpack_require__.r(__webpack_exports__);
     deleteSlide: function deleteSlide(id) {
       var _this2 = this;
 
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+
       if (confirm('Are You Sure ?')) {
-        fetch("api/slider/".concat(id), {
-          method: 'delete'
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        fetch("api/slider/".concat(id), config) // .then(res => res.json())
+        .then(function (res) {
           alert('Slide Deleted !');
 
           _this2.getSlides(); // console.log(res);
@@ -4166,13 +4309,15 @@ __webpack_require__.r(__webpack_exports__);
     addSlide: function addSlide() {
       var _this3 = this;
 
+      console.log(this.remember_token);
+
       if (this.edit === false) {
         // Add
         var vm = this;
         var config = {
           headers: {
             'content-type': 'multipart/form-data',
-            'remember_token': this.remember_token
+            'remember_token': window.Laravel.remember_token
           }
         };
         var formData = new FormData();
@@ -4195,7 +4340,8 @@ __webpack_require__.r(__webpack_exports__);
 
         var _config = {
           headers: {
-            'content-type': 'multipart/form-data'
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
           }
         };
 
@@ -4223,6 +4369,7 @@ __webpack_require__.r(__webpack_exports__);
       } // this.resetModal();
 
     },
+    // Edit Slide
     editSlide: function editSlide(slide) {
       this.edit = true;
       this.slide.id = slide.id;
@@ -4233,16 +4380,14 @@ __webpack_require__.r(__webpack_exports__);
       this.slide.desc_ar = slide.desc_ar;
       this.slide.sourse = slide.sourse;
     },
-    // File Handle
-    createImage: function createImage(file) {
-      var reader = new FileReader();
-      var vm = this;
-
-      reader.onload = function (e) {
-        vm.sourse = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
+    // Show Slide
+    showSlide: function showSlide(slide) {
+      this.slide.title_en = slide.title_en;
+      this.slide.title_ar = slide.title_ar;
+      this.slide.desc_en = slide.desc_en;
+      this.slide.desc_ar = slide.desc_ar;
+      this.slide.sourse = slide.sourse;
+      this.slide.type = slide.type;
     },
     resetModal: function resetModal() {
       this.slide.title_en = '';
@@ -4532,6 +4677,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 // import 'axios' from axios;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4564,9 +4713,14 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       page_url = page_url || 'api/tag';
-      fetch(page_url).then(function (res) {
-        return res.json();
-      }).then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get(page_url, config) // .then(res => res.json())
+      .then(function (res) {
         _this.tags = res.data;
         vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
@@ -4588,10 +4742,15 @@ __webpack_require__.r(__webpack_exports__);
     deleteTag: function deleteTag(id) {
       var _this2 = this;
 
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+
       if (confirm('Are You Sure ?')) {
-        fetch("api/tag/".concat(id), {
-          method: 'delete'
-        }).then(function (res) {
+        axios["delete"]("api/tag/".concat(id), config).then(function (res) {
           return res.json();
         }).then(function (res) {
           alert('Tag Deleted !');
@@ -4605,19 +4764,17 @@ __webpack_require__.r(__webpack_exports__);
     addTag: function addTag() {
       var _this3 = this;
 
-      console.log(this.tag);
+      // console.log(this.tag);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
 
       if (this.edit === false) {
         // Add 
-        fetch('api/tag', {
-          method: 'post',
-          body: JSON.stringify(this.tag),
-          headers: {
-            'content-type': 'application/json'
-          }
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        axios.post('api/tag', this.tag, config).then(function (res) {
           // console.log(res);
           // this.resetModal();                        
           // alert('Tag Added !');
@@ -4629,15 +4786,8 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         // Update
         // console.log(tag);
-        fetch('api/tag', {
-          method: 'put',
-          body: JSON.stringify(this.tag),
-          headers: {
-            'content-type': 'application/json'
-          }
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        axios.put('api/tag', this.tag, config) // .then(res => res.json())
+        .then(function (res) {
           // console.log(res);
           // this.resetModal();                        
           // alert('Tag Added !');
@@ -4665,9 +4815,14 @@ __webpack_require__.r(__webpack_exports__);
     getSetServices: function getSetServices() {
       var _this4 = this;
 
-      fetch('api/services_names').then(function (res) {
-        return res.json();
-      }).then(function (res) {
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get('api/services_names') // .then(res => res.json())
+      .then(function (res) {
         _this4.services = res;
         console.log(res);
       });
@@ -4677,6 +4832,12 @@ __webpack_require__.r(__webpack_exports__);
       this.tag.name_ar = '';
       this.tag.desc_en = '';
       this.tag.desc_ar = ''; // this.tag.sourse = null;
+    },
+    showTag: function showTag(tag) {
+      this.tag.name_en = tag.name_en;
+      this.tag.name_ar = tag.name_ar;
+      this.tag.desc_en = tag.desc_en;
+      this.tag.desc_ar = tag.desc_ar;
     }
   },
   mounted: function mounted() {
@@ -41450,23 +41611,6 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
-                      _vm.success != ""
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "alert alert-success",
-                              attrs: { role: "alert" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(_vm.success) +
-                                  "\n                                        "
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-12" }, [
                           _c("div", { staticClass: "card-body" }, [
@@ -41507,26 +41651,36 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "form-group row" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "col-form-label d-block",
-                                  attrs: { for: "example-email-input" }
-                                },
-                                [_vm._v("Client Logo")]
-                              ),
-                              _vm._v(" "),
-                              _c("input", {
-                                staticClass: "col-form-label d-block",
-                                attrs: { type: "file" },
-                                on: { change: _vm.onImageChange }
-                              }),
-                              _vm._v(" "),
-                              _c("img", {
-                                attrs: { src: _vm.client.logo, alt: "" }
-                              })
-                            ])
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "form-group container row justify-content-between align-items-center"
+                              },
+                              [
+                                _c("div", [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "col-form-label d-block",
+                                      attrs: { for: "example-email-input" }
+                                    },
+                                    [_vm._v("Client Logo")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "col-form-label d-block",
+                                    attrs: { type: "file" },
+                                    on: { change: _vm.onImageChange }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("img", {
+                                  staticClass: "bg-dark",
+                                  attrs: { src: _vm.client.logo, alt: "" }
+                                })
+                              ]
+                            )
                           ])
                         ])
                       ])
@@ -42512,38 +42666,32 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "border p-3" }, [
-                              _c(
-                                "span",
-                                { staticClass: "font-italic" },
-                                [
-                                  _c("b", [_vm._v("Tags:   ")]),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.service.tags, function(tag) {
-                                    return _c(
+                            _c("div", { staticClass: "form-group p-3" }, [
+                              _c("span", {}, [
+                                _c("label", { attrs: { for: "" } }, [
+                                  _vm._v("Tags:   ")
+                                ]),
+                                _vm._v(" "),
+                                _vm.edit
+                                  ? _c(
                                       "span",
-                                      {
-                                        key: tag.id,
-                                        staticClass:
-                                          "badge badge-pill badge-info p-1"
-                                      },
-                                      [_vm._v(" " + _vm._s(tag.name_en))]
+                                      _vm._l(_vm.service.tags, function(tag) {
+                                        return _c(
+                                          "span",
+                                          {
+                                            key: tag.id,
+                                            staticClass:
+                                              "badge badge-pill badge-info px-1 mx-1"
+                                          },
+                                          [_vm._v(" " + _vm._s(tag.name_en))]
+                                        )
+                                      }),
+                                      0
                                     )
-                                  })
-                                ],
-                                2
-                              ),
+                                  : _vm._e()
+                              ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "form-group mt-3" }, [
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "col-form-label d-block",
-                                    attrs: { for: "example-email-input" }
-                                  },
-                                  [_vm._v("Article Tag")]
-                                ),
-                                _vm._v(" "),
                                 _c(
                                   "select",
                                   {
@@ -42553,19 +42701,22 @@ var render = function() {
                                       multiple: ""
                                     }
                                   },
-                                  _vm._l(_vm.service.tags, function(tag) {
-                                    return _c(
-                                      "option",
-                                      {
-                                        key: tag.id,
-                                        domProps: {
-                                          value: tag.id,
-                                          selected: _vm.edit
-                                        }
-                                      },
-                                      [_vm._v(_vm._s(tag.name_en))]
-                                    )
-                                  }),
+                                  _vm._l(
+                                    _vm.edit ? _vm.service.tags : _vm.tags,
+                                    function(tag) {
+                                      return _c(
+                                        "option",
+                                        {
+                                          key: tag.id,
+                                          domProps: {
+                                            value: tag.id,
+                                            selected: _vm.edit
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(tag.name_en))]
+                                      )
+                                    }
+                                  ),
                                   0
                                 )
                               ])
@@ -42620,52 +42771,47 @@ var render = function() {
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-12" }, [
-                    _c("div", { staticClass: "card" }, [
-                      _c("div", { staticClass: "card-body p-0" }, [
-                        _c("div", { staticClass: "media" }, [
-                          _c("img", {
-                            staticClass: "img-card mr-md-4",
-                            attrs: {
-                              src: "assets/images/about/about-page.jpg",
-                              alt: "image"
-                            }
-                          }),
+                    _c("div", { staticClass: "card-body p-0" }, [
+                      _c("div", { staticClass: "media" }, [
+                        _c("img", {
+                          staticClass: "img-card mr-md-4",
+                          attrs: { src: _vm.service.image, alt: "image" }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "media-body" }, [
+                          _c("h4", { staticClass: "mb-2 md-mt-2" }, [
+                            _vm._v(_vm._s(_vm.service.title_en))
+                          ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("h4", { staticClass: "mb-2 md-mt-2" }, [
-                              _vm._v(_vm._s(_vm.service.title_en))
-                            ]),
-                            _vm._v(" "),
-                            _c("h4", { staticClass: "mb-2 md-mt-2" }, [
-                              _vm._v(_vm._s(_vm.service.title_ar))
-                            ]),
-                            _vm._v(" "),
-                            _c("p", [_vm._v(_vm._s(_vm.service.desc_en))]),
-                            _vm._v(" "),
-                            _c("p", [_vm._v(_vm._s(_vm.service.desc_ar))]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "row mb-3" }, [
-                              _c(
-                                "span",
-                                { staticClass: "col-lg-12 font-italic" },
-                                [
-                                  _c("b", [_vm._v("Tags:   ")]),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.service.tags, function(tag) {
-                                    return _c(
-                                      "span",
-                                      {
-                                        key: tag.id,
-                                        staticClass:
-                                          "badge badge-pill badge-info p-1 mx-1"
-                                      },
-                                      [_vm._v(" " + _vm._s(tag.name_en))]
-                                    )
-                                  })
-                                ],
-                                2
-                              )
-                            ])
+                          _c("h4", { staticClass: "mb-2 md-mt-2" }, [
+                            _vm._v(_vm._s(_vm.service.title_ar))
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(_vm.service.desc_en))]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(_vm.service.desc_ar))]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row mb-3" }, [
+                            _c(
+                              "span",
+                              { staticClass: "col-lg-12 font-italic" },
+                              [
+                                _c("b", [_vm._v("Tags:   ")]),
+                                _vm._v(" "),
+                                _vm._l(_vm.service.tags, function(tag) {
+                                  return _c(
+                                    "span",
+                                    {
+                                      key: tag.id,
+                                      staticClass:
+                                        "badge badge-pill badge-info p-1 mx-1"
+                                    },
+                                    [_vm._v(" " + _vm._s(tag.name_en))]
+                                  )
+                                })
+                              ],
+                              2
+                            )
                           ])
                         ])
                       ])
@@ -43254,23 +43400,6 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
-                      _vm.success != ""
-                        ? _c(
-                            "div",
-                            {
-                              staticClass: "alert alert-success",
-                              attrs: { role: "alert" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                            " +
-                                  _vm._s(_vm.success) +
-                                  "\n                                        "
-                              )
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-12" }, [
                           _c("div", { staticClass: "card-body" }, [
@@ -43412,26 +43541,37 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "form-group row" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "col-form-label d-block",
-                                  attrs: { for: "desc_" }
-                                },
-                                [_vm._v("Video or Image")]
-                              ),
-                              _vm._v(" "),
-                              _c("input", {
-                                staticClass: "col-form-label d-block",
-                                attrs: { type: "file" },
-                                on: { change: _vm.onImageChange }
-                              }),
-                              _vm._v(" "),
-                              _c("img", {
-                                attrs: { src: _vm.slide.sourse, alt: "" }
-                              })
-                            ])
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "form-group container row align-items-center justify-content-between"
+                              },
+                              [
+                                _c("div", [
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "col-form-label d-block",
+                                      attrs: { for: "desc_ar" }
+                                    },
+                                    [_vm._v("Video or Image")]
+                                  ),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "col-form-label d-block",
+                                    attrs: { type: "file" },
+                                    on: { change: _vm.onImageChange }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("img", {
+                                  staticClass: "table-img",
+                                  attrs: { src: _vm.slide.sourse, alt: "" }
+                                })
+                              ]
+                            )
                           ])
                         ])
                       ])
@@ -43471,6 +43611,89 @@ var render = function() {
       _vm._v(" "),
       _vm._m(5)
     ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
+      [
+        _c("div", { staticClass: "modal fade show-slider-details-modal" }, [
+          _c("div", { staticClass: "modal-dialog modal-lg" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("div", { staticClass: "card-body p-0" }, [
+                      _c("div", { staticClass: "media" }, [
+                        _vm.slide.type == 0
+                          ? _c("img", {
+                              staticClass: "img-card mr-md-4",
+                              attrs: {
+                                src: _vm.slide.sourse,
+                                alt: _vm.slide.title_en,
+                                srcset: ""
+                              }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.slide.type == 1
+                          ? _c(
+                              "video",
+                              {
+                                staticClass: "img-card mr-md-4",
+                                attrs: {
+                                  width: "320",
+                                  height: "240",
+                                  controls: ""
+                                }
+                              },
+                              [
+                                _c("source", {
+                                  attrs: {
+                                    src: _vm.slide.sourse,
+                                    type: "video/mp4"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("source", {
+                                  attrs: {
+                                    src: _vm.slide.sourse,
+                                    type: "video/ogg"
+                                  }
+                                }),
+                                _vm._v(
+                                  "\n                                                    Your browser does not support video.\n                                                "
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "media-body" }, [
+                          _c("h4", { staticClass: "mb-2 md-mt-2" }, [
+                            _vm._v(_vm._s(_vm.slide.title_en))
+                          ]),
+                          _vm._v(" "),
+                          _c("h4", { staticClass: "mb-2 md-mt-2" }, [
+                            _vm._v(_vm._s(_vm.slide.title_ar))
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(_vm.slide.desc_en))]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v(_vm._s(_vm.slide.desc_ar))])
+                        ])
+                      ])
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(7)
+            ])
+          ])
+        ])
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-10 mt-5" }, [
       _c("div", { staticClass: "card" }, [
@@ -43547,13 +43770,13 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(6)
+            _vm._m(8)
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "single-table" }, [
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table table-hover progress-table" }, [
-                _vm._m(7),
+                _vm._m(9),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -43622,7 +43845,25 @@ var render = function() {
                               "d-flex justify-content-center align-items-center"
                           },
                           [
-                            _vm._m(8, true),
+                            _c("li", { staticClass: "mr-3" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-primary",
+                                  attrs: {
+                                    href: "#",
+                                    "data-toggle": "modal",
+                                    "data-target": ".show-slider-details-modal"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showSlide(slide)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "ti-eye o-icon" })]
+                              )
+                            ]),
                             _vm._v(" "),
                             _c("li", { staticClass: "mr-3" }, [
                               _c(
@@ -43803,6 +44044,38 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Slider Details")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("code", [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning mt-4 py-2 px-4",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "button",
       {
@@ -43828,25 +44101,6 @@ var staticRenderFns = [
           _vm._v("Actions")
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "mr-3" }, [
-      _c(
-        "a",
-        {
-          staticClass: "text-primary",
-          attrs: {
-            href: "#",
-            "data-toggle": "modal",
-            "data-target": ".show-service-details-modal"
-          }
-        },
-        [_c("i", { staticClass: "ti-eye o-icon" })]
-      )
     ])
   }
 ]
@@ -44244,7 +44498,53 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._m(4)
+      _c(
+        "div",
+        { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
+        [
+          _c("div", { staticClass: "modal fade show-tag-details-modal" }, [
+            _c("div", { staticClass: "modal-dialog modal-lg" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(4),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("div", { staticClass: " p-0" }, [
+                        _c("div", { staticClass: "media" }, [
+                          _c("div", { staticClass: "media-body" }, [
+                            _c("h4", { staticClass: "mb-2 md-mt-2" }, [
+                              _vm._v("Title (en) : " + _vm._s(_vm.tag.name_en))
+                            ]),
+                            _vm._v(" "),
+                            _c("h4", { staticClass: "mb-2 md-mt-2" }, [
+                              _vm._v("Title (en) : " + _vm._s(_vm.tag.name_ar))
+                            ]),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "py-2" }, [
+                              _vm._v("Description (en) : "),
+                              _c("br"),
+                              _vm._v(" " + _vm._s(_vm.tag.desc_en))
+                            ]),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "py-2" }, [
+                              _vm._v("Description (ar) : "),
+                              _c("br"),
+                              _vm._v(" " + _vm._s(_vm.tag.desc_ar))
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(5)
+              ])
+            ])
+          ])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-lg-10 mt-5" }, [
@@ -44336,14 +44636,14 @@ var render = function() {
                   }
                 }
               },
-              [_c("i", { staticClass: "ti-plus mr-1" }), _vm._v(" Add Tag")]
+              [_c("i", { staticClass: "ti-plus mr-1" }), _vm._v(" New Tag")]
             )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "single-table" }, [
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table table-hover progress-table" }, [
-                _vm._m(5),
+                _vm._m(6),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -44359,7 +44659,25 @@ var render = function() {
                               "d-flex justify-content-center align-items-center"
                           },
                           [
-                            _vm._m(6, true),
+                            _c("li", { staticClass: "mr-3" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "text-primary",
+                                  attrs: {
+                                    href: "#",
+                                    "data-toggle": "modal",
+                                    "data-target": ".show-tag-details-modal"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showTag(tag)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "ti-eye o-icon" })]
+                              )
+                            ]),
                             _vm._v(" "),
                             _c("li", { staticClass: "mr-3" }, [
                               _c(
@@ -44456,75 +44774,33 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
-      [
-        _c("div", { staticClass: "modal fade show-tag-details-modal" }, [
-          _c("div", { staticClass: "modal-dialog modal-lg" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [
-                  _vm._v("Tag Details")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_c("code", [_vm._v("×")])]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12" }, [
-                    _c("div", { staticClass: "card" }, [
-                      _c("div", { staticClass: "card-body p-0" }, [
-                        _c("div", { staticClass: "media" }, [
-                          _c("img", {
-                            staticClass: "img-card mr-md-4",
-                            attrs: {
-                              src: "assets/images/about/about-page.jpg",
-                              alt: "image"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("h4", { staticClass: "mb-2 md-mt-2" }, [
-                              _vm._v("Media heading")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", [
-                              _vm._v(
-                                "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-                              )
-                            ])
-                          ])
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-warning mt-4 py-2 px-4",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                )
-              ])
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Tag Details")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("code", [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-warning mt-4 py-2 px-4",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
   },
   function() {
     var _vm = this
@@ -44538,25 +44814,6 @@ var staticRenderFns = [
           _vm._v("Actions")
         ])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "mr-3" }, [
-      _c(
-        "a",
-        {
-          staticClass: "text-primary",
-          attrs: {
-            href: "#",
-            "data-toggle": "modal",
-            "data-target": ".show-service-details-modal"
-          }
-        },
-        [_c("i", { staticClass: "ti-eye o-icon" })]
-      )
     ])
   }
 ]
@@ -56766,13 +57023,13 @@ Vue.component('tag', __webpack_require__(/*! ./components/Tag.vue */ "./resource
 Vue.component('client', __webpack_require__(/*! ./components/Client.vue */ "./resources/js/components/Client.vue")["default"]);
 Vue.component('notify', __webpack_require__(/*! ./components/Notification.vue */ "./resources/js/components/Notification.vue")["default"]);
 Vue.component('admin', __webpack_require__(/*! ./components/Admin.vue */ "./resources/js/components/Admin.vue")["default"]);
-axios.defaults.headers = {
+axios.defaults.headers.common = {
   'X-CSRF-TOKEN': Laravel.csrfToken,
   'X-Requested-With': 'XMLHttpRequest',
   'remember_token': window.Laravel.remember_token
 }; // Vue.http.headers.common['remember_token'] = window.Laravel.remember_token;
-// console.log(window.Laravel.remember_token);
-// window.Vue.prototype.$http = axios;
+
+console.log(window.Laravel.remember_token); // window.Vue.prototype.$http = axios;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -56815,6 +57072,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers['remember_token'] = window.Laravel.remember_token;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

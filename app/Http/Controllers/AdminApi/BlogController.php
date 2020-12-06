@@ -84,7 +84,7 @@ class BlogController extends Controller
                      mkdir($uploads_folder, 0777, true);
                 }
 
-                 $ext= $request->image->extension();
+                $ext= $request->image->extension();
 
                 $imageName = time().'.'.$request->image->extension();
                 $request->image->move($uploads_folder, $imageName);

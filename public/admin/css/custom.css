@@ -1,0 +1,71 @@
+
+
+/*-------------------- CUSTOM STYLING ------------------- */
+
+
+.table-img {
+    width: 6rem;
+    height: auto;
+}
+
+
+.media {
+    display: flex;
+}
+
+/* .media .media-body {
+    flex-grow: 3;
+} */
+.media .img-card {
+    max-width: 20%;
+    min-height: 100%;
+}
+
+@media (max-width: 426px) {
+    .media{
+        flex-direction: column;
+        align-items: center;
+    }
+    .media .img-card {
+        min-width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.modal-header {
+    border-radius: 0 0 20px 20px;
+    background: #F3F8FB;
+    /* border: none; */
+    /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); */
+}
+
+.modal-content {
+    border-radius: 0;
+    border: #fff;
+}
+
+.modal-footer {
+    border-radius: 20px 20px 0 0;
+    background: #F3F8FB;
+    padding: 0 0.75rem 1rem 0.75rem;
+    /* border: none; */
+}
+
+
+.o-icon {
+    display: inline-block;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 100%;
+    background: #F3F8FB;
+}
+
+.card {
+    border: none;
+    /* color: rgba(132, 65, 249, 0.507); */
+    box-shadow: 0 0 10px rgba(93, 0, 255, 0.05);
+}
+
+.btn {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

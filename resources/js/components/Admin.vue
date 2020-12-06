@@ -249,7 +249,10 @@
                     let vm = this;
  
                     const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
                     }
     
                     let formData = new FormData();
@@ -271,15 +274,15 @@
                 }else {
                     // Update
                         // console.log(admin);
+                    const config = {
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
+                    }
 
-                    fetch('api/user', {
-                        method: 'put',
-                        body: JSON.stringify(this.admin),
-                        headers: {
-                            'content-type': 'application/json'
-                        }
-                    })
-                    .then(res => res.json())
+                    axios.put('api/user', this.admin, config)
+                    // .then(res => res.json())
                     .then(res => {
                         // console.log(res);
 
@@ -310,8 +313,15 @@
             },
             // Get and Set Roles
             getSetRoles(){
-                fetch('api/role')
-                .then(res => res.json())
+                    const config = {
+                        headers: { 
+                            // 'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
+                    }
+
+                axios.get('api/role',config)
+                // .then(res => res.json())
                 .then(res => {
                     this.roles = res;
                     // console.log(res);

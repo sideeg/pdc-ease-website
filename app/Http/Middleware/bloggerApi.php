@@ -17,12 +17,14 @@ class bloggerApi
      */
     public function handle(Request $request, Closure $next)
     {
+        dd($request->header('remember_token', 'default'));
+        // return $next($request);
 
         $user = User::where('remember_token',$request->header('remember_token', 'default'));
         $user = $user->toArray();
 
         if(is_null($user) || sizeof($user) ==0){
-            return response()->json(" plese login first",401);
+            return response()->json("please login first",401);
         }else{
             $user = $user[0];
             if ($user['role_id'] == 1 || $user['role_id'] == 3)
