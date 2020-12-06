@@ -121,8 +121,14 @@
             getMessages(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/message';
-                fetch(page_url)
-                .then(res => res.json())
+                const config = {
+                        headers: { 
+                            // 'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                            }
+                    }
+                axios.get(page_url, config)
+                // .then(res => res.json())
                 .then(res => {
                     this.messages = res.data;
                     vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
@@ -139,13 +145,17 @@
             },
             // Delete Slide
             deleteMessage(id){
-                console.log(id);
+                // console.log(id);
+                const config = {
+                    headers: { 
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
 
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/message/${id}`, {
-                        method: 'delete'
-                    })
-                    .then(res => res.json())
+                    axios.delete(`api/message/${id}`, config)
+                    // .then(res => res.json())
                     .then(res => {
                         alert('Message Deleted !');
                         this.getMessages();

@@ -15,3 +15,7 @@
 <link rel="stylesheet" href="{{asset('admin/css/responsive.css')}}">
 <!-- modernizr css -->
 <script src="{{asset('admin/js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+<link rel="stylesheet" href="{{asset('admin/css/custom.css')}}">

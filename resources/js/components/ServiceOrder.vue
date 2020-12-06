@@ -123,8 +123,14 @@
                 let vm = this;
                 console.log(this.open ? 'api/order' : 'api/order-reverse')
                 page_url = page_url || this.open ? 'api/order' : 'api/order-reverse';
-                console.log(page_url);
-                fetch(page_url)
+                // console.log(page_url);
+                const config = {
+                    headers: { 
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
+                axios.get(page_url, config)
                 .then(res => res.json())
                 .then(res => {
                     this.orders = res.data;
@@ -154,11 +160,15 @@
             },
             // Delete Order
             deleteOrder(id){
+                const config = {
+                    headers: { 
+                        'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/order/${id}`, {
-                        method: 'delete'
-                    })
-                    .then(res => res.json())
+                    axios.delete(`api/order/${id}`, config)
+                    // .then(res => res.json())
                     .then(res => {
                         alert('Order Deleted !');
                         this.getOrders();
@@ -169,10 +179,14 @@
             },
             // Update Order
             updateOrder(id){
-                fetch(`api/order/${id}`, {
-                    method: 'put'
-                })
-                .then(res => res.json())
+                const config = {
+                    headers: { 
+                        'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
+                fetch(`api/order/${id}`, config)
+                // .then(res => res.json())
                 .then(res => {
                     // alert('Order Deleted !');
                     this.getOrders();

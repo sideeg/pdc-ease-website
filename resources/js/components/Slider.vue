@@ -14,9 +14,9 @@
                                             <button type="button" class="close" data-dismiss="modal" @click="resetModal()"><code>&times;</code></button>
                                         </div>
                                         <div class="modal-body">
-                                            <div v-if="success != ''" class="alert alert-success" role="alert">
+                                            <!-- <div v-if="success != ''" class="alert alert-success" role="alert">
                                                 {{success}}
-                                            </div>
+                                            </div> -->
                                             <div class="row">
                                                 <!-- Textual inputs start -->
                                                 <div class="col-12">
@@ -39,11 +39,13 @@
                                                                 <label for="desc_en" class="col-form-label">Description en <code>*</code></label>
                                                                 <textarea name="desc_en" id="desc_en" v-model="slide.desc_en" class="form-control" cols="30" rows="4"></textarea>
                                                             </div>
-                                                            <div class="form-group row">
-                                                                <label for="desc_"  class="col-form-label d-block">Video or Image</label>
-                                                                <!-- <input ref="file" type="file" @change.prevent="selectFile" class="col-form-label"> -->
-                                                                <input type="file" class="col-form-label d-block" v-on:change="onImageChange">
-                                                                <img v-bind:src="slide.sourse" alt="">
+                                                            <div class="form-group container row align-items-center justify-content-between">
+                                                                <div>
+                                                                    <label for="desc_ar"  class="col-form-label d-block">Video or Image</label><br>
+                                                                    <!-- <input ref="file" type="file" @change.prevent="selectFile" class="col-form-label"> -->
+                                                                    <input type="file" class="col-form-label d-block" v-on:change="onImageChange">
+                                                                </div>
+                                                                <img v-bind:src="slide.sourse" class="table-img" alt="">
                                                             </div>
 
                                                         </div>
@@ -105,7 +107,54 @@
             </div>
         <!-- End Modal -->
 
+        <!-- Show Service Details Modal -->
+            <div class="col-lg-10 mt-3 d-flex justify-content-between">
+                <div class="modal fade show-slider-details-modal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Slider Details</h5>
+                                <button type="button" class="close" data-dismiss="modal"><code>&times;</code></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <!-- Textual inputs start -->
+                                    <div class="col-12">
+                                        <!-- <div class="card"> -->
+                                            <div class="card-body p-0">
+                                                <div class="media">
+                                                    <img v-if="slide.type == 0" :src="slide.sourse"  :alt="slide.title_en" class="img-card mr-md-4" srcset="">
+                                                    <video v-if="slide.type == 1" width="320" height="240" controls class="img-card mr-md-4">  
+                                                        <source :src="slide.sourse" type="video/mp4"> 
+                                                        <source :src="slide.sourse" type="video/ogg">
+                                                        Your browser does not support video.
+                                                    </video>
+                                                    <!-- <img class="img-card mr-md-4" :src="slide.image" alt="image"> -->
+                                                    <div class="media-body">
+                                                        <h4 class="mb-2 md-mt-2">{{ slide.title_en}}</h4>
+                                                        <h4 class="mb-2 md-mt-2">{{ slide.title_ar}}</h4>
 
+                                                        <!-- <div class="row mb-3"><span class="col-lg-6 col-sm-12 font-italic"><b>Date:&ThickSpace; </b> 5 Fab, 2020</span></div> -->
+                                                        <p>{{ slide.desc_en}}</p>
+                                                        <p>{{ slide.desc_ar}}</p>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- </div> -->
+                                    </div>
+                                    <!-- Textual inputs end -->
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-warning mt-4 py-2 px-4" data-dismiss="modal">Close</button>
+                                <!-- <button type="button" class="btn btn-primary mt-4 py-2 px-4">Submit</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- End Modal -->
 
         <!-- Progress Table start -->
             <div class="col-lg-10 mt-5">
@@ -157,7 +206,7 @@
                                             </td>
                                             <td class="">
                                                 <ul class="d-flex justify-content-center align-items-center">
-                                                    <li class="mr-3"><a href="#" class="text-primary" data-toggle="modal" data-target=".show-service-details-modal"><i class="ti-eye o-icon"></i></a></li>
+                                                    <li class="mr-3"><a href="#" @click="showSlide(slide)" class="text-primary" data-toggle="modal" data-target=".show-slider-details-modal"><i class="ti-eye o-icon"></i></a></li>
                                                     <li class="mr-3"><a href="#" @click="editSlide(slide)" class="text-secondary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="ti-pencil o-icon"></i></a></li>
                                                     <li><a href="#" @click="deleteSlide(slide.id)" class="text-danger"><i class="ti-trash o-icon"></i></a></li>
                                                 </ul>
@@ -199,15 +248,21 @@
         created() {
             // this.http.headers.common['remember_token'] = this.remember_token;
             this.getSlides()
-            console.log(this.remember_token)
         },
 
         methods: {
             getSlides(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/slider';
-                fetch(page_url)
-                .then(res => res.json())
+                const config = {    
+                    headers: {
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token' : window.Laravel.remember_token
+                    }
+                }
+
+                axios.get(page_url, config)
+                // .then(res => res.json())
                 .then(res => {
                     this.slides = res.data;
                     vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
@@ -232,11 +287,15 @@
             },
             // Delete Slide
             deleteSlide(id){
+                const config = {
+                    headers: { 
+                        'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/slider/${id}`, {
-                        method: 'delete'
-                    })
-                    .then(res => res.json())
+                    fetch(`api/slider/${id}`, config)
+                    // .then(res => res.json())
                     .then(res => {
                         alert('Slide Deleted !');
                         this.getSlides();
@@ -247,6 +306,7 @@
             },
             // Add Slide
             addSlide(){
+                console.log(this.remember_token);
                 if(this.edit === false){
                     // Add
                    let vm = this;
@@ -254,7 +314,7 @@
                     const config = {
                         headers: {
                             'content-type': 'multipart/form-data',
-                            'remember_token' : this.remember_token
+                            'remember_token' : window.Laravel.remember_token
                              }
                     }
 
@@ -280,7 +340,10 @@
                     let vm = this;
 
                     const config = {
-                        headers: { 'content-type': 'multipart/form-data' }
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token' : window.Laravel.remember_token
+                        }
                     }
 
                     let formData = new FormData();
@@ -306,6 +369,7 @@
                 // this.resetModal();
 
             },
+            // Edit Slide
             editSlide(slide){
                 this.edit = true;
                 this.slide.id = slide.id;
@@ -317,16 +381,15 @@
                 this.slide.sourse = slide.sourse;
 
             },
-            // File Handle
-            createImage(file) {
-                let reader = new FileReader();
-                let vm = this;
-                reader.onload = (e) => {
-                    vm.sourse = e.target.result;
-                };
-                reader.readAsDataURL(file);
+            // Show Slide
+            showSlide(slide){
+                this.slide.title_en = slide.title_en;
+                this.slide.title_ar = slide.title_ar;
+                this.slide.desc_en = slide.desc_en;
+                this.slide.desc_ar = slide.desc_ar;
+                this.slide.sourse = slide.sourse;
+                this.slide.type = slide.type;
             },
-
             resetModal() {
                 this.slide.title_en = '';
                 this.slide.title_ar = '';

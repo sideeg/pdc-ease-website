@@ -179,15 +179,21 @@
 
         methods: {
             getNotifyNumber() {
+                const config = {
+                    headers: { 
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
                 // Orders Nutification Number
-                axios.get('api/user-notification-num')
+                axios.get('api/user-notification-num', config)
                 .then(res => {
                     this.orders_num = res.data;
                 })
                 .catch(err => console.log(err));
 
                 // Messages Nutification Number
-                axios.get('api/user-message-num')
+                axios.get('api/user-message-num', config)
                 .then(res => {
                     this.messages_num = res.data;
                 })
@@ -207,7 +213,13 @@
             },
             // Get Messages
             getMessages(){
-                axios.get('api/user-message')
+                const config = {
+                    headers: { 
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
+                axios.get('api/user-message', config)
                 .then(res => {
                     this.messages = res;
                     console.log(res);

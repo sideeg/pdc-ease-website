@@ -41,7 +41,7 @@ Vue.component('admin', require('./components/Admin.vue').default);
 
 
 
-axios.defaults.headers = {
+axios.defaults.headers.common = {
     'X-CSRF-TOKEN': Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest',
     'remember_token': window.Laravel.remember_token,
@@ -49,7 +49,7 @@ axios.defaults.headers = {
 
 // Vue.http.headers.common['remember_token'] = window.Laravel.remember_token;
 
-// console.log(window.Laravel.remember_token);
+console.log(window.Laravel.remember_token);
 
 // window.Vue.prototype.$http = axios;
 
