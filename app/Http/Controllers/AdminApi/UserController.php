@@ -180,10 +180,14 @@ class UserController extends Controller
                 return response()->json('User not found',404);
             }
             foreach ($user->unreadNotifications as $notification) {
-                if( $notification->type == $MessageType)
-                    $array[]=$notification;
+                if( $notification->type == $MessageType){
+                    $array[]=$notification->data;
+                    $notification->markAsRead();
+                }
+
             }
             unset($array[0]);
+            // $user->unreadNotifications->markAsRead();
 
 
             return response()->json($array,200);
@@ -204,12 +208,14 @@ class UserController extends Controller
                 return response()->json('User not found',404);
             }
             foreach ($user->unreadNotifications as $notification) {
-                if( $notification->type == $OrderType)
+                if( $notification->type == $OrderType){
                     $array[] =$notification->data;
+                    $notification->markAsRead();
+                }
             }
             unset($array[0]);
 
-            $user->unreadNotifications->markAsRead();
+            // $user->unreadNotifications->markAsRead();
 
             // $num = sizeof($user->unreadNotifications );
             return response()->json($array,200);
