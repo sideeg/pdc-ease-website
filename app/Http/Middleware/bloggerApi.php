@@ -17,7 +17,7 @@ class bloggerApi
      */
     public function handle(Request $request, Closure $next)
     {
-
+        // dd($request->header('remember_token', 'default'));
         $user = User::where('remember_token',$request->header('remember_token', 'default'));
         $user = $user->toArray();
 
