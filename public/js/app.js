@@ -2770,11 +2770,10 @@ __webpack_require__.r(__webpack_exports__);
           'remember_token': window.Laravel.remember_token
         }
       };
-      axios.get(page_url, config).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this.clients = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+      axios.get(page_url, config) // .then(res => res.json())
+      .then(function (res) {
+        _this.clients = res.data.data;
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3916,19 +3915,19 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       console.log(this.open ? 'api/order' : 'api/order-reverse');
-      page_url = page_url || this.open ? 'api/order' : 'api/order-reverse'; // console.log(page_url);
-
+      page_url = page_url || this.open ? 'api/order' : 'api/order-reverse';
+      console.log(this.open);
       var config = {
         headers: {
           // 'content-type': 'multipart/form-data',
           'remember_token': window.Laravel.remember_token
         }
       };
-      axios.get(page_url, config).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this.orders = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+      axios.get(page_url, config) // .then(res => res.json())
+      .then(function (res) {
+        _this.orders = res.data.data;
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url);
+        console.log(res.data.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3975,7 +3974,7 @@ __webpack_require__.r(__webpack_exports__);
           'remember_token': window.Laravel.remember_token
         }
       };
-      fetch("api/order/".concat(id), config) // .then(res => res.json())
+      axios.put("api/order/".concat(id), config) // .then(res => res.json())
       .then(function (res) {
         // alert('Order Deleted !');
         _this3.getOrders(); // console.log(res);

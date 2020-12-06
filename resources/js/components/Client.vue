@@ -196,12 +196,11 @@
                             }
                     }
                 axios.get(page_url, config)
-                .then(res => res.json())
+                // .then(res => res.json())
                 .then(res => {
-                    this.clients = res.data;
-                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
-                    // console.log(res.data);
-
+                    this.clients = res.data.data;
+                    vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
+                    // console.log(res);
                 }
                 )
                 .catch(err => console.log(err));

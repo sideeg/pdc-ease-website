@@ -123,7 +123,7 @@
                 let vm = this;
                 console.log(this.open ? 'api/order' : 'api/order-reverse')
                 page_url = page_url || this.open ? 'api/order' : 'api/order-reverse';
-                // console.log(page_url);
+                console.log(this.open);
                 const config = {
                     headers: { 
                         // 'content-type': 'multipart/form-data',
@@ -131,11 +131,11 @@
                         }
                 }
                 axios.get(page_url, config)
-                .then(res => res.json())
+                // .then(res => res.json())
                 .then(res => {
-                    this.orders = res.data;
-                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
-                    // console.log(res.data);
+                    this.orders = res.data.data;
+                    vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
+                    console.log(res.data.data);
 
                 }
                 )
@@ -185,7 +185,7 @@
                         'remember_token': window.Laravel.remember_token
                         }
                 }
-                fetch(`api/order/${id}`, config)
+                axios.put(`api/order/${id}`, config)
                 // .then(res => res.json())
                 .then(res => {
                     // alert('Order Deleted !');
