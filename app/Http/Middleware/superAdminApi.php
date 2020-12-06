@@ -19,7 +19,7 @@ class superAdminApi
     {
         $user = User::where('remember_token',$request->header('remember_token', 'default'))->get();
         $user = $user->toArray();
-        return $next($request);
+        // return $next($request);
         if(is_null($user) || sizeof($user) ==0){
             return response()->json(" plese login first",401);
         }else{

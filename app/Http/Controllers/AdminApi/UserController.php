@@ -183,6 +183,7 @@ class UserController extends Controller
                 if( $notification->type == $MessageType)
                     $array[]=$notification;
             }
+            unset($array[0]);
 
 
             return response()->json($array,200);

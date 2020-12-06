@@ -18,7 +18,7 @@ class admin
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        // return $next($request);
 
         // dd($request->header('remember_token', 'default'));
         $user = User::where('remember_token',$request->header('remember_token', 'default'));

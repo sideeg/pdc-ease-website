@@ -52,7 +52,7 @@ class ServiceController extends Controller
             'image' => $uploads_folder.$imageName,
         ]);
 
-        if (is_null($request->tags)){
+        if (!is_null($request->tags)){
             //check if the given tags list is string or not if it is convert it to array
             if (gettype($request->tags) == "string")
                 $tags_list = explode(',', substr($request->tags,1,-1));
@@ -123,7 +123,7 @@ class ServiceController extends Controller
                 return response()->json('service not found',404);
             }
 
-            if($request->tags != null){
+            if($request->tags){
                 //check if the given tags list is string or not if it is convert it to array
                 if (gettype($request->tags) == "string")
                     $tags_list = explode(',', substr($request->tags,1,-1));
@@ -132,6 +132,7 @@ class ServiceController extends Controller
 
                 // var_dump($fruits_ar);
                 //add the new tags to this new service as the user done
+
                 for ($i =0;$i<sizeof($tags_list);$i++){
                     $tag = tags::find($tags_list[$i]);
                     $tag->service_id = $service->id;
