@@ -179,9 +179,13 @@ class UserController extends Controller
             if (is_null($user)){
                 return response()->json('User not found',404);
             }
+            $i = 1;
             foreach ($user->unreadNotifications as $notification) {
                 if( $notification->type == $MessageType){
+                    $x = strval($i);
                     $array[]=$notification->data;
+                    // dd($notification->data[0]);
+                    $i++;
                     $notification->markAsRead();
                 }
 
