@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -55,7 +56,8 @@ class LoginController extends Controller
             'email'   => 'required|email',
             'password' => 'required|min:6'
         ]);
-
+        $user = User::where('email' , $request->email)->get();
+            // dd($user);
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
             $user = Auth::user();
             Auth::login($request->user());
@@ -64,7 +66,13 @@ class LoginController extends Controller
             $request->user()->forceFill([
                 'remember_token' => $token,
             ])->save();
-            return redirect()->intended('/dashboard')->with('token',$token);;
+            if(! is_null($user))
+                if($user->role_id == '1')//if super admin
+                    return redirect()->intended('/dashboard')->with('token',$token);
+                elseif($user->role_id == '2')//if admin
+                    return redirect()->intended('/dashboard-sliders')->with('token',$token);
+                else // if bloger
+                    return redirect()->intended('/dashboard-blog')->with('token',$token);
         }
         return back()->withInput($request->only('email', 'remember'));
     }
