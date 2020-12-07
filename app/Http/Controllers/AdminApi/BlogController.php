@@ -20,6 +20,8 @@ class BlogController extends Controller
     public function blogSave(Request $request)
     {
 
+        // dd($request);
+
         $validatedData = Validator::make($request->all(),[
             'image' => 'required',
             'title_en' => 'required',

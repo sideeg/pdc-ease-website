@@ -96,7 +96,7 @@ class UserController extends Controller
          */
         public function UserUpdate(Request $request,User $User)
         {
-            // dd($request->id);
+            // dd($request->email);
             $User = User::find($request->id);
 
             if (is_null($User)){

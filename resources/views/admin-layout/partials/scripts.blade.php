@@ -19,4 +19,5 @@
     <script>
         CKEDITOR.replace( 'desc_en' );
         CKEDITOR.replace( 'desc_ar' );
+        // $('#hide-modal').modal('hide');
      </script>
