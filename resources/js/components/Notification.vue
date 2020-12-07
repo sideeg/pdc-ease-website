@@ -14,7 +14,7 @@
                             <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
                             <div class="notify-text">
                                 <p>{{order.data}}</p>
-                                <span>Just Now</span>
+                                <!-- <span>Just Now</span> -->
                             </div>
                         </a>
                         <!-- <a href="#" class="notify-item">
@@ -72,9 +72,9 @@
                         <a href="javascript:void(0);" class="notify-item" v-for="message in messages.data" :key="message.id">
                             <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
                             <div class="notify-text">
-                                <p>{{ message.data }}</p>
-                                <span class="msg">Hey I am waiting for you...</span>
-                                <span>3:15 PM</span>
+                                <p>{{ message.name }}</p>
+                                <span class="msg">{{ message.subject }}</span>
+                                <!-- <span>3:15 PM</span> -->
                             </div>
                         </a>
                         <!-- <a href="#" class="notify-item">
@@ -196,6 +196,7 @@
                 axios.get('api/user-message-num', config)
                 .then(res => {
                     this.messages_num = res.data;
+                    console.log(res.data)
                 })
                 .catch(err => console.log(err));
                 // console.log(this.ordersRoute);
@@ -221,8 +222,8 @@
                 }
                 axios.get('api/user-message', config)
                 .then(res => {
-                    this.messages = res;
-                    console.log(res);
+                    this.messages = res.data;
+                    console.log(res.data.data);
                 })
                 .catch(err => console.log(err));
 

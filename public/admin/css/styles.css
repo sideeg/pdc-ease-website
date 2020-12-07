@@ -724,8 +724,8 @@ ul.breadcrumbs {
             align-items: center;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    background: -webkit-linear-gradient(left, #8914fe 0%, #8063f5 100%);
-    background: linear-gradient(to right, #8914fe 0%, #8063f5 100%);
+    /* background: -webkit-linear-gradient(left, #8914fe 0%, #8063f5 100%);
+    background: linear-gradient(to right, #8914fe 0%, #8063f5 100%); */
     padding: 17px 38px;
     position: relative;
     /* width: ; */
@@ -755,6 +755,7 @@ ul.breadcrumbs {
     font-size: 21px;
     vertical-align: middle;
     position: relative;
+    color: royalblue;
 }
 
 .notification-area .dropdown-toggle,
@@ -790,6 +791,7 @@ ul.breadcrumbs {
 
 .notification-area .dropdown-menu.show,
 .user-profile .dropdown-menu.show {
+    /* left: 10% !important; */
     top: 100%!important;
     visibility: visible;
     opacity: 1;

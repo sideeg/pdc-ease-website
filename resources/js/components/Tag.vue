@@ -4,7 +4,7 @@
             <div class="row justify-content-center">
                     <div class="col-lg-10 mt-3 d-flex justify-content-between">       
                         <!-- <button class="btn btn-rounded btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="ti-plus"></i> New Article</button> -->
-                        <div class="modal fade bd-example-modal-lg">
+                        <div class="modal fade bd-example-modal-lg" id="#hide-modal">
                             <div class="modal-dialog modal-lg">
                                 <form @submit.prevent="addTag" enctype="multipart/form-data">
                                     <div class="modal-content">
@@ -172,7 +172,7 @@
             return {
                 tags: [],
                 tag: {
-                    // id: '',
+                    id: '',
                     name_en: '',
                     name_ar: '',
                     desc_en: '',
@@ -208,9 +208,9 @@
                 axios.get(page_url, config)
                 // .then(res => res.json())
                 .then(res => {
-                    this.tags = res.data;
-                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
-                    // console.log(res.data);
+                    this.tags = res.data.data;
+                    vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
+                    // console.log(res.data.data);
                 }
                 )
                 .catch(err => console.log(err));
@@ -242,7 +242,7 @@
                 }
                 if(confirm('Are You Sure ?')){
                     axios.delete(`api/tag/${id}`, config)
-                    .then(res => res.json())
+                    // .then(res => res.json())
                     .then(res => {
                         alert('Tag Deleted !');
                         this.getTags();
@@ -254,29 +254,37 @@
             // Add Tag
             addTag(){
                 // console.log(this.tag);
-                const config = {
-                    headers: { 
-                        'content-type': 'multipart/form-data',
-                        'remember_token': window.Laravel.remember_token
-                        }
-                }
+                // $('.bd-example-modal-lg').modal('hide');
+                // this.$emit('close');
+                // location.reload()
+                
                 if(this.edit === false){
+
+                    const config = {
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                        }
+                    }
+                    // console.log(this.tag);
                     // Add 
                     axios.post('api/tag', this.tag, config)
                     .then(res => {
-                        // console.log(res);
-                        
-                        // this.resetModal();                        
-                        // alert('Tag Added !');
                         this.getTags();
-                        // console.log(res);
-                    })
-                    .catch(err => console.log(err));
+                    }).catch(err => console.log(err));
                     
                 }else {
                     // Update
                         // console.log(tag);
 
+                    const config = {
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                        }
+                    }
+
+                    // console.log(this.tag)
                     axios.put('api/tag', this.tag, config)
                     // .then(res => res.json())
                     .then(res => {
@@ -311,12 +319,12 @@
                     headers: { 
                         // 'content-type': 'multipart/form-data',
                         'remember_token': window.Laravel.remember_token
-                        }
+                    }
                 }
                 axios.get('api/services_names')
                 // .then(res => res.json())
                 .then(res => {
-                    this.services = res;
+                    this.services = res.data;
                     console.log(res);
                 })
                 
@@ -336,7 +344,7 @@
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>

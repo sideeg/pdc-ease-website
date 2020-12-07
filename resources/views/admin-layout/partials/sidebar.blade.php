@@ -9,9 +9,18 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
+                            @if(Auth::user()->role_id == 1 )
                             <li>
                                 <a href="{{route('dashboard')}}"><i class="ti-dashboard"></i><span>dashboard</span></a>
                             </li>
+                            <li>
+                                <a href="{{route('servicesOrders')}}"><i class="ti-shopping-cart"></i><span>Services Orders</span></a>
+                            </li>
+
+                            @endif
+
+                            @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 1)
+                                
                             <li>
                                 <a href="{{route('slider')}}"><i class="ti-layout-slider"></i><span>Slider</span></a>
                             </li>
@@ -21,18 +30,25 @@
                             <li>
                                 <a href="{{route('client')}}"><i class="ti-user"></i><span>Clients</span></a>
                             </li>
-                            <li>
-                                <a href="{{route('servicesOrders')}}"><i class="ti-shopping-cart"></i><span>Services Orders</span></a>
-                            </li>
-                            <li>
-                                <a href="{{route('blog')}}"><i class="ti-write"></i><span>Blog</span></a>
-                            </li>
+                            
                             <li>
                                 <a href="{{route('tag')}}"><i class="ti-bookmark"></i><span>Tags</span></a>
                             </li>
+                            @endif
+
+                            @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 3 )
+                            <li>
+                                <a href="{{route('blog')}}"><i class="ti-write"></i><span>Blog</span></a>
+                            </li>
+                            @endif
+
+                            @if(Auth::user()->role_id == 1 )
+
                             <li>
                                 <a href="{{route('message')}}"><i class="ti-comment-alt"></i><span>Messages</span></a>
                             </li>
+
+                            @endif
                             
                         </ul>
                     </nav>

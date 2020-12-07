@@ -35,6 +35,8 @@
                                                 <label for="example-text-input" class="col-form-label">Confirm Password</label>
                                                 <input class="form-control" type="Password" v-model="admin.password">
                                             </div>
+                                            <input hidden type="text" v-model="admin.id">
+
                                             <div class="form-group">
                                                 <label for="roles" class="col-form-label">Roles</label>
                                                 <select name="roles" id="roles" class="form-control" v-model='admin.role_id'>
@@ -172,7 +174,7 @@
             return {
                 admins: [],
                 admin: {
-                    // id: '',
+                    id: '',
                     name: '',
                     email: '',
                     password: '',
@@ -198,12 +200,20 @@
             getAdmins(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/user';
-                fetch(page_url)
-                .then(res => res.json())
+
+                const config = {
+                    headers: { 
+                        // 'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                        }
+                }
+
+                axios.get(page_url, config)
+                // .then(res => res.json())
                 .then(res => {
-                    this.admins = res.data;
-                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
-                    // console.log(res.data);
+                    this.admins = res.data.data;
+                    vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
+                    // console.log(res.data.data);
                 }
                 )
                 .catch(err => console.log(err));
@@ -219,20 +229,20 @@
                 }
 
                 this.pagination = pagination;
-
-                console.log(this.pagination);
-
-
             },
             // Delete Admin
             deleteAdmin(id){
+                const config = {
+                    headers: { 
+                        'content-type': 'multipart/form-data',
+                        'remember_token': window.Laravel.remember_token
+                    }
+                }
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/user/${id}`, {
-                        method: 'delete'
-                    })
-                    .then(res => res.json())
+                    axios.delete(`api/user/${id}`, config)
+                    // .then(res => res.json())
                     .then(res => {
-                        alert('Admin Deleted !');
+                        // alert('Admin Deleted !');
                         this.getAdmins();
                         // console.log(res);
 
@@ -252,7 +262,7 @@
                         headers: { 
                             'content-type': 'multipart/form-data',
                             'remember_token': window.Laravel.remember_token
-                            }
+                        }
                     }
     
                     let formData = new FormData();
@@ -261,10 +271,10 @@
                     formData.append('password', this.admin.password);
                     formData.append('role_id', this.admin.role_id);
                    
-    
+                    console.log(this.admin);
                     axios.post('/api/user', formData, config)
                         .then(res => {
-                            vm.success = res.success;
+                            // vm.success = res.success;
                             // console.log(res);
                             this.getAdmins();
 
@@ -278,10 +288,21 @@
                         headers: { 
                             'content-type': 'multipart/form-data',
                             'remember_token': window.Laravel.remember_token
-                            }
+                        }
                     }
 
-                    axios.put('api/user', this.admin, config)
+                    
+                    let formData = new FormData();
+
+                    formData.append('id', this.admin.id);
+                    formData.append('name', this.admin.name);
+                    formData.append('email', this.admin.email);
+                    formData.append('password', this.admin.password);
+                    formData.append('role_id', this.admin.role_id);
+                    // console.log(this.admin.id);
+                   
+
+                    axios.put('api/user', formData, config)
                     // .then(res => res.json())
                     .then(res => {
                         // console.log(res);
@@ -300,7 +321,7 @@
 
             },
             editAdmin(admin){
-                console.log(admin);
+                // console.log(admin.id);
                 this.edit = true;
                 this.admin.id = admin.id;
                 this.admin.admin_id = admin.id;
@@ -323,7 +344,7 @@
                 axios.get('api/role',config)
                 // .then(res => res.json())
                 .then(res => {
-                    this.roles = res;
+                    this.roles = res.data;
                     // console.log(res);
                 })
                 .catch(err => console.log(err));
@@ -331,6 +352,7 @@
             },
             resetModal() {
                 // console.log('kkkk')
+                this.admin.id = '';
                 this.admin.name = '';
                 this.admin.email = '';
                 this.admin.role_id = '';

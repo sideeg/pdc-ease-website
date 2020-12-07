@@ -104,6 +104,7 @@
                 },
                 // order_tag: {
                     tag: {
+                        id: '',
                         name_en: '',
                     },
 
@@ -135,7 +136,7 @@
                 .then(res => {
                     this.orders = res.data.data;
                     vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
-                    console.log(res.data.data);
+                    // console.log(res.data.data);
 
                 }
                 )
@@ -170,7 +171,7 @@
                     axios.delete(`api/order/${id}`, config)
                     // .then(res => res.json())
                     .then(res => {
-                        alert('Order Deleted !');
+                        // alert('Order Deleted !');
                         this.getOrders();
                         // console.log(res);
 
@@ -198,7 +199,7 @@
             changeStatus(){
                 this.open = !this.open;
                 this.getOrders();
-                console.log(this.open);
+                // console.log(this.open);
             }
         },
         mounted() {

@@ -27,11 +27,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label">Article <b>( ar )</b></label>
-                                                <textarea name="" id="desc_ar"  class="form-control" cols="30" rows="4" v-model="article.desc_ar"></textarea>
+                                                <textarea name=""   class="form-control" cols="30" rows="4" v-model="article.desc_ar"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label">Article <b>( en )</b></label>
-                                                <textarea name="" id="desc_en" class="form-control" cols="30" rows="4" v-model="article.desc_en"></textarea>
+                                                <textarea name=""  class="form-control" cols="30" rows="4" v-model="article.desc_en"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label d-block">Article Image</label>
@@ -133,7 +133,7 @@
             return {
                 articles: [],
                 article: {
-                    // id: '',
+                    id: '',
                     title_en: '',
                     title_ar: '',
                     desc_en: '',
@@ -174,8 +174,8 @@
                 axios.get(page_url, config)
                 // .then(res => res.json())
                 .then((res) => {
-                    this.articles = res.data;
-                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
+                    this.articles = res.data.data;
+                    vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
                     // console.log(res.data);
 
                 })
@@ -235,10 +235,10 @@
                     formData.append('desc_en', this.article.desc_en);
                     formData.append('desc_ar', this.article.desc_ar);
                     formData.append('tag_id', this.article.tag_id);
-    
+                    // console.log(this.article.desc_en);
                     axios.post('/api/blog', formData, config)
                         .then(res => {
-                            vm.success = res.success;
+                            // vm.success = res.success;
                             // console.log(res);
                             this.getArticles();
 
@@ -257,17 +257,19 @@
                     }
     
                     let formData = new FormData();
+                    formData.append('id', this.article.id);
                     formData.append('image', this.image);
                     formData.append('title_ar', this.article.title_ar);
                     formData.append('title_en', this.article.title_en);
                     formData.append('desc_en', this.article.desc_en);
                     formData.append('desc_ar', this.article.desc_ar);
+                    formData.append('tag_id', this.article.tag_id);
                     // formData.append('type', this.article.type);
-                            console.log('here');
+                            console.log(formData);
     
                     axios.put('/api/blog', formData, config)
                         .then(res => {
-                            vm.success = res.success;
+                            // vm.success = res.success;
                             // console.log(res);
                             this.getArticles();
 
@@ -304,11 +306,11 @@
                     }
                 axios.get('api/tag-names', config)
                 // .then(res => res.json())
-                .then((res) => {
-                    console.log(res);
+                .then(res => {
+                    console.log(res.data);
 
-                    this.tags = res;
-                })
+                    this.tags = res.data;
+                });
                 
             },
 

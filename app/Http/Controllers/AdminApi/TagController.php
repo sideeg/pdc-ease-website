@@ -17,7 +17,6 @@ class TagController extends Controller
      */
     public function tagSave(Request $request)
     {
-
         $validatedData = Validator::make($request->all(),[
             'name_en' => 'required',
             'name_ar' => 'required',
@@ -105,7 +104,7 @@ class TagController extends Controller
          */
         public function tagUpdate(Request $request,tags $tag)
         {
-            // dd($request->id);
+            dd($request->header('remember_token'));
             $tag = tags::find($request->id);
 
             if (is_null($tag)){

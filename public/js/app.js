@@ -2076,12 +2076,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       admins: [],
       admin: {
-        // id: '',
+        id: '',
         name: '',
         email: '',
         password: '',
@@ -2106,11 +2108,16 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       page_url = page_url || 'api/user';
-      fetch(page_url).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this.admins = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+      var config = {
+        headers: {
+          // 'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
+      axios.get(page_url, config) // .then(res => res.json())
+      .then(function (res) {
+        _this.admins = res.data.data;
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2124,20 +2131,22 @@ __webpack_require__.r(__webpack_exports__);
         prev_page_url: prev_page_url
       };
       this.pagination = pagination;
-      console.log(this.pagination);
     },
     // Delete Admin
     deleteAdmin: function deleteAdmin(id) {
       var _this2 = this;
 
-      if (confirm('Are You Sure ?')) {
-        fetch("api/user/".concat(id), {
-          method: 'delete'
-        }).then(function (res) {
-          return res.json();
-        }).then(function (res) {
-          alert('Admin Deleted !');
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+          'remember_token': window.Laravel.remember_token
+        }
+      };
 
+      if (confirm('Are You Sure ?')) {
+        axios["delete"]("api/user/".concat(id), config) // .then(res => res.json())
+        .then(function (res) {
+          // alert('Admin Deleted !');
           _this2.getAdmins(); // console.log(res);
 
         });
@@ -2164,9 +2173,10 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('email', this.admin.email);
         formData.append('password', this.admin.password);
         formData.append('role_id', this.admin.role_id);
+        console.log(this.admin);
         axios.post('/api/user', formData, config).then(function (res) {
-          vm.success = res.success; // console.log(res);
-
+          // vm.success = res.success;
+          // console.log(res);
           _this3.getAdmins();
         })["catch"](function (err) {
           return console.log(err);
@@ -2180,7 +2190,21 @@ __webpack_require__.r(__webpack_exports__);
             'remember_token': window.Laravel.remember_token
           }
         };
-        axios.put('api/user', this.admin, _config) // .then(res => res.json())
+
+        var _formData = new FormData();
+
+        _formData.append('id', this.admin.id);
+
+        _formData.append('name', this.admin.name);
+
+        _formData.append('email', this.admin.email);
+
+        _formData.append('password', this.admin.password);
+
+        _formData.append('role_id', this.admin.role_id); // console.log(this.admin.id);
+
+
+        axios.put('api/user', _formData, _config) // .then(res => res.json())
         .then(function (res) {
           // console.log(res);
           // this.resetModal();                        
@@ -2196,7 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
       this.resetModal();
     },
     editAdmin: function editAdmin(admin) {
-      console.log(admin);
+      // console.log(admin.id);
       this.edit = true;
       this.admin.id = admin.id;
       this.admin.admin_id = admin.id;
@@ -2218,13 +2242,14 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get('api/role', config) // .then(res => res.json())
       .then(function (res) {
-        _this4.roles = res; // console.log(res);
+        _this4.roles = res.data; // console.log(res);
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     resetModal: function resetModal() {
       // console.log('kkkk')
+      this.admin.id = '';
       this.admin.name = '';
       this.admin.email = '';
       this.admin.role_id = '';
@@ -2380,7 +2405,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       articles: [],
       article: {
-        // id: '',
+        id: '',
         title_en: '',
         title_ar: '',
         desc_en: '',
@@ -2417,8 +2442,8 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
-        _this.articles = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+        _this.articles = res.data.data;
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2472,10 +2497,11 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('title_en', this.article.title_en);
         formData.append('desc_en', this.article.desc_en);
         formData.append('desc_ar', this.article.desc_ar);
-        formData.append('tag_id', this.article.tag_id);
-        axios.post('/api/blog', formData, config).then(function (res) {
-          vm.success = res.success; // console.log(res);
+        formData.append('tag_id', this.article.tag_id); // console.log(this.article.desc_en);
 
+        axios.post('/api/blog', formData, config).then(function (res) {
+          // vm.success = res.success;
+          // console.log(res);
           _this3.getArticles();
         })["catch"](function (err) {
           return console.log(err);
@@ -2493,6 +2519,8 @@ __webpack_require__.r(__webpack_exports__);
 
         var _formData = new FormData();
 
+        _formData.append('id', this.article.id);
+
         _formData.append('image', this.image);
 
         _formData.append('title_ar', this.article.title_ar);
@@ -2501,13 +2529,15 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('desc_en', this.article.desc_en);
 
-        _formData.append('desc_ar', this.article.desc_ar); // formData.append('type', this.article.type);
+        _formData.append('desc_ar', this.article.desc_ar);
+
+        _formData.append('tag_id', this.article.tag_id); // formData.append('type', this.article.type);
 
 
-        console.log('here');
+        console.log(_formData);
         axios.put('/api/blog', _formData, _config).then(function (res) {
-          _vm.success = res.success; // console.log(res);
-
+          // vm.success = res.success;
+          // console.log(res);
           _this3.getArticles();
         })["catch"](function (err) {
           return console.log(err);
@@ -2542,8 +2572,8 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get('api/tag-names', config) // .then(res => res.json())
       .then(function (res) {
-        console.log(res);
-        _this4.tags = res;
+        console.log(res.data);
+        _this4.tags = res.data;
       });
     },
     // File Handle
@@ -2794,7 +2824,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var config = {
         headers: {
-          // 'content-type': 'multipart/form-data',
+          'content-type': 'multipart/form-data',
           'remember_token': window.Laravel.remember_token
         }
       };
@@ -2847,6 +2877,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('logo', this.image);
 
+        _formData.append('id', this.client.id);
+
         _formData.append('name', this.client.name);
 
         console.log(_formData);
@@ -2866,8 +2898,7 @@ __webpack_require__.r(__webpack_exports__);
       this.client.id = client.id;
       this.client.client_id = client.id;
       this.client.name = client.name;
-      this.client.logo = client.logo;
-      console.log(client.logo);
+      this.client.logo = client.logo; // console.log(client.logo);
     },
     // File Handle
     createImage: function createImage(file) {
@@ -2885,8 +2916,7 @@ __webpack_require__.r(__webpack_exports__);
       this.client.logo = null;
     },
     onImageChange: function onImageChange(e) {
-      this.image = e.target.files[0];
-      this.client.logo = e.target.files[0];
+      this.image = e.target.files[0]; // this.client.logo = e.target.files[0];
     }
   },
   mounted: function mounted() {// console.log('Component mounted.')
@@ -3067,8 +3097,8 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
-        _this.messages = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+        _this.messages = res.data.data;
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3093,8 +3123,7 @@ __webpack_require__.r(__webpack_exports__);
       if (confirm('Are You Sure ?')) {
         axios["delete"]("api/message/".concat(id), config) // .then(res => res.json())
         .then(function (res) {
-          alert('Message Deleted !');
-
+          // alert('Message Deleted !');
           _this2.getMessages(); // console.log(res);
 
         });
@@ -3322,6 +3351,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('api/user-message-num', config).then(function (res) {
         _this.messages_num = res.data;
+        console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       }); // console.log(this.ordersRoute);
@@ -3348,8 +3378,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       axios.get('api/user-message', config).then(function (res) {
-        _this3.messages = res;
-        console.log(res);
+        _this3.messages = res.data;
+        console.log(res.data.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3614,9 +3644,9 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
-        _this.services = res.data;
-        console.log(_this.services);
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url);
+        _this.services = res.data.data; // console.log(this.services)
+
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3633,11 +3663,10 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       var vm = this;
-      axios.get('api/tag-names'.config).then(function (res) {
-        return res.json();
-      }).then(function (res) {
-        _this2.tags = res;
-        console.log(_this2.tags);
+      axios.get('api/tag-names'.config) // .then(res => res.json())
+      .then(function (res) {
+        _this2.tags = res.data;
+        console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3666,8 +3695,7 @@ __webpack_require__.r(__webpack_exports__);
       if (confirm('Are You Sure ?')) {
         axios["delete"]("api/service/".concat(id), config) // .then(res => res.json())
         .then(function (res) {
-          alert('Service Deleted !');
-
+          // alert('Service Deleted !');
           _this3.getServices(); // console.log(res);
 
         });
@@ -3697,8 +3725,8 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(formData);
 
         axios.post('/api/service', formData, config).then(function (res) {
-          vm.success = res.success; // console.log(res);
-
+          // vm.success = res.success;
+          // console.log(res);
           _this4.getServices();
         })["catch"](function (err) {
           return console.log(err);
@@ -3718,12 +3746,12 @@ __webpack_require__.r(__webpack_exports__);
         _formData.append('desc_en', this.service.desc_en);
 
         _formData.append('desc_ar', this.service.desc_ar); // formData.append('type', this.service.type);
+        // console.log(formData);
 
 
-        console.log(_formData);
         axios.put('/api/service', _formData, config).then(function (res) {
-          _vm.success = res.success; // console.log(res);
-
+          // vm.success = res.success;
+          // console.log(res);
           _this4.getServices();
         })["catch"](function (err) {
           return console.log(err);
@@ -3733,7 +3761,7 @@ __webpack_require__.r(__webpack_exports__);
 
     },
     editService: function editService(service) {
-      console.log(service.tag);
+      // console.log(service.tag)
       this.getSetTags();
       this.edit = true;
       this.service.id = service.id;
@@ -3898,6 +3926,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       // order_tag: {
       tag: {
+        id: '',
         name_en: ''
       },
       // },
@@ -3926,8 +3955,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
         _this.orders = res.data.data;
-        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url);
-        console.log(res.data.data);
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3957,8 +3985,7 @@ __webpack_require__.r(__webpack_exports__);
       if (confirm('Are You Sure ?')) {
         axios["delete"]("api/order/".concat(id), config) // .then(res => res.json())
         .then(function (res) {
-          alert('Order Deleted !');
-
+          // alert('Order Deleted !');
           _this2.getOrders(); // console.log(res);
 
         });
@@ -3984,8 +4011,7 @@ __webpack_require__.r(__webpack_exports__);
     // Change the Orders View
     changeStatus: function changeStatus() {
       this.open = !this.open;
-      this.getOrders();
-      console.log(this.open);
+      this.getOrders(); // console.log(this.open);
     }
   },
   mounted: function mounted() {
@@ -4267,8 +4293,8 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
-        _this.slides = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+        _this.slides = res.data.data;
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -4297,8 +4323,7 @@ __webpack_require__.r(__webpack_exports__);
       if (confirm('Are You Sure ?')) {
         fetch("api/slider/".concat(id), config) // .then(res => res.json())
         .then(function (res) {
-          alert('Slide Deleted !');
-
+          // alert('Slide Deleted !');
           _this2.getSlides(); // console.log(res);
 
         });
@@ -4327,8 +4352,8 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('desc_ar', this.slide.desc_ar); // formData.append('type', this.slide.type);
 
         axios.post('/api/slider', formData, config).then(function (res) {
-          vm.success = res.success; // console.log(res);
-
+          // vm.success = res.success;
+          // console.log(res);
           _this3.getSlides();
         })["catch"](function (err) {
           return console.log(err);
@@ -4358,8 +4383,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
         axios.put('/api/slider', _formData, _config).then(function (res) {
-          _vm.success = res.success; // console.log(res);
-
+          // vm.success = res.success;
+          // console.log(res);
           _this3.getSlides();
         })["catch"](function (err) {
           return console.log(err);
@@ -4686,7 +4711,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       tags: [],
       tag: {
-        // id: '',
+        id: '',
         name_en: '',
         name_ar: '',
         desc_en: '',
@@ -4720,8 +4745,8 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
-        _this.tags = res.data;
-        vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url); // console.log(res.data);
+        _this.tags = res.data.data;
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -4749,9 +4774,8 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       if (confirm('Are You Sure ?')) {
-        axios["delete"]("api/tag/".concat(id), config).then(function (res) {
-          return res.json();
-        }).then(function (res) {
+        axios["delete"]("api/tag/".concat(id), config) // .then(res => res.json())
+        .then(function (res) {
           alert('Tag Deleted !');
 
           _this2.getTags(); // console.log(res);
@@ -4764,28 +4788,34 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       // console.log(this.tag);
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-          'remember_token': window.Laravel.remember_token
-        }
-      };
-
+      // $('.bd-example-modal-lg').modal('hide');
+      // this.$emit('close');
+      // location.reload()
       if (this.edit === false) {
+        var config = {
+          headers: {
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
+          }
+        }; // console.log(this.tag);
         // Add 
-        axios.post('api/tag', this.tag, config).then(function (res) {
-          // console.log(res);
-          // this.resetModal();                        
-          // alert('Tag Added !');
-          _this3.getTags(); // console.log(res);
 
+        axios.post('api/tag', this.tag, config).then(function (res) {
+          _this3.getTags();
         })["catch"](function (err) {
           return console.log(err);
         });
       } else {
         // Update
         // console.log(tag);
-        axios.put('api/tag', this.tag, config) // .then(res => res.json())
+        var _config = {
+          headers: {
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
+          }
+        }; // console.log(this.tag)
+
+        axios.put('api/tag', this.tag, _config) // .then(res => res.json())
         .then(function (res) {
           // console.log(res);
           // this.resetModal();                        
@@ -4822,7 +4852,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get('api/services_names') // .then(res => res.json())
       .then(function (res) {
-        _this4.services = res;
+        _this4.services = res.data;
         console.log(res);
       });
     },
@@ -4839,8 +4869,7 @@ __webpack_require__.r(__webpack_exports__);
       this.tag.desc_ar = tag.desc_ar;
     }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
   }
 });
 
@@ -40627,6 +40656,27 @@ var render = function() {
                               })
                             ]),
                             _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.admin.id,
+                                  expression: "admin.id"
+                                }
+                              ],
+                              attrs: { hidden: "", type: "text" },
+                              domProps: { value: _vm.admin.id },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.admin, "id", $event.target.value)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
                             _c("div", { staticClass: "form-group" }, [
                               _c(
                                 "label",
@@ -41136,12 +41186,7 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: {
-                                name: "",
-                                id: "desc_ar",
-                                cols: "30",
-                                rows: "4"
-                              },
+                              attrs: { name: "", cols: "30", rows: "4" },
                               domProps: { value: _vm.article.desc_ar },
                               on: {
                                 input: function($event) {
@@ -41171,12 +41216,7 @@ var render = function() {
                                 }
                               ],
                               staticClass: "form-control",
-                              attrs: {
-                                name: "",
-                                id: "desc_en",
-                                cols: "30",
-                                rows: "4"
-                              },
+                              attrs: { name: "", cols: "30", rows: "4" },
                               domProps: { value: _vm.article.desc_en },
                               on: {
                                 input: function($event) {
@@ -42372,9 +42412,7 @@ var render = function() {
                   _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v(_vm._s(order.data))]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Just Now")])
+                    _c("p", [_vm._v(_vm._s(order.data))])
                   ])
                 ]
               )
@@ -42425,13 +42463,11 @@ var render = function() {
                     _vm._m(1, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "notify-text" }, [
-                      _c("p", [_vm._v(_vm._s(message.data))]),
+                      _c("p", [_vm._v(_vm._s(message.name))]),
                       _vm._v(" "),
                       _c("span", { staticClass: "msg" }, [
-                        _vm._v("Hey I am waiting for you...")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", [_vm._v("3:15 PM")])
+                        _vm._v(_vm._s(message.subject))
+                      ])
                     ])
                   ]
                 )
@@ -44228,272 +44264,281 @@ var render = function() {
         "div",
         { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
         [
-          _c("div", { staticClass: "modal fade bd-example-modal-lg" }, [
-            _c("div", { staticClass: "modal-dialog modal-lg" }, [
-              _c(
-                "form",
-                {
-                  attrs: { enctype: "multipart/form-data" },
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.addTag($event)
+          _c(
+            "div",
+            {
+              staticClass: "modal fade bd-example-modal-lg",
+              attrs: { id: "#hide-modal" }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog modal-lg" }, [
+                _c(
+                  "form",
+                  {
+                    attrs: { enctype: "multipart/form-data" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.addTag($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "modal-content" }, [
-                    _c("div", { staticClass: "modal-header" }, [
-                      _c("h5", { staticClass: "modal-title" }, [_vm._v("Tag")]),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "close",
-                          attrs: { type: "button", "data-dismiss": "modal" },
-                          on: {
-                            click: function($event) {
-                              return _vm.resetModal()
+                  },
+                  [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _c("div", { staticClass: "modal-header" }, [
+                        _c("h5", { staticClass: "modal-title" }, [
+                          _vm._v("Tag")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "close",
+                            attrs: { type: "button", "data-dismiss": "modal" },
+                            on: {
+                              click: function($event) {
+                                return _vm.resetModal()
+                              }
                             }
-                          }
-                        },
-                        [_c("code", [_vm._v("×")])]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "modal-body" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-12" }, [
-                          _c("div", { staticClass: "card-body" }, [
-                            _c("div", { staticClass: "form-group" }, [
-                              _vm._m(0),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.tag.name_ar,
-                                    expression: "tag.name_ar"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "text",
-                                  id: "example-text-input1"
-                                },
-                                domProps: { value: _vm.tag.name_ar },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.tag,
-                                      "name_ar",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _vm._m(1),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.tag.name_en,
-                                    expression: "tag.name_en"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "text",
-                                  id: "example-text-input2"
-                                },
-                                domProps: { value: _vm.tag.name_en },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.tag,
-                                      "name_en",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _vm._m(2),
-                              _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.tag.desc_ar,
-                                    expression: "tag.desc_ar"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  name: "",
-                                  id: "example-email-input",
-                                  cols: "30",
-                                  rows: "4"
-                                },
-                                domProps: { value: _vm.tag.desc_ar },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.tag,
-                                      "desc_ar",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _vm._m(3),
-                              _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.tag.desc_en,
-                                    expression: "tag.desc_en"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  name: "",
-                                  id: "example-email-input",
-                                  cols: "30",
-                                  rows: "4"
-                                },
-                                domProps: { value: _vm.tag.desc_en },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.tag,
-                                      "desc_en",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _c(
-                                "label",
-                                {
-                                  staticClass: "col-form-label d-block",
-                                  attrs: { for: "example-email-input" }
-                                },
-                                [_vm._v("Services")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "select",
-                                {
+                          },
+                          [_c("code", [_vm._v("×")])]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("div", { staticClass: "card-body" }, [
+                              _c("div", { staticClass: "form-group" }, [
+                                _vm._m(0),
+                                _vm._v(" "),
+                                _c("input", {
                                   directives: [
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.tag.service_id,
-                                      expression: "tag.service_id"
+                                      value: _vm.tag.name_ar,
+                                      expression: "tag.name_ar"
                                     }
                                   ],
                                   staticClass: "form-control",
-                                  attrs: { id: "example-email-input" },
+                                  attrs: {
+                                    type: "text",
+                                    id: "example-text-input1"
+                                  },
+                                  domProps: { value: _vm.tag.name_ar },
                                   on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
                                       _vm.$set(
                                         _vm.tag,
-                                        "service_id",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
+                                        "name_ar",
+                                        $event.target.value
                                       )
                                     }
                                   }
-                                },
-                                _vm._l(_vm.services, function(service) {
-                                  return _c(
-                                    "option",
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _vm._m(1),
+                                _vm._v(" "),
+                                _c("input", {
+                                  directives: [
                                     {
-                                      key: service.id,
-                                      domProps: { value: service.id }
-                                    },
-                                    [_vm._v(_vm._s(service.title_en))]
-                                  )
-                                }),
-                                0
-                              )
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.tag.name_en,
+                                      expression: "tag.name_en"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    type: "text",
+                                    id: "example-text-input2"
+                                  },
+                                  domProps: { value: _vm.tag.name_en },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.tag,
+                                        "name_en",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _vm._m(2),
+                                _vm._v(" "),
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.tag.desc_ar,
+                                      expression: "tag.desc_ar"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    name: "",
+                                    id: "example-email-input",
+                                    cols: "30",
+                                    rows: "4"
+                                  },
+                                  domProps: { value: _vm.tag.desc_ar },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.tag,
+                                        "desc_ar",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _vm._m(3),
+                                _vm._v(" "),
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.tag.desc_en,
+                                      expression: "tag.desc_en"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: {
+                                    name: "",
+                                    id: "example-email-input",
+                                    cols: "30",
+                                    rows: "4"
+                                  },
+                                  domProps: { value: _vm.tag.desc_en },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.tag,
+                                        "desc_en",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "form-group" }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "col-form-label d-block",
+                                    attrs: { for: "example-email-input" }
+                                  },
+                                  [_vm._v("Services")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.tag.service_id,
+                                        expression: "tag.service_id"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: { id: "example-email-input" },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.tag,
+                                          "service_id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  _vm._l(_vm.services, function(service) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: service.id,
+                                        domProps: { value: service.id }
+                                      },
+                                      [_vm._v(_vm._s(service.title_en))]
+                                    )
+                                  }),
+                                  0
+                                )
+                              ])
                             ])
                           ])
                         ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "modal-footer" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-warning mt-4 py-2 px-4",
-                          attrs: { type: "button", "data-dismiss": "modal" },
-                          on: {
-                            click: function($event) {
-                              return _vm.resetModal()
-                            }
-                          }
-                        },
-                        [_vm._v("Close")]
-                      ),
+                      ]),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary mt-4 py-2 px-4",
-                          attrs: { type: "submit" }
-                        },
-                        [_vm._v("Submit")]
-                      )
+                      _c("div", { staticClass: "modal-footer" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning mt-4 py-2 px-4",
+                            attrs: { type: "button", "data-dismiss": "modal" },
+                            on: {
+                              click: function($event) {
+                                return _vm.resetModal()
+                              }
+                            }
+                          },
+                          [_vm._v("Close")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary mt-4 py-2 px-4",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Submit")]
+                        )
+                      ])
                     ])
-                  ])
-                ]
-              )
-            ])
-          ])
+                  ]
+                )
+              ])
+            ]
+          )
         ]
       ),
       _vm._v(" "),

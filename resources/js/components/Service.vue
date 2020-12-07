@@ -243,9 +243,9 @@
                 axios.get(page_url,config)
                 // .then(res => res.json())
                 .then(res => {
-                    this.services = res.data;
-                    console.log(this.services)
-                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url);
+                    this.services = res.data.data;
+                    // console.log(this.services)
+                    vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url);
                 })
                 .catch(err => console.log(err));
             },
@@ -260,10 +260,10 @@
                 }
                 let vm = this;
                 axios.get('api/tag-names'. config)
-                .then(res => res.json())
+                // .then(res => res.json())
                 .then(res => {
-                    this.tags = res;
-                    console.log(this.tags);
+                    this.tags = res.data;
+                    console.log(res.data);
                 })
                 .catch(err => console.log(err));
             },
@@ -292,7 +292,7 @@
                     axios.delete(`api/service/${id}`, config)
                     // .then(res => res.json())
                     .then(res => {
-                        alert('Service Deleted !');
+                        // alert('Service Deleted !');
                         this.getServices();
                         // console.log(res);
 
@@ -324,7 +324,7 @@
                     // console.log(formData);
                     axios.post('/api/service', formData, config)
                         .then(res => {
-                            vm.success = res.success;
+                            // vm.success = res.success;
                             // console.log(res);
                             this.getServices();
 
@@ -342,11 +342,11 @@
                     formData.append('desc_en', this.service.desc_en);
                     formData.append('desc_ar', this.service.desc_ar);
                     // formData.append('type', this.service.type);
-                            console.log(formData);
+                            // console.log(formData);
     
                     axios.put('/api/service', formData, config)
                         .then(res => {
-                            vm.success = res.success;
+                            // vm.success = res.success;
                             // console.log(res);
                             this.getServices();
 
@@ -361,7 +361,7 @@
 
             },
             editService(service){
-                console.log(service.tag)
+                // console.log(service.tag)
                 this.getSetTags();
                 this.edit = true;
                 this.service.id = service.id;

@@ -18,11 +18,12 @@
             <div class="row align-items-start">
                 <div class="col-lg-6 col-sm-6">
                     <div class="user-profile pull-left">
-                        <!-- <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar"> -->
-                        <h4 class="user-name dropdown-toggle text-center" data-toggle="dropdown">{{ Auth::user()->name }}<i class="fa fa-angle-down"></i></h4>
+                        <h4 class="user-name dropdown-toggle text-center" data-toggle="dropdown">
+                        <img class="avatar user-thumb" src="{{asset('admin/images/author/user.svg')}}" alt="avatar">
+                            <i class="fa fa-angle-down"></i></h4>
                         <div class="dropdown-menu d-inline">
                             <!-- <a class="dropdown-item" href="#">Message</a> -->
-                            <a class="dropdown-item" href="#"><i class="ti-settings mr-2"></i>Settings</a>
+                            {{-- <a class="dropdown-item" href="#"><i class="ti-settings mr-2"></i>Settings</a> --}}
                             {{-- <a class="dropdown-item" href="#"><i class="ti-share-alt mr-2"></i> --}}
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();

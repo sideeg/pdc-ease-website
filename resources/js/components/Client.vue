@@ -222,7 +222,7 @@
             deleteClient(id){
                 const config = {
                         headers: { 
-                            // 'content-type': 'multipart/form-data',
+                            'content-type': 'multipart/form-data',
                             'remember_token': window.Laravel.remember_token
                             }
                     }
@@ -276,6 +276,7 @@
     
                     let formData = new FormData();
                     formData.append('logo', this.image);
+                    formData.append('id', this.client.id);
                     formData.append('name', this.client.name);
                     console.log(formData);
     
@@ -300,7 +301,7 @@
                 this.client.client_id = client.id;
                 this.client.name = client.name;
                 this.client.logo = client.logo;
-                console.log(client.logo);
+                // console.log(client.logo);
 
             },
             // File Handle
@@ -319,7 +320,7 @@
             },
             onImageChange(e){
                 this.image = e.target.files[0];
-                this.client.logo = e.target.files[0];
+                // this.client.logo = e.target.files[0];
             },
            
         },

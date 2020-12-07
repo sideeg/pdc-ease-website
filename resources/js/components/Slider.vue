@@ -264,8 +264,8 @@
                 axios.get(page_url, config)
                 // .then(res => res.json())
                 .then(res => {
-                    this.slides = res.data;
-                    vm.makePagination(res.current_page, res.last_page, res.next_page_url, res.prev_page_url)
+                    this.slides = res.data.data;
+                    vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
                     // console.log(res.data);
 
                 }
@@ -297,7 +297,7 @@
                     fetch(`api/slider/${id}`, config)
                     // .then(res => res.json())
                     .then(res => {
-                        alert('Slide Deleted !');
+                        // alert('Slide Deleted !');
                         this.getSlides();
                         // console.log(res);
 
@@ -328,7 +328,7 @@
 
                     axios.post('/api/slider', formData, config)
                         .then(res => {
-                            vm.success = res.success;
+                            // vm.success = res.success;
                             // console.log(res);
                             this.getSlides();
 
@@ -356,7 +356,7 @@
 
                     axios.put('/api/slider', formData, config)
                         .then(res => {
-                            vm.success = res.success;
+                            // vm.success = res.success;
                             // console.log(res);
                             this.getSlides();
 
