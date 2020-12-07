@@ -86,7 +86,7 @@
                 <div class="login-form-body">
                     <div class="form-gp">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" id="exampleInputEmail1" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input type="email"  id="exampleInputEmail1" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                         <i class="ti-email"></i>
                         {{-- <div class="text-danger"></div> --}}
                         @error('email')
@@ -107,15 +107,15 @@
                         @enderror
                     </div>
                     <div class="row mb-4 rmber-area">
-                        <div class="col-6">
+                        {{-- <div class="col-6">
                             <div class="custom-control custom-checkbox mr-sm-2">
                                 <input type="checkbox" class="custom-control-input" id="customControlAutosizing" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-6 text-right">
                             {{-- <a href="#">Forgot Password?</a> --}}
-                            @if (Route::has('password.request'))
+                        @if (Route::has('password.request'))
                             <a class="btn btn-link" href="{{ route('password.request') }}">
                                 Forgot Password?
                             </a>

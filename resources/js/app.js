@@ -10,6 +10,7 @@ window.Vue = require('vue');
 
 window.Axios = require('axios');
 
+window.moment = require('moment');
 
 window.$ = window.jQuery = require('jquery');
 

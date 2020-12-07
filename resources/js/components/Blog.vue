@@ -101,19 +101,26 @@
                         <div class="media-body">
                             <h4 class="mb-2 md-mt-2">{{article.title_en}}</h4>
                             <div class="row mb-3">
-                                <span class="col-lg-3 col-sm-6 font-italic">
+                                <span class="col-lg-6 col-sm-6 font-italic">
                                     <b>Tag: &ThickSpace;</b >
                                     <span class="badge badge-pill badge-info p-1"> {{article.tag.name_en}}</span>
                                 </span> 
-                                <span class="col-lg-3 col-sm-6 font-italic">
-                                    <b>Date:&ThickSpace; </b> {{article.created_at }}
+                                <span class="col-lg-6 col-sm-6 font-italic">
+                                    <b>Date:&ThickSpace; </b> 
+                                    {{ article.created_at}}
+
+                                    <!-- {{moment(article.created_at).fromNow() }} -->
+                                    <br>
                                     <!-- {{Carbon:parse(article->created_at)->format('M  d,yy') }} -->
                                 </span>
                             </div>
                             <p>{{article.desc_en}}</p>
                             <div class="row mt-3 ml-1">
-                                <a href="#" class="btn btn-rounded btn-outline-warning py-1 px-4 mr-4" data-toggle="modal" data-target=".bd-example-modal-lg" @click="editArticle(article)"><i  class="fa fa-edit"></i></a>
-                                <a href="#" class="btn btn-rounded btn-outline-danger py-1 px-4" @click="deleteArticle(article.id)"><i  class="ti-trash"></i></a>
+                                <!-- <a href="#" class="btn btn-rounded btn-outline-warning py-1 px-4 mr-4" data-toggle="modal" data-target=".bd-example-modal-lg" @click="editArticle(article)"><i  class="fa fa-edit"></i></a>
+                                <a href="#" class="btn btn-rounded btn-outline-danger py-1 px-4" @click="deleteArticle(article.id)"><i  class="ti-trash"></i></a> -->
+                                <a href="#" class="text-secondary mr-3" data-toggle="modal" data-target=".bd-example-modal-lg" @click="editArticle(article)"><i class="ti-pencil o-icon"></i></a>
+                                <a href="#" class="text-danger" @click="deleteArticle(article.id)"><i class="ti-trash o-icon"></i></a>
+
                             </div>
                         </div>
                     </div>

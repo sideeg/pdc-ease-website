@@ -253,11 +253,6 @@
             },
             // Add Tag
             addTag(){
-                // console.log(this.tag);
-                // $('.bd-example-modal-lg').modal('hide');
-                // this.$emit('close');
-                // location.reload()
-                
                 if(this.edit === false){
 
                     const config = {
@@ -266,9 +261,16 @@
                             'remember_token': window.Laravel.remember_token
                         }
                     }
-                    // console.log(this.tag);
+                    let formData = new FormData();
+                    formData.append('id', this.tag.id);
+                    formData.append('name_ar', this.tag.name_ar);
+                    formData.append('name_en', this.tag.name_en);
+                    formData.append('desc_en', this.tag.desc_en);
+                    formData.append('desc_ar', this.tag.desc_ar);
+                    formData.append('service_id', this.tag.service_id);
+
                     // Add 
-                    axios.post('api/tag', this.tag, config)
+                    axios.post('api/tag', formData, config)
                     .then(res => {
                         this.getTags();
                     }).catch(err => console.log(err));
@@ -284,7 +286,15 @@
                         }
                     }
 
-                    // console.log(this.tag)
+                    let formData = new FormData();
+                    formData.append('id', this.tag.id);
+                    formData.append('name_ar', this.tag.name_ar);
+                    formData.append('name_en', this.tag.name_en);
+                    formData.append('desc_en', this.tag.desc_en);
+                    formData.append('desc_ar', this.tag.desc_ar);
+                    formData.append('service_id', this.tag.service_id);
+                    
+                    console.log(this.tag)
                     axios.put('api/tag', this.tag, config)
                     // .then(res => res.json())
                     .then(res => {
