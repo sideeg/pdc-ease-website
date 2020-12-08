@@ -42,12 +42,14 @@ Route::delete("/order/{id}","App\Http\Controllers\AdminApi\OrderController@order
 
 
 Route::get('/message','App\Http\Controllers\AdminApi\MessageController@messages');
+Route::get('/message/statistic','App\Http\Controllers\AdminApi\MessageController@messageStatisic');
 Route::get('/message/{id}','App\Http\Controllers\AdminApi\MessageController@messageById');
 Route::delete("/message/{id}","App\Http\Controllers\AdminApi\MessageController@messageDelete");
 
 Route::get('/role','App\Http\Controllers\AdminApi\roleController@roles');
 Route::get('/role/{id}','App\Http\Controllers\AdminApi\roleController@roleById');
 Route::delete("/role/{id}","App\Http\Controllers\AdminApi\roleController@roleDelete");
+
 
 // });
 /*********************************** end super admin access ******************************************** */
@@ -58,7 +60,7 @@ Route::delete("/role/{id}","App\Http\Controllers\AdminApi\roleController@roleDel
 
 
 /************************************** blogger access *****************************************************/
-// Route::group(['middleware' => 'bloger_api_auth'], function () {
+Route::group(['middleware' => 'bloger_api_auth'], function () {
 
 Route::post('/blog','App\Http\Controllers\AdminApi\BlogController@blogSave');
 Route::get('/blog','App\Http\Controllers\AdminApi\BlogController@blog');
@@ -66,7 +68,7 @@ Route::put("/blog","App\Http\Controllers\AdminApi\BlogController@blogUpdate");
 Route::get('/blog/{id}','App\Http\Controllers\AdminApi\BlogController@blogById');
 Route::delete("/blog/{id}","App\Http\Controllers\AdminApi\BlogController@blogDelete");
 
-// });
+});
 
 /*************************************************************end blogger access *********************** */
 

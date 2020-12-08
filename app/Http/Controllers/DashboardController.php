@@ -48,7 +48,28 @@ class DashboardController extends Controller
         // $count = [];
 
         // dd($orders);
-        return view('admin-layout.dashboard');
+        $messagesCounts=\DB::table('messages')
+        ->select(\DB::raw('sum(id) as total'),\DB::raw('date(created_at) as dates'))
+        ->groupBy('dates')
+        ->orderBy('dates','desc')
+       ->take(12)->get();
+       $array = array();
+       for($i=0;$i<sizeof($messagesCounts);$i++)
+            $array[]=$messagesCounts[$i]->total;
+
+            $orderCounts=\DB::table('orders')
+            ->select(\DB::raw('sum(id) as total'),\DB::raw('date(created_at) as dates'))
+            ->groupBy('dates')
+            ->orderBy('dates','desc')
+           ->take(12)->get();
+           $array2 = array();
+           for($i=0;$i<sizeof($orderCounts);$i++)
+                $array2[]=$orderCounts[$i]->total;
+
+
+    //    dd($array);
+    //    return view('dashboard', compact('messagesCounts'));
+        return view('admin-layout.dashboard')->with($array,$array2);
         // dd($slider);
         // return view('index', compact(['slider','blogs', 'service', 'clint'])); //TODO page name
     }
@@ -77,7 +98,7 @@ class DashboardController extends Controller
     {
         return view('admin-layout.pages.message');
     }
-    
+
     public function tag()
     {
         return view('admin-layout.pages.tag');
@@ -103,7 +124,7 @@ class DashboardController extends Controller
         // dd($request);
         if(filesize($request->file('sourse'))>2e+6){
             dd('size issue');
-            
+
           }else{
         if($validatedData->fails()){
 
@@ -154,6 +175,6 @@ class DashboardController extends Controller
             }
         }
 
-    
+
 
 }
