@@ -117,8 +117,8 @@ class ServiceController extends Controller
         public function serviceUpdate(Request $request)
         {
 
-            dd($request->name_en);
-            
+            dd($request->all());
+
             $service = services::find($request->id);
 
             if (is_null($service)){

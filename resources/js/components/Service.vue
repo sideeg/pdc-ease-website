@@ -1,5 +1,5 @@
 <template>
-    
+
     <div class="row justify-content-center">
         <!-- Modal -->
             <!-- Add New Service Modal -->
@@ -40,7 +40,7 @@
                                                     <input type="file" v-on:change="onImageChange" class="col-form-label">
                                                 </div>
                                                 <!-- <input type="text" hidden :value="article.edit ? article.created_at : ''"> -->
-                                                
+
                                                 <div class="form-group p-3">
                                                     <!-- <h5>Tags:&ThickSpace;</h5> -->
                                                     <span class="">
@@ -62,7 +62,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-        
+
                                             </div>
                                         </div>
                                     </div>
@@ -108,10 +108,10 @@
                                                             <span class="col-lg-12 font-italic">
                                                                 <b>Tags: &ThickSpace;</b >
                                                                 <span class="badge badge-pill badge-info p-1 mx-1" v-for="tag in service.tags" :key="tag.id"> {{tag.name_en}}</span>
-                                                                
-                                                            </span> 
+
+                                                            </span>
                                                         </div>
-                                                        
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -186,7 +186,7 @@
             </div>
         </div>
         <!-- Progress Table end -->
-        
+
     </div>
 
 </template>
@@ -235,7 +235,7 @@
                 let vm = this;
                 page_url = page_url || 'api/service';
                 const config = {
-                    headers: { 
+                    headers: {
                         // 'content-type': 'multipart/form-data',
                         'remember_token': window.Laravel.remember_token
                         }
@@ -253,7 +253,7 @@
             getSetTags() {
                 // console.log('getsettags');
                 const config = {
-                    headers: { 
+                    headers: {
                         // 'content-type': 'multipart/form-data',
                         'remember_token': window.Laravel.remember_token
                         }
@@ -283,7 +283,7 @@
             // Delete Service
             deleteService(id){
                 const config = {
-                    headers: { 
+                    headers: {
                         'content-type': 'multipart/form-data',
                         'remember_token': window.Laravel.remember_token
                         }
@@ -303,16 +303,16 @@
             addService(){
                 this.getSetTags();
                 const config = {
-                    headers: { 
+                    headers: {
                         'content-type': 'multipart/form-data',
                         'remember_token': window.Laravel.remember_token
                         }
                 }
                 if(this.edit === false){
-                    // Add 
+                    // Add
                    let vm = this;
 
-                    
+
                     let formData = new FormData();
                     formData.append('image', this.image);
                     formData.append('title_ar', this.service.title_ar);
@@ -323,7 +323,7 @@
                     // console.log(this.tags_ids);
                     // formData.append('type', this.service.type);
                     const config = {
-                        headers: { 
+                        headers: {
                             'content-type': 'multipart/form-data',
                             'remember_token': window.Laravel.remember_token
                         }
@@ -337,13 +337,13 @@
 
                         })
                         .catch(err => console.log(err));
-                        
+
                 }else {
                     // Update
                     let vm = this;
- 
+
                     let formData = new FormData();
-                    formData.append('image', this.service.id);
+                    formData.append('id', this.service.id);
                     formData.append('image', this.image);
                     formData.append('title_ar', this.service.title_ar);
                     formData.append('title_en', this.service.title_en);
@@ -356,12 +356,12 @@
                             // console.log(formData);
 
                     const config = {
-                        headers: { 
+                        headers: {
                             'content-type': 'multipart/form-data',
                             'remember_token': window.Laravel.remember_token
                         }
                     }
-    
+
                     axios.post('/api/service', formData, config)
                         .then(res => {
                             // vm.success = res.success;
@@ -370,12 +370,12 @@
 
                         })
                         .catch(err => console.log(err));
-                        
+
                     this.edit = false;
 
                 }
 
-                // this.resetModal();                        
+                // this.resetModal();
 
             },
             editService(service){
@@ -427,7 +427,7 @@
                 this.image = e.target.files[0];
                 // this.service.type = e.target.files[0].type;
             },
-            
+
         },
         mounted() {
             // console.log('Component mounted.')
