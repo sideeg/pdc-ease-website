@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\slide_bar;
+use App\Models\orders;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+
 use Illuminate\Support\Facades\Validator;
 
 
@@ -30,6 +35,19 @@ class DashboardController extends Controller
 
     public function index()
     {
+        // $orders = orders::orderBy('created_at')->with('order_tags.tag')->get();
+
+
+        // $orders = orders::select('id', 'created_at')
+        // ->get()
+        // ->groupBy(function($date) {
+        //     //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+        //     return Carbon::parse($date->created_at)->format('m'); // grouping by months
+        // });
+
+        // $count = [];
+
+        // dd($orders);
         return view('admin-layout.dashboard');
         // dd($slider);
         // return view('index', compact(['slider','blogs', 'service', 'clint'])); //TODO page name

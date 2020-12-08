@@ -29,11 +29,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="example-email-input" class="col-form-label">Service Description <b>( ar )</b></label>
-                                                    <textarea  class="form-control" id="desc_ar" v-model="service.desc_ar" cols="30" rows="4"></textarea>
+                                                    <textarea  class="form-control" v-model="service.desc_ar" cols="30" rows="4"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="example-email-input" class="col-form-label">Service Description <b>( en )</b></label>
-                                                    <textarea  class="form-control" id="desc_en" v-model="service.desc_en" cols="30" rows="4"></textarea>
+                                                    <textarea  class="form-control" v-model="service.desc_en" cols="30" rows="4"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="example-email-input" class="col-form-label d-block">Service Image</label>
@@ -51,9 +51,9 @@
                                                     </span>
                                                     <div class="form-group mt-3">
                                                         <!-- <label for="example-email-input" class="col-form-label d-block">Article Tag</label> -->
-                                                        <select id="example-email-input" class="form-control" multiple>
+                                                        <select id="example-email-input" class="form-control" v-model="tags_ids" multiple>
                                                             <!-- <option v-for="tag in edit ? service.tags : tags " :key="tag.id" v-bind:value="tag.id" :selected="edit">{{tag.name_en}}</option> -->
-                                                            <option v-for="tag in edit ? service.tags : tags" :key="tag.id" v-bind:value="tag.id" :selected="edit">{{tag.name_en}}</option>
+                                                            <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id" :selected="service.tags.includes(tag)">{{tag.name_en}}</option>
 
                                                             <!-- <div>
                                                                 <option v-for="tag in service.tags" :key="tag.id" v-bind:value="tag.id" >{{tag.name_en}} vvv</option>
@@ -244,7 +244,7 @@
                 // .then(res => res.json())
                 .then(res => {
                     this.services = res.data.data;
-                    // console.log(this.services)
+                    // console.log(res.data.data)
                     vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url);
                 })
                 .catch(err => console.log(err));
@@ -259,11 +259,11 @@
                         }
                 }
                 let vm = this;
-                axios.get('api/tag-names'. config)
+                axios.get('api/tag_names', config)
                 // .then(res => res.json())
                 .then(res => {
                     this.tags = res.data;
-                    console.log(res.data);
+                    // console.log(this.tags);
                 })
                 .catch(err => console.log(err));
             },
@@ -312,15 +312,22 @@
                     // Add 
                    let vm = this;
 
-    
+                    
                     let formData = new FormData();
                     formData.append('image', this.image);
                     formData.append('title_ar', this.service.title_ar);
                     formData.append('title_en', this.service.title_en);
                     formData.append('desc_en', this.service.desc_en);
                     formData.append('desc_ar', this.service.desc_ar);
+                    formData.append('tags', this.tags_ids);
+                    // console.log(this.tags_ids);
                     // formData.append('type', this.service.type);
-
+                    const config = {
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                        }
+                    }
                     // console.log(formData);
                     axios.post('/api/service', formData, config)
                         .then(res => {
@@ -336,15 +343,26 @@
                     let vm = this;
  
                     let formData = new FormData();
+                    formData.append('image', this.service.id);
                     formData.append('image', this.image);
                     formData.append('title_ar', this.service.title_ar);
                     formData.append('title_en', this.service.title_en);
                     formData.append('desc_en', this.service.desc_en);
                     formData.append('desc_ar', this.service.desc_ar);
+                    formData.append('tags', this.tags_ids);
+                    formData.append('_method', 'PUT');
+
                     // formData.append('type', this.service.type);
                             // console.log(formData);
+
+                    const config = {
+                        headers: { 
+                            'content-type': 'multipart/form-data',
+                            'remember_token': window.Laravel.remember_token
+                        }
+                    }
     
-                    axios.put('/api/service', formData, config)
+                    axios.post('/api/service', formData, config)
                         .then(res => {
                             // vm.success = res.success;
                             // console.log(res);
@@ -396,6 +414,7 @@
             },
 
             resetModal() {
+                this.edit= false;
                 this.service.title_en = '';
                 this.service.title_ar = '';
                 this.service.desc_en = '';

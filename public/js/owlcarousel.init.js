@@ -1,6 +1,6 @@
 //Owl Carousel
     $("#owl-demo").owlCarousel({
-        // autoPlay: 3000,
+        autoPlay: 3000,
         video:true,
         stopOnHover: true,
         navigation: false,
@@ -25,7 +25,7 @@
     });
 
     $("#services").owlCarousel({
-        // autoPlay: 3000,
+        autoPlay: 3000,
         stopOnHover: true,
         navigation: false,
         paginationSpeed: 1000,

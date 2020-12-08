@@ -50,7 +50,7 @@ axios.defaults.headers.common = {
 
 // Vue.http.headers.common['remember_token'] = window.Laravel.remember_token;
 
-console.log(window.Laravel.remember_token);
+// console.log(window.Laravel.remember_token);
 
 // window.Vue.prototype.$http = axios;
 

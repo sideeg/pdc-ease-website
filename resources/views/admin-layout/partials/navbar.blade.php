@@ -43,7 +43,9 @@
             </div>
         </div>
         <!-- profile info & task notification -->
-        <notify ordersRoute="{{ route('servicesOrders') }}" messagesRoute="{{ route('message') }}"></notify>
+        @if (Auth::user()->role_id == 1)        
+            <notify ordersRoute="{{ route('servicesOrders') }}" messagesRoute="{{ route('message') }}"></notify>
+        @endif
 
     </div>
 </div>

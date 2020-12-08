@@ -88,9 +88,9 @@ class SliderController extends Controller
      * udate slider by id
      *
      */
-    public function sliderUpdate(Request $request,slide_bar $slider)
+    public function sliderUpdate(Request $request)
     {
-        // dd($request->id);
+        // dd($request->all);
         $slider = slide_bar::find($request->id);
 
         if(!is_null($request->sourse)){

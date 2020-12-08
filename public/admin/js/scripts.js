@@ -2,6 +2,16 @@
 (function($) {
     "use strict";
 
+
+    $('.form-gp input').on('focus', function() {
+        $(this).parent('.form-gp').addClass('focused');
+        console.log('here');
+    });
+    $('.form-gp input').on('focusout', function() {
+        if ($(this).val().length === 0) {
+            $(this).parent('.form-gp').removeClass('focused');
+        }
+    });
     /*================================
     Preloader
     ==================================*/
@@ -75,7 +85,7 @@
     /*================================
     form bootstrap validation
     ==================================*/
-    $('[data-toggle="popover"]').popover()
+    $('[data-toggle="popover"]').popover();
 
     /*------------- Start form Validation -------------*/
     window.addEventListener('load', function() {

@@ -33,11 +33,11 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="desc_ar" class="col-form-label">Description ar <code>*</code></label>
-                                                                <textarea name="desc_ar" id="desc_ar" v-model="slide.desc_ar" class="form-control" cols="30" rows="4"></textarea>
+                                                                <textarea name="desc_ar" v-model="slide.desc_ar" class="form-control" cols="30" rows="4"></textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="desc_en" class="col-form-label">Description en <code>*</code></label>
-                                                                <textarea name="desc_en" id="desc_en" v-model="slide.desc_en" class="form-control" cols="30" rows="4"></textarea>
+                                                                <textarea name="desc_en" v-model="slide.desc_en" class="form-control" cols="30" rows="4"></textarea>
                                                             </div>
                                                             <div class="form-group container row align-items-center justify-content-between">
                                                                 <div>
@@ -196,7 +196,7 @@
                                     <tbody>
                                         <tr v-for="slide in slides" :key="slide.id" >
                                             <td >{{slide.title_en ? slide.title_en : 'This Slide Has No Title'}}</td>
-                                            <td>
+                                            <td class="d-flex justify-content-center">
                                                 <img v-if="slide.type == 0" :src="slide.sourse"  :alt="slide.title_en" class="table-img" srcset="">
                                                 <video v-if="slide.type == 1" width="320" height="240" controls class="table-img1">  
                                                     <source :src="slide.sourse" type="video/mp4"> 
@@ -294,7 +294,7 @@
                         }
                 }
                 if(confirm('Are You Sure ?')){
-                    fetch(`api/slider/${id}`, config)
+                    axios.delete(`api/slider/${id}`, config)
                     // .then(res => res.json())
                     .then(res => {
                         // alert('Slide Deleted !');
@@ -306,7 +306,7 @@
             },
             // Add Slide
             addSlide(){
-                console.log(this.remember_token);
+                // console.log(this.remember_token);
                 if(this.edit === false){
                     // Add
                    let vm = this;
@@ -347,14 +347,17 @@
                     }
 
                     let formData = new FormData();
+                    formData.append('id', this.slide.id);
                     formData.append('image', this.image);
                     formData.append('title_ar', this.slide.title_ar);
                     formData.append('title_en', this.slide.title_en);
                     formData.append('desc_en', this.slide.desc_en);
                     formData.append('desc_ar', this.slide.desc_ar);
-                    // formData.append('type', this.slide.type);
+                    formData.append('_method', 'PUT');
 
-                    axios.put('/api/slider', formData, config)
+                    // console.log(this.slide.id);
+
+                    axios.post('/api/slider', formData, config)
                         .then(res => {
                             // vm.success = res.success;
                             // console.log(res);

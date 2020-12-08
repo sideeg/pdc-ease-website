@@ -53,7 +53,7 @@
                                 <td>{{order.phone}}</td>
                                 <td>
                                     <div v-for="tag in order.order_tags" :key="tag.id">
-                                        <span class="badge badge-pill badge-info p-1 my-1"> {{tag.tag.name_en}}</span>
+                                        <span class="badge badge-pill badge-info p-1 my-1" > {{tag.tag.name_en}}</span>
                                     </div>
                                 </td>
                                 <td>
@@ -124,7 +124,7 @@
                 let vm = this;
                 console.log(this.open ? 'api/order' : 'api/order-reverse')
                 page_url = page_url || this.open ? 'api/order' : 'api/order-reverse';
-                console.log(this.open);
+                // console.log(this.open);
                 const config = {
                     headers: { 
                         // 'content-type': 'multipart/form-data',
@@ -136,14 +136,13 @@
                 .then(res => {
                     this.orders = res.data.data;
                     vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
-                    // console.log(res.data.data);
+                    // console.log(this.orders.order_tags);
 
                 }
                 )
                 .catch(err => console.log(err));
             },
             // Pagination
-
             makePagination(current_page, last_page, next_page_url , prev_page_url) {
 
                 let pagination = {
@@ -152,11 +151,7 @@
                     next_page_url : next_page_url,
                     prev_page_url : prev_page_url
                 }
-
                 this.pagination = pagination;
-
-                console.log(this.pagination);
-
 
             },
             // Delete Order

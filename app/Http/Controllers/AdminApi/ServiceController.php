@@ -18,6 +18,7 @@ class ServiceController extends Controller
      */
     public function serviceSave(Request $request)
     {
+        // dd($request->all());
 
         $validatedData = Validator::make($request->all(),[
             'image' => 'required',
@@ -43,7 +44,7 @@ class ServiceController extends Controller
 
         $imageName = time().'.'.$request->image->extension();
         $request->image->move($uploads_folder, $imageName);
-
+// dd($request->tags);
         $service = services::create([
             'title_en' => $request->title_en,
             'title_ar' => $request->title_ar,
@@ -55,11 +56,10 @@ class ServiceController extends Controller
         if (!is_null($request->tags)){
             //check if the given tags list is string or not if it is convert it to array
             if (gettype($request->tags) == "string")
-                $tags_list = explode(',', substr($request->tags,1,-1));
+                $tags_list = explode(',', substr($request->tags,0,-1));
             else
                 $tags_list = $request->tags;
-
-
+                // dd($tags_list);
                 //add the new tags to this new service as the user done
             for ($i =0;$i<sizeof($tags_list);$i++){
                 $tag = tags::find($tags_list[$i]);
@@ -114,9 +114,11 @@ class ServiceController extends Controller
          * udate service by id
          *
          */
-        public function serviceUpdate(Request $request,services $service)
+        public function serviceUpdate(Request $request)
         {
-            // dd($request->id);
+
+            dd($request->name_en);
+            
             $service = services::find($request->id);
 
             if (is_null($service)){

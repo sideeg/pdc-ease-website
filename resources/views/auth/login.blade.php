@@ -113,14 +113,13 @@
                                 <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
                             </div>
                         </div> --}}
-                        <div class="col-6 text-right">
-                            {{-- <a href="#">Forgot Password?</a> --}}
+                        {{-- <div class="col-6 text-right">
                         @if (Route::has('password.request'))
                             <a class="btn btn-link" href="{{ route('password.request') }}">
                                 Forgot Password?
                             </a>
                         @endif
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="submit-btn-area">
                         <button id="form_submit" type="submit">Submit <i class="ti-arrow-right"></i></button>
@@ -134,21 +133,5 @@
     </div>
 </div>
 <!-- login area end -->
-
-
-
-
-<script>
-    $('.form-gp input').on('focus', function() {
-        $(this).parent('.form-gp').addClass('focused');
-        console.log('here');
-    });
-    $('.form-gp input').on('focusout', function() {
-        if ($(this).val().length === 0) {
-            $(this).parent('.form-gp').removeClass('focused');
-        }
-    });
-
-</script>
 
 @endsection

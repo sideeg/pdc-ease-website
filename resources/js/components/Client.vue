@@ -278,9 +278,11 @@
                     formData.append('logo', this.image);
                     formData.append('id', this.client.id);
                     formData.append('name', this.client.name);
-                    console.log(formData);
+                    formData.append('_method', 'PUT');
+
+                    // console.log(formData);
     
-                    axios.put('/api/clint', formData, config)
+                    axios.post('/api/clint', formData, config)
                         .then(res => {
                             vm.success = res.success;
                             // console.log(res);

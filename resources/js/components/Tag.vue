@@ -244,7 +244,7 @@
                     axios.delete(`api/tag/${id}`, config)
                     // .then(res => res.json())
                     .then(res => {
-                        alert('Tag Deleted !');
+                        // alert('Tag Deleted !');
                         this.getTags();
                         // console.log(res);
 
@@ -277,7 +277,7 @@
                     
                 }else {
                     // Update
-                        // console.log(tag);
+                        // console.log('hhhhhhhhhhh');
 
                     const config = {
                         headers: { 
@@ -293,17 +293,13 @@
                     formData.append('desc_en', this.tag.desc_en);
                     formData.append('desc_ar', this.tag.desc_ar);
                     formData.append('service_id', this.tag.service_id);
+                    formData.append('_method', 'PUT');
                     
-                    console.log(this.tag)
-                    axios.put('api/tag', this.tag, config)
+                    // console.log(this.tag)
+                    axios.post('api/tag', formData, config)
                     // .then(res => res.json())
                     .then(res => {
-                        // console.log(res);
-
-                        // this.resetModal();                        
-                        // alert('Tag Added !');
                         this.getTags();
-                        // console.log(res);
                     })
                     .catch(err => console.log(err));
                     this.edit = false;
@@ -335,7 +331,7 @@
                 // .then(res => res.json())
                 .then(res => {
                     this.services = res.data;
-                    console.log(res);
+                    // console.log(res);
                 })
                 
             },

@@ -60,8 +60,8 @@ class TagController extends Controller
 
         public function tags_names(Request $request){
             // return response()->json(["code" => 1, "data" => tags::select('name_en', 'name_ar', 'id')->get()], 200);
-
-            return response()->json(tags::select('name_en','name_ar','id')->get(),200);
+            // dd(tags::select('name_en','id')->get());
+            return response()->json(tags::select('name_en','id')->get(),200);
         }
 
 
@@ -105,7 +105,7 @@ class TagController extends Controller
          */
         public function tagUpdate(Request $request,tags $tag)
         {
-            // dd($request->header('remember_token'));
+            // dd($request->all());
             $tag = tags::find($request->id);
 
             if (is_null($tag)){

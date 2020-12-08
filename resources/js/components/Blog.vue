@@ -95,7 +95,7 @@
     <div class="row justify-content-center" v-for="article in articles" :key="article.id">
         <div class="col-lg-10 mt-3">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body pb-2">
                     <div class="media mb-2">
                         <img class="img-card mr-md-4" :src="article.image" alt="image">
                         <div class="media-body">
@@ -115,7 +115,7 @@
                                 </span>
                             </div>
                             <p>{{article.desc_en}}</p>
-                            <div class="row mt-3 ml-1">
+                            <div class="row justify-content-end mt-3 ml-1 mb-0 px-2 py-0">
                                 <!-- <a href="#" class="btn btn-rounded btn-outline-warning py-1 px-4 mr-4" data-toggle="modal" data-target=".bd-example-modal-lg" @click="editArticle(article)"><i  class="fa fa-edit"></i></a>
                                 <a href="#" class="btn btn-rounded btn-outline-danger py-1 px-4" @click="deleteArticle(article.id)"><i  class="ti-trash"></i></a> -->
                                 <a href="#" class="text-secondary mr-3" data-toggle="modal" data-target=".bd-example-modal-lg" @click="editArticle(article)"><i class="ti-pencil o-icon"></i></a>
@@ -258,7 +258,7 @@
  
                     const config = {
                         headers: { 
-                            'content-type': 'multipart/form-data',
+                            // 'content-type': 'multipart/form-data',
                             'remember_token': window.Laravel.remember_token
                             }
                     }
@@ -271,10 +271,11 @@
                     formData.append('desc_en', this.article.desc_en);
                     formData.append('desc_ar', this.article.desc_ar);
                     formData.append('tag_id', this.article.tag_id);
+                    formData.append('_method', 'PUT');
                     // formData.append('type', this.article.type);
                             console.log(formData);
     
-                    axios.put('/api/blog', formData, config)
+                    axios.post('/api/blog', formData, config)
                         .then(res => {
                             // vm.success = res.success;
                             // console.log(res);

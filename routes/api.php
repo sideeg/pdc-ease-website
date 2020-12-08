@@ -88,7 +88,7 @@ Route::delete("/clint/{id}","App\Http\Controllers\AdminApi\clintController@clint
 
 
 Route::get('/tag','App\Http\Controllers\AdminApi\TagController@tags');
-Route::get('/tag-names','App\Http\Controllers\AdminApi\TagController@tags_names');
+Route::get('/tag_names','App\Http\Controllers\AdminApi\TagController@tags_names');
 Route::post('/tag','App\Http\Controllers\AdminApi\TagController@tagSave');
 Route::put("/tag","App\Http\Controllers\AdminApi\TagController@tagUpdate");
 Route::get('/tag/{id}','App\Http\Controllers\AdminApi\TagController@tagById');

@@ -196,7 +196,7 @@
                 axios.get('api/user-message-num', config)
                 .then(res => {
                     this.messages_num = res.data;
-                    console.log(res.data)
+                    // console.log(res.data)
                 })
                 .catch(err => console.log(err));
                 // console.log(this.ordersRoute);

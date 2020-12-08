@@ -9,82 +9,51 @@
     <div class=" bg-banner" style="background-image: url({{asset('images/svg/banner-01.svg')}});">
         <div class="owl-carousel text-white " id="owl-demo">
             @forelse ($slider as $item)
-                <div class="item" >
-                    <div class="banner-img">
-                        <img src="{{ asset($item->sourse)}}" class="img-fluid" alt="" srcset="">
-                    </div>
-                    <div class="banner-text">
-                        <!-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> -->
-                        <div class="banner-content p-4">
-                            <h4 class="color-blue font-22">{{ $item->title_en}}</h4>
-                            <p  class="mx-3">{{ $item->desc_en}}</p>
-                        </div>
-                    </div>
+                @if ($item->type == 0)
+                    @if ($item->title_en != null || $item->title_ar != null)
+                        <div class="item" >
+                            <div class="banner-img">
+                                <img src="{{ asset($item->sourse)}}" class="img-fluid" alt="" srcset="">
+                            </div>
+                            <div class="banner-text">
+                                <!-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> -->
+                                <div class="banner-content p-4">
+                                    <h4 class="color-blue font-22">{{ $item->title_en}}</h4>
+                                    <p  class="mx-3">{{ $item->desc_en}}</p>
+                                </div>
+                            </div>
 
-                </div>
+                        </div>
+                    @else
+                        <div class="item">
+                            <img src="{{ asset($item->sourse)}}" class="item img-fluid one-slide" alt="" srcset="">
+                        </div>
+                    @endif
+                @else
+                    @if ($item->title_en != null || $item->title_ar != null)
+                    
+                        <div class="item">
+                            <div class="banner-img">
+                                <video class="item" autoplay loop muted >
+                                    <source src="{{ asset($item->sourse)}}" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="banner-text p-2">
+                                <h2>{{ $item->title_en}}</h2>
+                                <p>{{ $item->title_en}}</p>
+                            </div>
+                        </div>
+                    @else
+                        <div class="item">
+                            <video class="one-slide" autoplay loop muted>
+                                <source src="{{ asset($item->sourse)}}" type="video/mp4" >
+                            </video>
+                        </div>
+                    @endif
+                @endif
             @empty
 
             @endforelse
-
-            {{-- <div class="item">
-                <div class="banner-img">
-                    <img src="./images/client/img-6.jpg" class="img-fluid" alt="" srcset="">
-                </div>
-                <div class="banner-text bg-svg">
-                    <!-- <div class="bg-svg" style="background-image: url('images/svg/banner-bg.svg');"></div> -->
-                    <div class="banner-content p-4">
-                        <h2 class="color-blue">Move Digatal At Ease</h2>
-                        <p  class="mx-3">Lorem ipsum dolor sit, amet consectetur. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi itaque neque porro corporis debitis deserunt voluptates excepturi quod eos repellat natus eum, tempore sit! Excepturi rem consequuntur veniam aliquid placeat.</p>
-                    </div>
-                </div>
-
-            </div>
-            <div class="item">
-                <div class="banner-img">
-                    <img src="./images/about/about-two-img.jpg" class="img-fluid" alt="" srcset="">
-                </div>
-                <div class="banner-text p-2">
-                    <h2>title</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur.</p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="banner-img">
-                    <img src="./images/about/about-img-three.jpg" class="item img-fluid" alt="" srcset="">
-                </div>
-                <div class="banner-text p-2">
-                    <h2>title</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur.</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="./images/about/about-pic.jpg" class="item img-fluid one-slide" alt="" srcset="">
-            </div>
-
-            <div class="item">
-                <div class="banner-img">
-                    <video class="item" autoplay loop muted >
-                        <source src="./images/videos/video.mp4"
-                                type="video/mp4">
-                    </video>
-                </div>
-                <div class="banner-text p-2">
-                    <h2>title</h2>
-                    <p>Lorem ipsum dolor sit, amet consectetur.</p>
-                </div>
-            </div>
-
-            <div class="item">
-                <video class="one-slide" autoplay loop muted>
-
-                    <!-- <source src="/media/cc0-videos/flower.webm"
-                            type="video/webm"> -->
-
-                    <source src="./images/videos/video.mp4"
-                            type="video/mp4" >
-
-                </video>
-            </div> --}}
 
         </div>
     </div>

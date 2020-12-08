@@ -9,13 +9,18 @@
 {{-- <slider></slider> --}}
 {{-- <message></message> --}}
 
+<!-- visitor graph area start -->
+{{-- <div class="card mt-5">
+    <div class="card-body">
+        <div class="d-flex justify-content-between mb-5">
+            <h4 class="header-title mb-0">Statistics Graph</h4>
+            
+        </div>
+        <div id="visitor_graph"></div>
+    </div>
+</div> --}}
+<!-- visitor graph area end -->
 
-<form action="{{ route('sliderSave')}}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="sourse" >
-    <button type="submit" class="btn btn-primary">submit
-    </button>
-</form>
 
 
 @endsection

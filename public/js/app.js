@@ -2519,7 +2519,7 @@ __webpack_require__.r(__webpack_exports__);
 
         var _config = {
           headers: {
-            'content-type': 'multipart/form-data',
+            // 'content-type': 'multipart/form-data',
             'remember_token': window.Laravel.remember_token
           }
         };
@@ -2538,11 +2538,13 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('desc_ar', this.article.desc_ar);
 
-        _formData.append('tag_id', this.article.tag_id); // formData.append('type', this.article.type);
+        _formData.append('tag_id', this.article.tag_id);
+
+        _formData.append('_method', 'PUT'); // formData.append('type', this.article.type);
 
 
         console.log(_formData);
-        axios.put('/api/blog', _formData, _config).then(function (res) {
+        axios.post('/api/blog', _formData, _config).then(function (res) {
           // vm.success = res.success;
           // console.log(res);
           _this3.getArticles();
@@ -2888,8 +2890,10 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('name', this.client.name);
 
-        console.log(_formData);
-        axios.put('/api/clint', _formData, _config).then(function (res) {
+        _formData.append('_method', 'PUT'); // console.log(formData);
+
+
+        axios.post('/api/clint', _formData, _config).then(function (res) {
           _vm.success = res.success; // console.log(res);
 
           _this3.getClients();
@@ -3357,8 +3361,7 @@ __webpack_require__.r(__webpack_exports__);
       }); // Messages Nutification Number
 
       axios.get('api/user-message-num', config).then(function (res) {
-        _this.messages_num = res.data;
-        console.log(res.data);
+        _this.messages_num = res.data; // console.log(res.data)
       })["catch"](function (err) {
         return console.log(err);
       }); // console.log(this.ordersRoute);
@@ -3651,7 +3654,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
-        _this.services = res.data.data; // console.log(this.services)
+        _this.services = res.data.data; // console.log(res.data.data)
 
         vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url);
       })["catch"](function (err) {
@@ -3670,10 +3673,9 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       var vm = this;
-      axios.get('api/tag-names'.config) // .then(res => res.json())
+      axios.get('api/tag_names', config) // .then(res => res.json())
       .then(function (res) {
-        _this2.tags = res.data;
-        console.log(res.data);
+        _this2.tags = res.data; // console.log(this.tags);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3728,10 +3730,18 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('title_ar', this.service.title_ar);
         formData.append('title_en', this.service.title_en);
         formData.append('desc_en', this.service.desc_en);
-        formData.append('desc_ar', this.service.desc_ar); // formData.append('type', this.service.type);
-        // console.log(formData);
+        formData.append('desc_ar', this.service.desc_ar);
+        formData.append('tags', this.tags_ids); // console.log(this.tags_ids);
+        // formData.append('type', this.service.type);
 
-        axios.post('/api/service', formData, config).then(function (res) {
+        var _config = {
+          headers: {
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
+          }
+        }; // console.log(formData);
+
+        axios.post('/api/service', formData, _config).then(function (res) {
           // vm.success = res.success;
           // console.log(res);
           _this4.getServices();
@@ -3744,6 +3754,8 @@ __webpack_require__.r(__webpack_exports__);
 
         var _formData = new FormData();
 
+        _formData.append('image', this.service.id);
+
         _formData.append('image', this.image);
 
         _formData.append('title_ar', this.service.title_ar);
@@ -3752,11 +3764,21 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('desc_en', this.service.desc_en);
 
-        _formData.append('desc_ar', this.service.desc_ar); // formData.append('type', this.service.type);
+        _formData.append('desc_ar', this.service.desc_ar);
+
+        _formData.append('tags', this.tags_ids);
+
+        _formData.append('_method', 'PUT'); // formData.append('type', this.service.type);
         // console.log(formData);
 
 
-        axios.put('/api/service', _formData, config).then(function (res) {
+        var _config2 = {
+          headers: {
+            'content-type': 'multipart/form-data',
+            'remember_token': window.Laravel.remember_token
+          }
+        };
+        axios.post('/api/service', _formData, _config2).then(function (res) {
           // vm.success = res.success;
           // console.log(res);
           _this4.getServices();
@@ -3803,6 +3825,7 @@ __webpack_require__.r(__webpack_exports__);
       reader.readAsDataURL(file);
     },
     resetModal: function resetModal() {
+      this.edit = false;
       this.service.title_en = '';
       this.service.title_ar = '';
       this.service.desc_en = '';
@@ -3951,8 +3974,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var vm = this;
       console.log(this.open ? 'api/order' : 'api/order-reverse');
-      page_url = page_url || this.open ? 'api/order' : 'api/order-reverse';
-      console.log(this.open);
+      page_url = page_url || this.open ? 'api/order' : 'api/order-reverse'; // console.log(this.open);
+
       var config = {
         headers: {
           // 'content-type': 'multipart/form-data',
@@ -3962,7 +3985,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
         _this.orders = res.data.data;
-        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data.data);
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(this.orders.order_tags);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3976,7 +3999,6 @@ __webpack_require__.r(__webpack_exports__);
         prev_page_url: prev_page_url
       };
       this.pagination = pagination;
-      console.log(this.pagination);
     },
     // Delete Order
     deleteOrder: function deleteOrder(id) {
@@ -4328,7 +4350,7 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       if (confirm('Are You Sure ?')) {
-        fetch("api/slider/".concat(id), config) // .then(res => res.json())
+        axios["delete"]("api/slider/".concat(id), config) // .then(res => res.json())
         .then(function (res) {
           // alert('Slide Deleted !');
           _this2.getSlides(); // console.log(res);
@@ -4340,8 +4362,7 @@ __webpack_require__.r(__webpack_exports__);
     addSlide: function addSlide() {
       var _this3 = this;
 
-      console.log(this.remember_token);
-
+      // console.log(this.remember_token);
       if (this.edit === false) {
         // Add
         var vm = this;
@@ -4378,6 +4399,8 @@ __webpack_require__.r(__webpack_exports__);
 
         var _formData = new FormData();
 
+        _formData.append('id', this.slide.id);
+
         _formData.append('image', this.image);
 
         _formData.append('title_ar', this.slide.title_ar);
@@ -4386,10 +4409,12 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('desc_en', this.slide.desc_en);
 
-        _formData.append('desc_ar', this.slide.desc_ar); // formData.append('type', this.slide.type);
+        _formData.append('desc_ar', this.slide.desc_ar);
+
+        _formData.append('_method', 'PUT'); // console.log(this.slide.id);
 
 
-        axios.put('/api/slider', _formData, _config).then(function (res) {
+        axios.post('/api/slider', _formData, _config).then(function (res) {
           // vm.success = res.success;
           // console.log(res);
           _this3.getSlides();
@@ -4783,8 +4808,7 @@ __webpack_require__.r(__webpack_exports__);
       if (confirm('Are You Sure ?')) {
         axios["delete"]("api/tag/".concat(id), config) // .then(res => res.json())
         .then(function (res) {
-          alert('Tag Deleted !');
-
+          // alert('Tag Deleted !');
           _this2.getTags(); // console.log(res);
 
         });
@@ -4816,7 +4840,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         // Update
-        // console.log(tag);
+        // console.log('hhhhhhhhhhh');
         var _config = {
           headers: {
             'content-type': 'multipart/form-data',
@@ -4838,14 +4862,12 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('service_id', this.tag.service_id);
 
-        console.log(this.tag);
-        axios.put('api/tag', this.tag, _config) // .then(res => res.json())
-        .then(function (res) {
-          // console.log(res);
-          // this.resetModal();                        
-          // alert('Tag Added !');
-          _this3.getTags(); // console.log(res);
+        _formData.append('_method', 'PUT'); // console.log(this.tag)
 
+
+        axios.post('api/tag', _formData, _config) // .then(res => res.json())
+        .then(function (res) {
+          _this3.getTags();
         })["catch"](function (err) {
           return console.log(err);
         });
@@ -4876,8 +4898,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get('api/services_names') // .then(res => res.json())
       .then(function (res) {
-        _this4.services = res.data;
-        console.log(res);
+        _this4.services = res.data; // console.log(res);
       });
     },
     resetModal: function resetModal() {
@@ -63038,7 +63059,7 @@ var render = function() {
           [
             _c("div", { staticClass: "col-lg-10 mt-3" }, [
               _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-body" }, [
+                _c("div", { staticClass: "card-body pb-2" }, [
                   _c("div", { staticClass: "media mb-2" }, [
                     _c("img", {
                       staticClass: "img-card mr-md-4",
@@ -63085,39 +63106,46 @@ var render = function() {
                       _vm._v(" "),
                       _c("p", [_vm._v(_vm._s(article.desc_en))]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "row mt-3 ml-1" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-secondary mr-3",
-                            attrs: {
-                              href: "#",
-                              "data-toggle": "modal",
-                              "data-target": ".bd-example-modal-lg"
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "row justify-content-end mt-3 ml-1 mb-0 px-2 py-0"
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "text-secondary mr-3",
+                              attrs: {
+                                href: "#",
+                                "data-toggle": "modal",
+                                "data-target": ".bd-example-modal-lg"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editArticle(article)
+                                }
+                              }
                             },
-                            on: {
-                              click: function($event) {
-                                return _vm.editArticle(article)
+                            [_c("i", { staticClass: "ti-pencil o-icon" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "text-danger",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteArticle(article.id)
+                                }
                               }
-                            }
-                          },
-                          [_c("i", { staticClass: "ti-pencil o-icon" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-danger",
-                            attrs: { href: "#" },
-                            on: {
-                              click: function($event) {
-                                return _vm.deleteArticle(article.id)
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "ti-trash o-icon" })]
-                        )
-                      ])
+                            },
+                            [_c("i", { staticClass: "ti-trash o-icon" })]
+                          )
+                        ]
+                      )
                     ])
                   ])
                 ])
@@ -64232,7 +64260,7 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { id: "desc_ar", cols: "30", rows: "4" },
+                                attrs: { cols: "30", rows: "4" },
                                 domProps: { value: _vm.service.desc_ar },
                                 on: {
                                   input: function($event) {
@@ -64262,7 +64290,7 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { id: "desc_en", cols: "30", rows: "4" },
+                                attrs: { cols: "30", rows: "4" },
                                 domProps: { value: _vm.service.desc_en },
                                 on: {
                                   input: function($event) {
@@ -64325,28 +64353,53 @@ var render = function() {
                                 _c(
                                   "select",
                                   {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.tags_ids,
+                                        expression: "tags_ids"
+                                      }
+                                    ],
                                     staticClass: "form-control",
                                     attrs: {
                                       id: "example-email-input",
                                       multiple: ""
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.tags_ids = $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      }
                                     }
                                   },
-                                  _vm._l(
-                                    _vm.edit ? _vm.service.tags : _vm.tags,
-                                    function(tag) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: tag.id,
-                                          domProps: {
-                                            value: tag.id,
-                                            selected: _vm.edit
-                                          }
-                                        },
-                                        [_vm._v(_vm._s(tag.name_en))]
-                                      )
-                                    }
-                                  ),
+                                  _vm._l(_vm.tags, function(tag) {
+                                    return _c(
+                                      "option",
+                                      {
+                                        key: tag.id,
+                                        domProps: {
+                                          value: tag.id,
+                                          selected: _vm.service.tags.includes(
+                                            tag
+                                          )
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(tag.name_en))]
+                                    )
+                                  }),
                                   0
                                 )
                               ])
@@ -65116,7 +65169,6 @@ var render = function() {
                                 staticClass: "form-control",
                                 attrs: {
                                   name: "desc_ar",
-                                  id: "desc_ar",
                                   cols: "30",
                                   rows: "4"
                                 },
@@ -65151,7 +65203,6 @@ var render = function() {
                                 staticClass: "form-control",
                                 attrs: {
                                   name: "desc_en",
-                                  id: "desc_en",
                                   cols: "30",
                                   rows: "4"
                                 },
@@ -65422,50 +65473,54 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("td", [
-                        slide.type == 0
-                          ? _c("img", {
-                              staticClass: "table-img",
-                              attrs: {
-                                src: slide.sourse,
-                                alt: slide.title_en,
-                                srcset: ""
-                              }
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        slide.type == 1
-                          ? _c(
-                              "video",
-                              {
-                                staticClass: "table-img1",
+                      _c(
+                        "td",
+                        { staticClass: "d-flex justify-content-center" },
+                        [
+                          slide.type == 0
+                            ? _c("img", {
+                                staticClass: "table-img",
                                 attrs: {
-                                  width: "320",
-                                  height: "240",
-                                  controls: ""
+                                  src: slide.sourse,
+                                  alt: slide.title_en,
+                                  srcset: ""
                                 }
-                              },
-                              [
-                                _c("source", {
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          slide.type == 1
+                            ? _c(
+                                "video",
+                                {
+                                  staticClass: "table-img1",
                                   attrs: {
-                                    src: slide.sourse,
-                                    type: "video/mp4"
+                                    width: "320",
+                                    height: "240",
+                                    controls: ""
                                   }
-                                }),
-                                _vm._v(" "),
-                                _c("source", {
-                                  attrs: {
-                                    src: slide.sourse,
-                                    type: "video/ogg"
-                                  }
-                                }),
-                                _vm._v(
-                                  "\n                                                Your browser does not support video.\n                                            "
-                                )
-                              ]
-                            )
-                          : _vm._e()
-                      ]),
+                                },
+                                [
+                                  _c("source", {
+                                    attrs: {
+                                      src: slide.sourse,
+                                      type: "video/mp4"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("source", {
+                                    attrs: {
+                                      src: slide.sourse,
+                                      type: "video/ogg"
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                                                Your browser does not support video.\n                                            "
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("td", {}, [
                         _c(
@@ -78668,8 +78723,8 @@ axios.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest',
   'remember_token': window.Laravel.remember_token
 }; // Vue.http.headers.common['remember_token'] = window.Laravel.remember_token;
-
-console.log(window.Laravel.remember_token); // window.Vue.prototype.$http = axios;
+// console.log(window.Laravel.remember_token);
+// window.Vue.prototype.$http = axios;
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -79285,14 +79340,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************!*\
   !*** ./resources/js/components/Slider.vue ***!
   \********************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Slider_vue_vue_type_template_id_872262e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Slider.vue?vue&type=template&id=872262e8& */ "./resources/js/components/Slider.vue?vue&type=template&id=872262e8&");
 /* harmony import */ var _Slider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Slider.vue?vue&type=script&lang=js& */ "./resources/js/components/Slider.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Slider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Slider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -79322,7 +79378,7 @@ component.options.__file = "resources/js/components/Slider.vue"
 /*!*********************************************************************!*\
   !*** ./resources/js/components/Slider.vue?vue&type=script&lang=js& ***!
   \*********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
