@@ -79,7 +79,7 @@ class MessageController extends Controller
                 $array[]=$monthlysales[$i]->total;
 
 
-           dd($array);
+        //    dd($array);
            return view('reports.monthlysales', compact('monthlysales'));
         }
 
