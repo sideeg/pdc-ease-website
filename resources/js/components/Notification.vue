@@ -10,10 +10,12 @@
                 <div class="dropdown-menu bell-notify-box notify-box">
                     <span class="notify-title">You have {{orders_num}} new orders <a href="/dashboard-messages"> view all</a></span>
                     <div class="nofity-list">
-                        <a href="javascript:void(0);" class="notify-item" v-for="order in orders.data" :key="order.id" >
+                        <a href="javascript:void(0);" class="notify-item" v-for="(key,order) in orders.data" :key="order.id" >
                             <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
                             <div class="notify-text">
-                                <p>{{order.data}}</p>
+                                <p>{{key.name_en}}</p>
+                                <span class="msg font-italic">{{ key.created_at }}</span>
+
                                 <!-- <span>Just Now</span> -->
                             </div>
                         </a>
@@ -69,11 +71,11 @@
                 <div class="dropdown-menu notify-box nt-enveloper-box">
                     <span class="notify-title">You have {{messages_num}} new messages <a href="/dashboard-services-orders">view all</a></span>
                     <div class="nofity-list">
-                        <a href="javascript:void(0);" class="notify-item" v-for="message in messages.data" :key="message.id">
+                        <a href="javascript:void(0);" class="notify-item" v-for="(key,message) in messages" :key="message.id">
                             <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
                             <div class="notify-text">
-                                <p>{{ message.name }}</p>
-                                <span class="msg">{{ message.subject }}</span>
+                                <p>{{ key.name }}</p>
+                                <span class="msg font-italic">{{ key.subject }}</span>
                                 <!-- <span>3:15 PM</span> -->
                             </div>
                         </a>
@@ -223,7 +225,7 @@
                 axios.get('api/user-message', config)
                 .then(res => {
                     this.messages = res.data;
-                    console.log(res.data.data);
+                    console.log(this.messages);
                 })
                 .catch(err => console.log(err));
 

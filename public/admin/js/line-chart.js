@@ -430,8 +430,18 @@ if ($('#mvaluechart4').length) {
 /*--------------  market status chart END ------------*/
 
 /*--------------  visitor graph line chart start ------------*/
-if ($('#visitor_graph').length) {
 
+orders = document.getElementById('orders_list').innerText;
+orders= orders.substring(1, orders.length-1);
+orders = orders.split(", ").map(x=>+x);
+console.log(orders);
+
+messages = document.getElementById('messages_list').innerText;
+messages= messages.substring(1, messages.length-1);
+messages = messages.split(", ").map(x=>+x);
+console.log(messages);
+
+if ($('#visitor_graph').length) {
     Highcharts.chart('visitor_graph', {
         chart: {
             type: 'areaspline'
@@ -447,14 +457,14 @@ if ($('#visitor_graph').length) {
             gridLineWidth: 1
         },
         series: [{
-                name: 'USD',
-                data: [400, 470, 520, 500, 420, 350, 320, 400, 550, 600, 500, 420, 400],
+                name: 'Orders',
+                data: orders,
                 fillColor: 'rgba(76, 57, 249, 0.5)',
                 lineColor: 'transparent'
             },
             {
-                name: 'BTC',
-                data: [450, 520, 550, 400, 450, 500, 400, 450, 500, 450, 400, 500, 450],
+                name: 'Messages',
+                data: messages,
                 fillColor: 'rgba(103, 13, 251, 0.5)',
                 lineColor: 'transparent'
             }

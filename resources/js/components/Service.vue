@@ -343,7 +343,7 @@
                     let vm = this;
  
                     let formData = new FormData();
-                    formData.append('image', this.service.id);
+                    formData.append('id', this.service.id);
                     formData.append('image', this.image);
                     formData.append('title_ar', this.service.title_ar);
                     formData.append('title_en', this.service.title_en);

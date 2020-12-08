@@ -3319,6 +3319,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3389,7 +3391,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get('api/user-message', config).then(function (res) {
         _this3.messages = res.data;
-        console.log(res.data.data);
+        console.log(_this3.messages);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3754,7 +3756,7 @@ __webpack_require__.r(__webpack_exports__);
 
         var _formData = new FormData();
 
-        _formData.append('image', this.service.id);
+        _formData.append('id', this.service.id);
 
         _formData.append('image', this.image);
 
@@ -64023,7 +64025,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "nofity-list" },
-            _vm._l(_vm.orders.data, function(order) {
+            _vm._l(_vm.orders.data, function(key, order) {
               return _c(
                 "a",
                 {
@@ -64035,7 +64037,11 @@ var render = function() {
                   _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v(_vm._s(order.data))])
+                    _c("p", [_vm._v(_vm._s(key.name_en))]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "msg font-italic" }, [
+                      _vm._v(_vm._s(key.created_at))
+                    ])
                   ])
                 ]
               )
@@ -64074,7 +64080,7 @@ var render = function() {
             _c(
               "div",
               { staticClass: "nofity-list" },
-              _vm._l(_vm.messages.data, function(message) {
+              _vm._l(_vm.messages, function(key, message) {
                 return _c(
                   "a",
                   {
@@ -64086,10 +64092,10 @@ var render = function() {
                     _vm._m(1, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "notify-text" }, [
-                      _c("p", [_vm._v(_vm._s(message.name))]),
+                      _c("p", [_vm._v(_vm._s(key.name))]),
                       _vm._v(" "),
-                      _c("span", { staticClass: "msg" }, [
-                        _vm._v(_vm._s(message.subject))
+                      _c("span", { staticClass: "msg font-italic" }, [
+                        _vm._v(_vm._s(key.subject))
                       ])
                     ])
                   ]
@@ -79340,15 +79346,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************************!*\
   !*** ./resources/js/components/Slider.vue ***!
   \********************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Slider_vue_vue_type_template_id_872262e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Slider.vue?vue&type=template&id=872262e8& */ "./resources/js/components/Slider.vue?vue&type=template&id=872262e8&");
 /* harmony import */ var _Slider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Slider.vue?vue&type=script&lang=js& */ "./resources/js/components/Slider.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Slider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Slider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -79378,7 +79383,7 @@ component.options.__file = "resources/js/components/Slider.vue"
 /*!*********************************************************************!*\
   !*** ./resources/js/components/Slider.vue?vue&type=script&lang=js& ***!
   \*********************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
