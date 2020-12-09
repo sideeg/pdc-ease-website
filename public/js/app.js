@@ -2579,9 +2579,9 @@ __webpack_require__.r(__webpack_exports__);
           'remember_token': window.Laravel.remember_token
         }
       };
-      axios.get('api/tag-names', config) // .then(res => res.json())
+      axios.get('api/tag_names', config) // .then(res => res.json())
       .then(function (res) {
-        console.log(res.data);
+        // console.log(res.data);
         _this4.tags = res.data;
       });
     },
