@@ -83,8 +83,8 @@
                                             <div class="card-body p-0">
                                                 <div class="media">
                                                     <img v-if="slide.type == 0" :src="slide.sourse"  :alt="slide.title_en" class="img-card mr-md-4" srcset="">
-                                                    <video v-if="slide.type == 1" width="320" height="240" controls class="img-card mr-md-4">  
-                                                        <source :src="slide.sourse" type="video/mp4"> 
+                                                    <video v-if="slide.type == 1" width="320" height="240" controls class="img-card mr-md-4">
+                                                        <source :src="slide.sourse" type="video/mp4">
                                                         <source :src="slide.sourse" type="video/ogg">
                                                         Your browser does not support video.
                                                     </video>
@@ -157,8 +157,8 @@
                                             <td >{{slide.title_en ? slide.title_en : 'This Slide Has No Title'}}</td>
                                             <td class="d-flex justify-content-center">
                                                 <img v-if="slide.type == 0" :src="slide.sourse"  :alt="slide.title_en" class="table-img" srcset="">
-                                                <video v-if="slide.type == 1" width="320" height="240" controls class="table-img1">  
-                                                    <source :src="slide.sourse" type="video/mp4"> 
+                                                <video v-if="slide.type == 1" width="320" height="240" controls class="table-img1">
+                                                    <source :src="slide.sourse" type="video/mp4">
                                                     <source :src="slide.sourse" type="video/ogg">
                                                     Your browser does not support video.
                                                 </video>
@@ -211,7 +211,7 @@
             getSlides(page_url) {
                 let vm = this;
                 page_url = page_url || 'api/slider';
-                const config = {    
+                const config = {
                     headers: {
                         // 'content-type': 'multipart/form-data',
                         'remember_token' : window.Laravel.remember_token
@@ -243,7 +243,7 @@
             // Delete Slide
             deleteSlide(id){
                 const config = {
-                    headers: { 
+                    headers: {
                         'content-type': 'multipart/form-data',
                         'remember_token': window.Laravel.remember_token
                         }
@@ -274,7 +274,7 @@
                     }
 
                     let formData = new FormData();
-                    formData.append('image', this.image);
+                    formData.append('sourse', this.image);
                     formData.append('title_ar', this.slide.title_ar);
                     formData.append('title_en', this.slide.title_en);
                     formData.append('desc_en', this.slide.desc_en);
@@ -291,7 +291,7 @@
                     let vm = this;
 
                     const config = {
-                        headers: { 
+                        headers: {
                             'content-type': 'multipart/form-data',
                             'remember_token' : window.Laravel.remember_token
                         }
@@ -299,7 +299,7 @@
 
                     let formData = new FormData();
                     formData.append('id', this.slide.id);
-                    formData.append('image', this.image);
+                    formData.append('sourse', this.image);
                     formData.append('title_ar', this.slide.title_ar);
                     formData.append('title_en', this.slide.title_en);
                     formData.append('desc_en', this.slide.desc_en);

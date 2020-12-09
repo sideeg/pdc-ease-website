@@ -69,19 +69,22 @@ class MessageController extends Controller
             // $revenueLastMonth = message::whereBetween('created_at',[$fromDate,$tillDate])->count();
             // dd($revenueLastMonth);
 
-            $monthlysales=\DB::table('messages')
+            $messagesCounts=\DB::table('messages')
             ->select(\DB::raw('sum(id) as total'),\DB::raw('date(created_at) as dates'))
             ->groupBy('dates')
             ->orderBy('dates','desc')
            ->take(12)->get();
            $array = array();
-           for($i=0;$i<sizeof($monthlysales);$i++)
-                $array[]=$monthlysales[$i]->total;
+           for($i=0;$i<sizeof($messagesCounts);$i++)
+                $array[]=$messagesCounts[$i]->total;
 
 
         //    dd($array);
-           return view('reports.monthlysales', compact('monthlysales'));
+           return view('dashboard', compact('messagesCounts'));
         }
+
+
+
 
 
 }
