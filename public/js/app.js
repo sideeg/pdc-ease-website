@@ -2854,13 +2854,13 @@ __webpack_require__.r(__webpack_exports__);
     addClient: function addClient() {
       var _this3 = this;
 
-      if (this.edit === false) {
+      if (this.edit == false) {
         // Add 
         var vm = this;
         var config = {
           headers: {
             'content-type': 'multipart/form-data',
-            'remember_token': this.remember_token
+            'remember_token': window.Laravel.remember_token
           }
         };
         var formData = new FormData();
@@ -2868,8 +2868,8 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('name', this.client.name); // console.log(this.image);
 
         axios.post('/api/clint', formData, config).then(function (res) {
-          vm.success = res.success; // console.log(res);
-
+          // vm.success = res.success;
+          // console.log(res);
           _this3.getClients();
         })["catch"](function (err) {
           return console.log(err);
