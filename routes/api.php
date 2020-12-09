@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 /******************************** super Admin access *************************************** */
-// Route::group(['middleware' => 'super_admin_api_auth'], function () {
+Route::group(['middleware' => 'super_admin_api_auth'], function () {
 
 Route::get('/user-notification-num','App\Http\Controllers\AdminApi\UserController@orderNotficationNum');
 Route::get('/user-notification','App\Http\Controllers\AdminApi\UserController@notfication');
@@ -51,7 +51,7 @@ Route::get('/role/{id}','App\Http\Controllers\AdminApi\roleController@roleById')
 Route::delete("/role/{id}","App\Http\Controllers\AdminApi\roleController@roleDelete");
 
 
-// });
+});
 /*********************************** end super admin access ******************************************** */
 
 

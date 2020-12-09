@@ -134,7 +134,7 @@ class BlogController extends Controller
          */
 
         public function blog(Request $request){
-            dd("here");
+            // dd("here");
             return response()->json(blogs::with('tag')->paginate(9),200);
         }
 
