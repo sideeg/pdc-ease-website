@@ -96,7 +96,7 @@ class SliderController extends Controller
         if (is_null($slider)){
             return response()->json('slider not found',404);
         }
-dd($request->sourse);
+// dd($request->all());
         if(!is_null($request->sourse)){
             $uploads_folder = 'images\svg\slider\\';//storage_path('app/public/slider');
             if (!file_exists($uploads_folder)) {

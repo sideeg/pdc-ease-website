@@ -310,12 +310,12 @@
                         headers: { 
                             // 'content-type': 'multipart/form-data',
                             'remember_token': window.Laravel.remember_token
-                            }
+                        }
                     }
-                axios.get('api/tag-names', config)
+                axios.get('api/tag_names', config)
                 // .then(res => res.json())
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
 
                     this.tags = res.data;
                 });
