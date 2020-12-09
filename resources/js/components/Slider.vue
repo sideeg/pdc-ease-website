@@ -33,11 +33,11 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="desc_ar" class="col-form-label">Description ar <code>*</code></label>
-                                                                <textarea name="desc_ar" v-model="slide.desc_ar" class="form-control" cols="30" rows="4"></textarea>
+                                                                <textarea name="" v-model="slide.desc_ar" class="form-control" cols="30" rows="4"></textarea>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="desc_en" class="col-form-label">Description en <code>*</code></label>
-                                                                <textarea name="desc_en" v-model="slide.desc_en" class="form-control" cols="30" rows="4"></textarea>
+                                                                <textarea name="" v-model="slide.desc_en" class="form-control" cols="30" rows="4"></textarea>
                                                             </div>
                                                             <div class="form-group container row align-items-center justify-content-between">
                                                                 <div>
@@ -156,6 +156,7 @@
                                         <tr v-for="slide in slides" :key="slide.id" >
                                             <td >{{slide.title_en ? slide.title_en : 'This Slide Has No Title'}}</td>
                                             <td class="d-flex justify-content-center">
+                                                {{slide.image}}
                                                 <img v-if="slide.type == 0" :src="slide.sourse"  :alt="slide.title_en" class="table-img" srcset="">
                                                 <video v-if="slide.type == 1" width="320" height="240" controls class="table-img1">  
                                                     <source :src="slide.sourse" type="video/mp4"> 
@@ -223,7 +224,7 @@
                 .then(res => {
                     this.slides = res.data.data;
                     vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
-                    // console.log(res.data);
+                    // console.log(res.data.data);
 
                 }).catch(err => console.log(err));
             },

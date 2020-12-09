@@ -351,9 +351,6 @@
                     formData.append('tags', this.tags_ids);
                     formData.append('_method', 'PUT');
 
-                    // formData.append('type', this.service.type);
-                            // console.log(formData);
-
                     const config = {
                         headers: {
                             'content-type': 'multipart/form-data',
