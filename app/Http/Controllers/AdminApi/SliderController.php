@@ -12,21 +12,21 @@ class SliderController extends Controller
 
     public function storeSlider(Request $request){
         $request->validate([
-            'image' => 'required|mimes:jpeg,bmp,png,jpg,avi,wmv,flv,gif,asf,m4v,mp4,m4p',
+            'sourse' => 'required|mimes:jpeg,bmp,png,jpg,avi,wmv,flv,gif,asf,m4v,mp4,m4p',
             // 'image' => 'required|mimes:jpeg,bmp,png,jpg,avi,wmv,flv,gif,asf,m4v,mp4,m4p|max:2048',
         ]);
 
         // Initiatl Type Value is Set to Image
         $type = 0;
-        $ext= $request->image->extension();
+        $ext= $request->sourse->extension();
 
         $uploads_folder = 'images\svg\slider\\' ;//storage_path('app/public/sliders');
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
 
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move($uploads_folder, $imageName);
+        $imageName = time().'.'.$request->sourse->extension();
+        $request->sourse->move($uploads_folder, $imageName);
 
         // List of Possible Extentions
         $images_list = ["jpeg","bmp","png","jpg"];
