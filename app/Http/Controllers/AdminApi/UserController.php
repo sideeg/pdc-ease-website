@@ -140,6 +140,7 @@ class UserController extends Controller
 
             // $num = sizeof($user->unreadNotifications );
             return response()->json($count,200);
+            
         }
 
          /**************************************************************************************************

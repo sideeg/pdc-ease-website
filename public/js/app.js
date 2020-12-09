@@ -4339,7 +4339,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         };
         var formData = new FormData();
-        formData.append('image', this.image);
+        formData.append('sourse', this.image);
         formData.append('title_ar', this.slide.title_ar);
         formData.append('title_en', this.slide.title_en);
         formData.append('desc_en', this.slide.desc_en);
@@ -4365,7 +4365,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('id', this.slide.id);
 
-        _formData.append('image', this.image);
+        _formData.append('sourse', this.image);
 
         _formData.append('title_ar', this.slide.title_ar);
 
