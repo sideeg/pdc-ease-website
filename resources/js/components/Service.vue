@@ -306,12 +306,11 @@
                     headers: {
                         'content-type': 'multipart/form-data',
                         'remember_token': window.Laravel.remember_token
-                        }
+                    }
                 }
                 if(this.edit === false){
                     // Add
                    let vm = this;
-
 
                     let formData = new FormData();
                     formData.append('image', this.image);
@@ -364,12 +363,8 @@
 
                     axios.post('/api/service', formData, config)
                         .then(res => {
-                            // vm.success = res.success;
-                            // console.log(res);
                             this.getServices();
-
-                        })
-                        .catch(err => console.log(err));
+                        }).catch(err => console.log(err));
 
                     this.edit = false;
 
@@ -403,15 +398,6 @@
                 // service tags
                 this.service.tags = service.tag;
             },
-            // File Handle
-            createImage(file) {
-                let reader = new FileReader();
-                let vm = this;
-                reader.onload = (e) => {
-                    vm.image = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            },
 
             resetModal() {
                 this.edit= false;
@@ -420,7 +406,7 @@
                 this.service.desc_en = '';
                 this.service.desc_ar = '';
                 this.service.image = null;
-                // this.service.tags = [];
+                this.service.tags = [];
 
             },
             onImageChange(e){

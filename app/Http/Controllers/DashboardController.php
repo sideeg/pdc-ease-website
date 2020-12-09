@@ -25,53 +25,32 @@ class DashboardController extends Controller
         $this->middleware('auth');
     }
 
-
-    public function dashboard()
-    {
-        # code...
-            // dd('hello');
-
-    }
-
     public function index()
     {
-        // $orders = orders::orderBy('created_at')->with('order_tags.tag')->get();
-
-
-        // $orders = orders::select('id', 'created_at')
-        // ->get()
-        // ->groupBy(function($date) {
-        //     //return Carbon::parse($date->created_at)->format('Y'); // grouping by years
-        //     return Carbon::parse($date->created_at)->format('m'); // grouping by months
-        // });
-
-        // $count = [];
-
-        // dd($orders);
+        
         $messagesCounts=\DB::table('messages')
         ->select(\DB::raw('sum(id) as total'),\DB::raw('date(created_at) as dates'))
         ->groupBy('dates')
         ->orderBy('dates','desc')
        ->take(12)->get();
+
        $array = array();
+
        for($i=0;$i<sizeof($messagesCounts);$i++)
             $array[]=$messagesCounts[$i]->total;
 
-            $orderCounts=\DB::table('orders')
-            ->select(\DB::raw('sum(id) as total'),\DB::raw('date(created_at) as dates'))
-            ->groupBy('dates')
-            ->orderBy('dates','desc')
-           ->take(12)->get();
-           $array2 = array();
-           for($i=0;$i<sizeof($orderCounts);$i++)
-                $array2[]=$orderCounts[$i]->total;
+        $orderCounts=\DB::table('orders')
+        ->select(\DB::raw('sum(id) as total'),\DB::raw('date(created_at) as dates'))
+        ->groupBy('dates')
+        ->orderBy('dates','desc')
+        ->take(12)->get();
 
+        $array2 = array();
 
-    //    dd($array);
-    //    return view('dashboard', compact('messagesCounts'));
-        return view('admin-layout.dashboard')->with($array,$array2);
-        // dd($slider);
-        // return view('index', compact(['slider','blogs', 'service', 'clint'])); //TODO page name
+        for($i=0;$i<sizeof($orderCounts);$i++)
+            $array2[]=$orderCounts[$i]->total;
+
+        return view('admin-layout.dashboard',compact(['array','array2']));
     }
 
     public function slider()

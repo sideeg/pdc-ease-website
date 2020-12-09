@@ -169,6 +169,9 @@
     letter-spacing: 0;
     font-weight: 400;
 }
+.metismenu li a:hover {
+    text-decoration: none;
+}
 
 .metismenu li a i {
     color: #6a56a5;
@@ -783,9 +786,14 @@ ul.breadcrumbs {
     visibility: hidden;
     opacity: 0;
 }
+.user-profile .dropdown-menu{
+    left: 10% !important;
+    top: 100%!important;
+}
 
-.notification-area .dropdown-menu.show,
+/* .notification-area .dropdown-menu.show, */
 .user-profile .dropdown-menu.show {
+    left: 10% !important;
     top: 100%!important;
 }
 

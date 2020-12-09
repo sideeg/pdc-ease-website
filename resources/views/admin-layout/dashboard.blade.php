@@ -17,11 +17,21 @@
             
         </div>
         <div id="visitor_graph"></div>
-        <p id="orders_list" > 
-            [400, 470, 520, 500, 420, 350, 320, 400, 550, 600, 500, 420, 400]
+        <p id="orders_list" style="opacity: 0;"> 
+            [
+            @foreach ($array as $item)
+                {{ $item }},    
+            @endforeach
+            ]
+            {{-- [400, 470, 520, 500, 420, 350, 320, 400, 550, 600, 500, 420, 400] --}}
         </p>
-        <p id="messages_list" > 
-            [450, 520, 550, 400, 450, 1000, 400, 450, 500, 450, 400, 500, 450]
+        <p id="messages_list" style="opacity: 0;"> 
+            [
+            @foreach ($array2 as $item)
+                {{ $item }},    
+            @endforeach
+            ]
+            {{-- [450, 520, 550, 400, 450, 1000, 400, 450, 500, 450, 400, 500, 450] --}}
         </p>
 
     </div>

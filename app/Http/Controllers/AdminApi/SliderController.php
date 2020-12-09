@@ -90,7 +90,7 @@ class SliderController extends Controller
      */
     public function sliderUpdate(Request $request)
     {
-        // dd($request->all);
+        // dd($request->all());
         $slider = slide_bar::find($request->id);
 
         if(!is_null($request->sourse)){

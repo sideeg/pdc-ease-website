@@ -13,8 +13,8 @@
                         <a href="javascript:void(0);" class="notify-item" v-for="(key,order) in orders.data" :key="order.id" >
                             <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
                             <div class="notify-text">
-                                <p>{{key.name_en}}</p>
-                                <span class="msg font-italic">{{ key.created_at }}</span>
+                                <h5>{{key.name_en}}</h5>
+                                <span class="msg font-italic">{{ getHumanDate(key.created_at) }}</span>
 
                                 <!-- <span>Just Now</span> -->
                             </div>
@@ -72,10 +72,10 @@
                     <span class="notify-title">You have {{messages_num}} new messages <a href="/dashboard-services-orders">view all</a></span>
                     <div class="nofity-list">
                         <a href="javascript:void(0);" class="notify-item" v-for="(key,message) in messages" :key="message.id">
-                            <div class="notify-thumb"><i class="ti-shopping-cart-full btn-danger"></i></div>
+                            <div class="notify-thumb"><i class="ti-email btn-danger"></i></div>
                             <div class="notify-text">
-                                <p>{{ key.name }}</p>
-                                <span class="msg font-italic">{{ key.subject }}</span>
+                                <h5>{{ key.name }}</h5>
+                                <p class="msg font-italic">{{ key.subject }}</p>
                                 <!-- <span>3:15 PM</span> -->
                             </div>
                         </a>
@@ -179,61 +179,73 @@
 
         },
 
-        methods: {
-            getNotifyNumber() {
-                const config = {
-                    headers: { 
-                        // 'content-type': 'multipart/form-data',
-                        'remember_token': window.Laravel.remember_token
-                        }
-                }
-                // Orders Nutification Number
-                axios.get('api/user-notification-num', config)
-                .then(res => {
-                    this.orders_num = res.data;
-                })
-                .catch(err => console.log(err));
+        _methods: {
+          getNotifyNumber() {
+            const config={
+              headers: {
+                // 'content-type': 'multipart/form-data',
+                'remember_token': window.Laravel.remember_token
+              }
+            };
+            // Orders Nutification Number
+            axios.get('api/user-notification-num',config)
+              .then(res => {
+                this.orders_num=res.data;
+              }).catch(err => console.log(err));
 
-                // Messages Nutification Number
-                axios.get('api/user-message-num', config)
-                .then(res => {
-                    this.messages_num = res.data;
-                    // console.log(res.data)
-                })
-                .catch(err => console.log(err));
-                // console.log(this.ordersRoute);
+            // Messages Nutification Number
+            axios.get('api/user-message-num',config)
+              .then(res => {
+                this.messages_num=res.data;
+                // console.log(res.data)
+              }).catch(err => console.log(err));
+            // console.log(this.ordersRoute);
+          },
+          // Get Orders
+          getOrders() {
+            axios.get('api/user-notification')
+              .then(res => {
+                this.orders=res;
+                // console.log(this.orders.data);
+              })
+              .catch(err => console.log(err));
+
+          },
+          // Get Messages
+          getMessages() {
+            const config={
+              headers: {
+                // 'content-type': 'multipart/form-data',
+                'remember_token': window.Laravel.remember_token
+              }
+            };
+            axios.get('api/user-message',config)
+              .then(res => {
+                this.messages=res.data;
+                // console.log(this.messages);
+              })
+              .catch(err => console.log(err));
+
+          },
+          getHumanDate(date) {
+                return moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
 
             },
-            // Get Orders
-            getOrders(){
-                axios.get('api/user-notification')
-                .then(res => {
-                    this.orders = res;
-                    console.log(this.orders.data);
-                })
-                .catch(err => console.log(err));
-
-            },
-            // Get Messages
-            getMessages(){
-                const config = {
-                    headers: { 
-                        // 'content-type': 'multipart/form-data',
-                        'remember_token': window.Laravel.remember_token
-                        }
-                }
-                axios.get('api/user-message', config)
-                .then(res => {
-                    this.messages = res.data;
-                    console.log(this.messages);
-                })
-                .catch(err => console.log(err));
-
-            },
-           
+        },
+        get methods_1() {
+          return this._methods;
+        },
+        set methods_1(value) {
+          this._methods=value;
+        },
+        get methods() {
+          return this._methods;
+        },
+        set methods(value) {
+          this._methods=value;
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>

@@ -63,47 +63,6 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <!-- Show Service Details Modal -->
-                    <div class="col-lg-10 mt-3 d-flex justify-content-between">
-                        <div class="modal fade show-slide-details-modal">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Slide Details</h5>
-                                        <button type="button" class="close" data-dismiss="modal"><code>&times;</code></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <!-- Textual inputs start -->
-                                            <div class="col-12">
-                                                <div class="card">
-                                                    <div class="card-body p-0">
-                                                        <div class="media">
-                                                            <img class="img-card mr-md-4" src="assets/images/about/about-page.jpg" alt="image">
-                                                            <div class="media-body">
-                                                                <h4 class="mb-2 md-mt-2">Media heading</h4>
-                                                                <!-- <div class="row mb-3"><span class="col-lg-6 col-sm-12 font-italic"><b>Date:&ThickSpace; </b> 5 Fab, 2020</span></div> -->
-                                                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Textual inputs end -->
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-warning mt-4 py-2 px-4" data-dismiss="modal">Close</button>
-                                        <!-- <button type="button" class="btn btn-primary mt-4 py-2 px-4">Submit</button> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
             </div>
         <!-- End Modal -->
 
@@ -243,10 +202,8 @@
                 success: '',
             }
         },
-        props: ['remember_token'],
 
         created() {
-            // this.http.headers.common['remember_token'] = this.remember_token;
             this.getSlides()
         },
 
@@ -268,9 +225,7 @@
                     vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
                     // console.log(res.data);
 
-                }
-                )
-                .catch(err => console.log(err));
+                }).catch(err => console.log(err));
             },
             // Pagination
 
@@ -328,12 +283,8 @@
 
                     axios.post('/api/slider', formData, config)
                         .then(res => {
-                            // vm.success = res.success;
-                            // console.log(res);
                             this.getSlides();
-
-                        })
-                        .catch(err => console.log(err));
+                        }).catch(err => console.log(err));
 
                 }else {
                     // Update
@@ -355,7 +306,7 @@
                     formData.append('desc_ar', this.slide.desc_ar);
                     formData.append('_method', 'PUT');
 
-                    // console.log(this.slide.id);
+                    // console.log(this.image);
 
                     axios.post('/api/slider', formData, config)
                         .then(res => {
@@ -404,29 +355,6 @@
                 this.image = e.target.files[0];
                 // this.slide.type = e.target.files[0].type;
             },
-            // formSubmit(e) {
-            //     e.preventDefault();
-            //     let vm = this;
-
-            //     const config = {
-            //         headers: { 'content-type': 'multipart/form-data' }
-            //     }
-
-            //     let formData = new FormData();
-            //     formData.append('image', this.image);
-            //     formData.append('title_ar', this.slide.title_ar);
-            //     formData.append('title_en', this.slide.title_en);
-            //     formData.append('desc_en', this.slide.desc_en);
-            //     formData.append('desc_ar', this.slide.desc_ar);
-            //     // formData.append('type', this.slide.type);
-
-            //     axios.post('/api/slider', formData, config)
-            //         .then(res => {
-            //             vm.success = res.success;
-            //             console.log(res);
-            //         })
-            //         .catch(err => console.log(err));
-            // },
         },
         mounted() {
             console.log('Component mounted.')

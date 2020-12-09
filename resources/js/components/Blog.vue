@@ -107,7 +107,7 @@
                                 </span> 
                                 <span class="col-lg-6 col-sm-6 font-italic">
                                     <b>Date:&ThickSpace; </b> 
-                                    {{ article.created_at}}
+                                    {{ getHumanDate(article.created_at) }}
 
                                     <!-- {{moment(article.created_at).fromNow() }} -->
                                     <br>
@@ -335,7 +335,11 @@
                 this.article.desc_ar = '';
                 this.article.image = null;
                 this.article.tag_id = '';
-            }
+            },
+            getHumanDate(date) {
+                return moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
+
+            },
         },
         mounted() {
             // console.log('Component mounted.')

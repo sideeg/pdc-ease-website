@@ -74,3 +74,10 @@
     font-size: 13px;
     font-weight: bold;
 }
+
+.notify-item {
+    text-decoration: none;
+}
+.notify-item:hover {
+    text-decoration: none;
+}

@@ -2597,6 +2597,9 @@ __webpack_require__.r(__webpack_exports__);
       this.article.desc_ar = '';
       this.article.image = null;
       this.article.tag_id = '';
+    },
+    getHumanDate: function getHumanDate(date) {
+      return moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
     }
   },
   mounted: function mounted() {// console.log('Component mounted.')
@@ -3345,7 +3348,7 @@ __webpack_require__.r(__webpack_exports__);
     // this.http.headers.common['remember_token'] = this.remember_token;
     this.getNotifyNumber(); // this.getMessagesNumber();
   },
-  methods: {
+  _methods: {
     getNotifyNumber: function getNotifyNumber() {
       var _this = this;
 
@@ -3373,8 +3376,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get('api/user-notification').then(function (res) {
-        _this2.orders = res;
-        console.log(_this2.orders.data);
+        _this2.orders = res; // console.log(this.orders.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -3390,15 +3392,33 @@ __webpack_require__.r(__webpack_exports__);
         }
       };
       axios.get('api/user-message', config).then(function (res) {
-        _this3.messages = res.data;
-        console.log(_this3.messages);
+        _this3.messages = res.data; // console.log(this.messages);
       })["catch"](function (err) {
         return console.log(err);
       });
+    },
+    getHumanDate: function getHumanDate(date) {
+      return moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY');
     }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+
+  get methods_1() {
+    return this._methods;
+  },
+
+  set methods_1(value) {
+    this._methods = value;
+  },
+
+  get methods() {
+    return this._methods;
+  },
+
+  set methods(value) {
+    this._methods = value;
+  },
+
+  mounted: function mounted() {// console.log('Component mounted.')
   }
 });
 
@@ -3725,7 +3745,7 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       if (this.edit === false) {
-        // Add 
+        // Add
         var vm = this;
         var formData = new FormData();
         formData.append('image', this.image);
@@ -3781,14 +3801,12 @@ __webpack_require__.r(__webpack_exports__);
           }
         };
         axios.post('/api/service', _formData, _config2).then(function (res) {
-          // vm.success = res.success;
-          // console.log(res);
           _this4.getServices();
         })["catch"](function (err) {
           return console.log(err);
         });
         this.edit = false;
-      } // this.resetModal();                        
+      } // this.resetModal();
 
     },
     editService: function editService(service) {
@@ -3815,24 +3833,14 @@ __webpack_require__.r(__webpack_exports__);
 
       this.service.tags = service.tag;
     },
-    // File Handle
-    createImage: function createImage(file) {
-      var reader = new FileReader();
-      var vm = this;
-
-      reader.onload = function (e) {
-        vm.image = e.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    },
     resetModal: function resetModal() {
       this.edit = false;
       this.service.title_en = '';
       this.service.title_ar = '';
       this.service.desc_en = '';
       this.service.desc_ar = '';
-      this.service.image = null; // this.service.tags = [];
+      this.service.image = null;
+      this.service.tags = [];
     },
     onImageChange: function onImageChange(e) {
       this.image = e.target.files[0]; // this.service.type = e.target.files[0].type;
@@ -4245,47 +4253,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4305,9 +4272,7 @@ __webpack_require__.r(__webpack_exports__);
       success: ''
     };
   },
-  props: ['remember_token'],
   created: function created() {
-    // this.http.headers.common['remember_token'] = this.remember_token;
     this.getSlides();
   },
   methods: {
@@ -4382,8 +4347,6 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('desc_ar', this.slide.desc_ar); // formData.append('type', this.slide.type);
 
         axios.post('/api/slider', formData, config).then(function (res) {
-          // vm.success = res.success;
-          // console.log(res);
           _this3.getSlides();
         })["catch"](function (err) {
           return console.log(err);
@@ -4413,7 +4376,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('desc_ar', this.slide.desc_ar);
 
-        _formData.append('_method', 'PUT'); // console.log(this.slide.id);
+        _formData.append('_method', 'PUT'); // console.log(this.image);
 
 
         axios.post('/api/slider', _formData, _config).then(function (res) {
@@ -4456,27 +4419,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     onImageChange: function onImageChange(e) {
       this.image = e.target.files[0]; // this.slide.type = e.target.files[0].type;
-    } // formSubmit(e) {
-    //     e.preventDefault();
-    //     let vm = this;
-    //     const config = {
-    //         headers: { 'content-type': 'multipart/form-data' }
-    //     }
-    //     let formData = new FormData();
-    //     formData.append('image', this.image);
-    //     formData.append('title_ar', this.slide.title_ar);
-    //     formData.append('title_en', this.slide.title_en);
-    //     formData.append('desc_en', this.slide.desc_en);
-    //     formData.append('desc_ar', this.slide.desc_ar);
-    //     // formData.append('type', this.slide.type);
-    //     axios.post('/api/slider', formData, config)
-    //         .then(res => {
-    //             vm.success = res.success;
-    //             console.log(res);
-    //         })
-    //         .catch(err => console.log(err));
-    // },
-
+    }
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -63097,7 +63040,7 @@ var render = function() {
                             _c("b", [_vm._v("Date:   ")]),
                             _vm._v(
                               " \n                                " +
-                                _vm._s(article.created_at) +
+                                _vm._s(_vm.getHumanDate(article.created_at)) +
                                 "\n\n                                "
                             ),
                             _vm._v(" "),
@@ -64037,10 +63980,10 @@ var render = function() {
                   _vm._m(0, true),
                   _vm._v(" "),
                   _c("div", { staticClass: "notify-text" }, [
-                    _c("p", [_vm._v(_vm._s(key.name_en))]),
+                    _c("h5", [_vm._v(_vm._s(key.name_en))]),
                     _vm._v(" "),
                     _c("span", { staticClass: "msg font-italic" }, [
-                      _vm._v(_vm._s(key.created_at))
+                      _vm._v(_vm._s(_vm.getHumanDate(key.created_at)))
                     ])
                   ])
                 ]
@@ -64092,9 +64035,9 @@ var render = function() {
                     _vm._m(1, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "notify-text" }, [
-                      _c("p", [_vm._v(_vm._s(key.name))]),
+                      _c("h5", [_vm._v(_vm._s(key.name))]),
                       _vm._v(" "),
-                      _c("span", { staticClass: "msg font-italic" }, [
+                      _c("p", { staticClass: "msg font-italic" }, [
                         _vm._v(_vm._s(key.subject))
                       ])
                     ])
@@ -64123,7 +64066,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "notify-thumb" }, [
-      _c("i", { staticClass: "ti-shopping-cart-full btn-danger" })
+      _c("i", { staticClass: "ti-email btn-danger" })
     ])
   }
 ]
@@ -65294,9 +65237,7 @@ var render = function() {
             ])
           ])
         ]
-      ),
-      _vm._v(" "),
-      _vm._m(5)
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -65306,7 +65247,7 @@ var render = function() {
         _c("div", { staticClass: "modal fade show-slider-details-modal" }, [
           _c("div", { staticClass: "modal-dialog modal-lg" }, [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(6),
+              _vm._m(5),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
@@ -65375,7 +65316,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(7)
+              _vm._m(6)
             ])
           ])
         ])
@@ -65457,13 +65398,13 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(8)
+            _vm._m(7)
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "single-table" }, [
             _c("div", { staticClass: "table-responsive" }, [
               _c("table", { staticClass: "table table-hover progress-table" }, [
-                _vm._m(9),
+                _vm._m(8),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -65655,80 +65596,6 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-form-label", attrs: { for: "desc_en" } },
       [_vm._v("Description en "), _c("code", [_vm._v("*")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col-lg-10 mt-3 d-flex justify-content-between" },
-      [
-        _c("div", { staticClass: "modal fade show-slide-details-modal" }, [
-          _c("div", { staticClass: "modal-dialog modal-lg" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [
-                  _vm._v("Slide Details")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_c("code", [_vm._v("×")])]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-12" }, [
-                    _c("div", { staticClass: "card" }, [
-                      _c("div", { staticClass: "card-body p-0" }, [
-                        _c("div", { staticClass: "media" }, [
-                          _c("img", {
-                            staticClass: "img-card mr-md-4",
-                            attrs: {
-                              src: "assets/images/about/about-page.jpg",
-                              alt: "image"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "media-body" }, [
-                            _c("h4", { staticClass: "mb-2 md-mt-2" }, [
-                              _vm._v("Media heading")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", [
-                              _vm._v(
-                                "Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis."
-                              )
-                            ])
-                          ])
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-warning mt-4 py-2 px-4",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                )
-              ])
-            ])
-          ])
-        ])
-      ]
     )
   },
   function() {

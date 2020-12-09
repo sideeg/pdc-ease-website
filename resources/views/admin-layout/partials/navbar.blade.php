@@ -15,8 +15,8 @@
                 </form>
             </div> -->
             
-            <div class="row align-items-start">
-                <div class="col-lg-6 col-sm-6">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-sm-6 d-flex align-items-center">
                     <div class="user-profile pull-left">
                         <h4 class="user-name dropdown-toggle text-center" data-toggle="dropdown">
                         <img class="avatar user-thumb" src="{{asset('admin/images/author/user.svg')}}" alt="avatar">
