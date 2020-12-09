@@ -239,14 +239,14 @@
             },
             // Add Client
             addClient(){
-                if(this.edit === false){
+                if(this.edit == false){
                     // Add 
                    let vm = this;
  
                     const config = {
                         headers: { 
                             'content-type': 'multipart/form-data',
-                            'remember_token' : this.remember_token
+                            'remember_token' : window.Laravel.remember_token
                              }
                     }
     
@@ -256,7 +256,7 @@
                     // console.log(this.image);
                     axios.post('/api/clint', formData, config)
                         .then(res => {
-                            vm.success = res.success;
+                            // vm.success = res.success;
                             // console.log(res);
                             this.getClients();
 
