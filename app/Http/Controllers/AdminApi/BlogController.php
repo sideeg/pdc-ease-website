@@ -79,7 +79,7 @@ class BlogController extends Controller
                 return response()->json('blog not found',404);
             }
 
-
+// dd($request->image);
             if(!is_null($request->image)){
                 $uploads_folder = 'images\svg\blogs\\';//storage_path('app/public/blogs');
                 if (!file_exists($uploads_folder)) {
