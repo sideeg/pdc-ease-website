@@ -117,14 +117,14 @@ class ServiceController extends Controller
         public function serviceUpdate(Request $request)
         {
 
-            dd($request->all());
+            // dd($request->id);
 
             $service = services::find($request->id);
 
             if (is_null($service)){
                 return response()->json('service not found',404);
             }
-
+// dd($request->tags);
             if($request->tags){
                 //check if the given tags list is string or not if it is convert it to array
                 if (gettype($request->tags) == "string")
@@ -134,7 +134,7 @@ class ServiceController extends Controller
 
                 // var_dump($fruits_ar);
                 //add the new tags to this new service as the user done
-
+dd($tags_list);
                 for ($i =0;$i<sizeof($tags_list);$i++){
                     $tag = tags::find($tags_list[$i]);
                     $tag->service_id = $service->id;
