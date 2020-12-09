@@ -142,20 +142,21 @@ class ServiceController extends Controller
                 }
 
             }
-
-
-            if(!is_null($request->image)){
-                $uploads_folder = 'images\svg\slider\\';//storage_path('app/public/services');
+// dd($request->image->extension());
+// if (gettype($request->image)=="string"){dd("true");}
+            if(!is_null($request->image) && !gettype($request->image) == "string"){
+                $uploads_folder = 'images\svg\service\\';//storage_path('app/public/services');
                 if (!file_exists($uploads_folder)) {
                      mkdir($uploads_folder, 0777, true);
                 }
-
+                dd("dfdf");
                  $ext= $request->image->extension();
 
                 $imageName = time().'.'.$request->image->extension();
-                $request->image->move($uploads_folder, $imageName);
+
 
                 $service->image = $uploads_folder.$imageName;
+                $request->image->move($uploads_folder, $imageName);
 
             }
 
