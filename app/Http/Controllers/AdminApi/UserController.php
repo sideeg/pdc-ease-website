@@ -140,6 +140,7 @@ class UserController extends Controller
 
             // $num = sizeof($user->unreadNotifications );
             return response()->json($count,200);
+            
         }
 
          /**************************************************************************************************
@@ -186,7 +187,7 @@ class UserController extends Controller
                     $array[]=$notification->data;
                     // dd($notification->data[0]);
                     $i++;
-                    // $notification->markAsRead();
+                    $notification->markAsRead();
                 }
 
             }
@@ -214,7 +215,7 @@ class UserController extends Controller
             foreach ($user->unreadNotifications as $notification) {
                 if( $notification->type == $OrderType){
                     $array[] =$notification->data;
-                    // $notification->markAsRead();
+                    $notification->markAsRead();
                 }
             }
             unset($array[0]);

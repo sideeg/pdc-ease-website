@@ -48,10 +48,8 @@ class SliderController extends Controller
             'type' => $type,
             'sourse' => $uploads_folder.$imageName,
         ]);
-
-        return response()->json([
-            'success'=>'You have successfully upload image.',
-        ]);
+            $slider->save();
+            return response()->json($slider,201);
     }
 
 

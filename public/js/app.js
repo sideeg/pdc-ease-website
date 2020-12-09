@@ -3790,9 +3790,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('tags', this.tags_ids);
 
-        _formData.append('_method', 'PUT'); // formData.append('type', this.service.type);
-        // console.log(formData);
-
+        _formData.append('_method', 'PUT');
 
         var _config2 = {
           headers: {
@@ -4253,6 +4251,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4290,7 +4289,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
         _this.slides = res.data.data;
-        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data);
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -4340,7 +4339,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         };
         var formData = new FormData();
-        formData.append('image', this.image);
+        formData.append('sourse', this.image);
         formData.append('title_ar', this.slide.title_ar);
         formData.append('title_en', this.slide.title_en);
         formData.append('desc_en', this.slide.desc_en);
@@ -4366,7 +4365,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('id', this.slide.id);
 
-        _formData.append('image', this.image);
+        _formData.append('sourse', this.image);
 
         _formData.append('title_ar', this.slide.title_ar);
 
@@ -65116,11 +65115,7 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: {
-                                  name: "desc_ar",
-                                  cols: "30",
-                                  rows: "4"
-                                },
+                                attrs: { name: "", cols: "30", rows: "4" },
                                 domProps: { value: _vm.slide.desc_ar },
                                 on: {
                                   input: function($event) {
@@ -65150,11 +65145,7 @@ var render = function() {
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: {
-                                  name: "desc_en",
-                                  cols: "30",
-                                  rows: "4"
-                                },
+                                attrs: { name: "", cols: "30", rows: "4" },
                                 domProps: { value: _vm.slide.desc_en },
                                 on: {
                                   input: function($event) {
@@ -65424,6 +65415,11 @@ var render = function() {
                         "td",
                         { staticClass: "d-flex justify-content-center" },
                         [
+                          _vm._v(
+                            "\n                                            " +
+                              _vm._s(slide.image) +
+                              "\n                                            "
+                          ),
                           slide.type == 0
                             ? _c("img", {
                                 staticClass: "table-img",

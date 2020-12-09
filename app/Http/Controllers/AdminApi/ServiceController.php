@@ -117,7 +117,7 @@ class ServiceController extends Controller
         public function serviceUpdate(Request $request)
         {
 
-            // dd($request->id);
+            // dd($request->all());
 
             $service = services::find($request->id);
 
@@ -128,13 +128,13 @@ class ServiceController extends Controller
             if($request->tags){
                 //check if the given tags list is string or not if it is convert it to array
                 if (gettype($request->tags) == "string")
-                    $tags_list = explode(',', substr($request->tags,1,-1));
+                    $tags_list = explode(',', substr($request->tags,0));
                 else
                     $tags_list = $request->tags;
 
                 // var_dump($fruits_ar);
                 //add the new tags to this new service as the user done
-dd($tags_list);
+                // dd($tags_list);
                 for ($i =0;$i<sizeof($tags_list);$i++){
                     $tag = tags::find($tags_list[$i]);
                     $tag->service_id = $service->id;
@@ -142,6 +142,7 @@ dd($tags_list);
                 }
 
             }
+
 
             if(!is_null($request->image)){
                 $uploads_folder = 'images\svg\slider\\';//storage_path('app/public/services');
