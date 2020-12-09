@@ -124,7 +124,7 @@ class ServiceController extends Controller
             if (is_null($service)){
                 return response()->json('service not found',404);
             }
-
+// dd($request->tags);
             if($request->tags){
                 //check if the given tags list is string or not if it is convert it to array
                 if (gettype($request->tags) == "string")
@@ -142,7 +142,7 @@ class ServiceController extends Controller
                 }
 
             }
-            
+
 
             if(!is_null($request->image)){
                 $uploads_folder = 'images\svg\slider\\';//storage_path('app/public/services');
