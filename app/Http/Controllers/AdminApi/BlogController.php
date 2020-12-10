@@ -72,7 +72,7 @@ class BlogController extends Controller
          */
         public function blogUpdate(Request $request,blogs $blog)
         {
-            // dd($request->id);
+            // dd($request->all());
             $blog = blogs::find($request->id);
 
             if (is_null($blog)){
