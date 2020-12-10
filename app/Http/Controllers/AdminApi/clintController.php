@@ -64,7 +64,7 @@ class clintController extends Controller
                 return response()->json('clint not found',404);
             }
             // dd($request->logo);
-            if(!is_null($request->logo) && !"undefined"==$request->logo){
+            if(!is_null($request->logo) && "undefined"!=$request->logo){
                 $uploads_folder = 'images\svg\clints\\';//storage_path('app/public/clints');
                 if (!file_exists($uploads_folder)) {
                      mkdir($uploads_folder, 0777, true);
