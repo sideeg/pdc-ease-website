@@ -29,7 +29,8 @@ class blogSeeder extends Seeder
 
         for($i = 0;$i < 20 ; $i++){
             blogs::create([
-                'image' => $faker_en->imageUrl(400,300, 'technics', false) ,
+                // 'image' => $faker_en->imageUrl(400,300, 'technics', false) ,
+                'image'=>"images\svg\slider\slide.svg",
                 'title_ar' => 'soon',
                 'title_en' => 'soon',
 
