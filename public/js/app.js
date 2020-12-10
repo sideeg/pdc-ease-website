@@ -4282,14 +4282,12 @@ __webpack_require__.r(__webpack_exports__);
       page_url = page_url || 'api/slider';
       var config = {
         headers: {
-          // 'content-type': 'multipart/form-data',
           'remember_token': window.Laravel.remember_token
         }
       };
-      axios.get(page_url, config) // .then(res => res.json())
-      .then(function (res) {
+      axios.get(page_url, config).then(function (res) {
         _this.slides = res.data.data;
-        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data.data);
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -4328,7 +4326,6 @@ __webpack_require__.r(__webpack_exports__);
     addSlide: function addSlide() {
       var _this3 = this;
 
-      // console.log(this.remember_token);
       if (this.edit === false) {
         // Add
         var vm = this;
@@ -4343,8 +4340,7 @@ __webpack_require__.r(__webpack_exports__);
         formData.append('title_ar', this.slide.title_ar);
         formData.append('title_en', this.slide.title_en);
         formData.append('desc_en', this.slide.desc_en);
-        formData.append('desc_ar', this.slide.desc_ar); // formData.append('type', this.slide.type);
-
+        formData.append('desc_ar', this.slide.desc_ar);
         axios.post('/api/slider', formData, config).then(function (res) {
           _this3.getSlides();
         })["catch"](function (err) {
@@ -4375,12 +4371,9 @@ __webpack_require__.r(__webpack_exports__);
 
         _formData.append('desc_ar', this.slide.desc_ar);
 
-        _formData.append('_method', 'PUT'); // console.log(this.image);
-
+        _formData.append('_method', 'PUT');
 
         axios.post('/api/slider', _formData, _config).then(function (res) {
-          // vm.success = res.success;
-          // console.log(res);
           _this3.getSlides();
         })["catch"](function (err) {
           return console.log(err);
