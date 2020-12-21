@@ -214,17 +214,14 @@
                 page_url = page_url || 'api/slider';
                 const config = {
                     headers: {
-                        // 'content-type': 'multipart/form-data',
                         'remember_token' : window.Laravel.remember_token
                     }
                 }
 
                 axios.get(page_url, config)
-                // .then(res => res.json())
                 .then(res => {
                     this.slides = res.data.data;
                     vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
-                    // console.log(res.data.data);
 
                 }).catch(err => console.log(err));
             },
@@ -262,7 +259,6 @@
             },
             // Add Slide
             addSlide(){
-                // console.log(this.remember_token);
                 if(this.edit === false){
                     // Add
                    let vm = this;
@@ -280,7 +276,6 @@
                     formData.append('title_en', this.slide.title_en);
                     formData.append('desc_en', this.slide.desc_en);
                     formData.append('desc_ar', this.slide.desc_ar);
-                    // formData.append('type', this.slide.type);
 
                     axios.post('/api/slider', formData, config)
                         .then(res => {
@@ -307,12 +302,9 @@
                     formData.append('desc_ar', this.slide.desc_ar);
                     formData.append('_method', 'PUT');
 
-                    // console.log(this.image);
 
                     axios.post('/api/slider', formData, config)
                         .then(res => {
-                            // vm.success = res.success;
-                            // console.log(res);
                             this.getSlides();
 
                         })
