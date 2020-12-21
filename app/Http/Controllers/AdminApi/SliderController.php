@@ -18,7 +18,7 @@ class SliderController extends Controller
 
         // Initiatl Type Value is Set to Image
         $type = 0;
-        // $ext= $request->sourse->extension();
+        $ext= $request->sourse->extension();
 
         $uploads_folder = 'images\svg\slider\\' ;//storage_path('app/public/sliders');
         if (!file_exists($uploads_folder)) {
