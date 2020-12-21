@@ -85,7 +85,7 @@ data-aos-delay="100" --}}
                         </div>
                     </a>
                     <div class="service-text">
-                        <a href="{{ route('service', $item->id)}}"><h2 class="text-center color-dark font-22 my-2">{{ $item->title_en}}</h2></a>
+                        <a href="{{ route('service', $item->id)}}" class="text-center"><h2 class="text-center color-dark font-22 my-2">{{ $item->title_en}}</h2></a>
                         <p class="two-lines">{{ $item->desc_en}}</p>
                         <div class="d-flex justify-content-center">
                             <a href="{{route('serviceOrderForm',$item->id )}}" class="btn-service">@lang('content.orderNow')</a>
@@ -134,7 +134,7 @@ data-aos-anchor-placement="top-bottom"
     </div>
 </section>
 <!-- CLIENTS END -->
-@php Auth::logout() @endphp
+{{-- @php Auth::logout() @endphp --}}
 <!-- BLOG START -->
 <section class="section bg-light" id="blog">
     <div class="container">
