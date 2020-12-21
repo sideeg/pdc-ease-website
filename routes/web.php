@@ -72,7 +72,7 @@ Route::post('/dashboard-saveSlider', [App\Http\Controllers\DashboardController::
 // });
 
 Auth::routes([
-    'register' => false, 
+    // 'register' => false, 
     'reset' => false, 
     'verify' => false, 
 ]);
