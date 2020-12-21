@@ -2450,7 +2450,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
         _this.articles = res.data.data;
-        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data);
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url);
+        console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2581,7 +2582,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get('api/tag_names', config) // .then(res => res.json())
       .then(function (res) {
-        // console.log(res.data);
+        console.log(res.data);
         _this4.tags = res.data;
       });
     },

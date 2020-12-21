@@ -183,7 +183,7 @@
                 .then((res) => {
                     this.articles = res.data.data;
                     vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
-                    // console.log(res.data);
+                    console.log(res.data);
 
                 })
                 .catch(err => console.log(err));
@@ -315,7 +315,7 @@
                 axios.get('api/tag_names', config)
                 // .then(res => res.json())
                 .then(res => {
-                    // console.log(res.data);
+                    console.log(res.data);
 
                     this.tags = res.data;
                 });

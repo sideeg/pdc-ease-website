@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ServiceController extends Controller
 {
+    public $mainFolder = "images\svg\service\\";
     /************************************************************
      *
      * add new service
@@ -35,7 +36,7 @@ class ServiceController extends Controller
 
         //create new service
         // $service = services::create($request->all());
-        $uploads_folder = "images\svg\slider\\";storage_path('app/public/services');
+        $uploads_folder = $this->mainFolder;
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
@@ -56,7 +57,7 @@ class ServiceController extends Controller
         if (!is_null($request->tags)){
             //check if the given tags list is string or not if it is convert it to array
             if (gettype($request->tags) == "string")
-                $tags_list = explode(',', substr($request->tags,0,-1));
+                $tags_list = explode(',', substr($request->tags,0,-2));
             else
                 $tags_list = $request->tags;
                 // dd($tags_list);
@@ -144,8 +145,8 @@ class ServiceController extends Controller
             }
 // dd($request->image->extension());
 // if (gettype($request->image)=="string"){dd("true");}
-            if(!is_null($request->image) && !gettype($request->image) == "string"){
-                $uploads_folder = 'images\svg\service\\';//storage_path('app/public/services');
+            if(!is_null($request->image) && !gettype($request->image) == gettype("string")){
+                $uploads_folder = $this->mainFolder;
                 if (!file_exists($uploads_folder)) {
                      mkdir($uploads_folder, 0777, true);
                 }

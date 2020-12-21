@@ -71,7 +71,11 @@ Route::post('/dashboard-saveSlider', [App\Http\Controllers\DashboardController::
 
 // });
 
-Auth::routes();
+Auth::routes([
+    'register' => false, 
+    'reset' => false, 
+    'verify' => false, 
+]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
