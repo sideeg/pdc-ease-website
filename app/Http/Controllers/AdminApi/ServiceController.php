@@ -144,7 +144,7 @@ class ServiceController extends Controller
             }
 // dd($request->image->extension());
 // if (gettype($request->image)=="string"){dd("true");}
-            if(!is_null($request->image) && !gettype($request->image) == "string"){
+            if(!is_null($request->image) && !gettype($request->image) == gettype("string")){
                 $uploads_folder = 'images\svg\service\\';//storage_path('app/public/services');
                 if (!file_exists($uploads_folder)) {
                      mkdir($uploads_folder, 0777, true);

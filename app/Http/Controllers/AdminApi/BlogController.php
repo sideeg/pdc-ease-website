@@ -4,8 +4,8 @@ namespace App\Http\Controllers\AdminApi;
 
 use App\Models\blogs;
 use App\Models\tags;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 
