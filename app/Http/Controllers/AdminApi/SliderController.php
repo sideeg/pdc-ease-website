@@ -7,20 +7,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\slide_bar;
 
+
+
 class SliderController extends Controller
 {
 
+    public $mainFolder = "images\svg\slider\\";
     public function storeSlider(Request $request){
         $request->validate([
             'sourse' => 'required|mimes:jpeg,bmp,png,jpg,avi,wmv,flv,gif,asf,m4v,mp4,m4p',
             // 'image' => 'required|mimes:jpeg,bmp,png,jpg,avi,wmv,flv,gif,asf,m4v,mp4,m4p|max:2048',
         ]);
+        // dd($this->mainFolder);
 
         // Initiatl Type Value is Set to Image
         $type = 0;
         $ext= $request->sourse->extension();
 
-        $uploads_folder = 'images\svg\slider\\' ;//storage_path('app/public/sliders');
+        $uploads_folder = $this->mainFolder ;//storage_path('app/public/sliders');
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
@@ -96,7 +100,7 @@ class SliderController extends Controller
         }
 // dd(gettype($request->sourse)."    ".gettype("string"));
         if(!is_null($request->sourse) && !(gettype($request->sourse) === gettype("string"))){
-            $uploads_folder = 'images\svg\slider\\';//storage_path('app/public/slider');
+            $uploads_folder = $this->mainFolder ;//storage_path('app/public/slider');
             if (!file_exists($uploads_folder)) {
                  mkdir($uploads_folder, 0777, true);
             }

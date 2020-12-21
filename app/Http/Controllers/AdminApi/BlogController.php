@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class BlogController extends Controller
 {
 
+    public $mainFolder = 'images\svg\blogs\\';
     /************************************************************
      *
      * add new blog
@@ -39,7 +40,7 @@ class BlogController extends Controller
 
         //create new blog
         // $blog = blogs::create($request->all());
-        $uploads_folder = 'images\svg\blogs\\';//storage_path('app/public/blogs');
+        $uploads_folder = $this->mainFolder;
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
@@ -81,7 +82,7 @@ class BlogController extends Controller
 
 // dd($request->image);
             if((!is_null($request->image) && "undefined"!=$request->image)){
-                $uploads_folder = 'images\svg\blogs\\';//storage_path('app/public/blogs');
+                $uploads_folder = $this->mainFolder;
                 if (!file_exists($uploads_folder)) {
                      mkdir($uploads_folder, 0777, true);
                 }

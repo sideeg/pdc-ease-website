@@ -9,6 +9,8 @@ use App\Models\clints;
 
 class clintController extends Controller
 {
+    public $mainFolder = 'images\svg\clints\\';
+
      /************************************************************
      *
      * add new clint
@@ -29,7 +31,7 @@ class clintController extends Controller
         //create new clint
         // $clint = clints::create($request->all());
 
-        $uploads_folder = 'images\svg\clints\\'; // storage_path('app/public/clints');
+        $uploads_folder = $this->mainFolder;
         if (!file_exists($uploads_folder)) {
             mkdir($uploads_folder, 0777, true);
         }
@@ -57,15 +59,15 @@ class clintController extends Controller
          */
         public function clintUpdate(Request $request,clints $clint)
         {
-            // dd($request->id);
+
             $clint = clints::find($request->id);
 
             if (is_null($clint)){
                 return response()->json('clint not found',404);
             }
-            // dd($request->logo);
+
             if(!is_null($request->logo) && "undefined"!=$request->logo){
-                $uploads_folder = 'images\svg\clints\\';//storage_path('app/public/clints');
+                $uploads_folder =  $this->mainFolder;
                 if (!file_exists($uploads_folder)) {
                      mkdir($uploads_folder, 0777, true);
                 }
