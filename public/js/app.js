@@ -2450,8 +2450,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(page_url, config) // .then(res => res.json())
       .then(function (res) {
         _this.articles = res.data.data;
-        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url);
-        console.log(res.data);
+        vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url); // console.log(res.data);
       })["catch"](function (err) {
         return console.log(err);
       });
@@ -2542,9 +2541,9 @@ __webpack_require__.r(__webpack_exports__);
         _formData.append('tag_id', this.article.tag_id);
 
         _formData.append('_method', 'PUT'); // formData.append('type', this.article.type);
+        // console.log(formData);
 
 
-        console.log(_formData);
         axios.post('/api/blog', _formData, _config).then(function (res) {
           // vm.success = res.success;
           // console.log(res);
@@ -2582,7 +2581,7 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.get('api/tag_names', config) // .then(res => res.json())
       .then(function (res) {
-        console.log(res.data);
+        // console.log(res.data);
         _this4.tags = res.data;
       });
     },
@@ -3152,8 +3151,7 @@ __webpack_require__.r(__webpack_exports__);
         next_page_url: next_page_url,
         prev_page_url: prev_page_url
       };
-      this.pagination = pagination;
-      console.log(this.pagination);
+      this.pagination = pagination; // console.log(this.pagination);
     },
     resetModal: function resetModal() {
       this.message.name = '';
@@ -3981,8 +3979,8 @@ __webpack_require__.r(__webpack_exports__);
     getOrders: function getOrders(page_url) {
       var _this = this;
 
-      var vm = this;
-      console.log(this.open ? 'api/order' : 'api/order-reverse');
+      var vm = this; // console.log(this.open ? 'api/order' : 'api/order-reverse')
+
       page_url = page_url || this.open ? 'api/order' : 'api/order-reverse'; // console.log(this.open);
 
       var config = {
@@ -4052,8 +4050,7 @@ __webpack_require__.r(__webpack_exports__);
       this.getOrders(); // console.log(this.open);
     }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
   }
 });
 
@@ -4414,8 +4411,7 @@ __webpack_require__.r(__webpack_exports__);
       this.image = e.target.files[0]; // this.slide.type = e.target.files[0].type;
     }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {// console.log('Component mounted.')
   }
 });
 
@@ -4729,8 +4725,7 @@ __webpack_require__.r(__webpack_exports__);
         next_page_url: next_page_url,
         prev_page_url: prev_page_url
       };
-      this.pagination = pagination;
-      console.log(this.pagination);
+      this.pagination = pagination; // console.log(this.pagination);
     },
     // Delete Tag
     deleteTag: function deleteTag(id) {
@@ -62252,7 +62247,8 @@ var render = function() {
                                       expression: "admin.role_id"
                                     }
                                   ],
-                                  staticClass: "form-control",
+                                  staticClass:
+                                    "form-control order-multiple-services",
                                   attrs: { name: "roles", id: "roles" },
                                   on: {
                                     change: function($event) {
@@ -62825,7 +62821,8 @@ var render = function() {
                                     expression: "article.tag_id"
                                   }
                                 ],
-                                staticClass: "form-control",
+                                staticClass:
+                                  "form-control order-multiple-services",
                                 attrs: { id: "example-email-input" },
                                 on: {
                                   change: function($event) {
@@ -64303,7 +64300,8 @@ var render = function() {
                                         expression: "tags_ids"
                                       }
                                     ],
-                                    staticClass: "form-control",
+                                    staticClass:
+                                      "form-control order-multiple-services",
                                     attrs: {
                                       id: "example-email-input",
                                       multiple: ""
@@ -65979,7 +65977,8 @@ var render = function() {
                                         expression: "tag.service_id"
                                       }
                                     ],
-                                    staticClass: "form-control",
+                                    staticClass:
+                                      "form-control order-multiple-services",
                                     attrs: { id: "example-email-input" },
                                     on: {
                                       change: function($event) {

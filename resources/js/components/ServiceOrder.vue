@@ -122,7 +122,7 @@
         methods: {
             getOrders(page_url) {
                 let vm = this;
-                console.log(this.open ? 'api/order' : 'api/order-reverse')
+                // console.log(this.open ? 'api/order' : 'api/order-reverse')
                 page_url = page_url || this.open ? 'api/order' : 'api/order-reverse';
                 // console.log(this.open);
                 const config = {
@@ -198,7 +198,7 @@
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>

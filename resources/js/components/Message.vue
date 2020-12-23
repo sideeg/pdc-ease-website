@@ -177,7 +177,7 @@
 
                 this.pagination = pagination;
 
-                console.log(this.pagination);
+                // console.log(this.pagination);
 
 
             },

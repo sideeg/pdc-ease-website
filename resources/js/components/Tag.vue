@@ -37,7 +37,7 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="example-email-input" class="col-form-label d-block">Services</label>
-                                                                <select id="example-email-input" class="form-control" v-model='tag.service_id'>
+                                                                <select id="example-email-input" class="form-control order-multiple-services" v-model='tag.service_id'>
                                                                    
                                                                     <option v-for="service in services" :key="service.id" v-bind:value="service.id">{{service.title_en}}</option>
                                                                 </select>
@@ -228,7 +228,7 @@
 
                 this.pagination = pagination;
 
-                console.log(this.pagination);
+                // console.log(this.pagination);
 
 
             },

@@ -39,7 +39,7 @@
 
                                             <div class="form-group">
                                                 <label for="roles" class="col-form-label">Roles</label>
-                                                <select name="roles" id="roles" class="form-control" v-model='admin.role_id'>
+                                                <select name="roles" id="roles" class="form-control order-multiple-services" v-model='admin.role_id'>
                                                     <option v-for="role in roles" :key="role.id" v-bind:value="role.id">{{role.role_name}}</option>
                                                 </select>
                                             </div>

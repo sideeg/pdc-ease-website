@@ -40,7 +40,7 @@
                                             <!-- <input type="text" hidden :value="article.edit ? article.created_at : ''"> -->
                                             <div class="form-group">
                                                 <label for="example-email-input" class="col-form-label d-block">Article Tag</label>
-                                                <select id="example-email-input" class="form-control" v-model='article.tag_id'>
+                                                <select id="example-email-input" class="form-control order-multiple-services" v-model='article.tag_id'>
                                                     <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id">{{tag.name_en}}</option>
                                                 </select>
                                             </div>
@@ -183,7 +183,7 @@
                 .then((res) => {
                     this.articles = res.data.data;
                     vm.makePagination(res.data.current_page, res.data.last_page, res.data.next_page_url, res.data.prev_page_url)
-                    console.log(res.data);
+                    // console.log(res.data);
 
                 })
                 .catch(err => console.log(err));
@@ -273,7 +273,7 @@
                     formData.append('tag_id', this.article.tag_id);
                     formData.append('_method', 'PUT');
                     // formData.append('type', this.article.type);
-                            console.log(formData);
+                            // console.log(formData);
     
                     axios.post('/api/blog', formData, config)
                         .then(res => {
@@ -315,7 +315,7 @@
                 axios.get('api/tag_names', config)
                 // .then(res => res.json())
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
 
                     this.tags = res.data;
                 });

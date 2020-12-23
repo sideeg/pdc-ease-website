@@ -84,7 +84,7 @@ data-aos-delay="100" --}}
                             <img src="{{asset($item->image)}}" class="img-fluid" alt="sevice img" srcset="">
                         </div>
                     </a>
-                    <div class="service-text">
+                    <div class="service-text text-center">
                         <a href="{{ route('service', $item->id)}}" class="text-center"><h2 class="text-center color-dark font-22 my-2">{{ $item->title_en}}</h2></a>
                         <p class="two-lines">{{ $item->desc_en}}</p>
                         <div class="d-flex justify-content-center">
@@ -222,7 +222,7 @@ data-aos-anchor-placement="top-bottom"
                             <div class="col-md-12">
                                 <div class="form-group app-label">
                                     <label for="" class=" text-white">@lang('content.chooseService')</label>
-                                    <select class="order-multiple-services form-control" id="id_label_single" name="tags[]" multiple="multiple">
+                                    <select class="order-multiple-services form-control" id="select_services" name="tags[]" multiple="multiple">
                                         @forelse ($service as $item)
                                             <optgroup label="{{$item->title_en}}">
                                                 @forelse ($item->tag as $tag)
