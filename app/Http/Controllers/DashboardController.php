@@ -102,7 +102,7 @@ class DashboardController extends Controller
         ]);
         // dd($request);
         if(filesize($request->file('sourse'))>2e+6){
-            dd('size issue');
+            // dd('size issue');
 
           }else{
         if($validatedData->fails()){
@@ -149,7 +149,7 @@ class DashboardController extends Controller
 
        //save the new slide bar
         $slide_bar->save();
-            dd('stored');
+            // dd('stored');
 
             }
         }
