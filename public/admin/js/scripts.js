@@ -18,6 +18,7 @@
 
     var preloader = $('#preloader');
     $(window).on('load', function() {
+        // console.log('here');
         setTimeout(function() {
             preloader.fadeOut('slow', function() { $(this).remove(); });
         }, 300)
