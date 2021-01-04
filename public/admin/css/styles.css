@@ -2900,3 +2900,7 @@ table.dataTable thead td {
     background: #F3F8FB;
 }
 
+
+.select2-container--default {
+    width: 100% !important;
+}

@@ -51,9 +51,9 @@
                                                     </span>
                                                     <div class="form-group mt-3">
                                                         <!-- <label for="example-email-input" class="col-form-label d-block">Article Tag</label> -->
-                                                        <select id="example-email-input" class="form-control order-multiple-services" v-model="tags_ids" multiple>
+                                                        <select id="example-email-input" class="order-multiple-services form-control w-100" v-model="tags_ids" multiple>
                                                             <!-- <option v-for="tag in edit ? service.tags : tags " :key="tag.id" v-bind:value="tag.id" :selected="edit">{{tag.name_en}}</option> -->
-                                                            <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id" :selected="service.tags.includes(tag)">{{tag.name_en}}</option>
+                                                            <option v-for="tag in tags" :key="tag.id" v-bind:value="tag.id" :selected="service.tags.includes(tag)" class="w-100">{{tag.name_en}}</option>
 
                                                             <!-- <div>
                                                                 <option v-for="tag in service.tags" :key="tag.id" v-bind:value="tag.id" >{{tag.name_en}} vvv</option>
@@ -222,6 +222,7 @@
                 pagination: {},
                 edit: false,
                 success: '',
+                modalStatus: false,
             }
         },
 

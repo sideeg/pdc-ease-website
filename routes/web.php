@@ -32,7 +32,7 @@ Route::post('/service_request',"App\Http\Controllers\homeController@serviceReque
 
 // Route::post("/contact","homeController@message")->name('contact');
 
-Route::get("/service/{id}","App\Http\Controllers\servicesController@serviceById")->name('service');
+Route::get("/service/{id}","App\Http\Controllers\servicesController@serviceById")->name('showService');
 Route::get("/service_order/{id}","App\Http\Controllers\servicesController@showServiceForm")->name('serviceOrderForm');
 Route::get("/tag_order/{id}","App\Http\Controllers\servicesController@showTagForm")->name('showTagForm');
 

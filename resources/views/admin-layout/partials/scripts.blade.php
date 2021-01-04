@@ -1,6 +1,6 @@
 
     <!-- jquery latest version -->
-    {{-- <script src="{{asset('admin/js/vendor/jquery-2.2.4.min.js')}}"></script> --}}
+    <script src="{{asset('admin/js/vendor/jquery-2.2.4.min.js')}}"></script>
     <!-- bootstrap 4 js -->
     
     <!-- start chart js -->
