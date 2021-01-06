@@ -72,12 +72,12 @@ Route::post('/dashboard-saveSlider', [App\Http\Controllers\DashboardController::
 // });
 
 Auth::routes([
-    // 'register' => false, 
-    'reset' => false, 
-    'verify' => false, 
+    // 'register' => false,
+    'reset' => false,
+    'verify' => false,
 ]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\homeController::class, 'index'])->name('home');
 
 
 Route::get('/login', 'App\Http\Controllers\Auth\LoginController@showEmployeeLoginForm')->name('login');;
